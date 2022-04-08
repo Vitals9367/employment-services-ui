@@ -1,12 +1,15 @@
 import Link from "next/link"
 
 import { PreviewAlert } from "@/components/preview-alert"
+import Nav from "./Nav"
+import { DrupalMenuLinkContent } from "next-drupal"
 
 interface LayoutProps {
   children: any,
+  menu: DrupalMenuLinkContent[],
 }
 
-export function Layout({ children }: LayoutProps): JSX.Element {
+export function Layout({ children, menu }: LayoutProps): JSX.Element {
   return (
     <>
       <PreviewAlert />
@@ -18,6 +21,7 @@ export function Layout({ children }: LayoutProps): JSX.Element {
                 Next.js for Drupal
               </a>
             </Link>
+            <Nav menu={menu}/>
           </div>
         </header>
         <main>{children}</main>
