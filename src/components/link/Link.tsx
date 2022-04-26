@@ -1,4 +1,5 @@
 import {IconArrowRight, IconArrowTopRight } from 'hds-react'
+import { isExternalLink } from '@/lib/helpers'
 import styles from './link.module.css'
 
 interface LinkProps {
@@ -8,12 +9,11 @@ interface LinkProps {
 
 function Link(props: LinkProps): JSX.Element {
   const { href, text} = props;
-  const isExternalLink = href && (href.startsWith("https://") || href.startsWith("http://"));
 
   return (
-    <a href={href} className={`${styles.link} ${isExternalLink ? styles.external : styles.internal }`}>
+    <a href={href} className={`${styles.link} ${isExternalLink(href) ? styles.external : styles.internal }`}>
       <span>{text}</span>
-      {isExternalLink ? <IconArrowTopRight size="l" /> : <IconArrowRight size="l" />}
+      {isExternalLink(href) ? <IconArrowTopRight size="l" /> : <IconArrowRight size="l" />}
     </a>
   );
 }
