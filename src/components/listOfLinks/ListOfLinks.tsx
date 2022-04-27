@@ -2,7 +2,7 @@ import { Linkbox } from 'hds-react'
 
 import Link from '@/components/link/Link'
 import { isExternalLink } from '@/lib/helpers'
-import styles from './listOfLinks.module.css'
+import styles from './listOfLinks.module.scss'
 
 
 type ListOfLinksDesign = 'with-image' | 'without-image' | 'without-image-desc';

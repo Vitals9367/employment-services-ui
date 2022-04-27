@@ -15,14 +15,14 @@
 .linkBox {
   flex-grow: 1;
   width: 100%;
-}
 
-.linkBox svg {
-  transition: transform .2s linear;
-}
+  svg {
+    transition: transform .2s linear;
+  }
 
-.linkBox:hover svg {
-  transform: translateX(8px);
+  &:hover svg {
+    transform: translateX(8px);
+  }
 }
 
 @media (min-width: 768px) {  
