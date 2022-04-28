@@ -23,11 +23,13 @@ function ListOfLinks(props: ListOfLinksProps): JSX.Element {
           design === 'with-image' ? (
             <div className={`${styles.linkBox} link-box`} key={key}>
               <Linkbox
+                linkboxAriaLabel="List of links Linkbox"
+                linkAriaLabel="Linkbox link"
                 key={key}
                 href={link.field_list_of_links_link.url} 
                 heading={link.field_list_of_links_link.title}
                 external={isExternalLink(link.field_list_of_links_link.url)}
-                imgProps={{ src: [link.field_list_of_links_image?.field_media_image?.image_style_uri?.['1_1_s']]}}
+                imgProps={{ src: link.field_list_of_links_image?.field_media_image?.image_style_uri?.['1_1_s']}}
               />
             </div>
           ) : (
