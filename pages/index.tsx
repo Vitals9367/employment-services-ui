@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { GetStaticPropsContext, GetStaticPropsResult } from "next"
 import { DrupalNode, getResourceCollectionFromContext, getResourceByPath } from "next-drupal"
-import { Layout } from "@/components/layout"
+import { Layout } from "@/components/layout/Layout"
 
 interface HomePageProps {
   node: DrupalNode

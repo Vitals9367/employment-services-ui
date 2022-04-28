@@ -1,0 +1,38 @@
+.listOfLinks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: var(--spacing-l);
+}
+
+.linkItem {
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+}
+
+.linkBox {
+  flex-grow: 1;
+  width: 100%;
+
+  svg {
+    transition: transform .2s linear;
+  }
+
+  &:hover svg {
+    transform: translateX(8px);
+  }
+}
+
+@media (min-width: 768px) {  
+  .linkItem {
+    flex-grow: 0;
+    width: calc(33.3333% - var(--spacing-l));
+  }
+
+  .linkBox {
+    flex-grow: 0;
+    width: calc(25% - var(--spacing-l));
+  }
+}

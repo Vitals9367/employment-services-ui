@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
-import Head from "next/head"
+import Head from 'next/head'
 import ErrorPage from 'next/error'
 
-import { GetStaticPropsContext, GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsResult } from "next"
+import { GetStaticPropsContext, GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsResult } from 'next'
 
 import {
   Locale,
@@ -12,13 +12,14 @@ import {
   getResource,
   getResourceFromContext,
   getResourceTypeFromContext,
-} from "next-drupal"
+} from 'next-drupal'
 
-import { Layout } from "@/components/layout"
-import NodeBasicPage from "@/components/node-basic-page"
+import NodeBasicPage from '@/components/pageTemplates/NodeBasicPage'
+import { Layout } from '@/components/layout/Layout'
 
-import { NODE_TYPES, CONTENT_TYPES } from "@/lib/DRUPAL_API_TYPES"
-import { getParams } from "@/lib/params"
+
+import { NODE_TYPES, CONTENT_TYPES } from 'src/lib/drupalApiTypes'
+import { getParams } from 'src/lib/params'
 interface PageProps {
   node: DrupalNode
 }
@@ -38,7 +39,7 @@ export default function Page({ node }: PageProps) {
         <meta name="description" content="A Next.js site powered by a Drupal backend."
         />
       </Head>
-      {node.type === "node--page" && (
+      { node.type === "node--page" && (
         <NodeBasicPage node={node} />
       )}
     </Layout>

@@ -1,7 +1,7 @@
 import parse from 'html-react-parser'
 
 interface HtmlBlockProps {
-  field_text: any;
+  field_text: any
 }
 
 export function HtmlBlock({ field_text }: HtmlBlockProps): JSX.Element {

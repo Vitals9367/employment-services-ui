@@ -1,10 +1,10 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { formatDate } from "@/lib/format-date"
+import { formatDate } from '@/lib/formatDate'
 
 interface NodeArticleProps {
-  node: any;
+  node: any
 }
 
 export function NodeArticle({ node, ...props }: NodeArticleProps): JSX.Element {
