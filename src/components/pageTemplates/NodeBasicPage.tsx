@@ -10,7 +10,7 @@ export function NodeBasicPage({ node, ...props }: NodeBasicPageProps): JSX.Eleme
     <article>
       <Container className="container">
         <div className="columns">
-          <div className="col col-8 flex-grow">
+          <div className="content-region col col-8 flex-grow">
             <h1>{node.title}</h1>
             {node.body?.processed && (
               <div
@@ -22,12 +22,12 @@ export function NodeBasicPage({ node, ...props }: NodeBasicPageProps): JSX.Eleme
               <ContentMapper content={node.field_content}/>
             )}
           </div>
-          <div className="col col-4 flex-order-first">
+          <div className="sidebar col col-4 flex-order-first">
             Sidebar
           </div>
         </div>
         <div className="columns">
-          <div className="col col-12">
+          <div className="lower-content-region col col-12">
             Lower content region placeholder
           </div>
         </div>

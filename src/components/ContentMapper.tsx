@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import HtmlBlock from './HtmlBlock'
-import { CONTENT_TYPES, TEXT_HTML_FORMAT } from 'src/lib/drupalApiTypes'
 import { DrupalParagraph } from 'next-drupal';
-
 import { Accordion } from 'hds-react'
+
+import HtmlBlock from '@/components/HtmlBlock'
+import { CONTENT_TYPES, TEXT_HTML_FORMAT } from '@/lib/drupalApiTypes'
+import ListOfLinks from '@/components/listOfLinks/ListOfLinks';
+
 
 interface ContentMapperProps {
   content: any
@@ -28,7 +30,7 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
 
       case CONTENT_TYPES.ACCORDION:
         return (
-          <div className="my-16 ifu-accordion" key={key}>
+          <div key={key}>
             {item?.field_accordion_items.map(
               (
                 {
@@ -54,6 +56,13 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
             )}
           </div>
         )
+
+      case CONTENT_TYPES.LIST_OF_LINKS:
+        if (!item?.field_list_of_links_links) {
+          return null
+        }
+        return <ListOfLinks {...item} key={key} />
+      
       case CONTENT_TYPES.HEADING:
       case CONTENT_TYPES.PARAGRAPH_IMAGE:
       case CONTENT_TYPES.HERO:

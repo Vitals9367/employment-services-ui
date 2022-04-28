@@ -1,6 +1,6 @@
 import { PreviewAlert } from '@/components/PreviewAlert'
 import { Container } from 'hds-react'
-import styles from './Layout.module.css'
+import styles from './layout.module.scss'
 
 interface LayoutProps {
   children: any
