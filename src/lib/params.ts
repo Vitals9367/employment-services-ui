@@ -7,8 +7,16 @@ export function getParams(type: string) {
   let params = new DrupalJsonApiParams()
 
   if (type === NODE_TYPES.PAGE) {
-    params.addInclude([
+    params.addFields(NODE_TYPES.PAGE, [
+      'id',
+      'title',
+      'path',
+      'revision_timestamp',
+      'langcode',
       'field_content',
+      'field_hero',
+      'field_lead_in',
+      'field_metatags',
     ])
     .addInclude([
       'field_content.field_accordion_items.field_accordion_item_content',
