@@ -1,6 +1,6 @@
 import { Container } from 'hds-react'
 import { Node } from 'src/lib/types'
-import ContentMapper from '../ContentMapper'
+import ContentMapper from '@/components/ContentMapper'
 
 interface NodeBasicPageProps {
   node: Node

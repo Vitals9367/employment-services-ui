@@ -5,3 +5,10 @@ export interface Node extends DrupalNode {
   field_lead_in: string
   field_content: any
 }
+
+type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text';
+export interface DrupalFormattedText {
+  format: TextFormats
+  processed: string
+  value: string
+}

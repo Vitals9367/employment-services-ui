@@ -22,5 +22,3 @@ export const CONTENT_TYPES = {
   PARAGRAPH_IMAGE: 'paragraph--image',
   VIDEO_REMOTE: 'paragraph--remote_video',
 }
-
-export const TEXT_HTML_FORMAT = 'full_html'
