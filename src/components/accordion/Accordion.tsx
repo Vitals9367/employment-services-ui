@@ -18,11 +18,12 @@ interface AccordionProps {
 
 function Accordion(props: AccordionProps): JSX.Element {
   const { field_accordion_title, field_accordion_title_level, field_accordion_text, field_accordion_items, field_accordion_heading_level } = props;
-  console.log(field_accordion_items);
+  const HeadingTag = `h${field_accordion_title_level}` as keyof JSX.IntrinsicElements;
+  
   return (
     <div className='component'>
       {field_accordion_title && 
-        <h2>{field_accordion_title}</h2>
+        <HeadingTag>{field_accordion_title}</HeadingTag>
       }
 
       {field_accordion_text?.processed && 
