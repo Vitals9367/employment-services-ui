@@ -6,7 +6,6 @@ import { GetStaticPropsContext, GetStaticPathsContext, GetStaticPathsResult, Get
 
 import {
   Locale,
-  DrupalNode,
   DrupalParagraph,
   getPathsFromContext,
   getResource,
@@ -17,11 +16,11 @@ import {
 import NodeBasicPage from '@/components/pageTemplates/NodeBasicPage'
 import { Layout } from '@/components/layout/Layout'
 
-
 import { NODE_TYPES, CONTENT_TYPES } from 'src/lib/drupalApiTypes'
+import { Node } from 'src/lib/types'
 import { getParams } from 'src/lib/params'
 interface PageProps {
-  node: DrupalNode
+  node: Node
 }
 
 export default function Page({ node }: PageProps) {
@@ -58,7 +57,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     }
   }
 
-  const node = await getResourceFromContext<DrupalNode>(type, context, {
+  const node = await getResourceFromContext<Node>(type, context, {
     params: getParams(type),
   })
 

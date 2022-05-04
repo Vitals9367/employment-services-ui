@@ -32,6 +32,7 @@ main h1.small, main .h1-small,
 .small-text main h1, .small-text main .h1,
 main h1, main .h1 {
   font-size: var(--fontsize-heading-l);
+  font-weight: 400;
   line-height: var(--lineheight-m);
 }
 
@@ -39,6 +40,7 @@ h2.small, .h2-small,
 h2, .h2,
 .small-text h2, .small-text .h2 {
   font-size: var(--fontsize-heading-m);
+  font-weight: 400;
   line-height: var(--lineheight-m);
 }
 
@@ -46,6 +48,7 @@ h3.small, .h3-small,
 h3, .h3,
 .small-text h3, .small-text .h3  {
   font-size: var(--fontsize-heading-s);
+  font-weight: 400;
   line-height: var(--lineheight-m);
 }
 
@@ -53,6 +56,7 @@ h4.small, .h4-small,
 h4, .h4,
 .small-text h4, .small-text .h4 {
   font-size: var(--fontsize-heading-xs);
+  font-weight: 400;
   line-height: var(--lineheight-m);
 }
 
@@ -60,6 +64,7 @@ h6, .h6, h5.small, .h5-small,
 h5, .h5,
 .small-text h5, .small-text .h5 {
   font-size: var(--fontsize-heading-xxs);
+  font-weight: 400;
   line-height: var(--lineheight-m);
 }
 
@@ -149,6 +154,11 @@ a.link-external::after {
 .lower-content-region {
   border: 1px solid;
   min-height: 140px;
+}
+
+.lead-in {
+  font-size: var(--fontsize-body-xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 @media (min-width: 576px) {
