@@ -1,11 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { DrupalParagraph } from 'next-drupal';
-import { Accordion } from 'hds-react'
 
 import HtmlBlock from '@/components/HtmlBlock'
-import { CONTENT_TYPES, TEXT_HTML_FORMAT } from '@/lib/drupalApiTypes'
+import { CONTENT_TYPES } from '@/lib/drupalApiTypes'
 import ListOfLinks from '@/components/listOfLinks/ListOfLinks';
+import Accordion from '@/components/accordion/Accordion';
 
 
 interface ContentMapperProps {
@@ -29,32 +28,11 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
         return <HtmlBlock {...item} key={key} />
 
       case CONTENT_TYPES.ACCORDION:
+        if (!item?.field_accordion_items) {
+          return null
+        }
         return (
-          <div key={key}>
-            {item?.field_accordion_items.map(
-              (
-                {
-                  field_accordion_item_content,
-                  field_accordion_item_heading,
-                  id,
-                  type,
-                }: any,
-                i: number
-              ) => {
-                return (
-                  <Accordion
-                    id={id}
-                    key={`${type}-${id}`}
-                    heading={field_accordion_item_heading}
-                  >
-                    {field_accordion_item_content?.length > 0 && (
-                      <ContentMapper content={field_accordion_item_content}/>
-                    )}
-                  </Accordion>
-                )
-              }
-            )}
-          </div>
+          <Accordion {...item} key={key} />
         )
 
       case CONTENT_TYPES.LIST_OF_LINKS:
