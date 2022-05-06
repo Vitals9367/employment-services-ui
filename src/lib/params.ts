@@ -21,6 +21,7 @@ export function getParams(type: string) {
     .addInclude([
       'field_content.field_accordion_items.field_accordion_item_content',
       'field_content.field_list_of_links_links.field_list_of_links_image.field_media_image',
+      'field_content.field_background_color',
     ])
     .addFields(CONTENT_TYPES.MEDIA_IMAGE, [
       'field_media_image',
@@ -37,6 +38,13 @@ export function getParams(type: string) {
       'field_accordion_item_content',
       'field_accordion_item_heading'
     ])
+    .addFields(CONTENT_TYPES.BANNER, [
+      'field_background_color',
+      'field_banner_desc',
+      'field_banner_title',
+      'field_icon'
+    ])
+    .addFields(CONTENT_TYPES.COLOR, ['name', 'field_css_name'])
     .addFields(CONTENT_TYPES.FILE, [
       'uri',
       'url',

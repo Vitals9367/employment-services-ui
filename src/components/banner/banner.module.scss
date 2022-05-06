@@ -1,0 +1,22 @@
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-l);
+
+  .bannerIcon {
+    margin-right: var(--spacing-m);
+    margin-bottom: var(--spacing-s);
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .banner {
+    flex-direction: row;
+  }
+}
+
