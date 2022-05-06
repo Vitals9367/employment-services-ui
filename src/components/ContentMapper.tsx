@@ -1,12 +1,8 @@
-import Image from 'next/image'
-import Link from 'next/link'
-
 import HtmlBlock from '@/components/HtmlBlock'
 import { CONTENT_TYPES } from '@/lib/drupalApiTypes'
-import ListOfLinks from '@/components/listOfLinks/ListOfLinks';
-import Accordion from '@/components/accordion/Accordion';
-import Banner from '@/components/banner/Banner';
-
+import ListOfLinks from '@/components/listOfLinks/ListOfLinks'
+import Accordion from '@/components/accordion/Accordion'
+import Banner from '@/components/banner/Banner'
 
 interface ContentMapperProps {
   content: any
