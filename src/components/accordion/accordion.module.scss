@@ -28,7 +28,7 @@
     z-index: -1;
     top: 100%;
     bottom: -15px;
-    left: 56px;
+    left: 48px;
     border-left: 2px dotted var(--color-black);
     transform: translate(-50%);
   }
@@ -63,6 +63,12 @@
 
     span {
       font-size: var(--fontsize-heading-m);
+    }
+  }
+
+  .accordionHeading {
+    &:not(:last-child)::after {
+      left: 56px;
     }
   }
 }
