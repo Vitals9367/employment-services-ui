@@ -9,6 +9,7 @@ export const NODE_TYPES = {
 export const CONTENT_TYPES = {
   ACCORDION: 'paragraph--accordion',
   ACCORDION_ITEM: 'paragraph--accordion_item',
+  BANNER: 'paragraph--banner',
   COLUMNS: 'paragraph--columns',
   COLUMN_LEFT: 'field_columns_left_column',
   COLUMN_RIGHT: 'field_columns_right_column',
@@ -21,4 +22,5 @@ export const CONTENT_TYPES = {
   LIST_OF_LINKS: 'paragraph--list_of_links',
   PARAGRAPH_IMAGE: 'paragraph--image',
   VIDEO_REMOTE: 'paragraph--remote_video',
+  COLOR: 'taxonomy_term--colors'
 }

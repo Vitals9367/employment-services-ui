@@ -25,9 +25,9 @@
     regenerator-runtime "^0.13.4"
 
 "@babel/runtime@^7.11.2", "@babel/runtime@^7.6.2":
-  version "7.17.8"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.8.tgz#3e56e4aff81befa55ac3ac6a0967349fd1c5bca2"
-  integrity sha512-dQpEpK0O9o6lj6oPu0gRDbbnk+4LeHlNcBpspf6Olzt3GIX4P1lWF1gS+pHLDFlaJvbR6q7jCfQ08zA4QJBnmA==
+  version "7.17.9"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.9.tgz#d19fbf802d01a8cb6cf053a64e472d42c434ba72"
+  integrity sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -234,13 +234,13 @@
   integrity sha512-Ba7HmkFgfQxZqqaeIWWkNK0rEhpxVQHIoVyW1YDSkGsGIXzcaW4deC8B0pZrNSSyLTdIk7y+5olKt5+g0GmFIQ==
 
 "@react-aria/interactions@^3.2.0":
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/@react-aria/interactions/-/interactions-3.8.3.tgz#31a913acee8199a827fe351f7d867a10706477a1"
-  integrity sha512-zffWRqhEk4SQNbr5sv3BnMIsmQjtdhXvv3FLn9Ch0HxxGb8VStjrVPEv7r9OtVodab+ThcUehL4NJ8zU/U/4ew==
+  version "3.8.4"
+  resolved "https://registry.yarnpkg.com/@react-aria/interactions/-/interactions-3.8.4.tgz#f3704470b70f150b753bba01a8714f97d6299906"
+  integrity sha512-6EHFKK8pmjSJSKcBbduijPETKqE669XZ1VaEY8ubr6VnlVhCszvKHoxpU384CkNiDNLJOVkK6HDzPXsn3lxhng==
   dependencies:
     "@babel/runtime" "^7.6.2"
-    "@react-aria/utils" "^3.11.3"
-    "@react-types/shared" "^3.11.2"
+    "@react-aria/utils" "^3.12.0"
+    "@react-types/shared" "^3.12.0"
 
 "@react-aria/ssr@^3.1.2":
   version "3.1.2"
@@ -249,15 +249,15 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
-"@react-aria/utils@^3.11.3", "@react-aria/utils@^3.2.0":
-  version "3.11.3"
-  resolved "https://registry.yarnpkg.com/@react-aria/utils/-/utils-3.11.3.tgz#fd870e1c4b994967883d5d5dae6b14b4e6da2d16"
-  integrity sha512-EH3SyA3FtbhuOj1cgGveiEYidKe3CgGYkP8D57O46rlTWcgTxhGHUEibGeJw3PFXxmbgm5RIOdBo29YwItvtcQ==
+"@react-aria/utils@^3.12.0", "@react-aria/utils@^3.2.0":
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/utils/-/utils-3.12.0.tgz#39d0f37525e050356c4de725c85d9b10e7a5c0d9"
+  integrity sha512-1TMrE7UpgTgQHgW3z0r6Zo4CTUDwNsZEwzg+mQVub8ZalonhuNs5OrulUn+lRIsGELNktGNkeh/29WsS1Od8eg==
   dependencies:
     "@babel/runtime" "^7.6.2"
     "@react-aria/ssr" "^3.1.2"
     "@react-stately/utils" "^3.4.1"
-    "@react-types/shared" "^3.11.2"
+    "@react-types/shared" "^3.12.0"
     clsx "^1.1.1"
 
 "@react-aria/visually-hidden@3.2.0":
@@ -362,10 +362,10 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
-"@react-types/shared@^3.11.2":
-  version "3.11.2"
-  resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.11.2.tgz#b269c0cf6223664ac42d980b7add1b67b51b87d4"
-  integrity sha512-MIjjjkFi/DTzMVmeFJJrpc51eS/PLNzLZEv6o/QJPhQ9uOMElYqA790qAcG75u3tR0XGU2Vv9RyeOC7+ppw8/Q==
+"@react-types/shared@^3.12.0":
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.12.0.tgz#31a53fcec5c3159fd0d5c67f7e3f3876c7d19908"
+  integrity sha512-faGr9xOjtMlkQPfA1i36iUmWS/hpPPtxIwdAtBi6p7rCejmShMLFZ2YN4DxzbJUCVubF2S1+rMMIKuXG17DkEw==
 
 "@rushstack/eslint-patch@^1.0.8":
   version "1.1.0"
@@ -1385,15 +1385,15 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-hds-core@1.12.0, hds-core@^1.12.0:
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/hds-core/-/hds-core-1.12.0.tgz#6dc8be76bfe8552fd3d0ff19c42ee550570f4c09"
-  integrity sha512-xRpTxK0hWiztUGLqk4xHs77adAGolvPdEW3u4zpC5RYPzh+gjIQte/qFZVJ74zO8Trtu+xf4ULRgQyN+TK1/+w==
+hds-core@1.14.0, hds-core@^1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/hds-core/-/hds-core-1.14.0.tgz#d11fd1047b2f96d022c02e333b0390a586c5204a"
+  integrity sha512-MSH2BgVHOHW+I6gIjs5xNw32QL/P9Mn7+mcc1TvR8hF5GJDWa2mAh0vqaD1SXFfY34/cGr7wJ05V74GDZ6+8XA==
 
-hds-react@^1.12.0:
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/hds-react/-/hds-react-1.12.0.tgz#994be7138e1a06270ef82d064ec02e5eed18789a"
-  integrity sha512-HCMLTPni88hAZD1ZZo0POj4D9pZ5leEloMVzEVJpUiaZ537H0J2tCGsUX1KPiKTtxxFwFmYd5H6Y0ljTGORxPA==
+hds-react@^1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/hds-react/-/hds-react-1.14.0.tgz#7038dda3ce1c7e27fe5b4a3911878b0efab51b69"
+  integrity sha512-gB73Ayn8Kox3KJH54KbG5idJD2sSdyGxYA8hOcYku8uGY+6O+K1a/fpZb7WJFWG5bB2S+ofncgMm80UvCSFJGg==
   dependencies:
     "@babel/runtime" "7.11.2"
     "@emotion/styled-base" "^11.0.0"
@@ -1402,7 +1402,7 @@ hds-react@^1.12.0:
     "@react-aria/visually-hidden" "3.2.0"
     date-fns "2.16.1"
     downshift "6.0.6"
-    hds-core "1.12.0"
+    hds-core "1.14.0"
     lodash.isequal "4.5.0"
     lodash.isfunction "3.0.9"
     lodash.uniqueid "4.0.1"

@@ -1,11 +1,8 @@
-import Image from 'next/image'
-import Link from 'next/link'
-
 import HtmlBlock from '@/components/HtmlBlock'
 import { CONTENT_TYPES } from '@/lib/drupalApiTypes'
-import ListOfLinks from '@/components/listOfLinks/ListOfLinks';
-import Accordion from '@/components/accordion/Accordion';
-
+import ListOfLinks from '@/components/listOfLinks/ListOfLinks'
+import Accordion from '@/components/accordion/Accordion'
+import Banner from '@/components/banner/Banner'
 
 interface ContentMapperProps {
   content: any
@@ -41,6 +38,13 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
         }
         return <ListOfLinks {...item} key={key} />
       
+      case CONTENT_TYPES.BANNER:
+        if (!item?.id) {
+          return null
+        }
+        return <Banner {...item} key={key} />
+      
+
       case CONTENT_TYPES.HEADING:
       case CONTENT_TYPES.PARAGRAPH_IMAGE:
       case CONTENT_TYPES.HERO:

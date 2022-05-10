@@ -62,9 +62,9 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   })
 
   if (!node || (!context.preview && node?.status === false)) {
-      return {
-        notFound: true,
-      }
+    return {
+      notFound: true,
+    }
   }
 
   return {
