@@ -16,12 +16,11 @@ interface AccordionProps {
     field_accordion_item_heading: string
     field_accordion_item_content: any
   }>;
-  field_accordion_heading_level: number
 }
 
 function Accordion(props: AccordionProps): JSX.Element {
-  const { field_accordion_type, field_accordion_title, field_accordion_title_level, field_accordion_text, field_accordion_items, field_accordion_heading_level } = props;
-  const HeadingTag = `h${field_accordion_title_level}` as keyof JSX.IntrinsicElements;
+  const { field_accordion_type, field_accordion_title, field_accordion_title_level, field_accordion_text, field_accordion_items } = props;
+  const HeadingTag = field_accordion_title_level ? `h${field_accordion_title_level}` as keyof JSX.IntrinsicElements : 'h2';
 
   return (
     <div className='component'>
@@ -49,7 +48,7 @@ function Accordion(props: AccordionProps): JSX.Element {
               id={id}
               key={`${type}-${id}`}
               heading={field_accordion_item_heading}
-              headingLevel={field_accordion_heading_level}
+              headingLevel={3}
               theme={{
                 '--border-color': 'var(--color-black-20)',
                 '--header-font-size': 'var(--fontsize-heading-m)',
@@ -65,7 +64,6 @@ function Accordion(props: AccordionProps): JSX.Element {
               id={id}
               index={i + 1}
               field_accordion_item_heading={field_accordion_item_heading}
-              field_accordion_heading_level={field_accordion_heading_level}
               field_accordion_item_content={field_accordion_item_content}
             />
           )
@@ -80,11 +78,10 @@ interface NumberedAccordionProps {
   index: number
   field_accordion_item_heading: string
   field_accordion_item_content: any
-  field_accordion_heading_level: number
 }
 
 function NumberedAccordion(props: NumberedAccordionProps): JSX.Element {
-  const { id, index, field_accordion_item_heading, field_accordion_heading_level, field_accordion_item_content } = props
+  const { id, index, field_accordion_item_heading, field_accordion_item_content } = props
   
   // Handle accordion state with useAccordion hook
   const { isOpen, buttonProps, contentProps } = useAccordion({ initiallyOpen: false })
@@ -94,7 +91,7 @@ function NumberedAccordion(props: NumberedAccordionProps): JSX.Element {
 
   return (
     <div className={styles.accordionHeading} id={id}>
-      <Button iconRight={icon} aria-level={field_accordion_heading_level} aria-labelledby={`${id}-heading`} {...buttonProps} className={styles.button}>
+      <Button iconRight={icon} aria-level={3} aria-labelledby={`${id}-heading`} {...buttonProps} className={styles.button}>
         <span className={styles.number}>{index}</span>
         {field_accordion_item_heading}
       </Button>
