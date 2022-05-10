@@ -28,6 +28,7 @@ export function getParams(type: string) {
       'field_photographer',
     ])
     .addFields(CONTENT_TYPES.ACCORDION, [
+      'field_accordion_type',
       'field_accordion_title_level',
       'field_accordion_text',
       'field_accordion_title',

@@ -6,7 +6,7 @@ export interface Node extends DrupalNode {
   field_content: any
 }
 
-type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text';
+type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text'
 export interface DrupalFormattedText {
   format: TextFormats
   processed: string
