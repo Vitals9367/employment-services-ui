@@ -39,7 +39,7 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
         return <ListOfLinks {...item} key={key} />
       
       case CONTENT_TYPES.BANNER:
-        if (!item) {
+        if (!item?.id) {
           return null
         }
         return <Banner {...item} key={key} />
