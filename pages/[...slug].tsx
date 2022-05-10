@@ -1,29 +1,33 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
-
 import { GetStaticPropsContext, GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsResult } from 'next'
+
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import {
   Locale,
-  DrupalParagraph,
   getPathsFromContext,
-  getResource,
   getResourceFromContext,
   getResourceTypeFromContext,
-} from 'next-drupal'
+  getMenu,
+} from "next-drupal"
 
 import NodeBasicPage from '@/components/pageTemplates/NodeBasicPage'
 import { Layout } from '@/components/layout/Layout'
 
-import { NODE_TYPES, CONTENT_TYPES } from 'src/lib/drupalApiTypes'
 import { Node } from 'src/lib/types'
+import { NODE_TYPES } from 'src/lib/drupalApiTypes'
 import { getParams } from 'src/lib/params'
+import { HeaderProps } from "src/lib/types"
+import { getLanguageLinks } from 'src/lib/helpers'
+
 interface PageProps {
   node: Node
+  header: HeaderProps,
 }
 
-export default function Page({ node }: PageProps) {
+export default function Page({ node, header }: PageProps) {
   const router = useRouter()
   if (!router.isFallback && !node?.id) {
     return <ErrorPage statusCode={404} />
@@ -32,7 +36,7 @@ export default function Page({ node }: PageProps) {
   if (!node) return null
 
   return (
-    <Layout>
+    <Layout header={header}>
       <Head>
         <title>{node.title}</title>
         <meta name="description" content="A Next.js site powered by a Drupal backend."
@@ -48,6 +52,8 @@ export default function Page({ node }: PageProps) {
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<PageProps>> {
 
   console.log('props context', context)
+
+  const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
 
   const type = await getResourceTypeFromContext(context)
 
@@ -67,22 +73,34 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     }
   }
 
+  const langLinks = await getLanguageLinks(node);
+
+  const { tree: menu } = await getMenu("main", {locale, defaultLocale})
+  const { tree: themes } = await getMenu("additional-languages")
+
   return {
     props: {
-      node
+      node,
+      header: {
+        locale,
+        menu,
+        themes,
+        langLinks,
+      },
+      ...(await serverSideTranslations(locale, ['common'])),
     },
     // revalidate: 30,
   }
 }
-
 
 export async function getStaticPaths(context: GetStaticPathsContext): Promise<GetStaticPathsResult> {
 
   const types = Object.values(NODE_TYPES)
 
   const paths = await getPathsFromContext(types, context)
+
   return {
     paths: paths,
-    fallback: true,
+    fallback: false,
   }
 }
