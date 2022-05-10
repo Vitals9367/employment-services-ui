@@ -89,7 +89,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
       },
       ...(await serverSideTranslations(locale, ['common'])),
     },
-    // revalidate: 30,
+    revalidate: 10
   }
 }
 
