@@ -1,18 +1,16 @@
-
 .button {
   background-color: var(--color-fog-light) !important;
   border: none !important;
   color: var(--color-black-90)	!important;
   display: grid !important;
   grid-template-columns: 90% 10%;
-  padding: var(--spacing-2-xs) var(--spacing-s) !important;
   text-align: left;
   width: 100%;
 
   span {
     display: flex;
     align-items: center;
-    font-size: var(--fontsize-heading-m);
+    font-size: var(--fontsize-heading-xs);
   }
 
   div {
@@ -57,5 +55,15 @@
   display: flex;
   padding-right: var(--spacing-l);
   padding-left: var(--spacing-l);
+}
+
+@media (min-width: 576px) {
+  .button {
+    padding: var(--spacing-2-xs) var(--spacing-s) !important;
+
+    span {
+      font-size: var(--fontsize-heading-m);
+    }
+  }
 }
 
