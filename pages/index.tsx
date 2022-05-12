@@ -1,10 +1,12 @@
 import Head from "next/head"
 import { GetStaticPropsContext, GetStaticPropsResult } from "next"
 import { DrupalNode, Locale, getMenu, getResourceTypeFromContext, getResourceFromContext } from "next-drupal"
+import getConfig from 'next/config'
+
 import { Layout } from "@/components/layout/Layout"
 import { Node, HeaderProps } from "@/lib/types";
 import { getLanguageLinks } from "@/lib/helpers";
-import { getParams } from "@/lib/params";
+import { getQueryParamsFor } from "@/lib/params";
 
 interface HomePageProps {
   node: DrupalNode;
@@ -13,6 +15,7 @@ interface HomePageProps {
 
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<HomePageProps>> {
   const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
+  const { REVALIDATE_TIME } = getConfig().serverRuntimeConfig
 
   const type = await getResourceTypeFromContext(context)
 
@@ -23,7 +26,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   }
 
   const node = await getResourceFromContext<Node>(type, context, {
-    params: getParams(type),
+    params: getQueryParamsFor(type),
   })
 
   if (!node || (!context.preview && node?.status === false)) {
@@ -48,7 +51,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
         langLinks,
       },
     },
-    //revalidate: 10,
+    revalidate: REVALIDATE_TIME
   }
 }
 
