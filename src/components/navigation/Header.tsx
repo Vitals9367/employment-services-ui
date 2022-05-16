@@ -102,7 +102,7 @@ function Header(header:HeaderProps): JSX.Element {
             key="navigation_button"
             iconRight={<IconArrowTopRight size="l" />}
             onClick={() => {
-              window.open(t("navigation.button_link"), '_blank').focus();
+              window.open(t("navigation.button_link"), '_blank')?.focus();
             }}
           >
             {t("navigation.button_text")}

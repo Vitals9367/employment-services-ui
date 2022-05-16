@@ -15,7 +15,7 @@ export async function getLanguageLinks(node: DrupalNode): Promise<Object> {
   for (let locale of i18n.locales) {
     let prefix = locale !== i18n.defaultLocale ? `/${locale}` : ''
     let link = ''
-    if(locale === node.langcode) {
+    if (locale === node.langcode) {
       link = `${prefix}${node?.path.alias}` // current page link
     } else {
       // this has the original alias if not translated
