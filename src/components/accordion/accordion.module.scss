@@ -4,11 +4,11 @@
   }
 }
 
-.button {
+.button[id="numbered-accordion-button"] {
   background-color: var(--color-fog-light) !important;
-  border: none !important;
-  color: var(--color-black-90)	!important;
-  display: grid !important;
+  border: none;
+  color: var(--color-black-90) !important;
+  display: grid;
   grid-template-columns: 90% 10%;
   text-align: left;
   width: 100%;
@@ -21,6 +21,12 @@
 
   div {
     justify-self: end;
+    height: var(--spacing-layout-m);
+    width: var(--spacing-layout-m);
+  }
+
+  svg {
+    --icon-size: var(--spacing-layout-m);
   }
 }
 
@@ -64,8 +70,8 @@
 }
 
 @media (min-width: 576px) {
-  .button {
-    padding: var(--spacing-2-xs) var(--spacing-s) !important;
+  .button[id="numbered-accordion-button"] {
+    padding: var(--spacing-2-xs) var(--spacing-s);
 
     span {
       font-size: var(--fontsize-heading-m);
@@ -78,4 +84,3 @@
     }
   }
 }
-

@@ -97,7 +97,7 @@ function NumberedAccordion(props: NumberedAccordionProps): JSX.Element {
 
   return (
     <div className={styles.accordionHeading} id={id}>
-      <Button iconRight={icon} aria-level={3} aria-labelledby={`${id}-heading`} {...buttonProps} className={styles.button}>
+      <Button iconRight={icon} aria-level={3} aria-labelledby={`${id}-heading`} {...buttonProps} className={styles.button} id="numbered-accordion-button">
         <span className={styles.number}>{index}</span>
         {field_accordion_item_heading}
       </Button>
