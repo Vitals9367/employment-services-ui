@@ -49,10 +49,12 @@ function Accordion(props: AccordionProps): JSX.Element {
               key={`${type}-${id}`}
               heading={field_accordion_item_heading}
               headingLevel={3}
+              className={styles.HDSAccordion}
               theme={{
                 '--border-color': 'var(--color-black-20)',
                 '--header-font-size': 'var(--fontsize-heading-m)',
                 '--header-line-height': 'var(--lineheight-m)',
+                '--button-size': 'var(--spacing-layout-m)'
               }}
             >
               {field_accordion_item_content?.length > 0 && (
@@ -62,10 +64,14 @@ function Accordion(props: AccordionProps): JSX.Element {
           ) : (
             <NumberedAccordion 
               id={id}
+              key={`${type}-${id}`}
               index={i + 1}
               field_accordion_item_heading={field_accordion_item_heading}
-              field_accordion_item_content={field_accordion_item_content}
-            />
+            >
+              {field_accordion_item_content?.length > 0 && (
+                <ContentMapper content={field_accordion_item_content}/>
+              )}
+            </NumberedAccordion>
           )
         }
       )}
@@ -77,11 +83,11 @@ interface NumberedAccordionProps {
   id: string
   index: number
   field_accordion_item_heading: string
-  field_accordion_item_content: any
+  children: any
 }
 
 function NumberedAccordion(props: NumberedAccordionProps): JSX.Element {
-  const { id, index, field_accordion_item_heading, field_accordion_item_content } = props
+  const { id, index, field_accordion_item_heading, children } = props
   
   // Handle accordion state with useAccordion hook
   const { isOpen, buttonProps, contentProps } = useAccordion({ initiallyOpen: false })
@@ -96,9 +102,7 @@ function NumberedAccordion(props: NumberedAccordionProps): JSX.Element {
         {field_accordion_item_heading}
       </Button>
       <div className={styles.accordionContent} aria-labelledby={`${id}-content`} role="region" {...contentProps}>
-        {field_accordion_item_content?.length > 0 && (
-          <ContentMapper content={field_accordion_item_content}/>
-        )}
+        {children}
       </div>
     </div>
   );
