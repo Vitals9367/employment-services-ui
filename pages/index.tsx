@@ -73,4 +73,3 @@ export default function HomePage({ node, nav }: HomePageProps) {
     </Layout>
   )
 }
-

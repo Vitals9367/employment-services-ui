@@ -1,0 +1,86 @@
+.HDSAccordion {
+  [role="heading"] {
+    font-weight: 400;
+  }
+}
+
+.button[id="numbered-accordion-button"] {
+  background-color: var(--color-fog-light) !important;
+  border: none;
+  color: var(--color-black-90) !important;
+  display: grid;
+  grid-template-columns: 90% 10%;
+  text-align: left;
+  width: 100%;
+
+  span {
+    display: flex;
+    align-items: center;
+    font-size: var(--fontsize-heading-xs);
+  }
+
+  div {
+    justify-self: end;
+    height: var(--spacing-layout-m);
+    width: var(--spacing-layout-m);
+  }
+
+  svg {
+    --icon-size: var(--spacing-layout-m);
+  }
+}
+
+.accordionHeading {
+  margin-bottom: var(--spacing-s);
+  position: relative;
+
+  &:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 100%;
+    bottom: -15px;
+    left: 48px;
+    border-left: 2px dotted var(--color-black);
+    transform: translate(-50%);
+  }
+}
+
+.number {
+  background-color: var(--color-bus-dark);
+  border-radius: 50%;
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fontsize-body-xl) !important;
+  line-height: 1;
+  height: 48px;
+  min-width: 48px;
+  width: 48px;
+  margin-right: var(--spacing-s);
+  padding: 0;
+}
+
+.accordionContent {
+  background-color: var(--color-fog-light);
+  display: flex;
+  padding-right: var(--spacing-l);
+  padding-left: var(--spacing-l);
+}
+
+@media (min-width: 576px) {
+  .button[id="numbered-accordion-button"] {
+    padding: var(--spacing-2-xs) var(--spacing-s);
+
+    span {
+      font-size: var(--fontsize-heading-m);
+    }
+  }
+
+  .accordionHeading {
+    &:not(:last-child)::after {
+      left: 56px;
+    }
+  }
+}
