@@ -6,7 +6,7 @@ import {
 
 export interface Node extends DrupalNode {
   title: string;
-  field_lead_in: string;
+  field_lead_in?: string;
   field_content: any;
 }
 

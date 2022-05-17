@@ -27,32 +27,7 @@ import { getLanguageLinks } from '@/lib/helpers'
 
 interface PageProps {
   node: Node
-  header: HeaderProps,
-}
-
-export default function Page({ node, header }: PageProps) {
-  const router = useRouter()
-  if (!router.isFallback && !node?.id) {
-    return <ErrorPage statusCode={404} />
-  }
-
-  if (!node) return null
-
-  return (
-    <Layout header={header}>
-      <Head>
-        <title>{node.title}</title>
-        <meta name="description" content="A Next.js site powered by a Drupal backend."
-        />
-      </Head>
-      { node.type === NODE_TYPES.PAGE && (
-        <NodeBasicPage node={node} />
-      )}
-      { node.type === NODE_TYPES.LANDING_PAGE && (
-        <NodeLandingPage node={node} />
-      )}
-    </Layout>
-  )
+  header: HeaderProps
 }
 
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<PageProps>> {
@@ -105,4 +80,29 @@ export async function getStaticPaths(context: GetStaticPathsContext): Promise<Ge
     paths: paths,
     fallback: true
   }
+}
+
+export default function Page({ node, header }: PageProps) {
+  const router = useRouter()
+  if (!router.isFallback && !node?.id) {
+    return <ErrorPage statusCode={404} />
+  }
+
+  if (!node) return null
+
+  return (
+    <Layout header={header}>
+      <Head>
+        <title>{node.title}</title>
+        <meta name="description" content="A Next.js site powered by a Drupal backend."
+        />
+      </Head>
+      { node.type === NODE_TYPES.PAGE && (
+        <NodeBasicPage node={node} />
+      )}
+      { node.type === NODE_TYPES.LANDING_PAGE && (
+        <NodeLandingPage node={node} />
+      )}
+    </Layout>
+  )
 }
