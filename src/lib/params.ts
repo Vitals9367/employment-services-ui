@@ -30,6 +30,11 @@ const baseQueryParams = () =>
       'field_banner_title',
       'field_icon'
     ])
+    .addFields(CONTENT_TYPES.LIST_OF_LINKS, [
+      'field_list_of_links_design',
+      'field_list_of_links_links',
+      'field_list_of_links_title'
+    ])
     .addFields(CONTENT_TYPES.COLOR, ['name', 'field_css_name'])
     .addFields(CONTENT_TYPES.FILE, [
       'uri',
@@ -51,6 +56,12 @@ const getPageQueryParams = () =>
     ])
     .addInclude([
       'field_content.field_accordion_items.field_accordion_item_content',
+    ])
+    .addFields(CONTENT_TYPES.TEXT, [
+      'field_text'
+    ])
+    .addFields(CONTENT_TYPES.SUBHEADING, [
+      'field_subheading_title'
     ])
     .getQueryObject()
 
