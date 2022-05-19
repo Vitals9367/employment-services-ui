@@ -9,7 +9,7 @@ interface ContentMapperProps {
 }
 
 export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.Element {
-  //console.log('content: ', content)
+  // console.log('content: ', content)
 
   return content.map((item: any) => {
     const { type, id } = item
@@ -52,9 +52,8 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
             <h2>{item.field_subheading_title}</h2>
           </div>
         )
-        
+
       case CONTENT_TYPES.PARAGRAPH_IMAGE:
-      case CONTENT_TYPES.HERO:
       case CONTENT_TYPES.VIDEO_REMOTE:
       case CONTENT_TYPES.FILE:
       case CONTENT_TYPES.MEDIA_IMAGE:

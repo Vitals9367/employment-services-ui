@@ -39,20 +39,23 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   if (!type) {
     return {
       notFound: true,
+      revalidate: 3
     }
   }
 
   const node = await getResourceFromContext<Node>(type, context, {
     params: getQueryParamsFor(type),
   })
-
-  if (!node || (!context.preview && node?.status === false)) {
+  
+  // Return 404 if node was null
+  if (!node || node?.notFound || (!context.preview && node?.status === false)) {
     return {
       notFound: true,
+      revalidate: 3
     }
   }
 
-  const langLinks = await getLanguageLinks(node);
+  const langLinks = await getLanguageLinks(node)
 
   const { tree: menu } = await getMenu("main", {locale, defaultLocale})
   const { tree: themes } = await getMenu("additional-languages")
