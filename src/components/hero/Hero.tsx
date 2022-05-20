@@ -41,8 +41,8 @@ function Hero(props: HeroProps): JSX.Element {
               size="xl"
               style={{ 
                 color: 'var(--color-metro)',
-                width: '154px',
-                height: '147px'
+                width: '150px',
+                height: '150px'
               }}/>
           </span>
         </div>
