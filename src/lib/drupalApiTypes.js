@@ -21,6 +21,7 @@ export const CONTENT_TYPES = {
   SUBHEADING: 'paragraph--subheading',
   LIST_OF_LINKS: 'paragraph--list_of_links',
   PARAGRAPH_IMAGE: 'paragraph--image',
+  LIFTUP_WITH_IMAGE: 'paragraph--liftup_with_image',
   VIDEO_REMOTE: 'paragraph--remote_video',
   COLOR: 'taxonomy_term--colors'
 }

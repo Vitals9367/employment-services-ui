@@ -5,7 +5,7 @@ import { isExternalLink } from '@/lib/helpers'
 import styles from './listOfLinks.module.scss'
 
 
-type ListOfLinksDesign = 'with-image' | 'without-image' | 'without-image-desc';
+type ListOfLinksDesign = 'with-image' | 'without-image' | 'without-image-desc'
 interface ListOfLinksProps {
   field_list_of_links_design: ListOfLinksDesign
   field_list_of_links_links: any

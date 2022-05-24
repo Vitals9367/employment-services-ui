@@ -7,6 +7,7 @@ const baseQueryParams = () =>
   new DrupalJsonApiParams()
     .addInclude([
       'field_content.field_list_of_links_links.field_list_of_links_image.field_media_image',
+      'field_content.field_liftup_with_image_image.field_media_image',
       'field_content.field_background_color',
     ])
     .addFields(CONTENT_TYPES.MEDIA_IMAGE, [
@@ -35,11 +36,18 @@ const baseQueryParams = () =>
       'field_list_of_links_links',
       'field_list_of_links_title'
     ])
+    .addFields(CONTENT_TYPES.LIFTUP_WITH_IMAGE, [
+      'field_liftup_with_image_title',
+      'field_liftup_with_image_image',
+      'field_liftup_with_image_design',
+      'field_liftup_with_image_desc'
+    ])
     .addFields(CONTENT_TYPES.COLOR, ['name', 'field_css_name'])
     .addFields(CONTENT_TYPES.FILE, [
       'uri',
       'url',
-      'image_style_uri'
+      'image_style_uri',
+      'width'
     ])
 
 const getPageQueryParams = () =>
