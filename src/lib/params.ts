@@ -85,6 +85,13 @@ const getLandingPageQueryParams = () =>
       'field_hero',
       'field_metatags',
     ])
+    .addInclude([
+      'field_hero.field_custom_hero_image.field_media_image'
+    ])
+    .addFields(CONTENT_TYPES.HERO, [
+      'field_hero_desc',
+      'field_custom_hero_image'
+    ])
     .getQueryObject()
 
 export const getQueryParamsFor = (type: string) => {
