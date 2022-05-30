@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import { DrupalFormattedText } from 'src/lib/types'
+import { DrupalFormattedText } from '@/lib/types'
+import { getImageUrl } from '@/lib/helpers'
 import HtmlBlock from '@/components/HtmlBlock'
 
 import styles from './liftupWithImage.module.scss'
@@ -17,11 +18,11 @@ interface LiftupWithImageProps {
 function LiftupWithImage(props: LiftupWithImageProps): JSX.Element {
   const { field_liftup_with_image_title, field_liftup_with_image_image, field_liftup_with_image_design: design, field_liftup_with_image_desc } = props
   const textAlign = design === 'image-on-right' || design == 'image-on-right-secondary' || design === 'background-text-on-left' ? styles.textLeft : styles.textRight
-  const contentBgSecondary = design ===  'image-on-right-secondary' || design == 'image-on-left-secondary' ? styles.contentBgSecondary : '';
-  const imageFullWidth = design ===  'background-text-on-right' || design == 'background-text-on-left' ? styles.imageFullWidth : '';
-  const imageStyle = design ===  'background-text-on-right' || design == 'background-text-on-left' ? field_liftup_with_image_image?.field_media_image?.image_style_uri?.['23_10_l'] : field_liftup_with_image_image?.field_media_image?.image_style_uri?.['3_2_m'];
-  const imageWidth = design ===  'background-text-on-right' || design == 'background-text-on-left' ? 1440 : 1024;
-  const imageHeight = design ===  'background-text-on-right' || design == 'background-text-on-left' ? 626 : 683;
+  const contentBgSecondary = design ===  'image-on-right-secondary' || design == 'image-on-left-secondary' ? styles.contentBgSecondary : ''
+  const imageFullWidth = design ===  'background-text-on-right' || design == 'background-text-on-left' ? styles.imageFullWidth : ''
+  const imageStyle = design ===  'background-text-on-right' || design == 'background-text-on-left' ? getImageUrl(field_liftup_with_image_image?.field_media_image?.image_style_uri?.['23_10_l']) : getImageUrl(field_liftup_with_image_image?.field_media_image?.image_style_uri?.['3_2_m'])
+  const imageWidth = design ===  'background-text-on-right' || design == 'background-text-on-left' ? 1440 : 1024
+  const imageHeight = design ===  'background-text-on-right' || design == 'background-text-on-left' ? 626 : 683
 
   return (
     <div className='component'>
