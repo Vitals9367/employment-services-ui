@@ -1,8 +1,10 @@
+import { useState, useRef } from 'react'
 import { useTranslation } from 'next-i18next'
 import { Navigation, Button, IconAngleRight, IconArrowTopRight } from 'hds-react'
-import { HeaderProps } from 'src/lib/types'
+import { NavProps } from 'src/lib/types'
+import styles from './navigation.module.scss'
 
-function Header(header:HeaderProps): JSX.Element {
+function Header(header:NavProps): JSX.Element {
 
   const { locale, menu, themes, langLinks } = header
   const { t } = useTranslation('common')
@@ -25,13 +27,12 @@ function Header(header:HeaderProps): JSX.Element {
             href={sub.url}
             label={sub.title}
             active={sub.url === activePath}
-            // onClick={function noRefCheck() {}}
           />
         )
         return subs
       })
       nav.push(
-        <Navigation.Dropdown label={item.title} key={item.title}>
+        <Navigation.Dropdown label={item.title} key={item.title} id={item.title} className={styles.zover}>
           {subs}
         </Navigation.Dropdown>
       )
@@ -66,46 +67,50 @@ function Header(header:HeaderProps): JSX.Element {
   return (
     <Navigation
       menuToggleAriaLabel="Menu"
-      logoLanguage={locale === "sv" ? "sv" : "fi"}
+      logoLanguage={locale === 'sv' ? 'sv' : 'fi'}
       skipTo="#content"
       skipToContentLabel="Skip to main content"
-      title={t("site_name")}
-      titleAriaLabel={t("navigation.title_aria_label")}
+      title={t('site_name')}
+      titleAriaLabel={t('navigation.title_aria_label')}
     >
       <Navigation.Actions>
-        <Navigation.Row variant='inline'>
+        <Navigation.Row variant='inline' key='languages'>
           <Navigation.Item
+            key="fi_lang"
             href={langLinks.fi}
             hrefLang='fi'
             label="Suomeksi"
             active={langLinks.fi === activePath}
           />
           <Navigation.Item
+            key="sv_lang"
             href={langLinks.sv}
             hrefLang='sv'
             label="På svenska"
             active={langLinks.sv === activePath}
           />
           <Navigation.Item
+            key="en_lang"
             href={langLinks.en}
             hrefLang='en'
             label="In English"
             active={langLinks.en === activePath}
           />
-          <Navigation.Dropdown label="🌐" key="theme_dropdown">
+          <Navigation.Dropdown label="🌐" key='theme_dropdown' id='theme_dropdown'>
             {getThemes(themes)}
           </Navigation.Dropdown>
 
         </Navigation.Row>
         <Button
             size="small"
-            key="navigation_button"
+            id='navigation_button'
+            key='navigation_button'
             iconRight={<IconArrowTopRight size="l" />}
             onClick={() => {
-              window.open(t("navigation.button_link"), '_blank')?.focus();
+              window.open(t('navigation.button_link'), '_blank')?.focus();
             }}
           >
-            {t("navigation.button_text")}
+            {t('navigation.button_text')}
           </Button>
       </Navigation.Actions>
       <Navigation.Row>
