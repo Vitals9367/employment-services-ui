@@ -1,3 +1,5 @@
+@import '/styles/variables.scss';
+
 .listOfLinks {
   display: flex;
   flex-direction: row;
@@ -25,7 +27,7 @@
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: $breakpoint-s) {
   .linkItem,
   .linkBox {
     flex-grow: 0;
@@ -33,7 +35,7 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: $breakpoint-l) {
   .linkItem,
   .linkBox {
     flex-grow: 0;
@@ -41,7 +43,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: $breakpoint-xl) {
   .linkBox {
     flex-grow: 0;
     width: calc(25% - var(--spacing-l));

@@ -1,3 +1,4 @@
+@import '/styles/variables.scss';
 
 .banner {
   display: flex;
@@ -14,9 +15,8 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: $breakpoint-m) {
   .banner {
     flex-direction: row;
   }
 }
-
