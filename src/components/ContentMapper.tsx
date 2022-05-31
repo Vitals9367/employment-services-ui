@@ -4,13 +4,14 @@ import ListOfLinks from '@/components/listOfLinks/ListOfLinks'
 import Accordion from '@/components/accordion/Accordion'
 import Banner from '@/components/banner/Banner'
 import LiftupWithImage from '@/components/liftupWithImage/LiftupWithImage'
+import Notification from '@/components/notification/Notification'
 
 interface ContentMapperProps {
   content: any
 }
 
 export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.Element {
-  // console.log('content: ', content)
+ // console.log('content: ', content)
 
   return content.map((item: any) => {
     const { type, id } = item
@@ -19,7 +20,6 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
     switch(type) {
       case CONTENT_TYPES.TEXT:
         if (!item?.field_text?.processed) {
-          // console.log('text', item)
           return null
         }
         return <HtmlBlock {...item} key={key} />
@@ -36,19 +36,24 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
           return null
         }
         return <ListOfLinks {...item} key={key} />
-      
+
       case CONTENT_TYPES.BANNER:
         if (!item?.id) {
           return null
         }
         return <Banner {...item} key={key} />
-      
+
+        case CONTENT_TYPES.NOTIFICATION:
+        if (!item?.id) {
+          return null
+        }
+        return <Notification {...item} key={key} />
 
       case CONTENT_TYPES.SUBHEADING:
         if (!item?.field_subheading_title) {
           return null
         }
-        return ( 
+        return (
           <div className='component' key={key}>
             <h2>{item.field_subheading_title}</h2>
           </div>

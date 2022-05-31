@@ -12,6 +12,7 @@ export interface Node extends DrupalNode {
   }
   field_lead_in?: string
   field_content: any
+  field_notification: any
 }
 
 type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text'
@@ -21,7 +22,7 @@ export interface DrupalFormattedText {
   value: string
 }
 
-export interface HeaderProps {
+export interface NavProps {
   locale: Locale
   menu?: DrupalMenuLinkContent[]
   themes?: DrupalMenuLinkContent[]

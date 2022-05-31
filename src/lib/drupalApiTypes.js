@@ -23,5 +23,6 @@ export const CONTENT_TYPES = {
   PARAGRAPH_IMAGE: 'paragraph--image',
   LIFTUP_WITH_IMAGE: 'paragraph--liftup_with_image',
   VIDEO_REMOTE: 'paragraph--remote_video',
+  NOTIFICATION: 'paragraph--notification',
   COLOR: 'taxonomy_term--colors'
 }
