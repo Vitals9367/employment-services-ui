@@ -16,6 +16,7 @@ const nextConfig = {
   serverRuntimeConfig,
   images: {
     domains: [process.env.NEXT_IMAGE_DOMAIN],
+    deviceSizes: [576, 768, 992, 1200]
   }
 }
 

@@ -3,6 +3,7 @@ import { CONTENT_TYPES } from '@/lib/drupalApiTypes'
 import ListOfLinks from '@/components/listOfLinks/ListOfLinks'
 import Accordion from '@/components/accordion/Accordion'
 import Banner from '@/components/banner/Banner'
+import LiftupWithImage from '@/components/liftupWithImage/LiftupWithImage'
 import Notification from '@/components/notification/Notification'
 
 interface ContentMapperProps {
@@ -19,7 +20,6 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
     switch(type) {
       case CONTENT_TYPES.TEXT:
         if (!item?.field_text?.processed) {
-          // console.log('text', item)
           return null
         }
         return <HtmlBlock {...item} key={key} />
@@ -58,6 +58,12 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
             <h2>{item.field_subheading_title}</h2>
           </div>
         )
+
+      case CONTENT_TYPES.LIFTUP_WITH_IMAGE:
+        if (!item?.field_liftup_with_image_image) {
+          return null
+        }
+        return <LiftupWithImage {...item} key={key} />
 
       case CONTENT_TYPES.PARAGRAPH_IMAGE:
       case CONTENT_TYPES.VIDEO_REMOTE:
