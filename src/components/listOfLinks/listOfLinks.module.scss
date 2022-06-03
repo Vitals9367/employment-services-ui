@@ -3,7 +3,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  gap: var(--spacing-l);
+  gap: var(--spacing-s);
+  justify-content: space-between;
 }
 
 .linkItem {
@@ -21,7 +22,7 @@
   }
 
   &:hover svg {
-    transform: translateX(8px);
+    transform: translateX(0.5rem);
   }
 }
 

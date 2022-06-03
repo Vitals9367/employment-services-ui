@@ -1,4 +1,4 @@
-import {IconArrowRight, IconArrowTopRight } from 'hds-react'
+import { IconArrowRight, IconArrowTopRight } from 'hds-react'
 import { isExternalLink } from '@/lib/helpers'
 import styles from './link.module.scss'
 

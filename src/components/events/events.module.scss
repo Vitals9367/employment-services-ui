@@ -1,0 +1,89 @@
+.eventList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: var(--spacing-xl) var(--spacing-s);
+  justify-content: space-between;
+}
+
+.eventCard {
+  flex-grow: 1;
+  width: 100%;
+
+  &> div {
+    height: 100%;
+  }
+
+  .eventCardContent {
+    max-width: 50rem;
+    padding: var(--spacing-xs);
+  }
+
+  a svg {
+    color: var(--color-metro);
+    transition: transform .2s linear;
+  }
+
+  &:hover a svg {
+    transform: translateX(0.5rem);
+  }
+}
+
+.linkBox {
+  & > div {
+    padding: 0 0 4rem 0;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -1rem;
+  position: relative;
+  list-style: none;
+  font-size: var(--fontsize-body-s);
+  padding: 0 var(--spacing-3-xs) 0 var(--spacing-2-xs);
+
+  .tag {
+    background-color: var(--color-suomenlinna-medium-light);
+    padding: var(--spacing-3-xs) var(--spacing-xs);
+    margin-right: var(--spacing-xs);
+    margin-bottom: var(--spacing-2-xs);
+    text-transform: capitalize;
+    width: auto;
+  }
+}
+
+.dateTime {
+  padding: 0 var(--spacing-xs);
+
+  div {
+    display: flex;
+    font-size: var(--fontsize-body-m);
+  }
+
+  svg {
+    margin-right: var(--spacing-xs);
+  }
+
+}
+
+@media (min-width: 576px) {
+  .eventCard {
+    width: calc(50% - var(--spacing-l));
+  }
+}
+
+@media (min-width: 992px) {
+  .eventCard {
+    width: calc(33.3333% - var(--spacing-l));
+  }
+}
+
+@media (min-width: 1248px) {
+  .eventCard {
+    flex-grow: 0;
+    width: calc(33.3333% - var(--spacing-l));
+  }
+}

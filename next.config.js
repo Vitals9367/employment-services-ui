@@ -1,11 +1,11 @@
 const { i18n } = require('./next-i18next.config')
 
 const publicRuntimeConfig = {
-  NEXT_PUBLIC_DRUPAL_BASE_URL: process.env.NEXT_PUBLIC_DRUPAL_BASE_URL,
+  NEXT_PUBLIC_DRUPAL_BASE_URL: process.env.NEXT_PUBLIC_DRUPAL_BASE_URL
 }
 
 const serverRuntimeConfig = {
-  REVALIDATE_TIME: 20, //seconds
+  REVALIDATE_TIME: 20 //seconds
 }
 
 /** @type {import('next').NextConfig} */
@@ -15,7 +15,7 @@ const nextConfig = {
   publicRuntimeConfig,
   serverRuntimeConfig,
   images: {
-    domains: [process.env.NEXT_IMAGE_DOMAIN],
+    domains: [process.env.NEXT_IMAGE_DOMAIN, 'api.hel.fi']
   }
 }
 

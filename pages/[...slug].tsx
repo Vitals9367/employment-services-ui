@@ -26,7 +26,7 @@ import { getLanguageLinks } from '@/lib/helpers'
 
 interface PageProps {
   node: Node
-  nav: NavProps,
+  nav: NavProps
 }
 
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<PageProps>> {

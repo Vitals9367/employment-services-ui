@@ -1,9 +1,7 @@
 export const NODE_TYPES = {
   PAGE: 'node--page',
   LANDING_PAGE: 'node--landing_page',
-  NEWS: 'node--news',
-  EVENT: 'node--event',
-  BLOG: 'node--blog',
+  EVENT: 'node--event'
 }
 
 export const CONTENT_TYPES = {
@@ -23,5 +21,6 @@ export const CONTENT_TYPES = {
   PARAGRAPH_IMAGE: 'paragraph--image',
   VIDEO_REMOTE: 'paragraph--remote_video',
   NOTIFICATION: 'paragraph--notification',
+  EVENTS_LIST: 'paragraph--events_list',
   COLOR: 'taxonomy_term--colors'
 }

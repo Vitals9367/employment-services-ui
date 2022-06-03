@@ -91,6 +91,11 @@ const getLandingPageQueryParams = () =>
       'field_hero_desc',
       'field_custom_hero_image'
     ])
+    .addFields(CONTENT_TYPES.EVENTS_LIST, [
+      'field_title',
+      'field_event_tag_filter',
+      'field_events_list_desc'
+    ])
     .getQueryObject()
 
 export const getQueryParamsFor = (type: string) => {

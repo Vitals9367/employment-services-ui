@@ -28,3 +28,7 @@ export interface NavProps {
   themes?: DrupalMenuLinkContent[]
   langLinks?: any
 };
+
+export interface Tags {
+  [key: string]: string | string[];
+}
