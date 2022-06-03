@@ -1,3 +1,5 @@
+@import '/styles/variables.scss';
+
 :root {
   --max-width: 1440px;
 }
@@ -162,7 +164,7 @@ h5, .h5,
   margin-bottom: var(--spacing-xl);
 }
 
-@media (min-width: 576px) {
+@media (min-width: $breakpoint-s) {
   .col {
     margin-left: var(--spacing-s);
     margin-right: var(--spacing-s);
@@ -174,7 +176,7 @@ h5, .h5,
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: $breakpoint-m) {
   .content-region .link-box {
     width: calc(33.33% - var(--spacing-l));
   }
@@ -205,7 +207,7 @@ h5, .h5,
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: $breakpoint-l) {
   body {
     font-size: var(--fontsize-body-l);
   }

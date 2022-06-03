@@ -15,7 +15,8 @@ const nextConfig = {
   publicRuntimeConfig,
   serverRuntimeConfig,
   images: {
-    domains: [process.env.NEXT_IMAGE_DOMAIN, 'api.hel.fi']
+    domains: [process.env.NEXT_IMAGE_DOMAIN, 'api.hel.fi'],
+    deviceSizes: [576, 768, 992, 1200]
   }
 }
 
