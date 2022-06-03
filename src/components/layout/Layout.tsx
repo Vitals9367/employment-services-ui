@@ -1,20 +1,20 @@
-import { PreviewAlert } from '@/components/PreviewAlert'
+import { PreviewAlert } from 'src/components/PreviewAlert'
 import { Container } from 'hds-react'
 import styles from './layout.module.scss'
+import Header from "@/components/navigation/Header"
+import { NavProps } from "src/lib/types"
 
 interface LayoutProps {
-  children: any
+  children: any,
+  header: NavProps,
 }
 
-export function Layout({ children }: LayoutProps): JSX.Element {
+export function Layout({ children, header }: LayoutProps): JSX.Element {
   return (
     <>
       <PreviewAlert />
       <div className={styles.wrapper}>
-        <header>
-          <div>
-          </div>
-        </header>
+        <Header {...header} />
         <main>{children}</main>
         <footer>
           <Container className="container">

@@ -1,11 +1,11 @@
 import parse from 'html-react-parser'
+import { DrupalFormattedText } from 'src/lib/types'
 
 interface HtmlBlockProps {
-  field_text: any
+  field_text: DrupalFormattedText
 }
 
 export function HtmlBlock({ field_text }: HtmlBlockProps): JSX.Element {
-  // console.log('field_text', field_text)
   return (
     <div>
       {parse(field_text?.processed)}

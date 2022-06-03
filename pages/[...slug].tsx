@@ -1,30 +1,90 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
-
 import { GetStaticPropsContext, GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsResult } from 'next'
+import getConfig from 'next/config'
+
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import {
   Locale,
-  DrupalNode,
-  DrupalParagraph,
   getPathsFromContext,
-  getResource,
   getResourceFromContext,
   getResourceTypeFromContext,
-} from 'next-drupal'
+  getMenu,
+} from "next-drupal"
 
 import NodeBasicPage from '@/components/pageTemplates/NodeBasicPage'
+import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
 import { Layout } from '@/components/layout/Layout'
 
+import { Node } from '@/lib/types'
+import { NODE_TYPES } from '@/lib/drupalApiTypes'
+import { getQueryParamsFor } from '@/lib/params'
+import { NavProps } from "@/lib/types"
+import { getLanguageLinks } from '@/lib/helpers'
 
-import { NODE_TYPES, CONTENT_TYPES } from 'src/lib/drupalApiTypes'
-import { getParams } from 'src/lib/params'
 interface PageProps {
-  node: DrupalNode
+  node: Node
+  nav: NavProps,
 }
 
-export default function Page({ node }: PageProps) {
+export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<PageProps>> {
+  const { REVALIDATE_TIME } = getConfig().serverRuntimeConfig
+  const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
+
+  const type = await getResourceTypeFromContext(context)
+
+  if (!type) {
+    return {
+      notFound: true,
+      revalidate: 3
+    }
+  }
+
+  const node = await getResourceFromContext<Node>(type, context, {
+    params: getQueryParamsFor(type),
+  })
+  
+  // Return 404 if node was null
+  if (!node || node?.notFound || (!context.preview && node?.status === false)) {
+    return {
+      notFound: true,
+      revalidate: 3
+    }
+  }
+
+  const langLinks = await getLanguageLinks(node)
+
+  const { tree: menu } = await getMenu("main", {locale, defaultLocale})
+  const { tree: themes } = await getMenu("additional-languages")
+
+  return {
+    props: {
+      node,
+      nav: {
+        locale,
+        menu,
+        themes,
+        langLinks,
+      },
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+    revalidate: REVALIDATE_TIME
+  }
+}
+
+export async function getStaticPaths(context: GetStaticPathsContext): Promise<GetStaticPathsResult> {
+  const types = Object.values(NODE_TYPES)
+  const paths = await getPathsFromContext(types, context)
+
+  return {
+    paths: paths,
+    fallback: true
+  }
+}
+
+export default function Page({ node, nav }: PageProps) {
   const router = useRouter()
   if (!router.isFallback && !node?.id) {
     return <ErrorPage statusCode={404} />
@@ -33,57 +93,18 @@ export default function Page({ node }: PageProps) {
   if (!node) return null
 
   return (
-    <Layout>
+    <Layout header={nav}>
       <Head>
         <title>{node.title}</title>
         <meta name="description" content="A Next.js site powered by a Drupal backend."
         />
       </Head>
-      { node.type === "node--page" && (
-        <NodeBasicPage node={node} />
+      { node.type === NODE_TYPES.PAGE && (
+        <NodeBasicPage node={node} sidebar={nav} />
+      )}
+      { node.type === NODE_TYPES.LANDING_PAGE && (
+        <NodeLandingPage node={node} />
       )}
     </Layout>
   )
-}
-
-export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<PageProps>> {
-
-  console.log('props context', context)
-
-  const type = await getResourceTypeFromContext(context)
-
-  if (!type) {
-    return {
-      notFound: true,
-    }
-  }
-
-  const node = await getResourceFromContext<DrupalNode>(type, context, {
-    params: getParams(type),
-  })
-
-  if (!node || (!context.preview && node?.status === false)) {
-      return {
-        notFound: true,
-      }
-  }
-
-  return {
-    props: {
-      node
-    },
-    // revalidate: 30,
-  }
-}
-
-
-export async function getStaticPaths(context: GetStaticPathsContext): Promise<GetStaticPathsResult> {
-
-  const types = Object.values(NODE_TYPES)
-
-  const paths = await getPathsFromContext(types, context)
-  return {
-    paths: paths,
-    fallback: true,
-  }
 }

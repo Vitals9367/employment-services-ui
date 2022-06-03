@@ -1,3 +1,5 @@
+@import '/styles/variables.scss';
+
 :root {
   --max-width: 1440px;
 }
@@ -32,6 +34,7 @@ main h1.small, main .h1-small,
 .small-text main h1, .small-text main .h1,
 main h1, main .h1 {
   font-size: var(--fontsize-heading-l);
+  font-weight: 400;
   line-height: var(--lineheight-m);
 }
 
@@ -39,6 +42,7 @@ h2.small, .h2-small,
 h2, .h2,
 .small-text h2, .small-text .h2 {
   font-size: var(--fontsize-heading-m);
+  font-weight: 400;
   line-height: var(--lineheight-m);
 }
 
@@ -46,6 +50,7 @@ h3.small, .h3-small,
 h3, .h3,
 .small-text h3, .small-text .h3  {
   font-size: var(--fontsize-heading-s);
+  font-weight: 400;
   line-height: var(--lineheight-m);
 }
 
@@ -53,6 +58,7 @@ h4.small, .h4-small,
 h4, .h4,
 .small-text h4, .small-text .h4 {
   font-size: var(--fontsize-heading-xs);
+  font-weight: 400;
   line-height: var(--lineheight-m);
 }
 
@@ -60,58 +66,61 @@ h6, .h6, h5.small, .h5-small,
 h5, .h5,
 .small-text h5, .small-text .h5 {
   font-size: var(--fontsize-heading-xxs);
+  font-weight: 400;
   line-height: var(--lineheight-m);
 }
 
-ul, ol {
-  margin-top: var(--spacing-l);
-  margin-bottom: var(--spacing-l);
-  padding-top: 0;
-  padding-left: var(--spacing-s);
-  list-style-position: outside;
-}
+.content-region {
+  ul, ol {
+    margin-top: var(--spacing-l);
+    margin-bottom: var(--spacing-l);
+    padding-top: 0;
+    padding-left: var(--spacing-s);
+    list-style-position: outside;
+  }
 
-li {
-  padding-left: var(--spacing-m);
-}
+  li {
+    padding-left: var(--spacing-m);
+  }
 
-ul li::marker {
-  color: var(--color-metro);
-}
+  ul li::marker {
+    color: var(--color-metro);
+  }
 
-li li::marker {
-  color: var(--color-black-90);
-}
+  li li::marker {
+    color: var(--color-black-90);
+  }
 
-a.link-internal,
-a.link-external {
-  display: inline-flex;
-}
+  a.link-internal,
+  a.link-external {
+    display: inline-flex;
+  }
 
-a.link-internal::after,
-a.link-external::after {
-  content: '';
-  margin-left: var(--spacing-3-xs);
-  transition: transform .2s linear;
-  width: 1.25rem;
-}
+  a.link-internal::after,
+  a.link-external::after {
+    content: '';
+    margin-left: var(--spacing-3-xs);
+    transition: transform .2s linear;
+    width: 1.25rem;
+  }
 
-.link-internal::after {
-  margin-right: var(--spacing-2-xs);
-  background: url('../src/assets/arrow-right.svg') no-repeat center center;
-}
+  .link-internal::after {
+    margin-right: var(--spacing-2-xs);
+    background: url('../src/assets/arrow-right.svg') no-repeat center center;
+  }
 
-.link-external::after {
-  margin-right: var(--spacing-3-xs);
-  background: url('../src/assets/arrow-top-right.svg') no-repeat center center;
-}
+  .link-external::after {
+    margin-right: var(--spacing-3-xs);
+    background: url('../src/assets/arrow-top-right.svg') no-repeat center center;
+  }
 
-.link-internal:hover::after {
-  transform: translateX(8px);
-}
+  .link-internal:hover::after {
+    transform: translateX(8px);
+  }
 
-.link-external:hover::after {
-  transform: translate(4px, -4px);
+  .link-external:hover::after {
+    transform: translate(4px, -4px);
+  }
 }
 
 .container {
@@ -145,13 +154,17 @@ a.link-external::after {
   margin-top: var(--spacing-4-xl);
 }
 
-.sidebar,
 .lower-content-region {
   border: 1px solid;
   min-height: 140px;
 }
 
-@media (min-width: 576px) {
+.lead-in {
+  font-size: var(--fontsize-body-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (min-width: $breakpoint-s) {
   .col {
     margin-left: var(--spacing-s);
     margin-right: var(--spacing-s);
@@ -163,7 +176,7 @@ a.link-external::after {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: $breakpoint-m) {
   .content-region .link-box {
     width: calc(33.33% - var(--spacing-l));
   }
@@ -194,7 +207,7 @@ a.link-external::after {
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: $breakpoint-l) {
   body {
     font-size: var(--fontsize-body-l);
   }
