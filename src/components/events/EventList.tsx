@@ -22,7 +22,7 @@ function EventList(props: EventListProps): JSX.Element {
   const { field_title, field_event_tag_filter: tags, field_events_list_desc } = props
   const fetcher = () => getEvents({ tags })
   const { locale, asPath } = useRouter()
-  const { data: events, error, isValidating } = useSWR(
+  const { data: events, error } = useSWR(
     `/${locale}/${asPath}`,
     fetcher
   )

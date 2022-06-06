@@ -1,3 +1,5 @@
+@import '~hds-design-tokens';
+
 .eventList {
   display: flex;
   flex-direction: row;
@@ -69,19 +71,19 @@
 
 }
 
-@media (min-width: 576px) {
+@media (min-width: $breakpoint-s) {
   .eventCard {
     width: calc(50% - var(--spacing-l));
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: $breakpoint-l) {
   .eventCard {
     width: calc(33.3333% - var(--spacing-l));
   }
 }
 
-@media (min-width: 1248px) {
+@media (min-width: 	$breakpoint-xl) {
   .eventCard {
     flex-grow: 0;
     width: calc(33.3333% - var(--spacing-l));
