@@ -32,8 +32,10 @@ function EventList(props: EventListProps): JSX.Element {
       {field_title && 
         <h2>{field_title}</h2>
       }
-      {field_events_list_desc?.processed && 
-        <HtmlBlock field_text={field_events_list_desc} />
+      {field_events_list_desc?.processed &&
+        <div className={styles.eventListDescription}>
+          <HtmlBlock field_text={field_events_list_desc} />
+        </div>
       }
       <div className={styles.eventList}>
         { events && events.map((event: any, key: any) => (

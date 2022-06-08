@@ -13,6 +13,10 @@
   }
 }
 
+.eventListDescription {
+  max-width: 50rem;
+}
+
 .eventCard {
   flex-grow: 1;
   width: 100%;
@@ -22,7 +26,6 @@
   }
 
   .eventCardContent {
-    max-width: 50rem;
     padding: var(--spacing-xs);
   }
 
