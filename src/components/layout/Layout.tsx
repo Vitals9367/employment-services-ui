@@ -20,10 +20,8 @@ export function Layout({ children, header }: LayoutProps): JSX.Element {
           <Container className="container">
             <div className="columns">
               <div className="col col-6">
-                Menu placeholder
               </div>
               <div className="col col-6">
-                Oma asiointi placeholder
               </div>
             </div>
           </Container>

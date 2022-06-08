@@ -35,7 +35,6 @@ export function NodeBasicPage({ node, sidebar, ...props }: NodeBasicPageProps): 
         </div>
         <div className="columns">
           <div className="lower-content-region col col-12">
-            Lower content region placeholder
           </div>
         </div>
       </Container>
