@@ -5,15 +5,17 @@ import styles from './link.module.scss'
 interface LinkProps {
   href: string
   text: string
+  fullAreaLink?: boolean
 }
 
 function Link(props: LinkProps): JSX.Element {
-  const { href, text} = props;
+  const { href, text, fullAreaLink } = props
+  const iconSize = fullAreaLink ? 'l' : 'm'
 
   return (
-    <a href={href} className={`${styles.link} ${isExternalLink(href) ? styles.external : styles.internal }`}>
+    <a href={href} className={`${styles.link} ${fullAreaLink ? styles.fullAreaLink : '' } ${isExternalLink(href) ? styles.external : styles.internal }`}>
       <span>{text}</span>
-      {isExternalLink(href) ? <IconArrowTopRight size="l" /> : <IconArrowRight size="l" />}
+      {isExternalLink(href) ? <IconArrowTopRight size={iconSize} /> : <IconArrowRight size={iconSize} />}
     </a>
   );
 }

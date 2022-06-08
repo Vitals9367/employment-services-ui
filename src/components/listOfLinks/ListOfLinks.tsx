@@ -36,6 +36,7 @@ function ListOfLinks(props: ListOfLinksProps): JSX.Element {
             <div className={`${styles.linkItem} link-item`} key={key}>
               <h3 className="flex">
                 <Link
+                  fullAreaLink
                   href={link.field_list_of_links_link.url}
                   text={link.field_list_of_links_link.title}
                 />

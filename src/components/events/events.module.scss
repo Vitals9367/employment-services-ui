@@ -7,6 +7,10 @@
   width: 100%;
   gap: var(--spacing-xl) var(--spacing-s);
   justify-content: space-between;
+
+  .tags {
+    margin-top: -1.5rem;
+  }
 }
 
 .eventCard {
@@ -41,11 +45,10 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  margin-top: -1rem;
   position: relative;
   list-style: none;
   font-size: var(--fontsize-body-s);
-  padding: 0 var(--spacing-3-xs) 0 var(--spacing-2-xs);
+  padding: 0 var(--spacing-3-xs) 0 0;
 
   .tag {
     background-color: var(--color-suomenlinna-medium-light);
@@ -58,7 +61,7 @@
 }
 
 .dateTime {
-  padding: 0 var(--spacing-xs);
+  padding: 0;
 
   div {
     display: flex;
@@ -83,9 +86,8 @@
   }
 }
 
-@media (min-width: 	$breakpoint-xl) {
+@media (min-width: $breakpoint-xl) {
   .eventCard {
     flex-grow: 0;
-    width: calc(33.3333% - var(--spacing-l));
   }
 }

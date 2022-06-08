@@ -106,6 +106,28 @@ const getLandingPageQueryParams = () =>
     ])
     .getQueryObject()
 
+export const baseEventQueryParams = () =>
+  new DrupalJsonApiParams()
+    .addFields(NODE_TYPES.EVENT, [
+      'id',
+      'title',
+      'path',
+      'field_text',
+      'field_location',
+      'field_start_time',
+      'field_end_time',
+      'field_tags',
+      'field_image_url',
+      'field_image_name',
+      'field_image_alt',
+      'field_external_links',
+      'field_info_url'
+    ])
+
+const getEventPageQueryParams = () =>
+  baseEventQueryParams()
+    .getQueryObject()
+
 export const getQueryParamsFor = (type: string) => {
   switch (type) {
     case NODE_TYPES.PAGE:
@@ -114,5 +136,9 @@ export const getQueryParamsFor = (type: string) => {
   switch (type) {
     case NODE_TYPES.LANDING_PAGE:
       return getLandingPageQueryParams()
+  }
+  switch (type) {
+    case NODE_TYPES.EVENT:
+      return getEventPageQueryParams()
   }
 }

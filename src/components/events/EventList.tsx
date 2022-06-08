@@ -14,7 +14,7 @@ import styles from './events.module.scss'
 
 interface EventListProps {
   field_title: string
-  field_event_tag_filter: any
+  field_event_tag_filter: Array<string>
   field_events_list_desc:  DrupalFormattedText
 }
 
@@ -43,7 +43,7 @@ function EventList(props: EventListProps): JSX.Element {
               linkboxAriaLabel="List of links Linkbox"
               linkAriaLabel="Linkbox link"
               key={key}            
-              href={`${event.path.langcode}/tapahtumat/${event.path.alias}`}
+              href={`${event.path.langcode}${event.path.alias}`}
               withBorder
             >
               <Image
@@ -54,9 +54,9 @@ function EventList(props: EventListProps): JSX.Element {
                 width={384}
                 height={158}
               />
-              {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
-              <DateTime startTime={event.field_start_time} endTime={event.field_end_time}  />
               <div className={styles.eventCardContent}>
+                {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
+                <DateTime startTime={event.field_start_time} endTime={event.field_end_time}  />
                 <h3>{event.title}</h3>
                 <p>{event.field_location}</p>
               </div>

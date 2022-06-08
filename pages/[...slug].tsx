@@ -16,6 +16,7 @@ import {
 
 import NodeBasicPage from '@/components/pageTemplates/NodeBasicPage'
 import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
+import NodeEventPage from '@/components/pageTemplates/NodeEventPage'
 import { Layout } from '@/components/layout/Layout'
 
 import { Node } from '@/lib/types'
@@ -104,6 +105,9 @@ export default function Page({ node, nav }: PageProps) {
       )}
       { node.type === NODE_TYPES.LANDING_PAGE && (
         <NodeLandingPage node={node} />
+      )}
+      { node.type === NODE_TYPES.EVENT && (
+        <NodeEventPage node={node} />
       )}
     </Layout>
   )
