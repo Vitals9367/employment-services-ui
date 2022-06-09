@@ -1,26 +1,26 @@
-import { DrupalJsonApiParams } from "drupal-jsonapi-params";
-import { DrupalMenuLinkContent, DrupalNode, getResource } from "next-drupal";
+import { DrupalJsonApiParams } from "drupal-jsonapi-params"
+import { DrupalMenuLinkContent, DrupalNode, getResource } from "next-drupal"
 import getConfig from 'next/config'
-import { i18n } from "next-i18next.config";
-import { BreadcrumbContent } from "./types";
+import { i18n } from "next-i18next.config"
+import { BreadcrumbContent } from "./types"
 
 export const isExternalLink = (href: string): boolean|undefined => {
-  const isExternalLink = href && (href.startsWith("https://") || href.startsWith("https://"));
+  const isExternalLink = href && (href.startsWith('https://') || href.startsWith('https://'))
   return isExternalLink || false
 };
 
 export const getImageUrl = (url: string): string => {
-  const host = getConfig().publicRuntimeConfig.NEXT_PUBLIC_DRUPAL_BASE_URL
+  const host = getConfig().publicRuntimeConfig.NEXT_IMAGE_DOMAIN
   url = url.substring(url.indexOf('/sites'))
 
-  return url ? `${host}${url}` : ''
+  return url ? `https://${host}${url}` : ''
 }
 
 export async function getLanguageLinks(node: DrupalNode): Promise<Object> {
   let params = new DrupalJsonApiParams().addFields(node.type, ['path']).getQueryObject()
   const uuid = node.id
 
-  let langLinks = {};
+  let langLinks = {}
   for (let locale of i18n.locales) {
     let prefix = locale !== i18n.defaultLocale ? `/${locale}` : ''
     let link = ''
