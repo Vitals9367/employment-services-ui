@@ -1,3 +1,5 @@
+@import '/styles/variables.scss';
+
 .zover {
   z-index: 101;
 }
@@ -16,7 +18,9 @@
   --side-navigation-level-color-hover: var(--color-black);
   --side-navigation-mobile-menu-border-color: var(--color-white) !important;
   --side-navigation-mobile-menu-z-index: 100 !important;
+  margin-top: var(--spacing-xl);
 }
+
 .mainLevel {
   &:not(.active) {
     > a, > button {
@@ -55,3 +59,35 @@
   }
 }
 
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 var(--spacing-m);
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--breakpoint-xl);
+  border-top: 1px solid var(--color-black-10);
+  min-height: var(--spacing-3-xl);
+}
+
+.breadcrumbElement {
+  min-height: var(--spacing-l);
+  align-self: stretch;
+  align-items: center;
+  display: flex;
+  line-height: 0;
+  outline: none;
+  padding: var(--spacing-3-xs) 0;
+  span {
+    margin: 0 var(--spacing-2-xs);
+    font-weight: 600;
+    font-size: var(--fontsize-body-s);
+    line-height: var(--lineheight-s);
+  }
+}
+
+@media (min-width: $breakpoint-s) {
+  .breadcrumbElement {
+    height: var(--spacing-3-xl);
+  }
+}

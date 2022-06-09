@@ -27,7 +27,14 @@ export interface NavProps {
   menu?: DrupalMenuLinkContent[]
   themes?: DrupalMenuLinkContent[]
   langLinks?: any
+  breadcrumb?: any
 };
+
+export interface BreadcrumbContent {
+  id: string;
+  title: string;
+  url: string;
+}
 
 export interface Tags {
   [key: string]: string | string[];

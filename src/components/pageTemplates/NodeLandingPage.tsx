@@ -21,7 +21,9 @@ export function NodeLandingPage({ node, ...props }: NodeLandingPageProps): JSX.E
           {field_notification?.length > 0 && (
               <ContentMapper content={node.field_notification}/>
             )}
-            <h1>{title}</h1>
+            {!field_hero &&(
+              <h1>{title}</h1>
+            )}
             {field_content?.length > 0 && (
               <ContentMapper content={node.field_content}/>
             )}
