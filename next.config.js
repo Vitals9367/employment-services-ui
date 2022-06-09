@@ -6,7 +6,7 @@ const publicRuntimeConfig = {
 }
 
 const serverRuntimeConfig = {
-  REVALIDATE_TIME: 20, //seconds
+  REVALIDATE_TIME: 20 //seconds
 }
 
 /** @type {import('next').NextConfig} */
@@ -16,7 +16,7 @@ const nextConfig = {
   publicRuntimeConfig,
   serverRuntimeConfig,
   images: {
-    domains: [process.env.NEXT_IMAGE_DOMAIN],
+    domains: [process.env.NEXT_IMAGE_DOMAIN, 'api.hel.fi'],
     deviceSizes: [576, 768, 992, 1200]
   }
 }

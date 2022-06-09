@@ -1,0 +1,96 @@
+@import '/styles/variables.scss';
+
+.eventList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: var(--spacing-xl) var(--spacing-s);
+  justify-content: space-between;
+
+  .tags {
+    margin-top: -1.5rem;
+  }
+}
+
+.eventListDescription {
+  max-width: 50rem;
+}
+
+.eventCard {
+  flex-grow: 1;
+  width: 100%;
+
+  &> div {
+    height: 100%;
+  }
+
+  .eventCardContent {
+    padding: var(--spacing-xs);
+  }
+
+  a svg {
+    color: var(--color-metro);
+    transition: transform .2s linear;
+  }
+
+  &:hover a svg {
+    transform: translateX(0.5rem);
+  }
+}
+
+.linkBox {
+  & > div {
+    padding: 0 0 4rem 0;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  list-style: none;
+  font-size: var(--fontsize-body-s);
+  padding: 0 var(--spacing-3-xs) 0 0;
+
+  .tag {
+    background-color: var(--color-suomenlinna-medium-light);
+    padding: var(--spacing-3-xs) var(--spacing-xs);
+    margin-right: var(--spacing-xs);
+    margin-bottom: var(--spacing-2-xs);
+    text-transform: capitalize;
+    width: auto;
+  }
+}
+
+.dateTime {
+  padding: 0;
+
+  div {
+    display: flex;
+    font-size: var(--fontsize-body-m);
+  }
+
+  svg {
+    margin-right: var(--spacing-xs);
+  }
+
+}
+
+@media (min-width: $breakpoint-s) {
+  .eventCard {
+    width: calc(50% - var(--spacing-l));
+  }
+}
+
+@media (min-width: $breakpoint-l) {
+  .eventCard {
+    width: calc(33.3333% - var(--spacing-l));
+  }
+}
+
+@media (min-width: $breakpoint-xl) {
+  .eventCard {
+    flex-grow: 0;
+  }
+}
