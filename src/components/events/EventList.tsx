@@ -58,7 +58,7 @@ function EventList(props: EventListProps): JSX.Element {
               />
               <div className={styles.eventCardContent}>
                 {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
-                <DateTime startTime={event.field_start_time} endTime={event.field_end_time}  />
+                <DateTime startTime={event.field_start_time} endTime={event.field_end_time} />
                 <h3>{event.title}</h3>
                 <p>{event.field_location}</p>
               </div>
@@ -70,4 +70,4 @@ function EventList(props: EventListProps): JSX.Element {
   );
 }
 
-export default EventList;
+export default EventList

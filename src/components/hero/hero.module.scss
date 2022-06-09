@@ -1,4 +1,4 @@
-@import '~hds-design-tokens';
+@import '/styles/variables.scss';
 
 .heroContainer {
   margin-left: auto;
@@ -105,7 +105,7 @@
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: $breakpoint-2xl) {
   .heroTextContainer {
     padding-left: var(--spacing-layout-xl);
     padding-right: var(--spacing-layout-xl);
