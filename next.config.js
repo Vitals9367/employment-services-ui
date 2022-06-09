@@ -2,6 +2,7 @@ const { i18n } = require('./next-i18next.config')
 
 const publicRuntimeConfig = {
   NEXT_PUBLIC_DRUPAL_BASE_URL: process.env.NEXT_PUBLIC_DRUPAL_BASE_URL,
+  NEXT_IMAGE_DOMAIN: process.env.NEXT_IMAGE_DOMAIN
 }
 
 const serverRuntimeConfig = {
