@@ -14,7 +14,7 @@ import styles from './events.module.scss'
 
 interface EventListProps {
   field_title: string
-  field_event_tag_filter: Array<string>
+  field_event_tag_filter: string[]
   field_events_list_desc:  DrupalFormattedText
 }
 

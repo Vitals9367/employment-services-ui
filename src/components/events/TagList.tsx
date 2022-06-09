@@ -2,7 +2,7 @@ import styles from './events.module.scss'
 
 
 export interface TagListProps {
-  tags: Array<string>
+  tags: string[]
 }
 
 function TagList(props: TagListProps): JSX.Element {
@@ -15,7 +15,7 @@ function TagList(props: TagListProps): JSX.Element {
   
   return (
     <>
-      {finalTags.length !== 0 && 
+      {!finalTags.length && 
         <ul className={styles.tags}>
           { Object.values(finalTags).map((tag: string, i: number) => (
             <li className={styles.tag} key={`${tag}-${i}`}>

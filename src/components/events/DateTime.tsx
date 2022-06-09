@@ -40,4 +40,4 @@ function DateTime(props: DateTimeProps): JSX.Element {
   )
 }
 
-export default DateTime;
+export default DateTime
