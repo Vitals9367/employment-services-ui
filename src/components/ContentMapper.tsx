@@ -5,7 +5,7 @@ import Accordion from '@/components/accordion/Accordion'
 import Banner from '@/components/banner/Banner'
 import LiftupWithImage from '@/components/liftupWithImage/LiftupWithImage'
 import Notification from '@/components/notification/Notification'
-import EventList from './events/EventList'
+import { EventList, EventListFilter } from './events/EventList'
 
 interface ContentMapperProps {
   content: any
@@ -65,7 +65,7 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
           return null
         }
         return (
-          <EventList {...item} key={key} />
+          <EventListFilter {...item} key={key} />
         )
 
       case CONTENT_TYPES.LIFTUP_WITH_IMAGE:
