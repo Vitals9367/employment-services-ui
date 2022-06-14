@@ -24,7 +24,7 @@ export function NodeLandingPage({ node, ...props }: NodeLandingPageProps): JSX.E
     <article>
       <Container className="container">
         <div className="columns">
-          <div className="col-12">
+          <div className="content-region col-12">
             <div className={styles.eventHero}>
               <div className={styles.imageContainer}>
                 <Image
