@@ -101,6 +101,7 @@ const getLandingPageQueryParams = () =>
     ])
     .addFields(CONTENT_TYPES.EVENTS_LIST, [
       'field_title',
+      'field_events_list_short',
       'field_event_tag_filter',
       'field_events_list_desc'
     ])

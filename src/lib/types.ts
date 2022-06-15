@@ -44,3 +44,17 @@ export interface BreadcrumbContent {
 export interface Tags {
   [key: string]: string | string[]
 }
+
+export interface EventState {
+  total: number
+  events: Array<{
+    title: string
+    url: string
+    field_image_url: string
+    field_image_alt: string
+    field_start_time: string
+    field_end_time: string
+    field_location: string
+    field_tags: string[]
+  }>
+}
