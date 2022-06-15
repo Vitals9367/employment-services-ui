@@ -23,7 +23,9 @@
     "blog_url": "/en/blog",
     "events_url": "/en/event",
     "news_url": "/en/news",
-    "results_text": "search results"
+    "results_text": "search results",
+    "show_all_events": "Show all events",
+    "events_page_url": "/en/events"
   },
   "event": {
     "remote_event": "Remote event",
