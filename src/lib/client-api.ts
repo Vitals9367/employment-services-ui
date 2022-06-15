@@ -19,17 +19,7 @@ export const getEvents = async (tags: Tags) => {
   return data
 }
 
-
-export const getEventsSearch = async () => {
-  const { data } = await axios(`${EVENTS_SEARCH_URL}`)
-
-  // , {
-  //   params:
-  //     tags,
-  //     paramsSerializer: params => {
-  //       return qs.stringify(params, { arrayFormat: 'repeat' })
-  //     }
-  // })
-
+export const getEventsSearch = async (eventsIndex: number) => {
+  const { data } = await axios(`${EVENTS_SEARCH_URL}`, { params: { index: eventsIndex } })
   return data
 }
