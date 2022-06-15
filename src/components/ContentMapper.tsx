@@ -5,6 +5,7 @@ import Accordion from '@/components/accordion/Accordion'
 import Banner from '@/components/banner/Banner'
 import LiftupWithImage from '@/components/liftupWithImage/LiftupWithImage'
 import Notification from '@/components/notification/Notification'
+import ParagraphImage from '@/components/paragraphImage/ParagraphImage'
 import EventList from './events/EventList'
 
 interface ContentMapperProps {
@@ -59,7 +60,7 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
             <h2>{item.field_subheading_title}</h2>
           </div>
         )
-      
+
       case CONTENT_TYPES.EVENTS_LIST:
         if (!item?.id) {
           return null
@@ -73,6 +74,12 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
           return null
         }
         return <LiftupWithImage {...item} key={key} />
+
+      case CONTENT_TYPES.PARAGRAPH_IMAGE:
+        if (!item?.field_image) {
+          return null
+        }
+        return <ParagraphImage {...item} key={key} />
 
       default:
         console.log('unmapped type: ', type)
