@@ -44,3 +44,10 @@ export interface BreadcrumbContent {
 export interface Tags {
   [key: string]: string | string[]
 }
+
+
+declare global {
+  interface Window {
+    _paq: any;
+  }
+}
