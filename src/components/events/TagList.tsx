@@ -1,3 +1,5 @@
+import { allowedEventTags } from '@/lib/helpers'
+
 import styles from './events.module.scss'
 
 
@@ -8,14 +10,13 @@ export interface TagListProps {
 function TagList(props: TagListProps): JSX.Element {
   const { tags } = props
 
-  const allowedTags = ['maahanmuuttajat', 'nuoret', 'info', 'koulutus', 'messut', 'neuvonta', 'rekrytointi', 'työpajat', 'digitaidot', 'etätapahtuma', 'palkkatuki', 'työnhaku']
-  // Prioritise tags order by allowedTags.
-  tags.sort((a: string, b: string) => allowedTags.indexOf(a) - allowedTags.indexOf(b))
-  const finalTags = tags.slice(0,3).map((tag: string) => tag === 'maahanmuuttajat' ? 'maahan muuttaneet' : tag);
-  
+  // Prioritise tags order by allowedEventTags.
+  tags.sort((a: string, b: string) => allowedEventTags.indexOf(a) - allowedEventTags.indexOf(b))
+  const finalTags = tags.slice(0,3).map((tag: string) => tag.replace('_', ' '))
+
   return (
     <>
-      {!finalTags.length && 
+      {finalTags.length && 
         <ul className={styles.tags}>
           { Object.values(finalTags).map((tag: string, i: number) => (
             <li className={styles.tag} key={`${tag}-${i}`}>
