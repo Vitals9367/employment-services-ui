@@ -6,6 +6,7 @@ import Banner from '@/components/banner/Banner'
 import LiftupWithImage from '@/components/liftupWithImage/LiftupWithImage'
 import Notification from '@/components/notification/Notification'
 import { EventList, EventListWithFilters } from './events/EventList'
+import ParagraphImage from '@/components/paragraphImage/ParagraphImage'
 
 interface ContentMapperProps {
   content: any
@@ -59,7 +60,7 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
             <h2>{item.field_subheading_title}</h2>
           </div>
         )
-      
+
       case CONTENT_TYPES.EVENTS_LIST:
         if (!item?.id) {
           return null
@@ -67,9 +68,8 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
         if (item.field_events_list_short) {
           return <EventList {...item} key={key} />
         }
-        return (
-          <EventListWithFilters {...item} key={key} />
-        )
+        return <EventListWithFilters {...item} key={key} />
+
 
       case CONTENT_TYPES.LIFTUP_WITH_IMAGE:
         if (!item?.field_liftup_with_image_image) {
@@ -77,8 +77,14 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
         }
         return <LiftupWithImage {...item} key={key} />
 
+      case CONTENT_TYPES.PARAGRAPH_IMAGE:
+        if (!item?.field_image) {
+          return null
+        }
+        return <ParagraphImage {...item} key={key} />
+
       default:
-        console.log('unmapped type: ', type);
+        console.log('unmapped type: ', type)
     }
   })
 }

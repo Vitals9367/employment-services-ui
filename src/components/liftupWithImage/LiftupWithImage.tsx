@@ -30,7 +30,7 @@ function LiftupWithImage(props: LiftupWithImageProps): JSX.Element {
     : styles.textRight
   const contentBgSecondary = design ===  'image-on-right-secondary' || design == 'image-on-left-secondary'? styles.contentBgSecondary : ''
   const imageFullWidth = design ===  'background-text-on-right' || design == 'background-text-on-left' ? styles.imageFullWidth : ''
-  const imageStyle = design ===  'background-text-on-right' || design == 'background-text-on-left'
+  const imageStyleUri = design ===  'background-text-on-right' || design == 'background-text-on-left'
     ? getImageUrl(field_liftup_with_image_image?.field_media_image?.image_style_uri?.['23_10_l'])
     : getImageUrl(field_liftup_with_image_image?.field_media_image?.image_style_uri?.['3_2_m'])
   const imageWidth = design ===  'background-text-on-right' || design == 'background-text-on-left'
@@ -45,7 +45,7 @@ function LiftupWithImage(props: LiftupWithImageProps): JSX.Element {
       <div className={`${styles.liftupWithImage} ${textAlign} ${imageFullWidth}`}>
         <div className={styles.liftupWithImageImage}>
           <Image
-            src={imageStyle}
+            src={imageStyleUri}
             alt={field_liftup_with_image_image?.field_media_image?.resourceIdObjMeta?.alt}
             layout='responsive'
             width={`${imageWidth}px`}
@@ -55,14 +55,14 @@ function LiftupWithImage(props: LiftupWithImageProps): JSX.Element {
         <div className={styles.liftupWithImageContentWrapper}>
           <div className={`${styles.liftupWithImageContent}  ${contentBgSecondary}`}>
             <h2>{field_liftup_with_image_title}</h2>
-            { field_liftup_with_image_desc.processed && 
-              <HtmlBlock field_text={field_liftup_with_image_desc} /> 
+            { field_liftup_with_image_desc.processed &&
+              <HtmlBlock field_text={field_liftup_with_image_desc} />
             }
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default LiftupWithImage;
+export default LiftupWithImage

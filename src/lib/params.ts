@@ -8,6 +8,7 @@ const baseQueryParams = () =>
     .addInclude([
       'field_content.field_list_of_links_links.field_list_of_links_image.field_media_image',
       'field_content.field_liftup_with_image_image.field_media_image',
+      'field_content.field_image.field_media_image',
       'field_content.field_background_color',
       'field_notification'
     ])
@@ -53,6 +54,12 @@ const baseQueryParams = () =>
     .addFields(CONTENT_TYPES.NOTIFICATION, [
       'field_notification_title',
       'field_notification_description'
+    ])
+
+    .addFields(CONTENT_TYPES.PARAGRAPH_IMAGE, [
+      'field_image',
+      'field_image_caption',
+      'field_original_aspect_ratio'
     ])
 
 const getPageQueryParams = () =>
