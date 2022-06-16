@@ -15,13 +15,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     return
   }
 
-  const elastic = Elastic.getElasticClient()
   const { index }: Index = req?.query
 
   if (isNaN(Number(index))) {
     res.status(400)
     return
   }
+
+  const elastic = Elastic.getElasticClient()
 
   const body = {
     size: 9,
