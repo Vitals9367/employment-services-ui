@@ -17,15 +17,29 @@
 
 .linkBox {
   flex-grow: 1;
+  height: 100%;
   width: 100%;
 
+  &>div {
+    height: 100%;
+  }
+
   svg {
+    bottom: 0;
+    left: 10px;
     transition: transform .2s linear;
   }
 
   &:hover svg {
     transform: translateX(0.5rem);
   }
+
+  div[role="heading"] {
+    font-weight: 500;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
 }
 
 @media (min-width: $breakpoint-s) {
