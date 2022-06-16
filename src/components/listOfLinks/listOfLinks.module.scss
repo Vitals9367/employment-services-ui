@@ -20,13 +20,18 @@
   height: 100%;
   width: 100%;
 
-  &>div {
+  & > div {
     height: 100%;
+
+    & > div {
+      padding-left: var(--spacing-2-xs);
+      padding-right: var(--spacing-2-xs);
+    }
   }
 
   svg {
     bottom: 0;
-    left: 10px;
+    left: 6px;
     transition: transform .2s linear;
   }
 
