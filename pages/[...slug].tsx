@@ -1,11 +1,10 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
 import { GetStaticPropsContext, GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsResult } from 'next'
 import getConfig from 'next/config'
-
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-
 import {
   Locale,
   getPathsFromContext,
@@ -13,6 +12,8 @@ import {
   getResourceTypeFromContext,
   getMenu,
 } from "next-drupal"
+import { getCookieConsentValue } from "react-cookie-consent"
+import { Container } from 'hds-react'
 
 import NodeBasicPage from '@/components/pageTemplates/NodeBasicPage'
 import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
@@ -24,6 +25,7 @@ import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getQueryParamsFor } from '@/lib/params'
 import { NavProps, FooterProps } from "@/lib/types"
 import { getBreadCrumb, getLanguageLinks } from '@/lib/helpers'
+import { useReactAndShare } from '@/hooks/useAnalytics'
 
 interface PageProps {
   node: Node
@@ -102,6 +104,9 @@ export default function Page({ node, nav, footer }: PageProps) {
 
   if (!node) return null
 
+  const [cookieConsent] = useState<string>(getCookieConsentValue('tyollisyyspalvelut_cookie_consent'))
+  useReactAndShare(cookieConsent, router.locale, node.title)
+
   return (
     <Layout header={nav} footer={footer}>
       <Head>
@@ -118,6 +123,10 @@ export default function Page({ node, nav, footer }: PageProps) {
       { node.type === NODE_TYPES.EVENT && (
         <NodeEventPage node={node} />
       )}
+      {/* React and share */}
+      <Container className="container">
+        <div className="rns" />
+      </Container>
     </Layout>
   )
 }

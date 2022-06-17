@@ -4,14 +4,12 @@ import type { AppProps } from 'next/app'
 import CookieConsent, { getCookieConsentValue } from "react-cookie-consent"
 import { useState } from 'react'
 
-import { useMatomo } from '@/lib/helpers'
+import { useMatomo } from '@/hooks/useAnalytics'
 
 function MyApp({ Component, pageProps }: AppProps) {
-
-  const { t } = useTranslation();
-
-  const [cookieConsent, setCookieConsent] = useState(getCookieConsentValue('tyollisyyspalvelut_cookie_consent'));
-  useMatomo(cookieConsent);
+  const { t } = useTranslation()
+  const [cookieConsent, setCookieConsent] = useState<string>(getCookieConsentValue('tyollisyyspalvelut_cookie_consent'))
+  useMatomo(cookieConsent)
 
   return (
     <>
@@ -26,20 +24,20 @@ function MyApp({ Component, pageProps }: AppProps) {
         cookieName="tyollisyyspalvelut_cookie_consent"
         containerClasses="cookie-banner"
         contentClasses="cookie-banner-content"
-        style={{ background: "#0000bf", color: "#fff", fontSize: "18px", alignItems: "center", maxHeight: "50vh", overflowX: "hidden", overflowY: "auto" }}
-        buttonStyle={{ background: "#fff", color: "#0000bf", fontSize: "16px", fontWeight: "500", lineHeight: "1.5", border: "2px solid #fff", padding: "16px 24px", margin: "0 8px 16px" }}
-        declineButtonStyle={{ background: "#0000bf", color: "#fff", fontSize: "16px", fontWeight: "500", lineHeight: "1.5", border: "2px solid #fff", padding: "16px 24px", margin: "0 8px 16px" }}
+        style={{ background: "var(--color-bus)", color: "var(--color-white)", fontSize: "var(--fontsize-body-l)", alignItems: "center", maxHeight: "50vh", overflowX: "hidden", overflowY: "auto" }}
+        buttonStyle={{ background: "var(--color-bus)", color: "var(--color-white)", fontSize: "var(--fontsize-body-m)", fontWeight: "500", lineHeight: "1.5", border: "2px solid var(--color-white)", padding: "var(--spacing-s) var(--spacing-m)", margin: "0 var(--spacing-2-xs) var(--spacing-s)" }}
+        declineButtonStyle={{ background: "var(--color-bus)", color: "var(--color-white)", fontSize: "var(--fontsize-body-m)", fontWeight: "500", lineHeight: "1.5", border: "2px solid var(--color-white)", padding: "var(--spacing-s) var(--spacing-m)", margin: "0 var(--spacing-2-xs) var(--spacing-s)" }}
         expires={180}
         flipButtons
         onAccept={() => {
-          setCookieConsent('true');
+          setCookieConsent('true')
         }}
         onDecline={() => {
-          setCookieConsent('false');
+          setCookieConsent('false')
         }}
       >
       <p>{t("cookies.text")}</p>
-      <a href={t("cookies.url")} style={{ color: "#fff" }}>{t("cookies.link_text")}</a>
+      <a href={t("cookies.url")} style={{ color: "var(--color-white)" }}>{t("cookies.link_text")}</a>
     </CookieConsent>
   </>
   )

@@ -49,5 +49,6 @@ export interface Tags {
 declare global {
   interface Window {
     _paq: any;
+    rnsData: any;
   }
 }
