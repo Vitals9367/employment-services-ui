@@ -39,6 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       sort: "field_end_time:asc"
     })
 
+    // TODO: fix typing for total.value 
     const {
       hits: { total, hits }
     } = searchRes as any

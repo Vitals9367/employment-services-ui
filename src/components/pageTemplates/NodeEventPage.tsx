@@ -11,11 +11,11 @@ import Link from '@/components/link/Link'
 
 import styles from './eventPage.module.scss'
 
-interface NodeLandingPageProps {
+interface NodeEventPageProps {
   node: Node
 }
 
-function NodeEventPage({ node, ...props }: NodeLandingPageProps): JSX.Element {
+function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
   const { title, field_text, field_location, field_start_time, field_end_time, field_tags, field_image_url, field_image_alt, field_info_url, field_external_links } = node
   const { t } = useTranslation('common')
   const infoUrlText = field_info_url && field_info_url.startsWith('https://teams.microsoft') ? t('event.info_url_text_teams') : t('event.info_url_text')
