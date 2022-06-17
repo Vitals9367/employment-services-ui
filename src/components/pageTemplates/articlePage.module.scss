@@ -1,0 +1,18 @@
+@import "/styles/variables.scss";
+
+.newsArticle {
+  max-width: 50rem;
+
+  figure {
+    margin-left: 0;
+  }
+}
+
+.pageDivider {
+  background-color: #000;
+  content: "";
+  display: block;
+  height: 2px;
+  margin-top: 32px;
+  width: 64px;
+}

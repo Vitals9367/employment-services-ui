@@ -141,6 +141,34 @@ const getEventPageQueryParams = () =>
   baseEventQueryParams()
     .getQueryObject()
 
+const getArticlePageQueryParams = () =>
+  new DrupalJsonApiParams()
+  .addInclude([
+    'field_content.field_image.field_media_image',
+  ])
+    .addFields(NODE_TYPES.ARTICLE, [
+      'id',
+      'title',
+      'path',
+      'created',
+      'revision_timestamp',
+      'langcode',
+      'publish_on',
+      'unpublish_on',
+      'field_lead',
+      'field_content',
+      'field_keywords'
+    ])
+    .addFields(CONTENT_TYPES.TEXT, [
+      'field_text'
+    ])
+    .addFields(CONTENT_TYPES.PARAGRAPH_IMAGE, [
+      'field_image',
+      'field_image_caption',
+      'field_original_aspect_ratio'
+    ])
+    .getQueryObject()
+
 export const getQueryParamsFor = (type: string) => {
   switch (type) {
     case NODE_TYPES.PAGE:
@@ -153,5 +181,9 @@ export const getQueryParamsFor = (type: string) => {
   switch (type) {
     case NODE_TYPES.EVENT:
       return getEventPageQueryParams()
+  }
+  switch (type) {
+    case NODE_TYPES.ARTICLE:
+      return getArticlePageQueryParams()
   }
 }
