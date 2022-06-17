@@ -8,7 +8,7 @@ interface NodeBasicPageProps {
   sidebar: NavProps
 }
 
-export function NodeBasicPage({ node, sidebar, ...props }: NodeBasicPageProps): JSX.Element {
+function NodeBasicPage({ node, sidebar, ...props }: NodeBasicPageProps): JSX.Element {
   //console.log({node})
   const { title, field_lead_in, field_content, field_notification} = node
 
