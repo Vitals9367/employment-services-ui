@@ -1,4 +1,4 @@
-import { Container, SideNavigation } from 'hds-react'
+import { Container } from 'hds-react'
 import { NavProps, Node } from '@/lib/types'
 import ContentMapper from '@/components/ContentMapper'
 import { Sidebar } from '@/components/navigation/Sidebar'
