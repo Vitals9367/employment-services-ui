@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as Elastic from '@/lib/elasticsearch'
-import { EventState } from '@/lib/types'
+import { EventState, EventData } from '@/lib/types'
 
 type Data = EventState
 
@@ -41,13 +41,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     const {
       hits: { total, hits }
-    } = searchRes
+    } = searchRes as any
 
     res.json({
-      //@ts-ignore 
       total: total?.value,
       events: hits.map((hit: any) => {
-        const { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags } = hit._source
+        const { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags } = hit._source as EventData
         return { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags }
       }),
     })

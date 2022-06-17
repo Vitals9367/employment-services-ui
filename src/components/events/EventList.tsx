@@ -9,7 +9,7 @@ import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, IconArrowRight
 
 import { DrupalFormattedText, EventState } from '@/lib/types'
 import { getEvents, getEventsSearch } from '@/lib/client-api'
-import { allowedEventTags } from '@/lib/helpers'
+import { eventTags } from '@/lib/helpers'
 
 import HtmlBlock from '@/components/HtmlBlock'
 import TagList from './TagList'
@@ -121,8 +121,8 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
   tags = tags && tags.flat().filter((value:any, index:any, array:any) => { 
     return array.indexOf(value) === index
   })
-  // Prioritise tags order by allowedEventTags.
-  tags && tags.sort((a: string, b: string) => allowedEventTags.indexOf(a) - allowedEventTags.indexOf(b))
+  // Prioritise tags order by eventTags.
+  tags && tags.sort((a: string, b: string) => eventTags.indexOf(a) - eventTags.indexOf(b))
   tags && tags.push(t('search.clear'))
   const finalTags = tags && tags.map((tag: string) => tag.replace('_', ' '))
 

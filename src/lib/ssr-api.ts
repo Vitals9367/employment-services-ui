@@ -21,7 +21,3 @@ export const getEvents = async ({ tags }: Tags) => {
 
   return await getResourceCollection(NODE_TYPES.EVENT, { params: eventParams().getQueryObject() })
 }
-
-export const getEventsSearch = async ({ tags }: Tags) => {
-
-}
