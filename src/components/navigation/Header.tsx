@@ -1,10 +1,13 @@
-import { useState, useRef, ReactElement } from 'react'
+import { ReactElement } from 'react'
 import { useTranslation } from 'next-i18next'
-import { Navigation, Button, IconAngleRight, IconArrowTopRight, IconGlobe } from 'hds-react'
-import { NavProps } from 'src/lib/types'
-import styles from './navigation.module.scss'
 import { DrupalMenuLinkContent } from 'next-drupal'
+import { Navigation, IconArrowTopRight, IconGlobe } from 'hds-react'
+
+import { NavProps } from '@/lib/types'
 import { Breadcrumb } from './Breadcrumb'
+import classNames from '@/lib/classNames'
+
+import styles from './navigation.module.scss'
 
 function Header(header:NavProps): JSX.Element {
 
@@ -14,14 +17,15 @@ function Header(header:NavProps): JSX.Element {
   const activePath = langLinks[locale]
 
   const getNavi = (menuArray: DrupalMenuLinkContent[]|undefined) => {
-    const nav: ReactElement[] = [];
+    const nav: ReactElement[] = []
     if (!menuArray) {
       return <></>
     }
-
     menuArray.map((item: DrupalMenuLinkContent, index: number) => {
-      const subs: ReactElement[] = [];
+      const subs: ReactElement[] = []
+      let childActive = false
       item.items?.map((sub: DrupalMenuLinkContent, i: number) => {
+        childActive = sub.url === activePath || childActive
         subs.push(
           <Navigation.Item
             key={sub.title}
@@ -33,8 +37,15 @@ function Header(header:NavProps): JSX.Element {
         )
         return subs
       })
+      const isActive = item.url === activePath || childActive
       nav.push(
-        <Navigation.Dropdown label={item.title} key={item.title} id={item.title} className={styles.zover}>
+        <Navigation.Dropdown 
+          label={item.title} 
+          key={item.title} 
+          id={item.title} 
+          active={isActive}
+          className={classNames(styles.navDropDown, isActive && styles.active)}
+        >
           {subs}
         </Navigation.Dropdown>
       )
@@ -75,9 +86,24 @@ function Header(header:NavProps): JSX.Element {
       skipToContentLabel="Skip to main content"
       title={t('site_name')}
       titleAriaLabel={t('navigation.title_aria_label')}
+      className={classNames(styles.navigation, styles.zover)}
     >
+      <Navigation.Row>
+        {getNavi(menu)}
+      </Navigation.Row>
       <Navigation.Actions>
-        <Navigation.Row variant='inline' key='languages'>
+        {/* <Navigation.Search searchLabel="Search" searchPlaceholder="Search page" /> */}
+        <Navigation.User
+          id='navigation_blue_button'
+          key='navigation_button'
+          label={t('navigation.button_text')}
+          icon={<IconArrowTopRight size="l" />}
+          onSignIn={() => {
+            window.open(t('navigation.button_link'), '_blank')?.focus()
+          }}
+          className={styles.blueButton}
+        />
+        <Navigation.LanguageSelector label={locale.toUpperCase()}>
           <Navigation.Item
             key="fi_lang"
             href={langLinks.fi}
@@ -99,30 +125,21 @@ function Header(header:NavProps): JSX.Element {
             label="In English"
             active={langLinks.en === activePath}
           />
-          <Navigation.Dropdown label="" aria-label={t("navigation.theme_dropdown")} icon={<IconGlobe size='s' aria-label="Globe"/>} key='theme_dropdown' id='theme_dropdown'>
-            {getThemes(themes)}
-          </Navigation.Dropdown>
-
-        </Navigation.Row>
-        <Button
-            size="small"
-            id='navigation_button'
-            key='navigation_button'
-            iconRight={<IconArrowTopRight size="l" />}
-            onClick={() => {
-              window.open(t('navigation.button_link'), '_blank')?.focus();
-            }}
-          >
-            {t('navigation.button_text')}
-          </Button>
+        </Navigation.LanguageSelector>
+        {/* <Navigation.Dropdown 
+          label="" 
+          aria-label={t("navigation.theme_dropdown")} 
+          icon={<IconGlobe size='s' aria-label="Globe"/>} 
+          key='theme_dropdown' 
+          id='theme_dropdown'
+        >
+          {getThemes(themes)}
+        </Navigation.Dropdown> */}
       </Navigation.Actions>
-      <Navigation.Row>
-        {getNavi(menu)}
-      </Navigation.Row>
     </Navigation>
     {activePath !== '/' && <Breadcrumb breadcrumb={breadcrumb}/>}
     </>
-  );
+  )
 }
 
-export default Header;
+export default Header

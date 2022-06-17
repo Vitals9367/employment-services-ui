@@ -1,6 +1,7 @@
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { DrupalMenuLinkContent, DrupalNode, getResource } from "next-drupal"
 import getConfig from 'next/config'
+
 import { i18n } from "next-i18next.config"
 import { useEffect } from "react"
 
@@ -8,8 +9,9 @@ import { BreadcrumbContent } from "./types"
 
 export const isExternalLink = (href: string): boolean|undefined => {
   const isExternalLink = href && (href.startsWith('https://') || href.startsWith('https://'))
+
   return isExternalLink || false
-};
+}
 
 export const getImageUrl = (url: string): string => {
   const host = getConfig().publicRuntimeConfig.NEXT_IMAGE_DOMAIN
@@ -63,7 +65,7 @@ export const getBreadCrumb = (menuItems: DrupalMenuLinkContent[], path: string, 
       if (parentItem) {
         breadcrumbs.push(parentItem)
       }
-      if (!parentItem?.parent) break;
+      if (!parentItem?.parent) break
     }
   }
   return breadcrumbs.reverse()
