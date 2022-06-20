@@ -39,11 +39,11 @@
     "link_text": "Read more on cookies",
     "accept": "Accept cookies",
     "decline": "Decline cookies",
-    "url": "https://tyollisyyspalvelut.hel.fi/en/cookie-policy"
+    "url": "/en/cookie-policy"
   },
   "footer": {
     "accessibility": "Accessibility statement",
-    "accessibilityLink": "https://tyollisyyspalvelut.hel.fi/en/accessibility_statement",
+    "accessibilityLink": "/en/accessibility_statement",
     "feedback": "Give feedback",
     "feedbackLink": "https://www.hel.fi/helsinki/en/administration/participate/feedback",
     "goup": "Back to the top",
