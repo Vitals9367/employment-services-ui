@@ -5,6 +5,9 @@ import getConfig from 'next/config'
 import { i18n } from "next-i18next.config"
 import { BreadcrumbContent } from "./types"
 
+
+export const eventTags = ['maahanmuuttajat', 'nuoret', 'info', 'koulutus', 'messut', 'neuvonta', 'rekrytointi', 'työpajat', 'digitaidot', 'etätapahtuma', 'palkkatuki', 'työnhaku']
+
 export const isExternalLink = (href: string): boolean|undefined => {
   const isExternalLink = href && (href.startsWith('https://') || href.startsWith('https://'))
 

@@ -23,7 +23,9 @@
     "blog_url": "/sv/blogg",
     "events_url": "/sv/evenemang",
     "news_url": "/sv/nyheter",
-    "results_text": "sökresultat"
+    "results_text": "sökresultat",
+    "show_all_events": "Visa alla evenemang",
+    "events_page_url": "/sv/evenemang"
   },
   "event": {
     "remote_event": "Virtuellt evenemang",
