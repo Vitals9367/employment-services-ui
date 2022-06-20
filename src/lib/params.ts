@@ -167,6 +167,12 @@ const getArticlePageQueryParams = () =>
       'field_image_caption',
       'field_original_aspect_ratio'
     ])
+    .addFields(CONTENT_TYPES.QUOTE, [
+      'field_quote_content',
+      'field_quote_author_first_name',
+      'field_quote_author_last_name',
+      'field_quote_author_title'
+    ])
     .getQueryObject()
 
 export const getQueryParamsFor = (type: string) => {

@@ -5,8 +5,10 @@ import Accordion from '@/components/accordion/Accordion'
 import Banner from '@/components/banner/Banner'
 import LiftupWithImage from '@/components/liftupWithImage/LiftupWithImage'
 import Notification from '@/components/notification/Notification'
-import { EventList, EventListWithFilters } from './events/EventList'
+import { EventList, EventListWithFilters } from '@/components/events/EventList'
 import ParagraphImage from '@/components/paragraphImage/ParagraphImage'
+import Quote from '@/components/quote/Quote'
+
 
 interface ContentMapperProps {
   content: any
@@ -82,6 +84,12 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
           return null
         }
         return <ParagraphImage {...item} key={key} />
+
+      case CONTENT_TYPES.QUOTE:
+        if (!item?.field_quote_content) {
+          return null
+        }
+        return <Quote {...item} key={key} />
 
       default:
         console.log('unmapped type: ', type)
