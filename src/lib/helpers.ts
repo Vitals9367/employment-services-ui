@@ -3,6 +3,8 @@ import { DrupalMenuLinkContent, DrupalNode, getResource } from "next-drupal"
 import getConfig from 'next/config'
 
 import { i18n } from "next-i18next.config"
+import { useEffect } from "react"
+
 import { BreadcrumbContent } from "./types"
 
 
@@ -70,4 +72,10 @@ export const getBreadCrumb = (menuItems: DrupalMenuLinkContent[], path: string, 
     }
   }
   return breadcrumbs.reverse()
+}
+
+export const deleteCookie = (event: any, name: string, history: any) => {
+  event.preventDefault()
+  document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`
+  history.go(0)
 }

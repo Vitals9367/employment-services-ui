@@ -18,6 +18,7 @@ export const CONTENT_TYPES = {
   HERO: 'paragraph--hero',
   SUBHEADING: 'paragraph--subheading',
   LIST_OF_LINKS: 'paragraph--list_of_links',
+  LIST_OF_LINKS_ITEM: 'paragraph--list_of_links_item',
   PARAGRAPH_IMAGE: 'paragraph--image',
   LIFTUP_WITH_IMAGE: 'paragraph--liftup_with_image',
   VIDEO_REMOTE: 'paragraph--remote_video',

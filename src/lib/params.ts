@@ -38,6 +38,11 @@ const baseQueryParams = () =>
       'field_list_of_links_links',
       'field_list_of_links_title'
     ])
+    .addFields(CONTENT_TYPES.LIST_OF_LINKS_ITEM, [
+      'field_list_of_links_link',
+      'field_list_of_links_image',
+      'field_list_of_links_desc'
+    ])
     .addFields(CONTENT_TYPES.LIFTUP_WITH_IMAGE, [
       'field_liftup_with_image_title',
       'field_liftup_with_image_image',
