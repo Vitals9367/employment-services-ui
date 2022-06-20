@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as Elastic from '@/lib/elasticsearch'
 import { EventState, EventData } from '@/lib/types'
+import { SearchHit, SearchTotalHits } from '@elastic/elasticsearch/lib/api/types'
 
 type Data = EventState
 
@@ -39,10 +40,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       sort: "field_end_time:asc"
     })
 
-    // TODO: fix typing for total.value 
     const {
       hits: { total, hits }
-    } = searchRes as any
+    } = searchRes as { hits: { total: SearchTotalHits, hits: SearchHit<unknown>[] }}
 
     res.json({
       total: total?.value,
