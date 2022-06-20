@@ -39,11 +39,11 @@
     "link_text": "Lue lisää evästeistä",
     "accept": "Hyväksy evästeet",
     "decline": "Kieltäydy evästeistä",
-    "url": "https://tyollisyyspalvelut.hel.fi/fi/evastekaytanto"
+    "url": "/evastekaytanto"
   },
   "footer": {
     "accessibility": "Saavutettavuusseloste",
-    "accessibilityLink": "https://tyollisyyspalvelut.hel.fi/fi/saavutettavuusseloste",
+    "accessibilityLink": "/saavutettavuusseloste",
     "feedback": "Anna palautetta",
     "feedbackLink": "https://www.hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/palaute/",
     "goup": "Sivun alkuun",

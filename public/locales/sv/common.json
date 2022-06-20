@@ -39,11 +39,11 @@
     "link_text": "Mer information",
     "accept": "Avvisa cookies",
     "decline": "Godkänn cookies",
-    "url": "https://tyollisyyspalvelut.hel.fi/sv/cookie-policy"
+    "url": "/sv/cookie-policy"
   },
   "footer": {
     "accessibility": "Tillgänglighetsbeskrivning",
-    "accessibilityLink": "https://tyollisyyspalvelut.hel.fi/sv/tillganglighetsbeskrivning",
+    "accessibilityLink": "/sv/tillganglighetsbeskrivning",
     "feedback": "Ge respons",
     "feedbackLink": "https://www.hel.fi/helsinki/sv/stad-och-forvaltning/delta/feedback",
     "goup": "Till början av sidan",

@@ -1,15 +1,18 @@
-import Head from "next/head"
-import { GetStaticPropsContext, GetStaticPropsResult } from "next"
-import { DrupalNode, Locale, getMenu, getResourceTypeFromContext, getResourceFromContext } from "next-drupal"
-import getConfig from 'next/config'
+import { GetStaticPropsContext, GetStaticPropsResult } from 'next'
+import { Locale, getMenu, getResourceByPath } from 'next-drupal'
 
-import { Layout } from "@/components/layout/Layout"
-import { Node, NavProps, FooterProps } from "@/lib/types"
-import { getLanguageLinks } from "@/lib/helpers"
-import { getQueryParamsFor } from "@/lib/params"
+import getConfig from 'next/config'
+import ErrorPage from 'next/error'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
+import { NODE_TYPES } from '@/lib/drupalApiTypes'
+import { Layout } from '@/components/layout/Layout'
+import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
+import { Node, NavProps, FooterProps } from '@/lib/types'
+import { getQueryParamsFor } from '@/lib/params'
 
 interface HomePageProps {
-  node: DrupalNode
+  node: Node
   nav: NavProps
   footer: FooterProps
 }
@@ -18,29 +21,22 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
   const { REVALIDATE_TIME } = getConfig().serverRuntimeConfig
 
-  const type = await getResourceTypeFromContext(context)
-
-  if (!type) {
-    return {
-      notFound: true,
-    }
-  }
-
-  const node = await getResourceFromContext<Node>(type, context, {
-    params: getQueryParamsFor(type),
+  const node = await getResourceByPath<Node>(getConfig().publicRuntimeConfig.DRUPAL_FRONT_PAGE, {
+    locale,
+    defaultLocale,
+    params: getQueryParamsFor(NODE_TYPES.LANDING_PAGE)
   })
 
   if (!node || (!context.preview && node?.status === false)) {
-    console.log(node)
     return {
       notFound: true,
+      revalidate: 3
     }
   }
 
-  const langLinks = await getLanguageLinks(node)
-
-  const { tree: menu } = await getMenu("main", {locale, defaultLocale})
-  const { tree: themes } = await getMenu("additional-languages")
+  const langLinks = { fi: '/', en: '/en', sv: '/sv'}
+  const { tree: menu } = await getMenu('main', {locale, defaultLocale})
+  const { tree: themes } = await getMenu('additional-languages')
   const { tree: footerNav } = await getMenu("footer")
 
   return {
@@ -56,26 +52,18 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
         locale,
         footerNav,
       },
+      ...(await serverSideTranslations(locale, ['common'])),
     },
     revalidate: REVALIDATE_TIME
   }
 }
 
 export default function HomePage({ node, nav, footer }: HomePageProps) {
+  if (!node) return <ErrorPage statusCode={404} />
+
   return (
     <Layout header={nav} footer={footer}>
-      <Head>
-        <title>Next.js for Drupal</title>
-      </Head>
-      <div>
-        {node ? (
-            <div key={node.id}>
-              <h1>{node.title}</h1>
-            </div>
-        ) : (
-          <p>No landing page found</p>
-        )}
-      </div>
+      <NodeLandingPage node={node} />
     </Layout>
   )
 }
