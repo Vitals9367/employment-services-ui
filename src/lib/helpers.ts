@@ -7,6 +7,9 @@ import { useEffect } from "react"
 
 import { BreadcrumbContent } from "./types"
 
+
+export const eventTags = ['maahanmuuttajat', 'nuoret', 'info', 'koulutus', 'messut', 'neuvonta', 'rekrytointi', 'työpajat', 'digitaidot', 'etätapahtuma', 'palkkatuki', 'työnhaku']
+
 export const isExternalLink = (href: string): boolean|undefined => {
   const isExternalLink = href && (href.startsWith('https://') || href.startsWith('https://'))
 

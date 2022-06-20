@@ -3,6 +3,7 @@ const { i18n } = require('./next-i18next.config')
 const publicRuntimeConfig = {
   NEXT_PUBLIC_DRUPAL_BASE_URL: process.env.NEXT_PUBLIC_DRUPAL_BASE_URL,
   NEXT_IMAGE_DOMAIN: process.env.NEXT_IMAGE_DOMAIN,
+  DRUPAL_FRONT_PAGE: process.env.DRUPAL_FRONT_PAGE,
   MATOMO_SITE_ID: process.env.MATOMO_SITE_ID,
   MATOMO_URL: process.env.MATOMO_URL,
   REACT_AND_SHARE_FI: process.env.REACT_AND_SHARE_FI,
@@ -11,7 +12,10 @@ const publicRuntimeConfig = {
 }
 
 const serverRuntimeConfig = {
-  REVALIDATE_TIME: 20 //seconds
+  REVALIDATE_TIME: 20, //seconds
+  ELASTICSEARCH_URL: process.env.ELASTICSEARCH_URL,
+  elasticsearch_password: process.env.elasticsearch_password,
+  elasticsearch_certificate: process.env.elasticsearch_certificate
 }
 
 /** @type {import('next').NextConfig} */

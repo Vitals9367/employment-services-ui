@@ -6,10 +6,7 @@ type Data = {
   name: string
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const tags: Tags = req?.query
   
   let events: any = []

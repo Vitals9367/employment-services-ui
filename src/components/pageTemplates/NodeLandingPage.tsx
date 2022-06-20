@@ -7,7 +7,7 @@ interface NodeLandingPageProps {
   node: Node
 }
 
-export function NodeLandingPage({ node, ...props }: NodeLandingPageProps): JSX.Element {
+function NodeLandingPage({ node, ...props }: NodeLandingPageProps): JSX.Element {
   const { title, field_content, field_hero, field_notification} = node
 
   return (

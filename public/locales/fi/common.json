@@ -23,7 +23,9 @@
     "blog_url": "/fi/blogi",
     "events_url": "/fi/tapahtuma",
     "news_url": "/fi/uutiset",
-    "results_text": "hakutulosta"
+    "results_text": "hakutulosta",
+    "show_all_events": "Näytä kaikki tapahtumat",
+    "events_page_url": "/tapahtumat"
   },
   "event": {
     "remote_event": "Etätapahtuma",
@@ -39,11 +41,11 @@
     "link_text": "Lue lisää evästeistä",
     "accept": "Hyväksy evästeet",
     "decline": "Kieltäydy evästeistä",
-    "url": "https://tyollisyyspalvelut.hel.fi/fi/evastekaytanto"
+    "url": "/evastekaytanto"
   },
   "footer": {
     "accessibility": "Saavutettavuusseloste",
-    "accessibilityLink": "https://tyollisyyspalvelut.hel.fi/fi/saavutettavuusseloste",
+    "accessibilityLink": "/saavutettavuusseloste",
     "feedback": "Anna palautetta",
     "feedbackLink": "https://www.hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/palaute/",
     "goup": "Sivun alkuun",
