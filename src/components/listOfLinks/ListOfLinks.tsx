@@ -26,9 +26,9 @@ function ListOfLinks(props: ListOfLinksProps): JSX.Element {
                 linkboxAriaLabel="List of links Linkbox"
                 linkAriaLabel="Linkbox link"
                 key={key}
-                href={link.field_list_of_links_link.url} 
+                href={link.field_list_of_links_link.full_url} 
                 heading={link.field_list_of_links_link.title}
-                external={isExternalLink(link.field_list_of_links_link.url)}
+                external={isExternalLink(link.field_list_of_links_link.full_url)}
                 imgProps={{ src: getImageUrl(link.field_list_of_links_image?.field_media_image?.image_style_uri?.['1_1_s'])}}
               />
             </div>
@@ -37,7 +37,7 @@ function ListOfLinks(props: ListOfLinksProps): JSX.Element {
               <h3 className="flex">
                 <Link
                   fullAreaLink
-                  href={link.field_list_of_links_link.url}
+                  href={link.field_list_of_links_link.full_url}
                   text={link.field_list_of_links_link.title}
                 />
               </h3>
