@@ -123,8 +123,8 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
   })
   // Prioritise tags order by eventTags.
   tags && tags.sort((a: string, b: string) => eventTags.indexOf(a) - eventTags.indexOf(b))
-  tags && tags.push(t('search.clear'))
   const finalTags = tags && tags.map((tag: string) => tag.replace('_', ' '))
+  finalTags && finalTags.push(t('search.clear'))
 
   const getEventUrl = (url: string) => {
     const eventPath = url.replace(`${drupalBaseUrl}/tapahtumat`, '')
@@ -152,7 +152,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
               variant="supplementary"
               iconLeft={<IconCrossCircle />}
               className={styles.supplementary}
-              onClick={() => {setFilter(tag.replace(' ', '_'))}}
+              onClick={() => {setFilter(tag)}}
             >
               {tag}
             </HDSButton>
