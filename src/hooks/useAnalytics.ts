@@ -39,7 +39,7 @@ export const useMatomo = (cookieConsent: string) => {
 export const useReactAndShare = (
   cookieConsent: string,
   lang: string | undefined,
-  pageTitle: string
+  pageTitle: string | undefined
 ) => {
   useEffect(() => {
     if (cookieConsent !== 'true') {
