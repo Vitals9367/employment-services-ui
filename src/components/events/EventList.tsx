@@ -112,7 +112,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
       setFilteredEvents(fe)
     }
     filterEvents()
-  }, [filter, data])
+  }, [filter, data]) // eslint-disable-line
 
   let tags = events && events.reduce((acc:any, curr:any) => {
     return [...acc, curr.field_tags]
@@ -149,6 +149,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
         {finalTags && Object.values(finalTags).map((tag: any, i: number) => (
           tag === t('search.clear') ? (
             <HDSButton
+              key={`tagFilter-${i}`}
               variant="supplementary"
               iconLeft={<IconCrossCircle />}
               className={styles.supplementary}
@@ -159,6 +160,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
           )
           : (
             <HDSButton
+              key={`tagFilter-${i}`}
               className={filter === tag ? styles.selected: styles.filterTag}
               onClick={() => {setFilter(tag.replace(' ', '_'))}}
             >
