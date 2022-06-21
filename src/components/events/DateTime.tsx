@@ -11,9 +11,8 @@ export interface DateTimeProps {
 function DateTime(props: DateTimeProps): JSX.Element {
   const { startTime, endTime } = props
 
-  // new Date() function needs to be supplied with a milliseconds value.
-  const startDate = new Date(startTime * 1000)
-  const endDate = new Date(endTime * 1000)
+  const startDate = new Date(Number(startTime))
+  const endDate = new Date(Number(endTime))
 
   const isSameDay =
     startDate.getFullYear() === endDate.getFullYear() &&

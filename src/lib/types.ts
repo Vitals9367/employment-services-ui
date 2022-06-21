@@ -50,8 +50,8 @@ export interface EventData {
   url: string
   field_image_url: string
   field_image_alt: string
-  field_start_time: string
-  field_end_time: string
+  field_start_time: number
+  field_end_time: number
   field_location: string
   field_tags: string[]
 }
