@@ -143,9 +143,9 @@ const getEventPageQueryParams = () =>
 
 const getArticlePageQueryParams = () =>
   new DrupalJsonApiParams()
-  .addInclude([
-    'field_content.field_image.field_media_image',
-  ])
+    .addInclude([
+      'field_content.field_image.field_media_image',
+    ])
     .addFields(NODE_TYPES.ARTICLE, [
       'id',
       'title',

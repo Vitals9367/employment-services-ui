@@ -1,5 +1,6 @@
 import { Container } from 'hds-react'
 import { Node } from 'src/lib/types'
+import dateformat from 'dateformat'
 import ContentMapper from '@/components/ContentMapper'
 
 import styles from './articlePage.module.scss'
@@ -10,7 +11,7 @@ interface NodeArticlePageProps {
 
 export function NodeArticlePage({ node, ...props }: NodeArticlePageProps): JSX.Element {
   const { title, field_lead, created, field_content} = node
-
+  
   return (
     <article>
       <Container className="container">
@@ -21,7 +22,7 @@ export function NodeArticlePage({ node, ...props }: NodeArticlePageProps): JSX.E
           )}
           <div className={styles.pageDivider}></div>
           {created && (
-            <p><time dateTime={created}>{new Date(created).toLocaleDateString()}</time></p>
+            <p className={styles.articleDate}><time dateTime={created}>{`${dateformat(created, 'dd.mm.yyyy')}`}</time></p>
           )}
           {field_content?.length > 0 && (
             <ContentMapper content={node.field_content}/>
