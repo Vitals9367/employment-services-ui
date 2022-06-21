@@ -98,14 +98,14 @@ export async function getStaticPaths(context: GetStaticPathsContext): Promise<Ge
 
 export default function Page({ node, nav, footer }: PageProps) {
   const router = useRouter()
+  const [cookieConsent] = useState<string>(getCookieConsentValue('tyollisyyspalvelut_cookie_consent'))
+  useReactAndShare(cookieConsent, router.locale, node && node.title)
+
   if (!router.isFallback && !node?.id) {
     return <ErrorPage statusCode={404} />
   }
 
   if (!node) return null
-
-  const [cookieConsent] = useState<string>(getCookieConsentValue('tyollisyyspalvelut_cookie_consent'))
-  useReactAndShare(cookieConsent, router.locale, node.title)
 
   return (
     <Layout header={nav} footer={footer}>
