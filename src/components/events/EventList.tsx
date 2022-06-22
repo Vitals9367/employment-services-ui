@@ -112,7 +112,9 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
       setFilteredEvents(fe)
     }
     filterEvents()
-  }, [filter, data])
+  }, [filter, data]) // eslint-disable-line
+
+  if (!data) return <></>
 
   let tags = events && events.reduce((acc:any, curr:any) => {
     return [...acc, curr.field_tags]
@@ -123,8 +125,8 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
   })
   // Prioritise tags order by eventTags.
   tags && tags.sort((a: string, b: string) => eventTags.indexOf(a) - eventTags.indexOf(b))
-  tags && tags.push(t('search.clear'))
   const finalTags = tags && tags.map((tag: string) => tag.replace('_', ' '))
+  finalTags && finalTags.push(t('search.clear'))
 
   const getEventUrl = (url: string) => {
     const eventPath = url.replace(`${drupalBaseUrl}/tapahtumat`, '')
@@ -149,16 +151,18 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
         {finalTags && Object.values(finalTags).map((tag: any, i: number) => (
           tag === t('search.clear') ? (
             <HDSButton
+              key={`tagFilter-${i}`}
               variant="supplementary"
               iconLeft={<IconCrossCircle />}
               className={styles.supplementary}
-              onClick={() => {setFilter(tag.replace(' ', '_'))}}
+              onClick={() => {setFilter(tag)}}
             >
               {tag}
             </HDSButton>
           )
           : (
             <HDSButton
+              key={`tagFilter-${i}`}
               className={filter === tag ? styles.selected: styles.filterTag}
               onClick={() => {setFilter(tag.replace(' ', '_'))}}
             >
