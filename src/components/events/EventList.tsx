@@ -87,7 +87,7 @@ const getKey = (eventsIndex: number) => {
   return `${eventsIndex}`
 }
 
-export function EventListWithFilters(props: EventListProps): JSX.Element | null {
+export function EventListWithFilters(props: EventListProps): JSX.Element {
   const { field_title, field_events_list_desc } = props
   const { t } = useTranslation()
   const fetcher = (eventsIndex: number) => getEventsSearch(eventsIndex)
@@ -114,7 +114,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element | null 
     filterEvents()
   }, [filter, data]) // eslint-disable-line
 
-  if (!data) return null
+  if (!data) return <></>
 
   let tags = events && events.reduce((acc:any, curr:any) => {
     return [...acc, curr.field_tags]
