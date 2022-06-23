@@ -125,7 +125,7 @@ export default function Page({ node, nav, footer }: PageProps) {
       )}
       {/* React and share */}
       <Container className="container">
-        <div className="rns" />
+        <div className="rns component" />
       </Container>
     </Layout>
   )
