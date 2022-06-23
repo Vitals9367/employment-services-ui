@@ -1,4 +1,6 @@
-@import '~hds-core/lib/icons/all';
+@import '~hds-core/lib/icons/ui/icon-face-sad';
+@import '~hds-core/lib/icons/ui/icon-face-smile';
+@import '~hds-core/lib/icons/ui/icon-face-neutral';
 @import '/styles/variables.scss';
 
 :root {
@@ -200,11 +202,14 @@ h5, .h5,
       mask-repeat: no-repeat;
       mask-position: center;
       mask-size: auto;
-      @extend .hds-icon--face-neutral !optional;
     }
 
     .rns-reactions .reactions .rns-reaction:first-child .rns-label:after {
-      @extend .hds-icon--face-happy !optional;
+      @extend .hds-icon--face-smile !optional;
+    }
+
+    .rns-reactions .reactions .rns-reaction:nth-child(2) .rns-label:after {
+      @extend .hds-icon--face-neutral !optional;
     }
 
     .rns-reactions .reactions .rns-reaction:last-child .rns-label:after {
