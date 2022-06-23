@@ -161,27 +161,103 @@ h5, .h5,
 }
 
 // React and share
-.rns .rns-plugin .rns-shares .rns-share {
-  padding: 0 .2rem .4rem !important;
-}
+.rns {
+  border-top: 1px solid var(--color-black-90);
+  border-bottom: 1px solid var(--color-black-90);
 
-.rns-reaction-button:focus .rns-label {
-  color: var(--color-bus) !important;
-}
+  .rns-plugin {
+    margin: var(--spacing-l) 0;
 
-.rns-reaction.selected .rns-reaction-button:focus .rns-label {
-  color: var(--color-white) !important;
-}
+    .rns-header {
+      font-size: var(--fontsize-heading-m);
+    }
 
-.rns-share-button {
-  border: 2px solid transparent;
-}
+    @media (min-width: $breakpoint-m) {
+      .rns-reactions .reactions .rns-reaction {
+        flex: 0 0 11rem;
+      }
+    }
+    
+    .rns-reactions .reactions .rns-reaction .rns-reaction-button {
+      border-color: var(--color-black-90);
+    }
+    
+    .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label {
+      color: var(--color-black-90);
+      display: flex;
+    }
 
-.rns-share-button:hover,
-.rns-share-button:focus {
-  background: white !important;
-  border: 2px solid #0000bf;
-  color: #0000bf !important;
+    .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label:after {
+      content: "";
+      display: flex;
+      height: 24px;
+      width: 24px;
+      margin-left: 16px;
+      mask-size: 24px 24px;
+      background-color: var(--color-black);
+      background-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: auto;
+      mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 24 24' role='img' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h24v24H0z'/%3E%3Cpath d='M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm4 10v2H8v-2h8zM8.5 8a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm7 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z' fill='currentColor'/%3E%3C/g%3E%3C/svg%3E");
+      -webkit-mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 24 24' role='img' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h24v24H0z'/%3E%3Cpath d='M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm4 10v2H8v-2h8zM8.5 8a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm7 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z' fill='currentColor'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    // Icons copied from hds-core/lib/icons/all.min.css
+    // TODO: could be probably done better
+    .rns-reactions .reactions .rns-reaction:first-child .rns-label:after {
+      mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 24 24' role='img' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h24v24H0z'/%3E%3Cpath d='M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm-3.103 9.558a3.463 3.463 0 003.108 1.942c1.28 0 2.434-.703 3.038-1.805l.062-.12 1.79.893a5.463 5.463 0 01-4.89 3.032 5.462 5.462 0 01-4.832-2.92l-.07-.138 1.794-.884zM8.5 8a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm7 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z' fill='currentColor'/%3E%3C/g%3E%3C/svg%3E");
+      -webkit-mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 24 24' role='img' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h24v24H0z'/%3E%3Cpath d='M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm-3.103 9.558a3.463 3.463 0 003.108 1.942c1.28 0 2.434-.703 3.038-1.805l.062-.12 1.79.893a5.463 5.463 0 01-4.89 3.032 5.462 5.462 0 01-4.832-2.92l-.07-.138 1.794-.884zM8.5 8a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm7 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z' fill='currentColor'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .rns-reactions .reactions .rns-reaction:last-child .rns-label:after {
+      mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 24 24' role='img' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h24v24H0z'/%3E%3Cpath d='M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm.005 9a5.46 5.46 0 014.78 2.822l.11.21-1.79.893-.062-.12A3.461 3.461 0 0012.005 15a3.461 3.461 0 00-3.011 1.759l-.097.183-1.794-.884.07-.138A5.462 5.462 0 0112.005 13zM8.5 8a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm7 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z' fill='currentColor'/%3E%3C/g%3E%3C/svg%3E");
+      -webkit-mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 24 24' role='img' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h24v24H0z'/%3E%3Cpath d='M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm.005 9a5.46 5.46 0 014.78 2.822l.11.21-1.79.893-.062-.12A3.461 3.461 0 0012.005 15a3.461 3.461 0 00-3.011 1.759l-.097.183-1.794-.884.07-.138A5.462 5.462 0 0112.005 13zM8.5 8a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm7 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z' fill='currentColor'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover .rns-label:after,
+    .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button .rns-label:after {
+      background-color: var(--color-white);
+    }
+    
+    .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover {
+      background: var(--color-black-90) !important;
+      color: var(--color-white) !important;
+    }
+    
+     .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button {
+      background: var(--color-black-90) !important;
+      color: var(--color-white) !important;
+    }
+    
+    .rns-reactions .reactions .rns-reaction .rns-reaction-button:focus {
+      color: var(--color-white) !important;
+    }
+    
+    .rns-reaction.selected .rns-reaction-button:focus .rns-label {
+      color: var(--color-white) !important;
+    }
+  
+    .rns-shares {
+      .rns-share {
+        padding: 0 .2rem .4rem !important;
+        width: 25%;
+      }
+  
+      .rns-share-button {
+        background: var(--color-black-90);
+        border: 2px solid transparent;
+        color: var(--color-white);
+      }
+  
+      .rns-share-button:hover,
+      .rns-share-button:focus {
+        background: var(--color-white) !important;
+        border: 2px solid var(--color-black-90) !important;
+        color: var(--color-black-90) !important;
+      }
+    }
+  } 
 }
 
 // Cookie banner
