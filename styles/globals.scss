@@ -200,15 +200,15 @@ h5, .h5,
       mask-repeat: no-repeat;
       mask-position: center;
       mask-size: auto;
-      @extend .hds-icon--face-neutral;
+      @extend .hds-icon--face-neutral !optional;
     }
 
     .rns-reactions .reactions .rns-reaction:first-child .rns-label:after {
-      @extend .hds-icon--face-smile;
+      @extend .hds-icon--face-happy !optional;
     }
 
     .rns-reactions .reactions .rns-reaction:last-child .rns-label:after {
-      @extend .hds-icon--face-sad;
+      @extend .hds-icon--face-sad !optional;
     }
 
     .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover .rns-label:after,
