@@ -25,5 +25,6 @@ export const CONTENT_TYPES = {
   VIDEO_REMOTE: 'paragraph--remote_video',
   NOTIFICATION: 'paragraph--notification',
   EVENTS_LIST: 'paragraph--events_list',
-  COLOR: 'taxonomy_term--colors'
+  COLOR: 'taxonomy_term--colors',
+  QUOTE: 'paragraph--quote'
 }

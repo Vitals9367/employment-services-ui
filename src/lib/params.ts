@@ -66,6 +66,12 @@ const baseQueryParams = () =>
       'field_image_caption',
       'field_original_aspect_ratio'
     ])
+    .addFields(CONTENT_TYPES.QUOTE, [
+      'field_quote_content',
+      'field_quote_author_first_name',
+      'field_quote_author_last_name',
+      'field_quote_author_title'
+    ])
 
 const getPageQueryParams = () =>
   baseQueryParams()
@@ -153,19 +159,25 @@ const getArticlePageQueryParams = () =>
       'created',
       'revision_timestamp',
       'langcode',
-      'publish_on',
-      'unpublish_on',
       'field_lead',
-      'field_content',
-      'field_keywords'
+      'field_content'
     ])
     .addFields(CONTENT_TYPES.TEXT, [
       'field_text'
+    ])
+    .addFields(CONTENT_TYPES.SUBHEADING, [
+      'field_subheading_title'
     ])
     .addFields(CONTENT_TYPES.PARAGRAPH_IMAGE, [
       'field_image',
       'field_image_caption',
       'field_original_aspect_ratio'
+    ])
+    .addFields(CONTENT_TYPES.QUOTE, [
+      'field_quote_content',
+      'field_quote_author_first_name',
+      'field_quote_author_last_name',
+      'field_quote_author_title'
     ])
     .getQueryObject()
 

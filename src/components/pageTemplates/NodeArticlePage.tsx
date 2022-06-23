@@ -11,7 +11,6 @@ interface NodeArticlePageProps {
 
 export function NodeArticlePage({ node, ...props }: NodeArticlePageProps): JSX.Element {
   const { title, field_lead, created, field_content} = node
-  
   return (
     <article>
       <Container className="container">
