@@ -40,7 +40,7 @@ function Quote(props: QuoteProps): JSX.Element {
           </blockquote>
           <figcaption>
             <cite className={styles.quoteAuthor}>
-              {quoteAuthor.length &&(
+              {quoteAuthor.length > 1 &&(
                 `- ${quoteAuthor}`
               )}
             </cite>
