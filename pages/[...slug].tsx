@@ -18,6 +18,7 @@ import { Container } from 'hds-react'
 import NodeBasicPage from '@/components/pageTemplates/NodeBasicPage'
 import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
 import NodeEventPage from '@/components/pageTemplates/NodeEventPage'
+import NodeArticlePage from '@/components/pageTemplates/NodeArticlePage'
 import { Layout } from '@/components/layout/Layout'
 
 import { Node } from '@/lib/types'
@@ -49,7 +50,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   const node = await getResourceFromContext<Node>(type, context, {
     params: getQueryParamsFor(type),
   })
-  
+
   // Return 404 if node was null
   if (!node || node?.notFound || (!context.preview && node?.status === false)) {
     return {
@@ -122,6 +123,9 @@ export default function Page({ node, nav, footer }: PageProps) {
       )}
       { node.type === NODE_TYPES.EVENT && (
         <NodeEventPage node={node} />
+      )}
+      { node.type === NODE_TYPES.ARTICLE && (
+        <NodeArticlePage node={node} />
       )}
       {/* React and share */}
       <Container className="container">

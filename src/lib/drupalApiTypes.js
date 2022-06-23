@@ -1,7 +1,8 @@
 export const NODE_TYPES = {
   PAGE: 'node--page',
   LANDING_PAGE: 'node--landing_page',
-  EVENT: 'node--event'
+  EVENT: 'node--event',
+  ARTICLE: 'node--article'
 }
 
 export const CONTENT_TYPES = {

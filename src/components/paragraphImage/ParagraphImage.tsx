@@ -45,10 +45,10 @@ function ParagraphImage(props: ParagraphImageProps): JSX.Element {
             }
           />
           {field_image_caption && (
-            <figcaption>{field_image_caption}</figcaption>
+            <figcaption className={styles.imgCaption}>{field_image_caption}</figcaption>
           )}
           {field_image?.field_photographer && (
-            <figcaption>{field_image.field_photographer}</figcaption>
+            <figcaption className={styles.imgCaption}>{field_image.field_photographer}</figcaption>
           )}
         </figure>
       </div>

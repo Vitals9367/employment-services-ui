@@ -1,0 +1,23 @@
+@import "/styles/variables.scss";
+
+.newsArticle {
+  max-width: 50rem;
+
+  figure {
+    margin-left: 0;
+  }
+}
+
+.pageDivider {
+  background-color: var(--color-black);
+  content: "";
+  display: block;
+  height: var(--spacing-4-xs);
+  margin-top: var(--spacing-l);
+  width: var(--spacing-4-xl);
+}
+
+.articleDate{
+  color: var(--color-black-60);
+  font-size: var(--fontsize-body-m);
+}
