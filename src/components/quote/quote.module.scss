@@ -1,5 +1,3 @@
-@import '/styles/variables.scss';
-
 .quoteContainer {
   border-left: 0.5rem solid var(--color-metro);
   padding: 0 0 0 1rem;
@@ -7,16 +5,13 @@
 }
 
 .quoteContent {
-  color: rgb(18, 18, 18);
   font-style: italic;
-  font-size: 32px;
-  line-height: 48px;
+  font-size: var(--fontsize-body-xl);
+  line-height: var(--lineheight-xl);
   font-weight: normal;
   margin-left: 0;
 }
 
 .quoteAuthor {
-  color: rgb(26, 26, 26);
-  font-size: 18px;
-  line-height: 27px;
+  font-size: var(--fontsize-body-l);
 }
