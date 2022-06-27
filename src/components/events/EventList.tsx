@@ -4,12 +4,11 @@ import useSWRInfinite from 'swr/infinite'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import getConfig from 'next/config'
 import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, IconArrowRight } from 'hds-react'
 
 import { DrupalFormattedText, EventState } from '@/lib/types'
 import { getEvents, getEventsSearch } from '@/lib/client-api'
-import { eventTags } from '@/lib/helpers'
+import { eventTags, getEventPath } from '@/lib/helpers'
 
 import HtmlBlock from '@/components/HtmlBlock'
 import TagList from './TagList'
@@ -58,7 +57,7 @@ export function EventList(props: EventListProps): JSX.Element {
               linkboxAriaLabel="List of links Linkbox"
               linkAriaLabel="Linkbox link"
               key={key}            
-              href={`${event.path.langcode}${event.path.alias}`}
+              href={`${t('list.events_page_url')}${getEventPath(event.path.alias)}`}
               withBorder
             >
               <Image
@@ -95,7 +94,6 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
   const [filter, setFilter] = useState<any | null>(t('search.clear'))
   const [filteredEvents, setFilteredEvents] = useState<EventState>()
 
-  const drupalBaseUrl = getConfig().publicRuntimeConfig.NEXT_PUBLIC_DRUPAL_BASE_URL
   const events = data && data.reduce((acc:any, curr:any) => acc.concat(curr.events), [])
   const total: Number = data && data.reduce((acc:any, r:any) => (r.total), 0)
 
@@ -127,11 +125,6 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
   tags && tags.sort((a: string, b: string) => eventTags.indexOf(a) - eventTags.indexOf(b))
   const finalTags = tags && tags.map((tag: string) => tag.replace('_', ' '))
   finalTags && finalTags.push(t('search.clear'))
-
-  const getEventUrl = (url: string) => {
-    const eventPath = url.replace(`${drupalBaseUrl}/tapahtumat`, '')
-    return (`${t('list.events_page_url')}${eventPath}`)
-  }
 
   return (
     <div className='component'>
@@ -179,7 +172,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
               linkboxAriaLabel="List of links Linkbox"
               linkAriaLabel="Linkbox link"
               key={key}            
-              href={getEventUrl(event.url[0])}
+              href={`${t('list.events_page_url')}${getEventPath(event.url[0])}`}
               withBorder
             >
               <Image
