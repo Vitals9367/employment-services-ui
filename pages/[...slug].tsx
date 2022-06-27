@@ -5,13 +5,8 @@ import ErrorPage from 'next/error'
 import { GetStaticPropsContext, GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsResult } from 'next'
 import getConfig from 'next/config'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import {
-  Locale,
-  getPathsFromContext,
-  getResourceFromContext,
-  getResourceTypeFromContext,
-  getMenu,
-} from "next-drupal"
+import { Locale } from "next-drupal"
+
 import { getCookieConsentValue } from "react-cookie-consent"
 import { Container } from 'hds-react'
 
@@ -21,6 +16,7 @@ import NodeEventPage from '@/components/pageTemplates/NodeEventPage'
 import NodeArticlePage from '@/components/pageTemplates/NodeArticlePage'
 import { Layout } from '@/components/layout/Layout'
 
+import { getDrupalClient } from "@/lib/drupal-client"
 import { Node } from '@/lib/types'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getQueryParamsFor } from '@/lib/params'
@@ -34,11 +30,24 @@ interface PageProps {
   footer: FooterProps
 }
 
+export async function getStaticPaths(context: GetStaticPathsContext): Promise<GetStaticPathsResult> {
+  const drupal = getDrupalClient()
+  const types = Object.values(NODE_TYPES)
+  const paths = await drupal.getStaticPathsFromContext(types, context)
+
+  return {
+    paths: paths,
+    fallback: true
+  }
+}
+
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<PageProps>> {
   const { REVALIDATE_TIME } = getConfig().serverRuntimeConfig
   const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
+  const drupal = getDrupalClient()
 
-  const type = await getResourceTypeFromContext(context)
+  const path = await drupal.translatePathFromContext(context)
+  const type = path?.jsonapi?.resourceName
 
   if (!type) {
     return {
@@ -47,7 +56,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     }
   }
 
-  const node = await getResourceFromContext<Node>(type, context, {
+  const node = await drupal.getResourceFromContext<Node>(type, context, {
     params: getQueryParamsFor(type),
   })
 
@@ -61,9 +70,9 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 
   const langLinks = await getLanguageLinks(node)
 
-  const { tree: menu, items: menuItems } = await getMenu("main", {locale, defaultLocale})
-  const { tree: themes } = await getMenu("additional-languages")
-  const { tree: footerNav } = await getMenu("footer")
+  const { tree: menu, items: menuItems } = await drupal.getMenu("main", {locale, defaultLocale})
+  const { tree: themes } = await drupal.getMenu("additional-languages")
+  const { tree: footerNav } = await drupal.getMenu("footer")
 
   const breadcrumb = getBreadCrumb(menuItems, node?.path.alias, node?.title)
 
@@ -84,16 +93,6 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
       ...(await serverSideTranslations(locale, ['common'])),
     },
     revalidate: REVALIDATE_TIME
-  }
-}
-
-export async function getStaticPaths(context: GetStaticPathsContext): Promise<GetStaticPathsResult> {
-  const types = Object.values(NODE_TYPES)
-  const paths = await getPathsFromContext(types, context)
-
-  return {
-    paths: paths,
-    fallback: true
   }
 }
 

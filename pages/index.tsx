@@ -1,10 +1,11 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from 'next'
-import { Locale, getMenu, getResourceByPath } from 'next-drupal'
+import { Locale } from 'next-drupal'
 
 import getConfig from 'next/config'
 import ErrorPage from 'next/error'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
+import { getDrupalClient } from "@/lib/drupal-client"
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { Layout } from '@/components/layout/Layout'
 import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
@@ -19,9 +20,10 @@ interface HomePageProps {
 
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<HomePageProps>> {
   const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
-  const { REVALIDATE_TIME } = getConfig().serverRuntimeConfig
+  const { REVALIDATE_TIME, DRUPAL_FRONT_PAGE } = getConfig().serverRuntimeConfig  
+  const drupal = getDrupalClient()
 
-  const node = await getResourceByPath<Node>(getConfig().publicRuntimeConfig.DRUPAL_FRONT_PAGE, {
+  const node = await drupal.getResourceByPath<Node>(DRUPAL_FRONT_PAGE, {
     locale,
     defaultLocale,
     params: getQueryParamsFor(NODE_TYPES.LANDING_PAGE)
@@ -35,9 +37,9 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   }
 
   const langLinks = { fi: '/', en: '/en', sv: '/sv'}
-  const { tree: menu } = await getMenu('main', {locale, defaultLocale})
-  const { tree: themes } = await getMenu('additional-languages')
-  const { tree: footerNav } = await getMenu("footer")
+  const { tree: menu } = await drupal.getMenu('main', {locale, defaultLocale})
+  const { tree: themes } = await drupal.getMenu('additional-languages')
+  const { tree: footerNav } = await drupal.getMenu("footer")
 
   return {
     props: {
