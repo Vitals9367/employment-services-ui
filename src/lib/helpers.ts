@@ -3,7 +3,6 @@ import { DrupalMenuLinkContent, DrupalNode, getResource } from "next-drupal"
 import getConfig from 'next/config'
 
 import { i18n } from "next-i18next.config"
-import { useEffect } from "react"
 
 import { BreadcrumbContent } from "./types"
 
@@ -21,6 +20,13 @@ export const getImageUrl = (url: string): string => {
   url = url.substring(url.indexOf('/sites'))
 
   return url ? `https://${host}${url}` : ''
+}
+
+export const getEventPath = (url: string) => {
+  const urlParts =  url.split('/')
+  const eventPath = urlParts.pop()
+
+  return (`/${eventPath}`)
 }
 
 export async function getLanguageLinks(node: DrupalNode): Promise<Object> {
