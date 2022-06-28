@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getNews } from '@/lib/ssr-api'
 
-type Data = {
-  name: string
-}
+//type Data = {
+//  name: string
+//}
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   let news: any = []
   // No posts allowed, no missing params-errors revealed.

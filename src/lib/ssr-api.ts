@@ -22,10 +22,11 @@ export const getEvents = async ({ tags }: Tags) => {
 }
 
 export const getNews = async () => {
-  const newsParams = () =>
-  baseArticlePageQueryParams()
-      .addSort('created', 'ASC')
-      .addPageLimit(3)
+  //const newsParams = () =>
+  //  baseArticlePageQueryParams()
+  //    .addSort('created', 'ASC')
+  //    .addPageLimit(3)
 
-  return await getResourceCollection(NODE_TYPES.ARTICLE, { params: newsParams().getQueryObject() })
+  return await getResourceCollection(NODE_TYPES.ARTICLE)
+  // return await getResourceCollection(NODE_TYPES.ARTICLE, { params: newsParams().getQueryObject() })
 }
