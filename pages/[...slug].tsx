@@ -44,7 +44,14 @@ export async function getStaticPaths(context: GetStaticPathsContext): Promise<Ge
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<PageProps>> {
   const { REVALIDATE_TIME } = getConfig().serverRuntimeConfig
   const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
-  const drupal = getDrupalClient()
+  let withAuth = false
+
+  // Use auth with preview to see unpublished content.
+  if (context.preview) {
+    withAuth = true
+  }
+  
+  const drupal = getDrupalClient(withAuth)
 
   const path = await drupal.translatePathFromContext(context)
   const type = path?.jsonapi?.resourceName
