@@ -29,6 +29,13 @@ export const getEventPath = (url: string) => {
   return (`/${eventPath}`)
 }
 
+export const getNewsPath = (url: string) => {
+  const urlParts =  url.split('/')
+  const newsPath = urlParts.pop()
+
+  return (`/${newsPath}`)
+}
+
 export async function getLanguageLinks(node: DrupalNode): Promise<Object> {
   let params = new DrupalJsonApiParams().addFields(node.type, ['path']).getQueryObject()
   const uuid = node.id
@@ -54,7 +61,7 @@ export const getBreadCrumb = (menuItems: DrupalMenuLinkContent[], path: string, 
   const page = menuItems.find(({ url }) => url === path)
   // Pages that are not in menus always get a breadcrumb.
   if (!page) {
-    return [{ 
+    return [{
       id: 'current_page_crumb',
       title: title,
       url: path

@@ -6,6 +6,7 @@ import Banner from '@/components/banner/Banner'
 import LiftupWithImage from '@/components/liftupWithImage/LiftupWithImage'
 import Notification from '@/components/notification/Notification'
 import { EventList, EventListWithFilters } from '@/components/events/EventList'
+import NewstList from '@/components/news/NewsList'
 import ParagraphImage from '@/components/paragraphImage/ParagraphImage'
 import Quote from '@/components/quote/Quote'
 
@@ -71,6 +72,12 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
           return <EventList {...item} key={key} />
         }
         return <EventListWithFilters {...item} key={key} />
+
+      case CONTENT_TYPES.NEWS_LIST:
+        if (!item?.id) {
+          return null
+        }
+        return <NewstList {...item} key={key} />
 
 
       case CONTENT_TYPES.LIFTUP_WITH_IMAGE:
