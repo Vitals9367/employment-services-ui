@@ -19,7 +19,8 @@ const serverRuntimeConfig = {
   DRUPAL_FRONT_PAGE: process.env.DRUPAL_FRONT_PAGE,
   DRUPAL_CLIENT_ID: process.env.DRUPAL_CLIENT_ID,
   DRUPAL_CLIENT_SECRET: process.env.DRUPAL_CLIENT_SECRET,
-  DRUPAL_PREVIEW_SECRET: process.env.DRUPAL_PREVIEW_SECRET
+  DRUPAL_PREVIEW_SECRET: process.env.DRUPAL_PREVIEW_SECRET,
+  REDIS_HOST: process.env.REDIS_HOST,
 }
 
 /** @type {import('next').NextConfig} */
