@@ -13,7 +13,7 @@ export function NodeArticlePage({ node, ...props }: NodeArticlePageProps): JSX.E
   const { title, field_lead, created, field_content} = node
   return (
     <article>
-      <Container className="container">
+      <Container className="container content-region">
         <div className={styles.newsArticle}>
           <h1>{title}</h1>
           {field_lead && (

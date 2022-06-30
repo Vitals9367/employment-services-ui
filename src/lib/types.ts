@@ -60,18 +60,6 @@ export interface EventState {
   total: number
   events: EventData[]
 }
-
-export interface NewsData {
-  title: string
-  url: string
-  created: string
-}
-
-export interface NewsState {
-  total: number
-  news: NewsData[]
-}
-
 declare global {
   interface Window {
     _paq: any;

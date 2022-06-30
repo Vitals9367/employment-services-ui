@@ -2,7 +2,6 @@ import axios from 'axios'
 import qs from 'qs'
 import { Tags } from 'src/lib/types'
 
-
 /** The Client API urls  */
 const EVENTS_URL = '/api/events'
 const EVENTS_SEARCH_URL = '/api/events-search'
@@ -26,7 +25,7 @@ export const getEventsSearch = async (eventsIndex: number) => {
   return data
 }
 
-export const getNews = async () => {
-  const { data } = await axios(NEWS_URL)
+export const getNews = async (shortList: boolean) => {
+  const { data } = await axios(`${NEWS_URL}`, { params: {limit: shortList } })
   return data
 }

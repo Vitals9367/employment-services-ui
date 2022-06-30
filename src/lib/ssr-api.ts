@@ -21,12 +21,18 @@ export const getEvents = async ({ tags }: Tags) => {
   return await getResourceCollection(NODE_TYPES.EVENT, { params: eventParams().getQueryObject() })
 }
 
-export const getNews = async () => {
-  //const newsParams = () =>
-  //  baseArticlePageQueryParams()
-  //    .addSort('created', 'ASC')
-  //    .addPageLimit(3)
+export const getNews = async (shortList: string) => {
+  const newsParams = () =>
+    baseArticlePageQueryParams()
+      .addSort('created', 'DESC')
 
-  return await getResourceCollection(NODE_TYPES.ARTICLE)
-  // return await getResourceCollection(NODE_TYPES.ARTICLE, { params: newsParams().getQueryObject() })
+  const newsParamsLimited = () =>
+    baseArticlePageQueryParams()
+      .addSort('created', 'DESC')
+      .addPageLimit(4)
+
+  if (shortList === 'true'){
+    return await getResourceCollection(NODE_TYPES.ARTICLE, { params: newsParamsLimited().getQueryObject() })
+  }
+  return await getResourceCollection(NODE_TYPES.ARTICLE, { params: newsParams().getQueryObject() })
 }

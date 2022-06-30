@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import { useTranslation } from 'next-i18next'
-import { Linkbox,IconArrowRight } from 'hds-react'
+import { IconArrowRight } from 'hds-react'
 import { DrupalFormattedText } from '@/lib/types'
 import {getNewsPath} from '@/lib/helpers'
 import {getNews} from '@/lib/client-api'
@@ -17,7 +17,7 @@ interface NewsListProps {
 function NewsList(props: NewsListProps): JSX.Element {
   const { field_title, field_short_list, field_news_list_desc } = props
   const { t } = useTranslation()
-  const fetcher = () => getNews()
+  const fetcher = () => getNews(field_short_list)
   const { data: news, error } = useSWR(
     `/news`,
     fetcher

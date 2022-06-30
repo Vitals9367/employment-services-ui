@@ -1,10 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getNews } from '@/lib/ssr-api'
 
-//type Data = {
-//  name: string
-//}
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   let news: any = []
@@ -14,7 +10,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return
   }
 
-  news = await getNews().catch((e) => {
+  const { limit }:any = req?.query
+
+  news = await getNews(limit).catch((e) => {
     console.log('Error fetching news from Drupal: ', e)
     throw e
   })
