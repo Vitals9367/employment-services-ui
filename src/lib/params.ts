@@ -154,36 +154,36 @@ const getEventPageQueryParams = () =>
 
 export const baseArticlePageQueryParams = () =>
   new DrupalJsonApiParams()
-  .addInclude([
-    'field_content.field_image.field_media_image',
-  ])
-  .addFields(NODE_TYPES.ARTICLE, [
-    'id',
-    'title',
-    'path',
-    'created',
-    'revision_timestamp',
-    'langcode',
-    'field_lead',
-    'field_content'
-  ])
-  .addFields(CONTENT_TYPES.TEXT, [
-    'field_text'
-  ])
-  .addFields(CONTENT_TYPES.SUBHEADING, [
-    'field_subheading_title'
-  ])
-  .addFields(CONTENT_TYPES.PARAGRAPH_IMAGE, [
-    'field_image',
-    'field_image_caption',
-    'field_original_aspect_ratio'
-  ])
-  .addFields(CONTENT_TYPES.QUOTE, [
-    'field_quote_content',
-    'field_quote_author_first_name',
-    'field_quote_author_last_name',
-    'field_quote_author_title'
-  ])
+    .addInclude([
+      'field_content.field_image.field_media_image',
+    ])
+    .addFields(NODE_TYPES.ARTICLE, [
+      'id',
+      'title',
+      'path',
+      'created',
+      'revision_timestamp',
+      'langcode',
+      'field_lead',
+      'field_content'
+    ])
+    .addFields(CONTENT_TYPES.TEXT, [
+      'field_text'
+    ])
+    .addFields(CONTENT_TYPES.SUBHEADING, [
+      'field_subheading_title'
+    ])
+    .addFields(CONTENT_TYPES.PARAGRAPH_IMAGE, [
+      'field_image',
+      'field_image_caption',
+      'field_original_aspect_ratio'
+    ])
+    .addFields(CONTENT_TYPES.QUOTE, [
+      'field_quote_content',
+      'field_quote_author_first_name',
+      'field_quote_author_last_name',
+      'field_quote_author_title'
+    ])
 
 const getArticlePageQueryParams = () =>
   baseArticlePageQueryParams()

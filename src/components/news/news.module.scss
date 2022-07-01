@@ -29,8 +29,9 @@
   }
 }
 
-.eventListDescription {
+.newsListDescription {
   max-width: 50rem;
+  margin-bottom: var(--spacing-xl);
 }
 
 .newsCard {
@@ -39,7 +40,7 @@
   justify-content: space-between;
   flex-grow: 1;
   border-left: 0.5rem solid var(--color-metro);
-  padding: 0 0 0 1rem;
+  padding: 0 0 0 var(--spacing-s);
   height: var(--spacing-layout-xl);
   overflow:hidden;
   word-wrap: break-word;

@@ -8,7 +8,7 @@ import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, IconArrowRight
 
 import { DrupalFormattedText, EventState } from '@/lib/types'
 import { getEvents, getEventsSearch } from '@/lib/client-api'
-import { eventTags, getEventPath } from '@/lib/helpers'
+import { eventTags, getPath } from '@/lib/helpers'
 
 import HtmlBlock from '@/components/HtmlBlock'
 import TagList from './TagList'
@@ -36,10 +36,10 @@ export function EventList(props: EventListProps): JSX.Element {
   return (
     <div className='component'>
         <div className={styles.eventListTitleArea}>
-          {field_title && 
+          {field_title &&
             <h2>{field_title}</h2>
           }
-          {field_events_list_short && 
+          {field_events_list_short &&
             <a href={t('list.events_page_url')}>{t('list.show_all_events')} <IconArrowRight size="l" /></a>
           }
         </div>
@@ -56,8 +56,8 @@ export function EventList(props: EventListProps): JSX.Element {
               className={styles.linkBox}
               linkboxAriaLabel="List of links Linkbox"
               linkAriaLabel="Linkbox link"
-              key={key}            
-              href={`${t('list.events_page_url')}${getEventPath(event.path.alias)}`}
+              key={key}
+              href={`${t('list.events_page_url')}${getPath(event.path.alias)}`}
               withBorder
             >
               <Image
@@ -118,7 +118,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
     return [...acc, curr.field_tags]
   }, [])
 
-  tags = tags && tags.flat().filter((value:any, index:any, array:any) => { 
+  tags = tags && tags.flat().filter((value:any, index:any, array:any) => {
     return array.indexOf(value) === index
   })
   // Prioritise tags order by eventTags.
@@ -128,7 +128,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
 
   return (
     <div className='component'>
-      {field_title && 
+      {field_title &&
         <h2>{field_title}</h2>
       }
       {field_events_list_desc?.processed &&
@@ -171,8 +171,8 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
               className={styles.linkBox}
               linkboxAriaLabel="List of links Linkbox"
               linkAriaLabel="Linkbox link"
-              key={key}            
-              href={`${t('list.events_page_url')}${getEventPath(event.url[0])}`}
+              key={key}
+              href={`${t('list.events_page_url')}${getPath(event.url[0])}`}
               withBorder
             >
               <Image

@@ -22,14 +22,7 @@ export const getImageUrl = (url: string): string => {
   return url ? `https://${host}${url}` : ''
 }
 
-export const getEventPath = (url: string) => {
-  const urlParts =  url.split('/')
-  const eventPath = urlParts.pop()
-
-  return (`/${eventPath}`)
-}
-
-export const getNewsPath = (url: string) => {
+export const getPath = (url: string) => {
   const urlParts =  url.split('/')
   const newsPath = urlParts.pop()
 

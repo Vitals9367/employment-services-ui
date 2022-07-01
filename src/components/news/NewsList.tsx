@@ -1,11 +1,14 @@
 import useSWR from 'swr'
 import { useTranslation } from 'next-i18next'
 import { IconArrowRight } from 'hds-react'
-import { DrupalFormattedText } from '@/lib/types'
-import {getNewsPath} from '@/lib/helpers'
-import {getNews} from '@/lib/client-api'
 import dateformat from 'dateformat'
+
+import { DrupalFormattedText } from '@/lib/types'
+import { getPath } from '@/lib/helpers'
+import { getNews } from '@/lib/client-api'
+
 import HtmlBlock from '@/components/HtmlBlock'
+
 import styles from './news.module.scss'
 
 interface NewsListProps {
@@ -22,6 +25,7 @@ function NewsList(props: NewsListProps): JSX.Element {
     `/news`,
     fetcher
   )
+  // TODO: Create a pagination/ load more function for the list with no short list
 
   return (
     <div className='component'>
@@ -41,7 +45,7 @@ function NewsList(props: NewsListProps): JSX.Element {
       <div className={`${styles.newsList} ${field_short_list && styles.short}`}>
         { news && news.map((news: any, key: any) => (
           <div className={styles.newsCard} key={key}>
-              <a href={`${t('list.news_url')}${getNewsPath(news.path.alias)}`}>
+              <a href={`${t('list.news_url')}${getPath(news.path.alias)}`}>
                 <h3 className={styles.newsTitle}>{news.title}</h3>
               </a>
             <p className={styles.articleDate}><time dateTime={news.created}>{`${dateformat(news.created, 'dd.mm.yyyy')}`}</time></p>

@@ -22,17 +22,18 @@ export const getEvents = async ({ tags }: Tags) => {
 }
 
 export const getNews = async (shortList: string) => {
+  if (shortList === 'true'){
+    const newsParamsLimited = () =>
+      baseArticlePageQueryParams()
+        .addSort('created', 'DESC')
+        .addPageLimit(4)
+
+    return await getResourceCollection(NODE_TYPES.ARTICLE, { params: newsParamsLimited().getQueryObject() })
+  }
+
   const newsParams = () =>
     baseArticlePageQueryParams()
       .addSort('created', 'DESC')
 
-  const newsParamsLimited = () =>
-    baseArticlePageQueryParams()
-      .addSort('created', 'DESC')
-      .addPageLimit(4)
-
-  if (shortList === 'true'){
-    return await getResourceCollection(NODE_TYPES.ARTICLE, { params: newsParamsLimited().getQueryObject() })
-  }
   return await getResourceCollection(NODE_TYPES.ARTICLE, { params: newsParams().getQueryObject() })
 }
