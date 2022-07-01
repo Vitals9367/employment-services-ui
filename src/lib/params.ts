@@ -123,6 +123,11 @@ const getLandingPageQueryParams = () =>
       'field_event_tag_filter',
       'field_events_list_desc'
     ])
+    .addFields(CONTENT_TYPES.NEWS_LIST, [
+      'field_title',
+      'field_short_list',
+      'field_news_list_desc'
+    ])
     .getQueryObject()
 
 export const baseEventQueryParams = () =>
@@ -147,7 +152,7 @@ const getEventPageQueryParams = () =>
   baseEventQueryParams()
     .getQueryObject()
 
-const getArticlePageQueryParams = () =>
+export const baseArticlePageQueryParams = () =>
   new DrupalJsonApiParams()
     .addInclude([
       'field_content.field_image.field_media_image',
@@ -179,6 +184,9 @@ const getArticlePageQueryParams = () =>
       'field_quote_author_last_name',
       'field_quote_author_title'
     ])
+
+const getArticlePageQueryParams = () =>
+  baseArticlePageQueryParams()
     .getQueryObject()
 
 export const getQueryParamsFor = (type: string) => {
