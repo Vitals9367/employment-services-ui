@@ -39,15 +39,16 @@ function Header(header:NavProps): JSX.Element {
       })
       const isActive = item.url === activePath || childActive
       nav.push(
-        <Navigation.Dropdown 
-          label={item.title} 
-          key={item.title} 
-          id={item.title} 
+        <Navigation.DropdownLink
+          label={item.title}
+          key={item.title}
+          id={item.title}
           active={isActive}
           className={classNames(styles.navDropDown, isActive && styles.active)}
+          href={item.url}
         >
           {subs}
-        </Navigation.Dropdown>
+        </Navigation.DropdownLink>
       )
       return nav
     })
@@ -126,11 +127,11 @@ function Header(header:NavProps): JSX.Element {
             active={langLinks.en === activePath}
           />
         </Navigation.LanguageSelector>
-        {/* <Navigation.Dropdown 
-          label="" 
-          aria-label={t("navigation.theme_dropdown")} 
-          icon={<IconGlobe size='s' aria-label="Globe"/>} 
-          key='theme_dropdown' 
+        {/* <Navigation.Dropdown
+          label=""
+          aria-label={t("navigation.theme_dropdown")}
+          icon={<IconGlobe size='s' aria-label="Globe"/>}
+          key='theme_dropdown'
           id='theme_dropdown'
         >
           {getThemes(themes)}
