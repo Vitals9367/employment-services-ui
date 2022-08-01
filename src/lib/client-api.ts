@@ -6,10 +6,10 @@ import { DrupalMenuLinkContent } from 'next-drupal'
 import { getDrupalClient } from '@/lib/drupal-client'
 import { Tags } from 'src/lib/types'
 
-
 /** The Client API urls  */
 const EVENTS_URL = '/api/events'
 const EVENTS_SEARCH_URL = '/api/events-search'
+const NEWS_URL = '/api/news'
 
 export const getEvents = async (tags: Tags) => {
   const { data } = await axios(`${EVENTS_URL}`, {
@@ -23,10 +23,12 @@ export const getEvents = async (tags: Tags) => {
   return data
 }
 
+
 export const getEventsSearch = async (eventsIndex: number) => {
   const { data } = await axios(`${EVENTS_SEARCH_URL}`, { params: { index: eventsIndex } })
   return data
 }
+
 
 // export async function getMenu(name: string): Promise<DrupalMenuLinkContent[]> {
 //   const drupal = getDrupalClient()
@@ -39,3 +41,9 @@ export const getEventsSearch = async (eventsIndex: number) => {
 
 //   return menu.items
 // }
+
+export const getNews = async (shortList: boolean) => {
+  const { data } = await axios(`${NEWS_URL}`, { params: {limit: shortList } })
+  return data
+}
+

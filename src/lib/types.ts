@@ -60,7 +60,6 @@ export interface EventState {
   total: number
   events: EventData[]
 }
-
 declare global {
   interface Window {
     _paq: any;

@@ -95,33 +95,41 @@ h5, .h5,
   }
 
   a.link-internal,
-  a.link-external {
+  a.link-external,
+  a[data-is-external="true"],
+  a[data-entity-type="node"] {
     display: inline-flex;
   }
 
   a.link-internal::after,
-  a.link-external::after {
+  a.link-external::after,
+  a[data-is-external="true"]::after,
+  a[data-entity-type="node"]::after {
     content: '';
     margin-left: var(--spacing-3-xs);
     transition: transform .2s linear;
-    width: 1.25rem;
+    width: 2rem;
   }
 
-  .link-internal::after {
-    margin-right: var(--spacing-2-xs);
-    background: url('../src/assets/arrow-right.svg') no-repeat center center;
-  }
-
-  .link-external::after {
+  .link-internal::after,
+  a[data-entity-type="node"]::after {
     margin-right: var(--spacing-3-xs);
-    background: url('../src/assets/arrow-top-right.svg') no-repeat center center;
+    background: url('../src/assets/arrow-right.svg') no-repeat center top;
   }
 
-  .link-internal:hover::after {
+  .link-external::after,
+  a[data-is-external="true"]::after {
+    margin-right: var(--spacing-3-xs);
+    background: url('../src/assets/arrow-top-right.svg') no-repeat center top;
+  }
+
+  .link-internal:hover::after,
+  a[data-entity-type="node"]:hover::after {
     transform: translateX(8px);
   }
 
-  .link-external:hover::after {
+  .link-external:hover::after,
+  a[data-is-external="true"]:hover::after {
     transform: translate(4px, -4px);
   }
 }

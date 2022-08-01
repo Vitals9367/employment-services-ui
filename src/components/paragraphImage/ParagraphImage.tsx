@@ -25,6 +25,7 @@ function ParagraphImage(props: ParagraphImageProps): JSX.Element {
   const imageWidth = imageStyleDimensions["3_2_m_width"]
   const imageHeight = imageStyleDimensions["3_2_m_height"]
 
+  //TODO: Add translation functionality to caption and photographer
   return (
     <div className="component">
       <div className={`${styles.paragraphImage}`}>

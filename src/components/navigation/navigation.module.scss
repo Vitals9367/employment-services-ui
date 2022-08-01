@@ -33,31 +33,43 @@
   --menu-item-background-color-highlighted: var(--color-white) !important;
   --menu-item-color-highlighted: var(--color-black) !important;
   text-align: left;
+
   a {
-    position: relative;
-
-    &:hover {
-      text-decoration: underline;
-    }
-
     &[aria-current] {
       font-weight: 600 !important;
     }
+  }
 
-    &::before {
-      position: absolute;
-      display: block;
-      content: "";
-      background: var(--item-active-color);
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      transition: width 0.2s;
+  // dropdown menu
+  div a {
+    position: relative;
+
+    &[aria-current] {
+      @media (max-width: $breakpoint-m) {
+        background-color: var(--color-black-10);
+      }
     }
 
-    &:hover::before, &[aria-current]::before {
-      width: var(--spacing-3-xs);
+    @media (min-width: $breakpoint-m) {
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &::before {
+        position: absolute;
+        display: block;
+        content: "";
+        background: var(--item-active-color);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        transition: width 0.2s;
+      }
+
+      &:hover::before, &[aria-current]::before {
+        width: var(--spacing-3-xs);
+      }
     }
   }
 
