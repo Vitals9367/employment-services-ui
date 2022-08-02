@@ -2,8 +2,24 @@ import getConfig from 'next/config'
 import { DrupalClient, DataCache  } from 'next-drupal'
 import Redis from 'ioredis'
 
-const { REDIS_HOST, REDIS_PORT } = getConfig().serverRuntimeConfig
-const redis = new Redis({host: REDIS_HOST, port: REDIS_PORT})
+const getRedis = () => {
+  const { REDIS_HOST, REDIS_PORT, REDIS_INSTANCE } = getConfig().serverRuntimeConfig
+
+  if (REDIS_INSTANCE) {
+    return new Redis({
+      sentinels: [
+        { host: 'sentinel', port: 5000 },
+      ],
+      name: 'mymaster',
+    })
+  }
+
+  // For local environment.
+  return new Redis({host: REDIS_HOST, port: REDIS_PORT})
+}
+
+const redis = getRedis()
+
 
 export const redisCache: DataCache = {
   async set(key, value) {

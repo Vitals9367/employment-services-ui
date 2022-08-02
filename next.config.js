@@ -23,6 +23,7 @@ const serverRuntimeConfig = {
   REDIS_HOST: process.env.REDIS_HOST,
   REDIS_PORT: process.env.REDIS_PORT,
   REDIS_PREFIX: process.env.REDIS_PREFIX,
+  REDIS_INSTANCE: process.env.REDIS_INSTANCE,
 }
 
 /** @type {import('next').NextConfig} */
