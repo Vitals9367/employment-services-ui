@@ -8,9 +8,9 @@ const getRedis = () => {
   if (REDIS_INSTANCE) {
     return new Redis({
       sentinels: [
-        { host: 'sentinel', port: 5000 },
+        { host: REDIS_HOST, port: REDIS_PORT },
       ],
-      name: 'mymaster',
+      name: REDIS_INSTANCE,
     })
   }
 
