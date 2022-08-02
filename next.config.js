@@ -21,6 +21,8 @@ const serverRuntimeConfig = {
   DRUPAL_CLIENT_SECRET: process.env.DRUPAL_CLIENT_SECRET,
   DRUPAL_PREVIEW_SECRET: process.env.DRUPAL_PREVIEW_SECRET,
   REDIS_HOST: process.env.REDIS_HOST,
+  REDIS_PORT: process.env.REDIS_PORT,
+  REDIS_PREFIX: process.env.REDIS_PREFIX,
 }
 
 /** @type {import('next').NextConfig} */

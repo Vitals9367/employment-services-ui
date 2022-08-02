@@ -1,5 +1,5 @@
 import parse from 'html-react-parser'
-import { DrupalFormattedText } from 'src/lib/types'
+import { DrupalFormattedText } from '@/lib/types'
 
 interface HtmlBlockProps {
   field_text: DrupalFormattedText

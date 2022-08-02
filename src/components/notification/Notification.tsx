@@ -1,6 +1,6 @@
 import React from "react"
 import { Notification as HDSNotification } from "hds-react"
-import { DrupalFormattedText } from "src/lib/types"
+import { DrupalFormattedText } from "@/lib/types"
 import HtmlBlock from "@/components/HtmlBlock"
 
 interface NotificationProps {

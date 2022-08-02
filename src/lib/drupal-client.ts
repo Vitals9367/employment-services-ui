@@ -2,18 +2,17 @@ import getConfig from 'next/config'
 import { DrupalClient, DataCache  } from 'next-drupal'
 import Redis from 'ioredis'
 
-// const { REDIS_HOST } = getConfig().serverRuntimeConfig
-// const redis = new Redis(REDIS_HOST)
+const { REDIS_HOST, REDIS_PORT } = getConfig().serverRuntimeConfig
+const redis = new Redis({host: REDIS_HOST, port: REDIS_PORT})
 
-
-// export const redisCache: DataCache = {
-//   async set(key, value) {
-//     return await redis.set(key, value)
-//   },
-//   async get(key) {
-//     return await redis.get(key)
-//   },
-// }
+export const redisCache: DataCache = {
+  async set(key, value) {
+    return await redis.set(key, value)
+  },
+  async get(key) {
+    return await redis.get(key)
+  },
+}
 
 export const getDrupalClient = (withAuth: boolean = false) => {
   const { NEXT_PUBLIC_DRUPAL_BASE_URL, DRUPAL_PREVIEW_SECRET, DRUPAL_CLIENT_ID, DRUPAL_CLIENT_SECRET } = getConfig().serverRuntimeConfig
@@ -24,7 +23,7 @@ export const getDrupalClient = (withAuth: boolean = false) => {
         clientId: DRUPAL_CLIENT_ID,
         clientSecret: DRUPAL_CLIENT_SECRET
       },
-      // cache: redisCache,
+      cache: redisCache,
       previewSecret: DRUPAL_PREVIEW_SECRET,
       // Make preview work in development environment.
       forceIframeSameSiteCookie: process.env.NODE_ENV === 'development',

@@ -17,6 +17,7 @@ import NodeArticlePage from '@/components/pageTemplates/NodeArticlePage'
 import { Layout } from '@/components/layout/Layout'
 
 import { getDrupalClient } from "@/lib/drupal-client"
+import getMenu from '@/lib/get-menu'
 import { Node } from '@/lib/types'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getQueryParamsFor } from '@/lib/params'
@@ -77,9 +78,9 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 
   const langLinks = await getLanguageLinks(node)
 
-  const { tree: menu, items: menuItems } = await drupal.getMenu("main", {locale, defaultLocale})
-  const { tree: themes } = await drupal.getMenu("additional-languages")
-  const { tree: footerNav } = await drupal.getMenu("footer")
+  const { tree: menu, items: menuItems } = await getMenu('main', locale, defaultLocale)
+  const { tree: themes } = await getMenu('additional-languages', locale, defaultLocale)
+  const { tree: footerNav } = await getMenu('footer', locale, defaultLocale)
 
   const breadcrumb = getBreadCrumb(menuItems, node?.path.alias, node?.title)
 
