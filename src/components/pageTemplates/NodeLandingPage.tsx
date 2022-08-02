@@ -1,5 +1,5 @@
 import { Container } from 'hds-react'
-import { Node } from 'src/lib/types'
+import { Node } from '@/lib/types'
 import ContentMapper from '@/components/ContentMapper'
 import Hero from '@/components/hero/Hero'
 

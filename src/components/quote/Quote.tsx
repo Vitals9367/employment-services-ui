@@ -1,5 +1,5 @@
 import React from "react"
-import { DrupalFormattedText } from 'src/lib/types'
+import { DrupalFormattedText } from '@/lib/types'
 import styles from './quote.module.scss'
 
 interface QuoteProps {

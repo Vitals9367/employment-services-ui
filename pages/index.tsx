@@ -6,6 +6,7 @@ import ErrorPage from 'next/error'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { getDrupalClient } from "@/lib/drupal-client"
+import getMenu from '@/lib/get-menu'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { Layout } from '@/components/layout/Layout'
 import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
@@ -37,9 +38,9 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   }
 
   const langLinks = { fi: '/', en: '/en', sv: '/sv'}
-  const { tree: menu } = await drupal.getMenu('main', {locale, defaultLocale})
-  const { tree: themes } = await drupal.getMenu('additional-languages')
-  const { tree: footerNav } = await drupal.getMenu("footer")
+  const { tree: menu } = await getMenu('main', locale, defaultLocale)
+  const { tree: themes } = await getMenu('additional-languages', locale, defaultLocale)
+  const { tree: footerNav } = await getMenu('footer', locale, defaultLocale)
 
   return {
     props: {

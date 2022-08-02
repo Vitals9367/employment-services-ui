@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getEvents } from '@/lib/ssr-api'
-import { Tags } from 'src/lib/types'
+import { Tags } from '@/lib/types'
 
 type Data = {
   name: string

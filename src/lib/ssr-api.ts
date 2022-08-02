@@ -1,6 +1,6 @@
 import { getResourceCollection } from 'next-drupal'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
-import { Tags } from 'src/lib/types'
+import { Tags } from '@/lib/types'
 import { baseEventQueryParams, baseArticlePageQueryParams } from './params'
 
 export const getEvents = async ({ tags }: Tags) => {

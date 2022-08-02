@@ -3,7 +3,7 @@ import { Accordion as HDSAccordion, useAccordion, Button, Card, IconAngleUp, Ico
 
 import ContentMapper from '@/components/ContentMapper'
 import HtmlBlock from '@/components/HtmlBlock'
-import { DrupalFormattedText } from 'src/lib/types'
+import { DrupalFormattedText } from '@/lib/types'
 import styles from './accordion.module.scss'
 
 
