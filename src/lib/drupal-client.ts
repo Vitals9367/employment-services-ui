@@ -3,13 +3,14 @@ import { DrupalClient, DataCache  } from 'next-drupal'
 import Redis from 'ioredis'
 
 const getRedis = () => {
-  const { REDIS_HOST, REDIS_PORT, REDIS_INSTANCE } = getConfig().serverRuntimeConfig
+  const { REDIS_HOST, REDIS_PORT, REDIS_INSTANCE, REDIS_PASSWORD } = getConfig().serverRuntimeConfig
 
   if (REDIS_INSTANCE) {
     return new Redis({
       sentinels: [
         { host: REDIS_HOST, port: REDIS_PORT },
       ],
+      sentinelPassword: REDIS_PASSWORD,
       name: REDIS_INSTANCE,
     })
   }
