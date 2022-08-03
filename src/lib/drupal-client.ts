@@ -10,8 +10,9 @@ const getRedis = () => {
       sentinels: [
         { host: REDIS_HOST, port: REDIS_PORT },
       ],
+      password: REDIS_PASSWORD,
       sentinelPassword: REDIS_PASSWORD,
-      name: REDIS_INSTANCE,
+      name: REDIS_INSTANCE
     })
   }
 
