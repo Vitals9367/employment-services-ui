@@ -64,6 +64,15 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     }
   }
 
+  const entityLangcode = path?.entity?.langcode
+  // If page(path) doesn't exist on current language.
+  if (locale !== entityLangcode) {
+    return {
+      notFound: true,
+      revalidate: 3
+    }
+  }
+
   const node = await drupal.getResourceFromContext<Node>(type, context, {
     params: getQueryParamsFor(type),
   })
