@@ -22,7 +22,7 @@ export const getEvents = async ({ tags }: Tags) => {
 }
 
 export const getNews = async (shortList: string) => {
-  if (shortList === 'true'){
+  if (shortList === 'true') {
     const newsParamsLimited = () =>
       baseArticlePageQueryParams()
         .addSort('created', 'DESC')

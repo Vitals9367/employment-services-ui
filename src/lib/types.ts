@@ -62,7 +62,7 @@ export interface EventState {
 }
 declare global {
   interface Window {
-    _paq: any;
-    rnsData: any;
+    _paq: any
+    rnsData: any
   }
 }
