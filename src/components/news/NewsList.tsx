@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import { useTranslation } from 'next-i18next'
-import { IconArrowRight } from 'hds-react'
+import { Button as HDSButton, IconPlus, IconArrowRight } from 'hds-react'
+
 import dateformat from 'dateformat'
 
-import { DrupalFormattedText } from '@/lib/types'
+import { DrupalFormattedText, Node } from '@/lib/types'
 import { getPath } from '@/lib/helpers'
 import { getNews } from '@/lib/client-api'
 
@@ -20,12 +22,24 @@ interface NewsListProps {
 function NewsList(props: NewsListProps): JSX.Element {
   const { field_title, field_short_list, field_news_list_desc } = props
   const { t } = useTranslation()
+  const [newsIndex, setNewsIndex] = useState<number>(1)
+  const [paginatedNews, setPaginatedNews] = useState<Node[]>([])
   const fetcher = () => getNews(field_short_list)
   const { data: news, error } = useSWR(
     `/news`,
     fetcher
   )
-  // TODO: Create a pagination/ load more function for the list with no short list
+  const total: number = news && news.length || 0
+
+  useEffect(() => {
+    const filterNews = () => {
+      const pn = news && news.slice(0, 4*newsIndex)
+      setPaginatedNews(pn)
+    }
+    filterNews()
+  }, [news, newsIndex]) // eslint-disable-line
+
+  const loadMoreText = t('list.load_more')
 
   return (
     <div className='component'>
@@ -43,7 +57,7 @@ function NewsList(props: NewsListProps): JSX.Element {
         </div>
       }
       <div className={`${styles.newsList} ${field_short_list && styles.short}`}>
-        { news && news.map((news: any, key: any) => (
+        { paginatedNews && paginatedNews.map((news: any, key: any) => (
           <div className={styles.newsCard} key={key}>
               <a href={`${t('list.news_url')}${getPath(news.path.alias)}`}>
                 <h3 className={styles.newsTitle}>{news.title}</h3>
@@ -52,6 +66,20 @@ function NewsList(props: NewsListProps): JSX.Element {
           </div>
         ))}
       </div>
+      {paginatedNews && total > paginatedNews.length && (
+        <div className={styles.loadMore}>
+          <HDSButton
+            variant='supplementary'
+            iconRight={<IconPlus />}
+            style={{ background: 'none' }}
+            onClick={() => {
+              setNewsIndex(newsIndex + 1)
+            }}
+          >
+            {loadMoreText}
+          </HDSButton>
+        </div>
+      )}
     </div>
   )
 }

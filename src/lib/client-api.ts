@@ -26,7 +26,7 @@ export const getEventsSearch = async (eventsIndex: number) => {
 }
 
 export const getNews = async (shortList: boolean) => {
-  const { data } = await axios(`${NEWS_URL}`, { params: {limit: shortList } })
+  const { data } = await axios(`${NEWS_URL}`, { params: { limit: shortList } })
   return data
 }
 

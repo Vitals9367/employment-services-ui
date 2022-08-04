@@ -15,7 +15,7 @@
     "@types/qs": "^6.9.7",
     "axios": "^0.26.0",
     "dateformat": "^5.0.3",
-    "drupal-jsonapi-params": "^2.0.0",
+    "drupal-jsonapi-params": "2.1.0",
     "hds-core": "2.1",
     "hds-design-tokens": "2.1",
     "hds-react": "2.1",

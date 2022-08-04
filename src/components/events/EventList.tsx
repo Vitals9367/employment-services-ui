@@ -35,14 +35,14 @@ export function EventList(props: EventListProps): JSX.Element {
 
   return (
     <div className='component'>
-        <div className={styles.eventListTitleArea}>
-          {field_title &&
-            <h2>{field_title}</h2>
-          }
-          {field_events_list_short &&
-            <a href={t('list.events_page_url')}>{t('list.show_all_events')} <IconArrowRight size="l" /></a>
-          }
-        </div>
+      <div className={styles.eventListTitleArea}>
+        {field_title &&
+          <h2>{field_title}</h2>
+        }
+        {field_events_list_short &&
+          <a href={t('list.events_page_url')}>{t('list.show_all_events')} <IconArrowRight size="l" /></a>
+        }
+      </div>
 
       {field_events_list_desc?.processed &&
         <div className={styles.eventListDescription}>
