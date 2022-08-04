@@ -171,6 +171,18 @@ h5, .h5,
   margin-bottom: var(--spacing-xl);
 }
 
+.not-found {
+  margin: var(--spacing-4-xl) auto;
+
+  h1 {
+    text-align: center;
+  }
+
+  a {
+    justify-content: center;
+  }
+}
+
 // React and share
 .rns {
   border-top: 1px solid var(--color-black-90);
