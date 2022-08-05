@@ -1,3 +1,11 @@
-import { DrupalPreview } from "next-drupal"
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { getDrupalClient } from '@/lib/drupal-client'
 
-export default DrupalPreview()
+
+export default async function (
+  request: NextApiRequest,
+  response: NextApiResponse
+  ) {
+  const drupal = getDrupalClient()
+  return await drupal.preview(request, response)
+}

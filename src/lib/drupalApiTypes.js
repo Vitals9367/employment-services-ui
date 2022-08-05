@@ -1,9 +1,8 @@
 export const NODE_TYPES = {
   PAGE: 'node--page',
   LANDING_PAGE: 'node--landing_page',
-  NEWS: 'node--news',
   EVENT: 'node--event',
-  BLOG: 'node--blog',
+  ARTICLE: 'node--article'
 }
 
 export const CONTENT_TYPES = {
@@ -20,9 +19,13 @@ export const CONTENT_TYPES = {
   HERO: 'paragraph--hero',
   SUBHEADING: 'paragraph--subheading',
   LIST_OF_LINKS: 'paragraph--list_of_links',
+  LIST_OF_LINKS_ITEM: 'paragraph--list_of_links_item',
   PARAGRAPH_IMAGE: 'paragraph--image',
   LIFTUP_WITH_IMAGE: 'paragraph--liftup_with_image',
   VIDEO_REMOTE: 'paragraph--remote_video',
   NOTIFICATION: 'paragraph--notification',
-  COLOR: 'taxonomy_term--colors'
+  EVENTS_LIST: 'paragraph--events_list',
+  NEWS_LIST: 'paragraph--news_list',
+  COLOR: 'taxonomy_term--colors',
+  QUOTE: 'paragraph--quote'
 }

@@ -27,4 +27,42 @@ export interface NavProps {
   menu?: DrupalMenuLinkContent[]
   themes?: DrupalMenuLinkContent[]
   langLinks?: any
-};
+  breadcrumb?: any
+}
+
+export interface FooterProps {
+  locale: Locale
+  footerNav?: DrupalMenuLinkContent[]
+}
+
+export interface BreadcrumbContent {
+  id: string
+  title: string
+  url: string
+}
+
+export interface Tags {
+  [key: string]: string | string[]
+}
+
+export interface EventData {
+  title: string
+  url: string
+  field_image_url: string
+  field_image_alt: string
+  field_start_time: number
+  field_end_time: number
+  field_location: string
+  field_tags: string[]
+}
+
+export interface EventState {
+  total: number
+  events: EventData[]
+}
+declare global {
+  interface Window {
+    _paq: any
+    rnsData: any
+  }
+}

@@ -6,7 +6,10 @@
     "button_text": "E-Services",
     "button_link": "https://asiointi.mol.fi/omaasiointi/",
     "title_aria_label": "Helsinki: Employment services",
-    "navigate_to_page": "Navigate to page"
+    "navigate_to_page": "Navigate to page",
+    "frontpage": "Front page",
+    "breadcrumb_label": "Breadcrumb",
+    "theme_dropdown": "Additional languages"
   },
   "search": {
     "filter": "Filter events",
@@ -19,11 +22,16 @@
     "read_more_news": "Read all news",
     "blog_url": "/en/blog",
     "events_url": "/en/event",
+    "show_all_news": "Show all news",
     "news_url": "/en/news",
-    "results_text": "search results"
+    "results_text": "search results",
+    "show_all_events": "Show all events",
+    "events_page_url": "/en/events"
   },
   "event": {
-    "remote_event": "Remote event"
+    "remote_event": "Remote event",
+    "info_url_text": "Event homepage",
+    "info_url_text_teams": "Open Teams-event"
   },
   "video": {
     "cookie_consent": "You have not allowed the use of cookies on this site.",
@@ -34,11 +42,11 @@
     "link_text": "Read more on cookies",
     "accept": "Accept cookies",
     "decline": "Decline cookies",
-    "url": "https://tyollisyyspalvelut.hel.fi/en/cookie-policy"
+    "url": "/en/cookie-policy"
   },
   "footer": {
     "accessibility": "Accessibility statement",
-    "accessibilityLink": "https://tyollisyyspalvelut.hel.fi/en/accessibility_statement",
+    "accessibilityLink": "/en/accessibility_statement",
     "feedback": "Give feedback",
     "feedbackLink": "https://www.hel.fi/helsinki/en/administration/participate/feedback",
     "goup": "Back to the top",

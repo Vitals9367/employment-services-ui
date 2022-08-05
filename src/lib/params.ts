@@ -8,6 +8,7 @@ const baseQueryParams = () =>
     .addInclude([
       'field_content.field_list_of_links_links.field_list_of_links_image.field_media_image',
       'field_content.field_liftup_with_image_image.field_media_image',
+      'field_content.field_image.field_media_image',
       'field_content.field_background_color',
       'field_notification'
     ])
@@ -37,6 +38,11 @@ const baseQueryParams = () =>
       'field_list_of_links_links',
       'field_list_of_links_title'
     ])
+    .addFields(CONTENT_TYPES.LIST_OF_LINKS_ITEM, [
+      'field_list_of_links_link',
+      'field_list_of_links_image',
+      'field_list_of_links_desc'
+    ])
     .addFields(CONTENT_TYPES.LIFTUP_WITH_IMAGE, [
       'field_liftup_with_image_title',
       'field_liftup_with_image_image',
@@ -53,6 +59,18 @@ const baseQueryParams = () =>
     .addFields(CONTENT_TYPES.NOTIFICATION, [
       'field_notification_title',
       'field_notification_description'
+    ])
+
+    .addFields(CONTENT_TYPES.PARAGRAPH_IMAGE, [
+      'field_image',
+      'field_image_caption',
+      'field_original_aspect_ratio'
+    ])
+    .addFields(CONTENT_TYPES.QUOTE, [
+      'field_quote_content',
+      'field_quote_author_first_name',
+      'field_quote_author_last_name',
+      'field_quote_author_title'
     ])
 
 const getPageQueryParams = () =>
@@ -99,6 +117,76 @@ const getLandingPageQueryParams = () =>
       'field_hero_desc',
       'field_custom_hero_image'
     ])
+    .addFields(CONTENT_TYPES.EVENTS_LIST, [
+      'field_title',
+      'field_events_list_short',
+      'field_event_tag_filter',
+      'field_events_list_desc'
+    ])
+    .addFields(CONTENT_TYPES.NEWS_LIST, [
+      'field_title',
+      'field_short_list',
+      'field_news_list_desc'
+    ])
+    .getQueryObject()
+
+export const baseEventQueryParams = () =>
+  new DrupalJsonApiParams()
+    .addFields(NODE_TYPES.EVENT, [
+      'id',
+      'title',
+      'path',
+      'field_text',
+      'field_location',
+      'field_start_time',
+      'field_end_time',
+      'field_tags',
+      'field_image_url',
+      'field_image_name',
+      'field_image_alt',
+      'field_external_links',
+      'field_info_url'
+    ])
+
+const getEventPageQueryParams = () =>
+  baseEventQueryParams()
+    .getQueryObject()
+
+export const baseArticlePageQueryParams = () =>
+  new DrupalJsonApiParams()
+    .addInclude([
+      'field_content.field_image.field_media_image',
+    ])
+    .addFields(NODE_TYPES.ARTICLE, [
+      'id',
+      'title',
+      'path',
+      'created',
+      'revision_timestamp',
+      'langcode',
+      'field_lead',
+      'field_content'
+    ])
+    .addFields(CONTENT_TYPES.TEXT, [
+      'field_text'
+    ])
+    .addFields(CONTENT_TYPES.SUBHEADING, [
+      'field_subheading_title'
+    ])
+    .addFields(CONTENT_TYPES.PARAGRAPH_IMAGE, [
+      'field_image',
+      'field_image_caption',
+      'field_original_aspect_ratio'
+    ])
+    .addFields(CONTENT_TYPES.QUOTE, [
+      'field_quote_content',
+      'field_quote_author_first_name',
+      'field_quote_author_last_name',
+      'field_quote_author_title'
+    ])
+
+const getArticlePageQueryParams = () =>
+  baseArticlePageQueryParams()
     .getQueryObject()
 
 export const getQueryParamsFor = (type: string) => {
@@ -109,5 +197,13 @@ export const getQueryParamsFor = (type: string) => {
   switch (type) {
     case NODE_TYPES.LANDING_PAGE:
       return getLandingPageQueryParams()
+  }
+  switch (type) {
+    case NODE_TYPES.EVENT:
+      return getEventPageQueryParams()
+  }
+  switch (type) {
+    case NODE_TYPES.ARTICLE:
+      return getArticlePageQueryParams()
   }
 }

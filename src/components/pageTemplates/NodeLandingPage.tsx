@@ -1,5 +1,5 @@
 import { Container } from 'hds-react'
-import { Node } from 'src/lib/types'
+import { Node } from '@/lib/types'
 import ContentMapper from '@/components/ContentMapper'
 import Hero from '@/components/hero/Hero'
 
@@ -7,7 +7,7 @@ interface NodeLandingPageProps {
   node: Node
 }
 
-export function NodeLandingPage({ node, ...props }: NodeLandingPageProps): JSX.Element {
+function NodeLandingPage({ node, ...props }: NodeLandingPageProps): JSX.Element {
   const { title, field_content, field_hero, field_notification} = node
 
   return (

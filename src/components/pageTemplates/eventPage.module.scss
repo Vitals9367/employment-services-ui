@@ -1,0 +1,57 @@
+@import '/styles/variables.scss';
+
+.eventHero {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 2px solid var(--color-black);
+  margin-bottom: var(--spacing-layout-s);
+}
+
+.imageContainer {
+  position: relative;
+  min-height: 360px;
+}
+
+.headingContainer {
+  padding: var(--spacing-s);
+
+  h1 {
+    font-size: var(--fontsize-heading-l);
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .location {
+    display: flex;
+    font-size: var(--fontsize-body-m);
+    margin-top: var(--spacing-2-xs);
+    
+    svg {
+      margin-right: var(--spacing-2-xs);
+    }
+  }
+}
+
+.contentContainer {
+  padding: var(--spacing-s);
+}
+
+@media (min-width: $breakpoint-l) {
+  .eventHero {
+    flex-direction: row;
+  }
+
+  .headingContainer {
+    padding: var(--spacing-l) var(--spacing-m);
+    width: 40%;
+  }
+
+  .imageContainer {
+    width: 60%;
+  }
+
+  .contentContainer {
+    max-width: 50rem;
+  }
+}

@@ -1,5 +1,84 @@
+@import '/styles/variables.scss';
+
 .zover {
-  z-index: 101;
+  z-index: 100 !important;
+}
+.zover2 {
+  z-index: 110 !important;
+}
+.zover3 {
+  z-index: 120 !important;
+}
+
+.navigation {
+  --header-background-color: var(--color-white);
+  --header-color: var(--color-black-90);
+  --header-divider-color: var(--color-black-20);
+  --header-focus-outline-color: var(--color-black);
+  --mobile-menu-background-color: var(--color-white);
+  --mobile-menu-color: var(--color-black-90);
+  --navigation-row-background-color: var(--color-white);
+  --navigation-row-color: var(--color-metro);
+  --navigation-row-focus-outline-color: var(--color-coat-of-arms);
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--breakpoint-xl);
+  .blueButton {
+    --background-color: var(--color-bus) !important;
+  }
+}
+
+.navDropDown {
+  --item-active-color: var(--color-metro) !important;
+  --menu-item-background-color-highlighted: var(--color-white) !important;
+  --menu-item-color-highlighted: var(--color-black) !important;
+  text-align: left;
+
+  a {
+    &[aria-current] {
+      font-weight: 600 !important;
+    }
+  }
+
+  // dropdown menu
+  div a {
+    position: relative;
+
+    &[aria-current] {
+      @media (max-width: $breakpoint-m) {
+        background-color: var(--color-black-10);
+      }
+    }
+
+    @media (min-width: $breakpoint-m) {
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &::before {
+        position: absolute;
+        display: block;
+        content: "";
+        background: var(--item-active-color);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        transition: width 0.2s;
+      }
+
+      &:hover::before, &[aria-current]::before {
+        width: var(--spacing-3-xs);
+      }
+    }
+  }
+
+  &.active {
+    font-weight: 600;
+  }
+  @media (min-width: $breakpoint-m) {
+    margin-left: var(--spacing-xs) !important;
+  }
 }
 
 .sidenav {
@@ -7,7 +86,7 @@
   --side-navigation-background-color: var(--color-white) !important;
   --side-navigation-level-border-color: var(--color-fog-light);
   --side-navigation-level-border-color-focus: var(--color-coat-of-arms);
-  --side-navigation-level-border-color-hover: var(--color-fog-light);
+  --side-navigation-level-border-color-hover: var(--color-white) !important;
   --side-navigation-level-background-color: var(--color-white) !important;
   --side-navigation-level-background-color-active: var(--color-white) !important;
   --side-navigation-level-background-color-hover: var(--color-white) !important;
@@ -17,7 +96,36 @@
   --side-navigation-mobile-menu-border-color: var(--color-white) !important;
   --side-navigation-mobile-menu-z-index: 100 !important;
   margin-top: var(--spacing-xl);
+  height: auto !important;
+
+  > button {
+    --border-color: var(--color-black);
+    --border-color-hover: var(--color-bus-dark);
+    --border-color-focus: var(--color-bus);
+    --border-color-hover-focus: var(--color-bus-dark);
+    --border-color-disabled: var(--color-black-50);
+    --background-color: transparent;
+    --background-color-hover: var(--color-bus-light);
+    --background-color-focus: transparent;
+    --background-color-hover-focus: var(--color-bus-light);
+    --background-color-disabled: transparent;
+    --color: var(--color-black);
+    --color-hover: var(--color-bus-dark);
+    --color-focus: var(--color-black);
+    --color-hover-focus: var(--color-bus-dark);
+    --color-disabled: var(--color-black-40);
+
+    @media (max-width: $breakpoint-m) {
+      display: flex;
+      span {
+        display: block;
+        width: 100%;
+        text-align: left;
+      }
+    }
+  }
 }
+
 .mainLevel {
   &:not(.active) {
     > a, > button {
@@ -30,21 +138,28 @@
       padding-left: var(--spacing-s);
     }
   }
+  > a, > button {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .subLevel {
   &.active {
     > a, > button {
-      font-weight: 400 !important;
-      padding-left: var(--spacing-s);
+      font-weight: 600 !important;
     }
+  }
+  &:hover {
+    text-decoration: underline;
   }
 }
 
 .mainLevel, .subLevel {
-  padding: var(--spacing-s) 0;
+  padding: var(--spacing-2-xs) 0;
   &:not(:last-child) {
-    border-bottom: 1px solid var(--color-black-10);
+    border-bottom: 1px solid var(--color-black-20);
   }
 }
 
@@ -53,6 +168,84 @@
   > a {
     padding-left: 0 !important;
     font-size: var(--fontsize-heading-s);
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
+.wiggle {
+  transform: translateX(0);
+  transition: transform 0.2s;
+  a:hover & {
+    transform: translateX(-0.2em);
+  }
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 var(--spacing-m);
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--breakpoint-xl);
+  border-top: 1px solid var(--color-black-10);
+  min-height: var(--spacing-3-xl);
+}
+
+.breadcrumbElement {
+  min-height: var(--spacing-l);
+  align-self: stretch;
+  align-items: center;
+  display: flex;
+  line-height: 0;
+  outline: none;
+  padding: var(--spacing-3-xs) 0;
+  span {
+    margin: 0 var(--spacing-2-xs);
+    font-weight: 600;
+    font-size: var(--fontsize-body-s);
+    line-height: var(--lineheight-s);
+  }
+}
+
+@media (min-width: $breakpoint-s) {
+  .breadcrumbElement {
+    height: var(--spacing-3-xl);
+  }
+}
+
+.footer {
+  --footer-background: var(--color-black) !important;
+  nav {
+    @media (min-width: $breakpoint-m) {
+      display: grid !important;
+      grid-template: repeat(4, auto) / repeat(4, auto);
+      grid-auto-flow: column;
+      justify-items: left;
+    }
+  }
+  .backToTopButton {
+    font-size: var(--fontsize-body-l) !important;
+    text-decoration: none !important;
+    margin-left: auto;
+    > span {
+      display: flex;
+    }
+  }
+  > div > div {
+    justify-content: flex-start !important;
+    > div {
+      margin-right: var(--spacing-m) !important;
+      &:last-of-type {
+        flex: 1 1;
+        @media (min-width: $breakpoint-m) {
+          display: flex;
+        }
+      }
+      > a, > span {
+        align-self: center;
+      }
+    }
+  }
+}

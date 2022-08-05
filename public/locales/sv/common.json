@@ -6,7 +6,10 @@
     "button_text": "E-Tjänster",
     "button_link": "https://asiointi.mol.fi/omaasiointi/?kieli=sv",
     "title_aria_label": "Helsingfors: Sysselsättningstjänster",
-    "navigate_to_page": "Navigera till sidan"
+    "navigate_to_page": "Navigera till sidan",
+    "frontpage": "Framsida",
+    "breadcrumb_label": "Synlig sökväg",
+    "theme_dropdown": "Övriga Språk"
   },
   "search": {
     "filter": "Filtrera evenemang",
@@ -19,11 +22,16 @@
     "read_more_news": "Läs alla nyheter",
     "blog_url": "/sv/blogg",
     "events_url": "/sv/evenemang",
+    "show_all_news": "Visa alla nyheter",
     "news_url": "/sv/nyheter",
-    "results_text": "sökresultat"
+    "results_text": "sökresultat",
+    "show_all_events": "Visa alla evenemang",
+    "events_page_url": "/sv/evenemang"
   },
   "event": {
-    "remote_event": "Virtuellt evenemang"
+    "remote_event": "Virtuellt evenemang",
+    "info_url_text": "Evenemangets hemsida",
+    "info_url_text_teams": "Öppna Teams-evenemanget"
   },
   "video": {
     "cookie_consent": "Du har inte gett tillstånd att installera cookies.",
@@ -34,11 +42,11 @@
     "link_text": "Mer information",
     "accept": "Avvisa cookies",
     "decline": "Godkänn cookies",
-    "url": "https://tyollisyyspalvelut.hel.fi/sv/cookie-policy"
+    "url": "/sv/cookie-policy"
   },
   "footer": {
     "accessibility": "Tillgänglighetsbeskrivning",
-    "accessibilityLink": "https://tyollisyyspalvelut.hel.fi/sv/tillganglighetsbeskrivning",
+    "accessibilityLink": "/sv/tillganglighetsbeskrivning",
     "feedback": "Ge respons",
     "feedbackLink": "https://www.hel.fi/helsinki/sv/stad-och-forvaltning/delta/feedback",
     "goup": "Till början av sidan",

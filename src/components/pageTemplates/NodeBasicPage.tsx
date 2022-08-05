@@ -1,15 +1,14 @@
-import { Container, SideNavigation } from 'hds-react'
-import { NavProps, Node } from 'src/lib/types'
+import { Container } from 'hds-react'
+import { NavProps, Node } from '@/lib/types'
 import ContentMapper from '@/components/ContentMapper'
-import { DrupalMenuLinkContent } from 'next-drupal';
-import { Sidebar } from '../navigation/Sidebar';
+import { Sidebar } from '@/components/navigation/Sidebar'
 
 interface NodeBasicPageProps {
-  node: Node;
-  sidebar: NavProps;
+  node: Node
+  sidebar: NavProps
 }
 
-export function NodeBasicPage({ node, sidebar, ...props }: NodeBasicPageProps): JSX.Element {
+function NodeBasicPage({ node, sidebar, ...props }: NodeBasicPageProps): JSX.Element {
   //console.log({node})
   const { title, field_lead_in, field_content, field_notification} = node
 
@@ -35,7 +34,6 @@ export function NodeBasicPage({ node, sidebar, ...props }: NodeBasicPageProps): 
         </div>
         <div className="columns">
           <div className="lower-content-region col col-12">
-            Lower content region placeholder
           </div>
         </div>
       </Container>

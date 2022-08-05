@@ -5,6 +5,11 @@ import Accordion from '@/components/accordion/Accordion'
 import Banner from '@/components/banner/Banner'
 import LiftupWithImage from '@/components/liftupWithImage/LiftupWithImage'
 import Notification from '@/components/notification/Notification'
+import { EventList, EventListWithFilters } from '@/components/events/EventList'
+import NewsList from '@/components/news/NewsList'
+import ParagraphImage from '@/components/paragraphImage/ParagraphImage'
+import Quote from '@/components/quote/Quote'
+
 
 interface ContentMapperProps {
   content: any
@@ -43,7 +48,7 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
         }
         return <Banner {...item} key={key} />
 
-        case CONTENT_TYPES.NOTIFICATION:
+      case CONTENT_TYPES.NOTIFICATION:
         if (!item?.id) {
           return null
         }
@@ -59,6 +64,22 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
           </div>
         )
 
+      case CONTENT_TYPES.EVENTS_LIST:
+        if (!item?.id) {
+          return null
+        }
+        if (item.field_events_list_short) {
+          return <EventList {...item} key={key} />
+        }
+        return <EventListWithFilters {...item} key={key} />
+
+      case CONTENT_TYPES.NEWS_LIST:
+        if (!item?.id) {
+          return null
+        }
+        return <NewsList {...item} key={key} />
+
+
       case CONTENT_TYPES.LIFTUP_WITH_IMAGE:
         if (!item?.field_liftup_with_image_image) {
           return null
@@ -66,13 +87,19 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
         return <LiftupWithImage {...item} key={key} />
 
       case CONTENT_TYPES.PARAGRAPH_IMAGE:
-      case CONTENT_TYPES.VIDEO_REMOTE:
-      case CONTENT_TYPES.FILE:
-      case CONTENT_TYPES.MEDIA_IMAGE:
-      case CONTENT_TYPES.MEDIA_VIDEO:
+        if (!item?.field_image) {
+          return null
+        }
+        return <ParagraphImage {...item} key={key} />
+
+      case CONTENT_TYPES.QUOTE:
+        if (!item?.field_quote_content) {
+          return null
+        }
+        return <Quote {...item} key={key} />
 
       default:
-        console.log('unmapped type: ', type);
+        console.log('unmapped type: ', type)
     }
   })
 }

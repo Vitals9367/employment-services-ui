@@ -13,7 +13,7 @@ interface ListOfLinksProps {
 }
 
 function ListOfLinks(props: ListOfLinksProps): JSX.Element {
-  const { field_list_of_links_design: design, field_list_of_links_links, field_list_of_links_title } = props;
+  const { field_list_of_links_design: design, field_list_of_links_links, field_list_of_links_title } = props
 
   return (
     <div className="component">
@@ -26,9 +26,9 @@ function ListOfLinks(props: ListOfLinksProps): JSX.Element {
                 linkboxAriaLabel="List of links Linkbox"
                 linkAriaLabel="Linkbox link"
                 key={key}
-                href={link.field_list_of_links_link.url} 
+                href={link.field_list_of_links_link.full_url} 
                 heading={link.field_list_of_links_link.title}
-                external={isExternalLink(link.field_list_of_links_link.url)}
+                external={isExternalLink(link.field_list_of_links_link.full_url)}
                 imgProps={{ src: getImageUrl(link.field_list_of_links_image?.field_media_image?.image_style_uri?.['1_1_s'])}}
               />
             </div>
@@ -36,7 +36,8 @@ function ListOfLinks(props: ListOfLinksProps): JSX.Element {
             <div className={`${styles.linkItem} link-item`} key={key}>
               <h3 className="flex">
                 <Link
-                  href={link.field_list_of_links_link.url}
+                  fullAreaLink
+                  href={link.field_list_of_links_link.full_url}
                   text={link.field_list_of_links_link.title}
                 />
               </h3>
@@ -46,7 +47,7 @@ function ListOfLinks(props: ListOfLinksProps): JSX.Element {
         ))}
       </div>
     </div>
-  );
+  )
 }
 
-export default ListOfLinks;
+export default ListOfLinks
