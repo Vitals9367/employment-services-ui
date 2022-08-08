@@ -11,7 +11,7 @@ const publicRuntimeConfig = {
 }
 
 const serverRuntimeConfig = {
-  REVALIDATE_TIME: 20, //seconds
+  REVALIDATE_TIME: 60, //seconds
   ELASTICSEARCH_URL: process.env.ELASTICSEARCH_URL,
   elasticsearch_password: process.env.elasticsearch_password,
   elasticsearch_certificate: process.env.elasticsearch_certificate,
