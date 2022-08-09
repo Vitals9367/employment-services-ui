@@ -17,21 +17,24 @@ import DateTime from './DateTime'
 import styles from './events.module.scss'
 
 interface EventListProps {
+  pageType?: string
   field_title: string
   field_events_list_short: boolean
   field_event_tag_filter: string[]
   field_events_list_desc:  DrupalFormattedText
 }
 
-export function EventList(props: EventListProps): JSX.Element {
+export function EventList({ pageType, ...props }: EventListProps): JSX.Element {
   const { field_title, field_events_list_short, field_event_tag_filter: tags, field_events_list_desc } = props
   const { t } = useTranslation()
   const fetcher = () => getEvents({ tags })
   const { locale, asPath } = useRouter()
-  const { data: events, error } = useSWR(
+  const { data, error } = useSWR(
     `/${locale}/${asPath}`,
     fetcher
   )
+
+  const events = data && pageType === 'basic' ? data.slice(0, 2) : data
 
   return (
     <div className='component'>
@@ -51,7 +54,7 @@ export function EventList(props: EventListProps): JSX.Element {
       }
       <div className={`${styles.eventList} ${field_events_list_short && styles.short}`}>
         { events && events.map((event: any, key: any) => (
-          <div className={styles.eventCard} key={key}>
+          <div className={`${styles.eventCard} event-card`} key={key}>
             <Linkbox
               className={styles.linkBox}
               linkboxAriaLabel="List of links Linkbox"

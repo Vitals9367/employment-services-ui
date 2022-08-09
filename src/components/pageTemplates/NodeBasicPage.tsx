@@ -25,7 +25,7 @@ function NodeBasicPage({ node, sidebar, ...props }: NodeBasicPageProps): JSX.Ele
               <div className='lead-in'>{field_lead_in}</div>
             )}
             {field_content?.length > 0 && (
-              <ContentMapper content={node.field_content}/>
+              <ContentMapper content={node.field_content} pageType='basic' />
             )}
           </div>
           <div className="sidebar col col-4 flex-order-first">
