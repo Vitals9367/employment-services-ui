@@ -295,9 +295,10 @@ h5, .h5,
     margin-left: var(--spacing-s);
     margin-right: var(--spacing-s);
   }
-
+  // for basic page's narrower content region.
   .content-region .link-item,
-  .content-region .link-box {
+  .content-region .link-box,
+  .content-region .event-card {
     width: calc(50% - var(--spacing-l));
   }
 }

@@ -12,10 +12,11 @@ import Quote from '@/components/quote/Quote'
 
 
 interface ContentMapperProps {
-  content: any
+  content: any,
+  pageType?: string
 }
 
-export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.Element {
+export function ContentMapper({ content, pageType, ...props }: ContentMapperProps): JSX.Element {
  // console.log('content: ', content)
 
   return content.map((item: any) => {
@@ -69,7 +70,7 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
           return null
         }
         if (item.field_events_list_short) {
-          return <EventList {...item} key={key} />
+          return <EventList {...item} pageType={pageType} key={key} />
         }
         return <EventListWithFilters {...item} key={key} />
 

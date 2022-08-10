@@ -24,7 +24,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
     <article>
       <Container className="container">
         <div className="columns">
-          <div className="content-region col-12">
+          <div className="col-12">
             <div className={styles.eventHero}>
               <div className={styles.imageContainer}>
                 <Image
@@ -41,7 +41,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                 <div className={styles.location}><IconLocation />{field_location}</div>
               </div>
             </div>
-            <div className={styles.contentContainer}>
+            <div className={`${styles.contentContainer} content-region`}>
               {field_text?.processed && 
               <HtmlBlock field_text={field_text} />
               }
