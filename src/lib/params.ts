@@ -84,7 +84,8 @@ const getPageQueryParams = () =>
       'field_content',
       'field_lead_in',
       'field_metatags',
-      'field_notification'
+      'field_notification',
+      'field_hide_sidebar'
     ])
     .addInclude([
       'field_content.field_accordion_items.field_accordion_item_content',
