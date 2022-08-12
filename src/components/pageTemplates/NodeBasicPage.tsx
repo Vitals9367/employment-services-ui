@@ -17,7 +17,7 @@ function NodeBasicPage({ node, sidebar, ...props }: NodeBasicPageProps): JSX.Ele
       <Container className="container">
         <div className="columns">
           {/*<div className="content-region col col-8 flex-grow">*/}
-          <div className={`content-region col ${field_hide_sidebar ? "col-12" : "col-8 "} flex-grow`}>
+          <div className={`content-region col col-8${!field_hide_sidebar ? " flex-grow" : "" }`}>
             {field_notification?.length > 0 && (
               <ContentMapper content={node.field_notification}/>
             )}
