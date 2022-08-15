@@ -13,6 +13,7 @@ export interface Node extends DrupalNode {
   field_lead_in?: string
   field_content: any
   field_notification: any
+  field_lower_content: any
   field_hide_sidebar: boolean
 }
 

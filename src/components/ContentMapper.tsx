@@ -9,6 +9,7 @@ import { EventList, EventListWithFilters } from '@/components/events/EventList'
 import NewsList from '@/components/news/NewsList'
 import ParagraphImage from '@/components/paragraphImage/ParagraphImage'
 import Quote from '@/components/quote/Quote'
+import SujoEmbedded from '@/components/sujoEmbedded/sujoEmbedded'
 
 
 interface ContentMapperProps {
@@ -98,6 +99,12 @@ export function ContentMapper({ content, pageType, ...props }: ContentMapperProp
           return null
         }
         return <Quote {...item} key={key} />
+
+      case CONTENT_TYPES.SUJO_EMBEDDED:
+        if (typeof item.field_training !== 'boolean') {
+          return null
+        }
+        return <SujoEmbedded {...item} key={key} />
 
       default:
         console.log('unmapped type: ', type)

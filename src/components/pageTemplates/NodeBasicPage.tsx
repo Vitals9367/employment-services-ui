@@ -10,7 +10,7 @@ interface NodeBasicPageProps {
 
 function NodeBasicPage({ node, sidebar, ...props }: NodeBasicPageProps): JSX.Element {
   // console.log({node})
-  const { title, field_lead_in, field_content, field_notification, field_hide_sidebar } = node
+  const { title, field_lead_in, field_content, field_notification, field_hide_sidebar, field_lower_content } = node
 
   return (
     <article>
@@ -37,6 +37,9 @@ function NodeBasicPage({ node, sidebar, ...props }: NodeBasicPageProps): JSX.Ele
         </div>
         <div className="columns">
           <div className="lower-content-region col col-12">
+            {field_lower_content ?.length > 0 && (
+              <ContentMapper content={node.field_lower_content} pageType='basic' />
+            )}
           </div>
         </div>
       </Container>
