@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
 function SujoEmbedded(props: {field_training: boolean }): JSX.Element {
-  const { field_training } = props;
+  const { field_training } = props
 
   return (
     <div>
@@ -17,7 +17,7 @@ function SujoEmbedded(props: {field_training: boolean }): JSX.Element {
         frameBorder="0"
       />
     </div>
-  );
+  )
 }
 
-export default SujoEmbedded;
+export default SujoEmbedded
