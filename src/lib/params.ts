@@ -85,16 +85,21 @@ const getPageQueryParams = () =>
       'field_lead_in',
       'field_metatags',
       'field_notification',
+      'field_lower_content',
       'field_hide_sidebar'
     ])
     .addInclude([
       'field_content.field_accordion_items.field_accordion_item_content',
+      'field_lower_content'
     ])
     .addFields(CONTENT_TYPES.TEXT, [
       'field_text'
     ])
     .addFields(CONTENT_TYPES.SUBHEADING, [
       'field_subheading_title'
+    ])
+    .addFields(CONTENT_TYPES.SUJO_EMBEDDED, [
+      'field_training'
     ])
     .getQueryObject()
 
