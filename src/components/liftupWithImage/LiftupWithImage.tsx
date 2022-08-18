@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import { Container } from 'hds-react'
+
 import { DrupalFormattedText } from '@/lib/types'
 import { getImageUrl } from '@/lib/helpers'
 import HtmlBlock from '@/components/HtmlBlock'
@@ -42,25 +44,27 @@ function LiftupWithImage(props: LiftupWithImageProps): JSX.Element {
 
   return (
     <div className='component'>
-      <div className={`${styles.liftupWithImage} ${textAlign} ${imageFullWidth}`}>
-        <div className={styles.liftupWithImageImage}>
-          <Image
-            src={imageStyleUri}
-            alt={field_liftup_with_image_image?.field_media_image?.resourceIdObjMeta?.alt}
-            layout='responsive'
-            width={`${imageWidth}px`}
-            height={`${imageHeight}px`}
-          />
-        </div>
-        <div className={styles.liftupWithImageContentWrapper}>
-          <div className={`${styles.liftupWithImageContent}  ${contentBgSecondary}`}>
-            <h2>{field_liftup_with_image_title}</h2>
-            { field_liftup_with_image_desc.processed &&
-              <HtmlBlock field_text={field_liftup_with_image_desc} />
-            }
+      <Container className='container'>
+        <div className={`${styles.liftupWithImage} ${textAlign} ${imageFullWidth}`}>
+          <div className={styles.liftupWithImageImage}>
+            <Image
+              src={imageStyleUri}
+              alt={field_liftup_with_image_image?.field_media_image?.resourceIdObjMeta?.alt}
+              layout='responsive'
+              width={`${imageWidth}px`}
+              height={`${imageHeight}px`}
+            />
+          </div>
+          <div className={styles.liftupWithImageContentWrapper}>
+            <div className={`${styles.liftupWithImageContent}  ${contentBgSecondary}`}>
+              <h2>{field_liftup_with_image_title}</h2>
+              { field_liftup_with_image_desc.processed &&
+                <HtmlBlock field_text={field_liftup_with_image_desc} />
+              }
+            </div>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   )
 }
