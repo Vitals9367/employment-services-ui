@@ -92,7 +92,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   const { tree: themes } = await getMenu('additional-languages', locale, defaultLocale)
   const { tree: footerNav } = await getMenu('footer', locale, defaultLocale)
 
-  const breadcrumb = getBreadCrumb(menuItems, node?.path.alias, node?.title)
+  const breadcrumb = getBreadCrumb(menuItems, node?.path.alias, node?.title, node?.type)
 
   return {
     props: {

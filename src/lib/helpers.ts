@@ -51,22 +51,48 @@ export async function getLanguageLinks(node: DrupalNode): Promise<Object> {
   return langLinks
 }
 
-export const getBreadCrumb = (menuItems: DrupalMenuLinkContent[], path: string, title: string): BreadcrumbContent[] => {
+export const getBreadCrumb = (menuItems: DrupalMenuLinkContent[], path: string, title: string, type: string): BreadcrumbContent[] => {
   const page = menuItems.find(({ url }) => url === path)
+  // Breadcrumb object for pages without menu attachment
+  let newPage: any = {
+    id: 'current_page_crumb',
+    title: title,
+    url: path,
+    parent: ''
+  }
+
   // Pages that are not in menus always get a breadcrumb.
   if (!page) {
-    return [{
-      id: 'current_page_crumb',
-      title: title,
-      url: path
-    }]
+    // Custom breadcrumb for Event pages
+    if (type !== 'node--event') {
+      return [newPage]
+    }
+
+    // Read parent from the page path
+    const parentPath = path.substring(0, path.lastIndexOf('/'))
+    // Load parent menu object
+    const parentPage = menuItems.find(({ url }) => url.includes(parentPath))
+
+    // Event page doesn't have parent
+    if (!parentPage?.id) {
+      return [newPage]
+    }
+
+    // Create parent id for the page
+    newPage.parent = parentPage.id
   }
+
   // Landing pages don't need breadcrumb.
   if (page?.parent === '') {
     return []
   }
-  const breadcrumbs: BreadcrumbContent[] = [page]
-  let parentItem = menuItems.find(({ id }) => id === page?.parent)
+
+  // Create handle for the page object based on above
+  const pageHandle: any = newPage.parent !== '' ? newPage : page
+
+  const breadcrumbs: BreadcrumbContent[] = [pageHandle]
+  let parentItem = menuItems.find(({ id }) => id === pageHandle.parent)
+
   if (parentItem) {
     breadcrumbs.push(parentItem)
     // This should always exit early and never infloop.
