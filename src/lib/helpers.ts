@@ -1,5 +1,6 @@
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { DrupalMenuLinkContent, DrupalNode, getResource } from "next-drupal"
+import { Node } from '@/lib/types'
 import getConfig from 'next/config'
 
 import { i18n } from "next-i18next.config"
@@ -84,4 +85,64 @@ export const deleteCookie = (event: any, name: string, history: any) => {
   event.preventDefault()
   document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`
   history.go(0)
+}
+
+export const getTitle = (node: Node, suffix: String) => {
+  let title = node.field_metatags?.title ? node.field_metatags.title : node.title
+  return suffix ? title + " | " + suffix : title
+}
+
+export const getDescription = (node: Node) => {
+  if (node.field_metatags?.description) {
+    return node.field_metatags.description
+  }
+
+  switch (node.type) {
+    case 'node--page':
+      return node.field_lead_in
+
+    case 'node--landing_page':
+      if (!node.field_hero?.field_hero_desc) {
+        break
+      }
+      return node.field_hero.field_hero_desc.processed.replace(/(<([^>]+)>)/gi, "")
+
+    case 'node--event':
+      if (!node?.field_short_description) {
+        break
+      }
+      return node.field_short_description.processed.replace(/(<([^>]+)>)/gi, "")
+
+    case 'node--article':
+      if (!node?.field_lead) {
+        break
+      }
+      return node.field_lead
+
+    default:
+      break
+  }
+
+  return ''
+}
+
+export const getDefaultImage = (node: Node) => {
+  switch (node.type) {
+    case 'node--event':
+      if (!node?.field_image_url) {
+        break
+      }
+      return node.field_image_url
+
+    case 'node--landing_page':
+      if (!node?.field_hero) {
+        break
+      }
+      return node.field_hero.field_custom_hero_image?.field_media_image?.image_style_uri?.['hero']
+
+    default:
+      break
+  }
+
+  return process.env.NEXT_PUBLIC_SITE_URL + "/tyollisyyspalvelut.png"
 }

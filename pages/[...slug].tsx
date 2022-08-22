@@ -22,9 +22,9 @@ import { Node } from '@/lib/types'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getQueryParamsFor } from '@/lib/params'
 import { NavProps, FooterProps } from "@/lib/types"
-import { getBreadCrumb, getLanguageLinks } from '@/lib/helpers'
+import { getBreadCrumb, getDefaultImage, getDescription, getLanguageLinks, getTitle } from '@/lib/helpers'
 import { useReactAndShare } from '@/hooks/useAnalytics'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 interface PageProps {
   node: Node
@@ -117,6 +117,8 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 export default function Page({ node, nav, footer }: PageProps) {
   const router = useRouter()
   const [cookieConsent] = useState<string>(getCookieConsentValue('tyollisyyspalvelut_cookie_consent'))
+  const { t } = useTranslation('common')
+  useReactAndShare(cookieConsent, router.locale, node && getTitle(node, t('site_title')))
 
   if (!router.isFallback && !node?.id) {
     return <ErrorPage statusCode={404} />
@@ -124,17 +126,15 @@ export default function Page({ node, nav, footer }: PageProps) {
 
   if (!node) return null
 
-  const { t } = useTranslation('common')
-  const metaTitle = node.field_metatags?.title ? node.field_metatags.title : node.title
-  const metaDescription = node.field_metatags?.description ? node.field_metatags.description : node.field_lead_in
+  const metaTitle = getTitle(node, t('site_title'))
+  const metaDescription = getDescription(node)
   const metaUrl = process.env.NEXT_PUBLIC_SITE_URL + router.asPath
-  const metaImage = node?.field_image_url ? node.field_image_url : process.env.NEXT_PUBLIC_SITE_URL + "/tyollisyyspalvelut.png"
-  useReactAndShare(cookieConsent, router.locale, metaTitle)
+  const metaImage = getDefaultImage(node)
 
   return (
     <Layout header={nav} footer={footer}>
       <Head>
-        <title>{metaTitle} | {t('site_title')}</title>
+        <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
         <meta property="og:title" content={metaTitle} />
         <meta property="og:description" content={metaDescription} />
