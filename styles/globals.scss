@@ -304,10 +304,6 @@ h5, .h5,
 }
 
 @media (min-width: $breakpoint-m) {
-  .content-region .link-box {
-    width: calc(33.33% - var(--spacing-l));
-  }
-
   main h1, main .h1 {
     font-size: var(--fontsize-heading-xl);
     line-height: var(--lineheight-m);
@@ -378,9 +374,5 @@ h5, .h5,
 
   .col-12 {
     width: 100%;
-  }
-
-  .content-region .link-box {
-    width: calc(33.33% - var(--spacing-l));
   }
 }
