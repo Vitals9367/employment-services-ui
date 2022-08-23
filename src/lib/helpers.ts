@@ -87,12 +87,12 @@ export const deleteCookie = (event: any, name: string, history: any) => {
   history.go(0)
 }
 
-export const getTitle = (node: Node, suffix: String) => {
+export const getTitle = (node: Node, suffix: String): string => {
   let title = node.field_metatags?.title ? node.field_metatags.title : node.title
-  return suffix ? title + " | " + suffix : title
+  return suffix ? `${title} | ${suffix}` : title
 }
 
-export const getDescription = (node: Node) => {
+export const getDescription = (node: Node): any => {
   if (node.field_metatags?.description) {
     return node.field_metatags.description
   }
@@ -126,7 +126,7 @@ export const getDescription = (node: Node) => {
   return ''
 }
 
-export const getDefaultImage = (node: Node) => {
+export const getDefaultImage = (node: Node): string => {
   switch (node.type) {
     case 'node--event':
       if (!node?.field_image_url) {
