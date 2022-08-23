@@ -22,8 +22,9 @@ import { Node } from '@/lib/types'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getQueryParamsFor } from '@/lib/params'
 import { NavProps, FooterProps } from "@/lib/types"
-import { getBreadCrumb, getLanguageLinks } from '@/lib/helpers'
+import { getBreadCrumb, getDefaultImage, getDescription, getLanguageLinks, getTitle } from '@/lib/helpers'
 import { useReactAndShare } from '@/hooks/useAnalytics'
+import { useTranslation } from "next-i18next";
 
 interface PageProps {
   node: Node
@@ -116,7 +117,8 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 export default function Page({ node, nav, footer }: PageProps) {
   const router = useRouter()
   const [cookieConsent] = useState<string>(getCookieConsentValue('tyollisyyspalvelut_cookie_consent'))
-  useReactAndShare(cookieConsent, router.locale, node && node.title)
+  const { t } = useTranslation('common')
+  useReactAndShare(cookieConsent, router.locale, node && getTitle(node, t('site_title')))
 
   if (!router.isFallback && !node?.id) {
     return <ErrorPage statusCode={404} />
@@ -124,12 +126,21 @@ export default function Page({ node, nav, footer }: PageProps) {
 
   if (!node) return null
 
+  const metaTitle = getTitle(node, t('site_title'))
+  const metaDescription = getDescription(node)
+  const metaUrl = process.env.NEXT_PUBLIC_SITE_URL + router.asPath
+  const metaImage = getDefaultImage(node)
+
   return (
     <Layout header={nav} footer={footer}>
       <Head>
-        <title>{node.title}</title>
-        <meta name="description" content="A Next.js site powered by a Drupal backend."
-        />
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription} />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={metaUrl} />
+        <meta property="og:image" content={metaImage} />
       </Head>
       { node.type === NODE_TYPES.PAGE && (
         <NodeBasicPage node={node} sidebar={nav} />

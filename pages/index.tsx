@@ -12,6 +12,9 @@ import { Layout } from '@/components/layout/Layout'
 import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
 import { Node, NavProps, FooterProps } from '@/lib/types'
 import { getQueryParamsFor } from '@/lib/params'
+import { useTranslation } from "next-i18next";
+import { getDefaultImage, getDescription, getTitle } from "@/lib/helpers";
+import Head from "next/head";
 
 interface HomePageProps {
   node: Node
@@ -62,10 +65,25 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 }
 
 export default function HomePage({ node, nav, footer }: HomePageProps) {
+  const { t } = useTranslation('common')
   if (!node) return <ErrorPage statusCode={404} />
+
+  const metaTitle = getTitle(node, t('site_title'))
+  const metaDescription = getDescription(node)
+  const metaUrl = process.env.NEXT_PUBLIC_SITE_URL
+  const metaImage = getDefaultImage(node)
 
   return (
     <Layout header={nav} footer={footer}>
+      <Head>
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription} />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={metaUrl} />
+        <meta property="og:image" content={metaImage} />
+      </Head>
       <NodeLandingPage node={node} />
     </Layout>
   )

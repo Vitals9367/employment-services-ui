@@ -151,7 +151,8 @@ export const baseEventQueryParams = () =>
       'field_image_name',
       'field_image_alt',
       'field_external_links',
-      'field_info_url'
+      'field_info_url',
+      'field_short_description'
     ])
 
 const getEventPageQueryParams = () =>
