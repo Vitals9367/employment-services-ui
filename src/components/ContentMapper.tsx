@@ -1,3 +1,5 @@
+import { Container } from 'hds-react'
+
 import HtmlBlock from '@/components/HtmlBlock'
 import { CONTENT_TYPES } from '@/lib/drupalApiTypes'
 import ListOfLinks from '@/components/listOfLinks/ListOfLinks'
@@ -29,7 +31,13 @@ export function ContentMapper({ content, pageType, ...props }: ContentMapperProp
         if (!item?.field_text?.processed) {
           return null
         }
-        return <HtmlBlock {...item} key={key} />
+        return (
+          <div className='component' key={key}>
+            <Container className='container'>
+              <HtmlBlock {...item} key={key} />
+            </Container>
+          </div>
+        )
 
       case CONTENT_TYPES.ACCORDION:
         if (!item?.field_accordion_items) {
@@ -62,7 +70,9 @@ export function ContentMapper({ content, pageType, ...props }: ContentMapperProp
         }
         return (
           <div className='component' key={key}>
-            <h2>{item.field_subheading_title}</h2>
+            <Container className='container'>
+              <h2>{item.field_subheading_title}</h2>
+            </Container>
           </div>
         )
 

@@ -4,7 +4,7 @@ import useSWRInfinite from 'swr/infinite'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, IconArrowRight } from 'hds-react'
+import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, IconArrowRight, Container } from 'hds-react'
 
 import { DrupalFormattedText, EventState } from '@/lib/types'
 import { getEvents, getEventsSearch } from '@/lib/client-api'
@@ -21,11 +21,15 @@ interface EventListProps {
   field_title: string
   field_events_list_short: boolean
   field_event_tag_filter: string[]
+  field_background_color: {
+    field_css_name: string
+  } | null
   field_events_list_desc:  DrupalFormattedText
 }
 
 export function EventList({ pageType, ...props }: EventListProps): JSX.Element {
-  const { field_title, field_events_list_short, field_event_tag_filter: tags, field_events_list_desc } = props
+  const { field_title, field_events_list_short, field_event_tag_filter: tags, field_background_color, field_events_list_desc } = props
+  const bgColor = field_background_color?.field_css_name || 'white'
   const { t } = useTranslation()
   const fetcher = () => getEvents({ tags })
   const { locale, asPath } = useRouter()
@@ -37,50 +41,52 @@ export function EventList({ pageType, ...props }: EventListProps): JSX.Element {
   const events = data && pageType === 'basic' ? data.slice(0, 2) : data
 
   return (
-    <div className='component'>
-      <div className={styles.eventListTitleArea}>
-        {field_title &&
-          <h2>{field_title}</h2>
-        }
-        {field_events_list_short &&
-          <a href={t('list.events_page_url')}>{t('list.show_all_events')} <IconArrowRight size="l" /></a>
-        }
-      </div>
-
-      {field_events_list_desc?.processed &&
-        <div className={styles.eventListDescription}>
-          <HtmlBlock field_text={field_events_list_desc} />
+    <div className='component' style={{ backgroundColor: `var(--color-${bgColor})` }}>
+      <Container className='container'>
+        <div className={styles.eventListTitleArea}>
+          {field_title &&
+            <h2>{field_title}</h2>
+          }
+          {field_events_list_short &&
+            <a href={t('list.events_page_url')}>{t('list.show_all_events')} <IconArrowRight size="l" /></a>
+          }
         </div>
-      }
-      <div className={`${styles.eventList} ${field_events_list_short && styles.short}`}>
-        { events && events.map((event: any, key: any) => (
-          <div className={`${styles.eventCard} event-card`} key={key}>
-            <Linkbox
-              className={styles.linkBox}
-              linkboxAriaLabel="List of links Linkbox"
-              linkAriaLabel="Linkbox link"
-              key={key}
-              href={`${t('list.events_page_url')}${getPath(event.path.alias)}`}
-              withBorder
-            >
-              <Image
-                src={event.field_image_url}
-                alt=''
-                layout='responsive'
-                objectFit='cover'
-                width={384}
-                height={158}
-              />
-              <div className={styles.eventCardContent}>
-                {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
-                <DateTime startTime={event.field_start_time} endTime={event.field_end_time} />
-                <h3>{event.title}</h3>
-                <p>{event.field_location}</p>
-              </div>
-            </Linkbox>
+
+        {field_events_list_desc?.processed &&
+          <div className={styles.eventListDescription}>
+            <HtmlBlock field_text={field_events_list_desc} />
           </div>
-        ))}
-      </div>
+        }
+        <div className={`${styles.eventList} ${field_events_list_short && styles.short}`}>
+          { events && events.map((event: any, key: any) => (
+            <div className={`${styles.eventCard} event-card`} key={key}>
+              <Linkbox
+                className={styles.linkBox}
+                linkboxAriaLabel="List of links Linkbox"
+                linkAriaLabel="Linkbox link"
+                key={key}
+                href={`${t('list.events_page_url')}${getPath(event.path.alias)}`}
+                withBorder
+              >
+                <Image
+                  src={event.field_image_url}
+                  alt=''
+                  layout='responsive'
+                  objectFit='cover'
+                  width={384}
+                  height={158}
+                />
+                <div className={styles.eventCardContent}>
+                  {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
+                  <DateTime startTime={event.field_start_time} endTime={event.field_end_time} />
+                  <h3>{event.title}</h3>
+                  <p>{event.field_location}</p>
+                </div>
+              </Linkbox>
+            </div>
+          ))}
+        </div>
+      </Container>
     </div>
   )
 }
@@ -131,85 +137,87 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
 
   return (
     <div className='component'>
-      {field_title &&
-        <h2>{field_title}</h2>
-      }
-      {field_events_list_desc?.processed &&
-        <div className={styles.eventListDescription}>
-          <HtmlBlock field_text={field_events_list_desc} />
-        </div>
-      }
-      <div className={styles.results}>
-        {filter !== t('search.clear') ? `${filteredEvents?.total} / ${total} ${resultsText}` : `${total} ${resultsText}`}
-      </div>
-      <div className={styles.filter}>{t('search.filter')}</div>
-      <div className={styles.filterTags}>
-        {finalTags && Object.values(finalTags).map((tag: any, i: number) => (
-          tag === t('search.clear') ? (
-            <HDSButton
-              key={`tagFilter-${i}`}
-              variant="supplementary"
-              iconLeft={<IconCrossCircle />}
-              className={styles.supplementary}
-              onClick={() => {setFilter(tag)}}
-            >
-              {tag}
-            </HDSButton>
-          )
-          : (
-            <HDSButton
-              key={`tagFilter-${i}`}
-              className={filter === tag ? styles.selected: styles.filterTag}
-              onClick={() => {setFilter(tag.replace(' ', '_'))}}
-            >
-              {tag}
-            </HDSButton>
-          )
-        ))}
-      </div>
-      <div className={styles.eventList}>
-        { filteredEvents?.events && filteredEvents.events.map((event: any, key: any) => (
-          <div className={styles.eventCard} key={key}>
-            <Linkbox
-              className={styles.linkBox}
-              linkboxAriaLabel="List of links Linkbox"
-              linkAriaLabel="Linkbox link"
-              key={key}
-              href={`${t('list.events_page_url')}${getPath(event.url[0])}`}
-              withBorder
-            >
-              <Image
-                src={event.field_image_url[0]}
-                alt={event.field_image_alt[0]}
-                layout='responsive'
-                objectFit='cover'
-                width={384}
-                height={158}
-              />
-              <div className={styles.eventCardContent}>
-                {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
-                <DateTime startTime={event.field_start_time[0]} endTime={event.field_end_time[0]} />
-                <h3>{event.title[0]}</h3>
-                <p>{event.field_location[0]}</p>
-              </div>
-            </Linkbox>
+      <Container className='container'>
+        {field_title &&
+          <h2>{field_title}</h2>
+        }
+        {field_events_list_desc?.processed &&
+          <div className={styles.eventListDescription}>
+            <HtmlBlock field_text={field_events_list_desc} />
           </div>
-        ))}
-      </div>
-      {events && total > events.length && (
-        <div className={styles.loadMore}>
-          <HDSButton
-            variant='supplementary'
-            iconRight={<IconPlus />}
-            style={{ background: 'none' }}
-            onClick={() => {
-              setSize(size + 1)
-            }}
-          >
-            {loadMoreText}
-          </HDSButton>
+        }
+        <div className={styles.results}>
+          {filter !== t('search.clear') ? `${filteredEvents?.total} / ${total} ${resultsText}` : `${total} ${resultsText}`}
         </div>
-      )}
+        <div className={styles.filter}>{t('search.filter')}</div>
+        <div className={styles.filterTags}>
+          {finalTags && Object.values(finalTags).map((tag: any, i: number) => (
+            tag === t('search.clear') ? (
+              <HDSButton
+                key={`tagFilter-${i}`}
+                variant="supplementary"
+                iconLeft={<IconCrossCircle />}
+                className={styles.supplementary}
+                onClick={() => {setFilter(tag)}}
+              >
+                {tag}
+              </HDSButton>
+            )
+            : (
+              <HDSButton
+                key={`tagFilter-${i}`}
+                className={filter === tag ? styles.selected: styles.filterTag}
+                onClick={() => {setFilter(tag.replace(' ', '_'))}}
+              >
+                {tag}
+              </HDSButton>
+            )
+          ))}
+        </div>
+        <div className={styles.eventList}>
+          { filteredEvents?.events && filteredEvents.events.map((event: any, key: any) => (
+            <div className={styles.eventCard} key={key}>
+              <Linkbox
+                className={styles.linkBox}
+                linkboxAriaLabel="List of links Linkbox"
+                linkAriaLabel="Linkbox link"
+                key={key}
+                href={`${t('list.events_page_url')}${getPath(event.url[0])}`}
+                withBorder
+              >
+                <Image
+                  src={event.field_image_url[0]}
+                  alt={event.field_image_alt[0]}
+                  layout='responsive'
+                  objectFit='cover'
+                  width={384}
+                  height={158}
+                />
+                <div className={styles.eventCardContent}>
+                  {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
+                  <DateTime startTime={event.field_start_time[0]} endTime={event.field_end_time[0]} />
+                  <h3>{event.title[0]}</h3>
+                  <p>{event.field_location[0]}</p>
+                </div>
+              </Linkbox>
+            </div>
+          ))}
+        </div>
+        {events && total > events.length && (
+          <div className={styles.loadMore}>
+            <HDSButton
+              variant='supplementary'
+              iconRight={<IconPlus />}
+              style={{ background: 'none' }}
+              onClick={() => {
+                setSize(size + 1)
+              }}
+            >
+              {loadMoreText}
+            </HDSButton>
+          </div>
+        )}
+      </Container>
     </div>
   )
 }

@@ -137,6 +137,11 @@ h5, .h5,
 .container {
   margin-left: auto;
   margin-right: auto;
+
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .columns {
@@ -161,9 +166,22 @@ h5, .h5,
   order: -1;
 }
 
+.content-region {
+  .component {
+    margin-top: var(--spacing-4-xl);
+    margin-bottom: var(--spacing-4-xl);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
 .component {
-  margin-top: var(--spacing-4-xl);
-  margin-bottom: var(--spacing-4-xl);
+  padding-top: var(--spacing-4-xl);
+  padding-bottom: var(--spacing-4-xl);
+
+  h2 {
+    margin-top: 0;
+  }
 }
 
 .lead-in {
@@ -187,6 +205,8 @@ h5, .h5,
 .rns {
   border-top: 1px solid var(--color-black-90);
   border-bottom: 1px solid var(--color-black-90);
+  margin-top: var(--spacing-4-xl);
+  margin-bottom: var(--spacing-4-xl);
 
   .rns-plugin {
     margin: var(--spacing-l) 0;

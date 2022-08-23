@@ -36,12 +36,13 @@ const baseQueryParams = () =>
     .addFields(CONTENT_TYPES.LIST_OF_LINKS, [
       'field_list_of_links_design',
       'field_list_of_links_links',
-      'field_list_of_links_title'
+      'field_list_of_links_title',
+      'field_background_color'
     ])
     .addFields(CONTENT_TYPES.LIST_OF_LINKS_ITEM, [
       'field_list_of_links_link',
       'field_list_of_links_image',
-      'field_list_of_links_desc'
+      'field_list_of_links_desc',
     ])
     .addFields(CONTENT_TYPES.LIFTUP_WITH_IMAGE, [
       'field_liftup_with_image_title',
@@ -49,7 +50,10 @@ const baseQueryParams = () =>
       'field_liftup_with_image_design',
       'field_liftup_with_image_desc'
     ])
-    .addFields(CONTENT_TYPES.COLOR, ['name', 'field_css_name'])
+    .addFields(CONTENT_TYPES.COLOR, [
+      'name',
+      'field_css_name'
+    ])
     .addFields(CONTENT_TYPES.FILE, [
       'uri',
       'url',
@@ -127,6 +131,7 @@ const getLandingPageQueryParams = () =>
       'field_title',
       'field_events_list_short',
       'field_event_tag_filter',
+      'field_background_color',
       'field_events_list_desc'
     ])
     .addFields(CONTENT_TYPES.NEWS_LIST, [

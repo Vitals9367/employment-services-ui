@@ -1,4 +1,6 @@
 import Image from "next/image"
+import { Container } from 'hds-react'
+
 import { DrupalFormattedText } from "@/lib/types"
 import { getImageUrl } from "@/lib/helpers"
 
@@ -28,31 +30,33 @@ function ParagraphImage(props: ParagraphImageProps): JSX.Element {
   //TODO: Add translation functionality to caption and photographer
   return (
     <div className="component">
-      <div className={`${styles.paragraphImage}`}>
-        <figure>
-          <Image
-            src={imageStyleUri}
-            alt={field_image?.field_media_image?.resourceIdObjMeta?.alt}
-            layout={"responsive"}
-            width={
-              field_original_aspect_ratio
-                ? `${field_image?.field_media_image?.resourceIdObjMeta?.width}px`
-                : `${imageWidth}px`
-            }
-            height={
-              field_original_aspect_ratio
-                ? `${field_image?.field_media_image?.resourceIdObjMeta?.height}px`
-                : `${imageHeight}px`
-            }
-          />
-          {field_image_caption && (
-            <figcaption className={styles.imgCaption}>{field_image_caption}</figcaption>
-          )}
-          {field_image?.field_photographer && (
-            <figcaption className={styles.imgCaption}>{field_image.field_photographer}</figcaption>
-          )}
-        </figure>
-      </div>
+      <Container className='container'>
+        <div className={`${styles.paragraphImage}`}>
+          <figure>
+            <Image
+              src={imageStyleUri}
+              alt={field_image?.field_media_image?.resourceIdObjMeta?.alt}
+              layout={"responsive"}
+              width={
+                field_original_aspect_ratio
+                  ? `${field_image?.field_media_image?.resourceIdObjMeta?.width}px`
+                  : `${imageWidth}px`
+              }
+              height={
+                field_original_aspect_ratio
+                  ? `${field_image?.field_media_image?.resourceIdObjMeta?.height}px`
+                  : `${imageHeight}px`
+              }
+            />
+            {field_image_caption && (
+              <figcaption className={styles.imgCaption}>{field_image_caption}</figcaption>
+            )}
+            {field_image?.field_photographer && (
+              <figcaption className={styles.imgCaption}>{field_image.field_photographer}</figcaption>
+            )}
+          </figure>
+        </div>
+      </Container>
     </div>
   )
 }
