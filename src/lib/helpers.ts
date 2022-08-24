@@ -23,11 +23,10 @@ export const getImageUrl = (url: string): string => {
   return url ? `https://${host}${url}` : ''
 }
 
-export const getPath = (url: string) => {
-  const urlParts =  url.split('/')
-  const newsPath = urlParts.pop()
+export const getPath = (url: string): string => {
+  const newUrl = new URL(url)
 
-  return (`/${newsPath}`)
+  return (newUrl.pathname)
 }
 
 export async function getLanguageLinks(node: DrupalNode): Promise<Object> {

@@ -65,7 +65,7 @@ export function EventList({ pageType, ...props }: EventListProps): JSX.Element {
                 linkboxAriaLabel="List of links Linkbox"
                 linkAriaLabel="Linkbox link"
                 key={key}
-                href={`${t('list.events_page_url')}${getPath(event.path.alias)}`}
+                href={event.path.alias}
                 withBorder
               >
                 <Image
@@ -182,7 +182,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
                 linkboxAriaLabel="List of links Linkbox"
                 linkAriaLabel="Linkbox link"
                 key={key}
-                href={`${t('list.events_page_url')}${getPath(event.url[0])}`}
+                href=getPath(event.url[0])}
                 withBorder
               >
                 <Image

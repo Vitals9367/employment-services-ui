@@ -60,7 +60,7 @@ function NewsList(props: NewsListProps): JSX.Element {
         <div className={`${styles.newsList} ${field_short_list && styles.short}`}>
           { paginatedNews && paginatedNews.map((news: any, key: any) => (
             <div className={styles.newsCard} key={key}>
-                <a href={`${t('list.news_url')}${getPath(news.path.alias)}`}>
+                <a href={news.path.alias}>
                   <h3 className={styles.newsTitle}>{news.title}</h3>
                 </a>
               <p className={styles.articleDate}><time dateTime={news.created}>{`${dateformat(news.created, 'dd.mm.yyyy')}`}</time></p>
