@@ -182,7 +182,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
                 linkboxAriaLabel="List of links Linkbox"
                 linkAriaLabel="Linkbox link"
                 key={key}
-                href=getPath(event.url[0])}
+                href={getPath(event.url[0])}
                 withBorder
               >
                 <Image
