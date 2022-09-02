@@ -87,6 +87,7 @@ function Header(header:NavProps): JSX.Element {
       skipToContentLabel="Skip to main content"
       title={t('site_name')}
       titleAriaLabel={t('navigation.title_aria_label')}
+      titleUrl={locale === 'fi' ? '/' : `/${locale}`}
       className={classNames(styles.navigation, styles.zover)}
     >
       <Navigation.Row>
