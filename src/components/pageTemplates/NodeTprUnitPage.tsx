@@ -25,7 +25,13 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
 
   const Block = (block: BlockProps): JSX.Element => {
     const { title, icon, content } = block
-    const IconTag = icon
+    const iconsMap :any = {
+      'location': IconLocation,
+      'clock': IconClock,
+      'phone': IconPhone,
+      'envelope': IconEnvelope
+    }
+    const IconTag = iconsMap[icon]
 
     return (
       <div className={styles.sidebarBlock}>
@@ -65,10 +71,10 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
                 <span>{t('unit.contact_information')}</span>
               </div>
 
-              <Block title={t('unit.visit_address')} icon={IconLocation} content={[address.address_line1, address.postal_code, address.locality]} />
-              <Block title={t('unit.open_hours')} icon={IconClock} content={[opening_hours[0].value]} />
-              <Block title={t('unit.phone_service')} icon={IconPhone} content={[`${phone} (${call_charge_info.value})`]} />
-              <Block title={t('unit.postal_address')} icon={IconEnvelope} content={[address_postal]} />
+              <Block title={t('unit.visit_address')} icon="location" content={[address.address_line1, address.postal_code, address.locality]} />
+              <Block title={t('unit.open_hours')} icon="clock" content={[opening_hours[0].value]} />
+              <Block title={t('unit.phone_service')} icon="phone" content={[`${phone} (${call_charge_info.value})`]} />
+              <Block title={t('unit.postal_address')} icon="envelope" content={[address_postal]} />
             </div>
           </div>
         </div>

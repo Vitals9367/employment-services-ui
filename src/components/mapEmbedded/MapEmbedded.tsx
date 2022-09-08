@@ -17,7 +17,7 @@ export default function MapEmbedded({id} :MapEmbeddedProps):JSX.Element {
       </div>
       <iframe src={mapLink} width="100%" height="400px" />
       <div className={styles.mapFooter}>
-          <a href={mapLink} target="_blank">{t('map.new_window')}</a> <IconLinkExternal aria-hidden="true" />
+          <a href={mapLink} target="_blank" rel="noreferrer">{t('map.new_window')}</a> <IconLinkExternal aria-hidden="true" />
       </div>
     </div>
   )
