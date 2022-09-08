@@ -53,5 +53,16 @@
     "goup": "Back to the top",
     "cookies": "Cookie policy",
     "cookie_settings": "Cookie settings"
+  },
+  "map": {
+    "location": "Location",
+    "new_window": "Open the map on a new window"
+  },
+  "unit": {
+    "contact_information": "Contact information",
+    "visit_address": "Visiting address",
+    "open_hours": "Open hours",
+    "phone_service": "Phone service",
+    "postal_address": "Postal address"
   }
 }

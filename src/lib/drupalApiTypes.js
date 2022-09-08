@@ -2,7 +2,8 @@ export const NODE_TYPES = {
   PAGE: 'node--page',
   LANDING_PAGE: 'node--landing_page',
   EVENT: 'node--event',
-  ARTICLE: 'node--article'
+  ARTICLE: 'node--article',
+  TPR_UNIT: 'tpr_unit--tpr_unit'
 }
 
 export const CONTENT_TYPES = {

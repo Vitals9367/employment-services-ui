@@ -53,5 +53,16 @@
     "goup": "Till början av sidan",
     "cookies": "Policy för kakor",
     "cookie_settings": "Cookie inställningar"
+  },
+  "map": {
+    "location": "Plats",
+    "new_window": "Öppna kartan i ett nytt fönster"
+  },
+  "unit": {
+    "contact_information": "Kontaktinformation",
+    "visit_address": "Besöksadress",
+    "open_hours": "Öppettider",
+    "phone_service": "Telefontjänst",
+    "postal_address": "Postadress"
   }
 }

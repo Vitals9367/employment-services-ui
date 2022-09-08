@@ -1,0 +1,37 @@
+.sidebarContent {
+  margin-top: 50px;
+
+  .contentTitle {
+    border-bottom: 2px solid var(--color-black);
+    padding: var(--spacing-2-xs) 0;
+    margin-bottom: 24px;
+
+    span {
+      font-size: var(--fontsize-heading-s);
+      font-weight: 500;
+    }
+  }
+}
+
+.sidebarBlock {
+  display: flex;
+  column-gap: 15px;
+  border-bottom: 2px solid var(--color-silver);
+  margin-bottom: 24px;
+
+  .blockContent {
+
+  }
+
+  .icon {
+
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
+  .content {
+
+  }
+}

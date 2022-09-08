@@ -201,6 +201,32 @@ const getArticlePageQueryParams = () =>
   baseArticlePageQueryParams()
     .getQueryObject()
 
+export const baseTprUnitQueryParams = () =>
+  new DrupalJsonApiParams()
+    .addFields(NODE_TYPES.TPR_UNIT, [
+      'id',
+      'path',
+      'name',
+      'description',
+      'field_metatags',
+      'field_content',
+      'field_lower_content',
+      'phone',
+      'address',
+      'address_postal',
+      'opening_hours',
+      'call_charge_info',
+      'service_map_embed'
+    ])
+    .addInclude([
+    'field_content',
+    'field_lower_content',
+  ])
+
+const getTprUnitQueryParams = () =>
+  baseTprUnitQueryParams()
+    .getQueryObject()
+
 export const getQueryParamsFor = (type: string) => {
   switch (type) {
     case NODE_TYPES.PAGE:
@@ -217,5 +243,10 @@ export const getQueryParamsFor = (type: string) => {
   switch (type) {
     case NODE_TYPES.ARTICLE:
       return getArticlePageQueryParams()
+  }
+
+  switch (type) {
+    case NODE_TYPES.TPR_UNIT:
+      return getTprUnitQueryParams()
   }
 }

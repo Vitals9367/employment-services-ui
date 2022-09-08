@@ -53,5 +53,17 @@
     "goup": "Sivun alkuun",
     "cookies": "Evästekäytäntö",
     "cookie_settings": "Evästeasetukset"
+  },
+  "map": {
+    "location": "Sijainti",
+    "new_window": "Avaa kartta uuteen ikkunaan"
+  },
+  "unit": {
+    "contact_information": "Yhteystiedot",
+    "visit_address": "Käyntiosoite",
+    "open_hours": "Aukioloajat",
+    "phone_service": "Puhelinpalvelu",
+    "postal_address": "Postiosoite"
   }
+
 }
