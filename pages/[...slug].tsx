@@ -14,6 +14,7 @@ import NodeBasicPage from '@/components/pageTemplates/NodeBasicPage'
 import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
 import NodeEventPage from '@/components/pageTemplates/NodeEventPage'
 import NodeArticlePage from '@/components/pageTemplates/NodeArticlePage'
+import NodeTprUnitPage from "@/components/pageTemplates/NodeTprUnitPage"
 import { Layout } from '@/components/layout/Layout'
 
 import { getDrupalClient } from "@/lib/drupal-client"
@@ -24,7 +25,7 @@ import { getQueryParamsFor } from '@/lib/params'
 import { NavProps, FooterProps } from "@/lib/types"
 import { getBreadCrumb, getDefaultImage, getDescription, getLanguageLinks, getTitle } from '@/lib/helpers'
 import { useReactAndShare } from '@/hooks/useAnalytics'
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next"
 
 interface PageProps {
   node: Node
@@ -153,6 +154,9 @@ export default function Page({ node, nav, footer }: PageProps) {
       )}
       { node.type === NODE_TYPES.ARTICLE && (
         <NodeArticlePage node={node} />
+      )}
+      { node.type === NODE_TYPES.TPR_UNIT && (
+        <NodeTprUnitPage node={node} sidebar={nav} />
       )}
       {/* React and share */}
       <Container className="container">

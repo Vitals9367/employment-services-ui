@@ -15,6 +15,12 @@ export interface Node extends DrupalNode {
   field_notification: any
   field_lower_content: any
   field_hide_sidebar: boolean
+  name: string
+  description: DrupalFormattedText
+  phone: any
+  address: any
+  address_postal: string
+  opening_hours: any
 }
 
 type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text'
@@ -56,6 +62,17 @@ export interface EventData {
   field_end_time: number
   field_location: string
   field_tags: string[]
+}
+
+export interface TprUnitData extends DrupalNode {
+  name: string
+  description: DrupalFormattedText
+  field_content: any
+  field_lower_content: any
+  phone: any
+  address: any
+  address_postal: string
+  opening_hours: any
 }
 
 export interface EventState {

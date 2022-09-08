@@ -52,6 +52,12 @@ export async function getLanguageLinks(node: DrupalNode): Promise<Object> {
 
 export const getBreadCrumb = (menuItems: DrupalMenuLinkContent[], path: string, title: string, type: string): BreadcrumbContent[] => {
   const page = menuItems.find(({ url }) => url === path)
+
+  // TPR Unit may not have menu attachment
+  if (!page && (type === 'tpr_unit--tpr_unit')) {
+    return []
+  }
+
   // Breadcrumb object for pages without menu attachment
   let newPage: any = {
     id: 'current_page_crumb',
@@ -113,7 +119,8 @@ export const deleteCookie = (event: any, name: string, history: any) => {
 }
 
 export const getTitle = (node: Node, suffix: String): string => {
-  let title = node.field_metatags?.title ? node.field_metatags.title : node.title
+  const pageTitle = node.name ? node.name : node.title
+  const title = node.field_metatags?.title ? node.field_metatags.title : pageTitle
   return suffix ? `${title} | ${suffix}` : title
 }
 
@@ -143,6 +150,12 @@ export const getDescription = (node: Node): any => {
         break
       }
       return node.field_lead
+
+    case 'tpr_unit--tpr_unit':
+      if (!node?.description) {
+        break
+      }
+      return node.description.value
 
     default:
       break
