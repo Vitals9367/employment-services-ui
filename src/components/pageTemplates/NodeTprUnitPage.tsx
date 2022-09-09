@@ -7,8 +7,6 @@ import HtmlBlock from "@/components/HtmlBlock"
 import MapEmbedded from "@/components/mapEmbedded/MapEmbedded"
 import parse from "html-react-parser"
 import styles from './tprUnitPage.module.scss'
-import { getMediaImageUrl } from "@/lib/helpers";
-import Image from "next/image";
 import MediaImage from "@/components/mediaImage/MediaImage";
 
 interface NodeTprUnitProps {
