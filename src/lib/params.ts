@@ -207,6 +207,7 @@ export const baseTprUnitQueryParams = () =>
       'id',
       'path',
       'name',
+      'name_override',
       'description',
       'field_metatags',
       'field_content',
@@ -216,11 +217,14 @@ export const baseTprUnitQueryParams = () =>
       'address_postal',
       'opening_hours',
       'call_charge_info',
-      'service_map_embed'
+      'service_map_embed',
+      'picture_url_override',
+      'picture_url'
     ])
     .addInclude([
     'field_content',
     'field_lower_content',
+    'picture_url_override.field_media_image'
   ])
 
 const getTprUnitQueryParams = () =>
