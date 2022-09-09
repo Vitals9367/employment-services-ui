@@ -1,12 +1,15 @@
 import { Container, IconClock, IconLocation, IconPhone, IconEnvelope } from 'hds-react'
 import { useTranslation } from 'next-i18next'
-import {NavProps, Node, TprUnitData } from '@/lib/types'
+import { NavProps, TprUnitData } from '@/lib/types'
 import ContentMapper from '@/components/ContentMapper'
 import { Sidebar } from '@/components/navigation/Sidebar'
 import HtmlBlock from "@/components/HtmlBlock"
 import MapEmbedded from "@/components/mapEmbedded/MapEmbedded"
 import parse from "html-react-parser"
 import styles from './tprUnitPage.module.scss'
+import { getMediaImageUrl } from "@/lib/helpers";
+import Image from "next/image";
+import MediaImage from "@/components/mediaImage/MediaImage";
 
 interface NodeTprUnitProps {
   node: TprUnitData
@@ -20,8 +23,25 @@ interface BlockProps {
 }
 
 function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Element {
-  const { name, description, field_content, field_lower_content, phone, address, address_postal, opening_hours, call_charge_info, service_map_embed } = node
+  const {
+    name,
+    name_override,
+    description,
+    field_content,
+    field_lower_content,
+    phone,
+    address,
+    address_postal,
+    opening_hours,
+    call_charge_info,
+    service_map_embed,
+    picture_url,
+    picture_url_override
+  } = node
+
   const { t } = useTranslation('common')
+  const pageTitle = name_override ? name_override : name
+  const picture = picture_url_override ? picture_url_override : picture_url
 
   const Block = (block: BlockProps): JSX.Element => {
     const { title, icon, content } = block
@@ -53,10 +73,17 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
       <Container className="container">
         <div className="columns">
           <div className="content-region col col-8 flex-grow">
-            <h1>{name}</h1>
+            <h1>{pageTitle}</h1>
             {description && (
               <div className='lead-in'><HtmlBlock field_text={description} /></div>
             )}
+
+            {picture && (
+              <div className={styles.unitImage}>
+                <MediaImage media={picture} />
+              </div>
+            )}
+
             {field_content?.length > 0 && (
               <ContentMapper content={field_content} pageType='tpr_unit' />
             )}
@@ -71,10 +98,21 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
                 <span>{t('unit.contact_information')}</span>
               </div>
 
-              <Block title={t('unit.visit_address')} icon="location" content={[address.address_line1, address.postal_code, address.locality]} />
-              <Block title={t('unit.open_hours')} icon="clock" content={[opening_hours[0].value]} />
-              <Block title={t('unit.phone_service')} icon="phone" content={[`${phone} (${call_charge_info.value})`]} />
-              <Block title={t('unit.postal_address')} icon="envelope" content={[address_postal]} />
+              {address.address_line1 && (
+                <Block title={t('unit.visit_address')} icon="location" content={[address.address_line1, address.postal_code, address.locality]} />
+              )}
+
+              {opening_hours && (
+                <Block title={t('unit.open_hours')} icon="clock" content={[opening_hours[0].value]} />
+              )}
+
+              {phone && (
+                <Block title={t('unit.phone_service')} icon="phone" content={[`${phone} (${call_charge_info.value})`]} />
+              )}
+
+              {address_postal && (
+                <Block title={t('unit.postal_address')} icon="envelope" content={[address_postal]} />
+              )}
             </div>
           </div>
         </div>

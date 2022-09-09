@@ -16,11 +16,14 @@ export interface Node extends DrupalNode {
   field_lower_content: any
   field_hide_sidebar: boolean
   name: string
+  name_override: string
   description: DrupalFormattedText
   phone: any
   address: any
   address_postal: string
   opening_hours: any
+  picture_url: string
+  picture_url_override: any
 }
 
 type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text'
@@ -66,6 +69,7 @@ export interface EventData {
 
 export interface TprUnitData extends DrupalNode {
   name: string
+  name_override: string
   description: DrupalFormattedText
   field_content: any
   field_lower_content: any
@@ -73,6 +77,8 @@ export interface TprUnitData extends DrupalNode {
   address: any
   address_postal: string
   opening_hours: any
+  picture_url: string
+  picture_url_override: any
 }
 
 export interface EventState {

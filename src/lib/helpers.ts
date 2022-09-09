@@ -119,7 +119,12 @@ export const deleteCookie = (event: any, name: string, history: any) => {
 }
 
 export const getTitle = (node: Node, suffix: String): string => {
-  const pageTitle = node.name ? node.name : node.title
+  let pageTitle = node.title
+
+  if (node.type === 'tpr_unit--tpr_unit') {
+    pageTitle = node.name_override ? node.name_override : node.name
+  }
+
   const title = node.field_metatags?.title ? node.field_metatags.title : pageTitle
   return suffix ? `${title} | ${suffix}` : title
 }
