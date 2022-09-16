@@ -1,7 +1,7 @@
 import { getResourceCollection } from 'next-drupal'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { Tags } from '@/lib/types'
-import { baseEventQueryParams, baseArticlePageQueryParams } from './params'
+import { baseEventQueryParams, baseArticlePageQueryParams, baseTprUnitQueryParams } from './params'
 
 export const getEvents = async ({ tags }: Tags) => {
   const eventParams = () =>
@@ -36,4 +36,12 @@ export const getNews = async (shortList: string) => {
       .addSort('created', 'DESC')
 
   return await getResourceCollection(NODE_TYPES.ARTICLE, { params: newsParams().getQueryObject() })
+}
+
+
+export const getUnits = async () => {
+  const unitsParams = () =>
+    baseTprUnitQueryParams()
+
+  return await getResourceCollection(NODE_TYPES.TPR_UNIT, { params: unitsParams().getQueryObject() })
 }

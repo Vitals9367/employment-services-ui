@@ -12,6 +12,7 @@ import NewsList from '@/components/news/NewsList'
 import ParagraphImage from '@/components/paragraphImage/ParagraphImage'
 import Quote from '@/components/quote/Quote'
 import SujoEmbedded from '@/components/sujoEmbedded/sujoEmbedded'
+import UnitsList from './tprUnits/UnitsList'
 import MapEmbedded from './mapEmbedded/MapEmbedded'
 
 
@@ -116,9 +117,15 @@ export function ContentMapper({ content, pageType, ...props }: ContentMapperProp
           return null
         }
         return <SujoEmbedded {...item} key={key} />
-      
+
       case CONTENT_TYPES.UNIT_MAP:
         return <MapEmbedded {...props} key={key} />
+
+      case CONTENT_TYPES.UNITS_LIST:
+        if (!item?.id) {
+          return null
+        }
+        return <UnitsList key={key} />
 
       default:
         console.log('unmapped type: ', type)
