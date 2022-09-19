@@ -6,7 +6,7 @@
 
     .card {
         border: 2px solid var(--color-black);
-        margin-bottom: 25px;
+        margin-bottom: var(--spacing-m);
         height: 260px;
     }
 
@@ -23,7 +23,7 @@
         display: flex;
         flex-flow: column wrap;
         width: 66.66%;
-        padding: 25px;
+        padding: var(--spacing-m);
 
         h3 {
             margin: 0;
@@ -41,6 +41,14 @@
             span {
                 padding-right: 10px;
             }
+
+            svg {
+                transition: transform .2s linear;
+              }
+            
+              &:hover svg {
+                transform: translateX(0.5rem);
+              }
         }
     }
 }
