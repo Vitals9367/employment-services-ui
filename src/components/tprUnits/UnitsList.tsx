@@ -31,7 +31,7 @@ function UnitsList(): JSX.Element {
                   {`${unit.address.postal_code ? unit.address.postal_code + ', ' : ''}`}
                   {`${unit.address.locality ? unit.address.locality : ''}`}
                 </p>
-                <div className={styles.link}><a href={unit.path.alias}><span>{t('unit.more_info')}</span><IconArrowRight /></a></div>
+                <div className={styles.link}><a href={unit.path.alias}></a><span>{t('unit.more_info')}</span><IconArrowRight /></div>
               </div>
             </div>
           ))}

@@ -13,6 +13,7 @@
         border: 2px solid var(--color-black);
         margin-bottom: var(--spacing-m);
         min-height: 260px;
+        position: relative;
     }
 
     .media {
@@ -42,14 +43,20 @@
 
         .link {
             margin-top: auto;
+            display: flex;
 
             @media (min-width: $breakpoint-l) {
                 align-self: flex-end;
             }
 
             a {
-                font-weight: 500;
-                display: flex;
+                font-weight: 500; 
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                
             }
 
             span {
