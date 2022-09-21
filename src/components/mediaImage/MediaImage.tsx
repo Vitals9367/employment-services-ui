@@ -8,7 +8,7 @@ interface MediaImageProps {
 export default function MediaImage({media} :MediaImageProps) :JSX.Element {
 
   if (media === null) {
-    return (<></>)
+    return (<img src={process.env.NEXT_PUBLIC_SITE_URL + "/tyollisyyspalvelut.png"} alt="" />)
   }
 
   if (typeof media === "object") {
