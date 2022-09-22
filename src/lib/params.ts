@@ -208,7 +208,7 @@ export const baseTprUnitQueryParams = () =>
       'field_lower_content',
       'picture_url_override.field_media_image',
       'field_content.field_accordion_items.field_accordion_item_content',
-      'field_content.field_list_of_links_links.field_list_of_links_image.field_media_image'
+      'field_content.field_list_of_links_links.field_list_of_links_image.field_media_image',
     ])
     .addFields(NODE_TYPES.TPR_UNIT, [
       'id',
@@ -260,6 +260,9 @@ export const baseTprUnitQueryParams = () =>
       'field_event_tag_filter',
       'field_background_color',
       'field_events_list_desc'
+    ])
+    .addFields(CONTENT_TYPES.UNIT_MAP, [
+      'field_unit_map'
     ])
 
 const getTprUnitQueryParams = () =>
