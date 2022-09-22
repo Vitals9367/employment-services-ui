@@ -2,13 +2,10 @@ import { IconLocation, IconLinkExternal } from "hds-react"
 import { useTranslation } from "next-i18next"
 import styles from "./MapEmbedded.module.scss"
 
-interface MapEmbeddedProps {
-  id: string
-}
-
-export default function MapEmbedded({id} :MapEmbeddedProps):JSX.Element {
+export default function MapEmbedded({...props}):JSX.Element {
   const { t } = useTranslation('common')
-  const mapLink = `https://palvelukartta.hel.fi/fi/embed/unit/${id}`
+  const { mapId } = props
+  const mapLink = `https://palvelukartta.hel.fi/fi/embed/unit/${mapId}`
 
   return (
     <div className={styles.mapEmbedded}>

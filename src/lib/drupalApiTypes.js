@@ -29,5 +29,6 @@ export const CONTENT_TYPES = {
   NEWS_LIST: 'paragraph--news_list',
   QUOTE: 'paragraph--quote',
   SUJO_EMBEDDED: 'paragraph--sujo_embedded',
-  COLOR: 'taxonomy_term--colors'
+  COLOR: 'taxonomy_term--colors',
+  UNIT_MAP: 'paragraph--unit_map'
 }

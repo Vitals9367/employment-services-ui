@@ -203,6 +203,13 @@ const getArticlePageQueryParams = () =>
 
 export const baseTprUnitQueryParams = () =>
   new DrupalJsonApiParams()
+    .addInclude([
+      'field_content',
+      'field_lower_content',
+      'picture_url_override.field_media_image',
+      'field_content.field_accordion_items.field_accordion_item_content',
+      'field_content.field_list_of_links_links.field_list_of_links_image.field_media_image',
+    ])
     .addFields(NODE_TYPES.TPR_UNIT, [
       'id',
       'path',
@@ -220,12 +227,43 @@ export const baseTprUnitQueryParams = () =>
       'service_map_embed',
       'picture_url_override',
       'picture_url'
+    ])    
+    .addFields(CONTENT_TYPES.ACCORDION, [
+      'field_accordion_type',
+      'field_accordion_title_level',
+      'field_accordion_text',
+      'field_accordion_title',
+      'field_accordion_items'
     ])
-    .addInclude([
-    'field_content',
-    'field_lower_content',
-    'picture_url_override.field_media_image'
-  ])
+    .addFields(CONTENT_TYPES.ACCORDION_ITEM, [
+      'field_accordion_item_content',
+      'field_accordion_item_heading'
+    ])    
+    .addFields(CONTENT_TYPES.LIST_OF_LINKS, [
+      'field_list_of_links_design',
+      'field_list_of_links_links',
+      'field_list_of_links_title',
+      'field_background_color'
+    ])
+    .addFields(CONTENT_TYPES.LIST_OF_LINKS_ITEM, [
+      'field_list_of_links_link',
+      'field_list_of_links_image',
+      'field_list_of_links_desc',
+    ])
+    .addFields(CONTENT_TYPES.NOTIFICATION, [
+      'field_notification_title',
+      'field_notification_description'
+    ])
+    .addFields(CONTENT_TYPES.EVENTS_LIST, [
+      'field_title',
+      'field_events_list_short',
+      'field_event_tag_filter',
+      'field_background_color',
+      'field_events_list_desc'
+    ])
+    .addFields(CONTENT_TYPES.UNIT_MAP, [
+      'field_unit_map'
+    ])
 
 const getTprUnitQueryParams = () =>
   baseTprUnitQueryParams()

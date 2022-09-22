@@ -17,6 +17,10 @@ export const isExternalLink = (href: string): boolean|undefined => {
 }
 
 export const getImageUrl = (url: string): string => {
+  if (!url) {
+    return ''
+  }
+
   const host = getConfig().publicRuntimeConfig.NEXT_IMAGE_DOMAIN
   url = url.substring(url.indexOf('/sites'))
 

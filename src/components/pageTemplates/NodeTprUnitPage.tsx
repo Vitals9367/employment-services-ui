@@ -4,7 +4,6 @@ import { NavProps, TprUnitData } from '@/lib/types'
 import ContentMapper from '@/components/ContentMapper'
 import { Sidebar } from '@/components/navigation/Sidebar'
 import HtmlBlock from "@/components/HtmlBlock"
-import MapEmbedded from "@/components/mapEmbedded/MapEmbedded"
 import parse from "html-react-parser"
 import styles from './tprUnitPage.module.scss'
 import MediaImage from "@/components/mediaImage/MediaImage";
@@ -83,10 +82,9 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
             )}
 
             {field_content?.length > 0 && (
-              <ContentMapper content={field_content} pageType='tpr_unit' />
+              <ContentMapper content={field_content} pageType='tpr_unit' {...{mapId: service_map_embed}} />
             )}
-
-            <MapEmbedded id={service_map_embed} />
+            
           </div>
           <div className="sidebar col col-4 flex-order-first">
             <Sidebar {...sidebar}/>
