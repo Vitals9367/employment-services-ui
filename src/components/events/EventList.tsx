@@ -38,7 +38,7 @@ export function EventList({ pageType, ...props }: EventListProps): JSX.Element {
     fetcher
   )
 
-  const events = data && pageType === 'basic' ? data.slice(0, 2) : data
+  const events = data && pageType === 'basic' || 'tpr_unit' ? data.slice(0, 2) : data
 
   return (
     <div className='component' style={{ backgroundColor: `var(--color-${bgColor})` }}>
