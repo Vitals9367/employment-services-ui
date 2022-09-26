@@ -7,6 +7,7 @@ import { Tags } from '@/lib/types'
 const EVENTS_URL = '/api/events'
 const EVENTS_SEARCH_URL = '/api/events-search'
 const NEWS_URL = '/api/news'
+const UNITS_URL = '/api/units'
 
 export const getEvents = async (tags: Tags) => {
   const { data } = await axios(`${EVENTS_URL}`, {
@@ -27,6 +28,11 @@ export const getEventsSearch = async (eventsIndex: number) => {
 
 export const getNews = async (shortList: boolean) => {
   const { data } = await axios(`${NEWS_URL}`, { params: { limit: shortList } })
+  return data
+}
+
+export const getUnits = async () => {
+  const { data } = await axios(`${UNITS_URL}`)
   return data
 }
 

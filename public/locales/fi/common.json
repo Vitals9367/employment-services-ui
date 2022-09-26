@@ -63,7 +63,8 @@
     "visit_address": "Käyntiosoite",
     "open_hours": "Aukioloajat",
     "phone_service": "Puhelinpalvelu",
-    "postal_address": "Postiosoite"
+    "postal_address": "Postiosoite",
+    "more_info": "Katso aukioloajat ja yhteystiedot"
   }
 
 }
