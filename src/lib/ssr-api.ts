@@ -42,6 +42,8 @@ export const getNews = async (shortList: string) => {
 export const getUnits = async () => {
   const unitsParams = () =>
     baseTprUnitQueryParams()
+      .addFilter('menu_link', null, 'IS NOT NULL')
+      .addSort('name_override', 'ASC')
 
   return await getResourceCollection(NODE_TYPES.TPR_UNIT, { params: unitsParams().getQueryObject() })
 }
