@@ -24,6 +24,7 @@ export interface Node extends DrupalNode {
   opening_hours: any
   picture_url: string
   picture_url_override: any
+  drupal_internal__id: number
 }
 
 type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text'
@@ -56,6 +57,11 @@ export interface Tags {
   [key: string]: string | string[]
 }
 
+export interface EventsQueryParams {
+  tags?: string | string[],
+  locationId?: number | null
+}
+
 export interface EventData {
   title: string
   url: string
@@ -64,6 +70,7 @@ export interface EventData {
   field_start_time: number
   field_end_time: number
   field_location: string
+  field_location_id?: number
   field_tags: string[]
 }
 
@@ -79,6 +86,7 @@ export interface TprUnitData extends DrupalNode {
   opening_hours: any
   picture_url: string
   picture_url_override: any
+  drupal_internal__id: number
 }
 
 export interface EventState {

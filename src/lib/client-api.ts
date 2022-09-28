@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 
-import { Tags } from '@/lib/types'
+import { EventsQueryParams } from '@/lib/types'
 
 /** The Client API urls  */
 const EVENTS_URL = '/api/events'
@@ -9,10 +9,10 @@ const EVENTS_SEARCH_URL = '/api/events-search'
 const NEWS_URL = '/api/news'
 const UNITS_URL = '/api/units'
 
-export const getEvents = async (tags: Tags) => {
+export const getEvents = async (queryParams: EventsQueryParams) => {
   const { data } = await axios(`${EVENTS_URL}`, {
     params:
-      tags,
+      queryParams,
       paramsSerializer: params => {
         return qs.stringify(params, { arrayFormat: 'repeat' })
       }
