@@ -38,4 +38,8 @@
 
 .unitImage {
   margin-bottom: var(--spacing-xl);
+
+  img {
+    max-width: 100%;
+  }
 }
