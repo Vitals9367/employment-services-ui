@@ -226,7 +226,8 @@ export const baseTprUnitQueryParams = () =>
       'call_charge_info',
       'service_map_embed',
       'picture_url_override',
-      'picture_url'
+      'picture_url',
+      'drupal_internal__id'
     ])    
     .addFields(CONTENT_TYPES.ACCORDION, [
       'field_accordion_type',

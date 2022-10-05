@@ -19,9 +19,11 @@ import MapEmbedded from './mapEmbedded/MapEmbedded'
 interface ContentMapperProps {
   content: any,
   pageType?: string
+  mapId?: number | null
+  locationId?: string | null
 }
 
-export function ContentMapper({ content, pageType, ...props }: ContentMapperProps): JSX.Element {
+export function ContentMapper({ content, pageType, locationId, mapId, ...props }: ContentMapperProps): JSX.Element {
  // console.log('content: ', content)
 
   return content.map((item: any) => {
@@ -83,7 +85,7 @@ export function ContentMapper({ content, pageType, ...props }: ContentMapperProp
           return null
         }
         if (item.field_events_list_short) {
-          return <EventList {...item} pageType={pageType} key={key} />
+          return <EventList {...item} pageType={pageType} key={key} locationId={locationId}/>
         }
         return <EventListWithFilters {...item} key={key} />
 
@@ -119,7 +121,7 @@ export function ContentMapper({ content, pageType, ...props }: ContentMapperProp
         return <SujoEmbedded {...item} key={key} />
 
       case CONTENT_TYPES.UNIT_MAP:
-        return <MapEmbedded {...props} key={key} />
+        return <MapEmbedded mapId={mapId} {...item} key={key} />
 
       case CONTENT_TYPES.UNITS_LIST:
         if (!item?.id) {

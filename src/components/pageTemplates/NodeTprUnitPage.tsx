@@ -33,7 +33,8 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
     call_charge_info,
     service_map_embed,
     picture_url,
-    picture_url_override
+    picture_url_override,
+    drupal_internal__id
   } = node
 
   const { t } = useTranslation('common')
@@ -82,7 +83,7 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
             )}
 
             {field_content?.length > 0 && (
-              <ContentMapper content={field_content} pageType='tpr_unit' {...{mapId: service_map_embed}} />
+              <ContentMapper content={field_content} pageType='tpr_unit' locationId={drupal_internal__id} mapId={service_map_embed} />
             )}
             
           </div>
