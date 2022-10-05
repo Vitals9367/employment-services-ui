@@ -8,7 +8,7 @@ type Data = {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const query :any = req?.query
+  const query: any = req?.query
   const queryParams: EventsQueryParams = qs.parse(query)
 
   let events: any = []

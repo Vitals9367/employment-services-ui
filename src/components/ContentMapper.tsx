@@ -20,7 +20,7 @@ interface ContentMapperProps {
   content: any,
   pageType?: string
   mapId?: number | null
-  locationId?: number | null
+  locationId?: string | null
 }
 
 export function ContentMapper({ content, pageType, locationId, mapId, ...props }: ContentMapperProps): JSX.Element {

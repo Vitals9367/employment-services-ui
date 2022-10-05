@@ -15,7 +15,6 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
     const filteredEventParams = () =>
       eventParams()
         .addFilter('field_tags', tags, 'IN')
-        // @ts-ignore
         .addFilter('field_location_id', locationId)
         .getQueryObject()
 
@@ -34,7 +33,6 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
   if (locationId) {
     const filteredEventParams = () =>
       eventParams()
-        // @ts-ignore
         .addFilter('field_location_id', locationId)
         .getQueryObject()
 

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, IconArrowRight, Container } from 'hds-react'
 
-import {DrupalFormattedText, EventsQueryParams, EventState } from '@/lib/types'
+import { DrupalFormattedText, EventsQueryParams, EventState } from '@/lib/types'
 import { getEvents, getEventsSearch } from '@/lib/client-api'
 import { eventTags, getPath } from '@/lib/helpers'
 
@@ -25,7 +25,7 @@ interface EventListProps {
     field_css_name: string
   } | null
   field_events_list_desc:  DrupalFormattedText
-  locationId: number | null
+  locationId: string | null
 }
 
 export function EventList({ pageType, locationId, ...props }: EventListProps): JSX.Element {
@@ -33,7 +33,7 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
   const bgColor = field_background_color?.field_css_name || 'white'
   const { t } = useTranslation()
 
-  const queryParams :EventsQueryParams = {
+  const queryParams: EventsQueryParams = {
     tags: tags,
     locationId: pageType === 'tpr_unit' ? locationId : null
   }
