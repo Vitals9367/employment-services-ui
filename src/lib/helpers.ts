@@ -33,6 +33,15 @@ export const getPath = (url: string): string => {
   return (newUrl.pathname)
 }
 
+export const getPathAlias = (path: any): string => {
+  if (!path) {
+    return ''
+  }
+
+  return path.langcode === 'fi' ? path.alias : `/${path.langcode}${path.alias}`
+}
+
+
 export async function getLanguageLinks(node: DrupalNode): Promise<Object> {
   let params = new DrupalJsonApiParams().addFields(node.type, ['path']).getQueryObject()
   const uuid = node.id
