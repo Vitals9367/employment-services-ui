@@ -23,7 +23,7 @@ import { Node } from '@/lib/types'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getQueryParamsFor } from '@/lib/params'
 import { NavProps, FooterProps } from "@/lib/types"
-import { getBreadCrumb, getDefaultImage, getDescription, getLanguageLinks, getTitle } from '@/lib/helpers'
+import { getBreadCrumb, getDefaultImage, getDescription, getLanguageLinks, getPathAlias, getTitle } from '@/lib/helpers'
 import { useReactAndShare } from '@/hooks/useAnalytics'
 import { useTranslation } from "next-i18next"
 
@@ -93,7 +93,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   const { tree: themes } = await getMenu('additional-languages', locale, defaultLocale)
   const { tree: footerNav } = await getMenu('footer', locale, defaultLocale)
 
-  const breadcrumb = getBreadCrumb(menuItems, node?.path.alias, node?.title, node?.type)
+  const breadcrumb = getBreadCrumb(menuItems, getPathAlias(node?.path), node?.title, node?.type)
 
   return {
     props: {
