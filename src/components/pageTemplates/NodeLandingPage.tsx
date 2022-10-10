@@ -16,7 +16,7 @@ function NodeLandingPage({ node, ...props }: NodeLandingPageProps): JSX.Element 
         <Hero title={title} {...field_hero} />
       )}
       <div className="columns">
-        <div className="col-12">
+        <div className="content-region col-12">
         {field_notification?.length > 0 && (
             <ContentMapper content={node.field_notification}/>
           )}
