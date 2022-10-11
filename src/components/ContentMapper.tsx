@@ -21,9 +21,10 @@ interface ContentMapperProps {
   pageType?: string
   mapId?: number | null
   locationId?: string | null
+  langcode?: string
 }
 
-export function ContentMapper({ content, pageType, locationId, mapId, ...props }: ContentMapperProps): JSX.Element {
+export function ContentMapper({ content, pageType, locationId, mapId, langcode, ...props }: ContentMapperProps): JSX.Element {
  // console.log('content: ', content)
 
   return content.map((item: any) => {
@@ -93,7 +94,7 @@ export function ContentMapper({ content, pageType, locationId, mapId, ...props }
         if (!item?.id) {
           return null
         }
-        return <NewsList {...item} key={key} />
+        return <NewsList {...item} langcode={langcode} key={key} />
 
 
       case CONTENT_TYPES.LIFTUP_WITH_IMAGE:

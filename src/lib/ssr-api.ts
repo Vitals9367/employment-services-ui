@@ -1,4 +1,4 @@
-import { getResourceCollection } from 'next-drupal'
+import { getResourceCollection, Locale } from 'next-drupal'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { EventsQueryParams } from '@/lib/types'
 import { baseEventQueryParams, baseArticlePageQueryParams, baseTprUnitQueryParams } from './params'
@@ -42,21 +42,33 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
   return await getResourceCollection(NODE_TYPES.EVENT, { params: eventParams().getQueryObject() })
 }
 
-export const getNews = async (shortList: string) => {
+export const getNews = async (shortList: string, langcode: string) => {
+  const locale: Locale = langcode
+  const defaultLocale: Locale = 'fi'
+
   if (shortList === 'true') {
     const newsParamsLimited = () =>
       baseArticlePageQueryParams()
         .addSort('created', 'DESC')
         .addPageLimit(4)
 
-    return await getResourceCollection(NODE_TYPES.ARTICLE, { params: newsParamsLimited().getQueryObject() })
+    return await getResourceCollection(NODE_TYPES.ARTICLE, { 
+      params: newsParamsLimited().getQueryObject(),
+      locale,
+      defaultLocale
+    })
   }
 
   const newsParams = () =>
     baseArticlePageQueryParams()
       .addSort('created', 'DESC')
+      .addFilter('langcode', locale)
 
-  return await getResourceCollection(NODE_TYPES.ARTICLE, { params: newsParams().getQueryObject() })
+  return await getResourceCollection(NODE_TYPES.ARTICLE, { 
+    locale,
+    defaultLocale,
+    params: newsParams().getQueryObject() 
+  })
 }
 
 

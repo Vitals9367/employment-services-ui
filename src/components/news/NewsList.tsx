@@ -17,14 +17,15 @@ interface NewsListProps {
   field_title: string
   field_short_list: boolean
   field_news_list_desc: DrupalFormattedText
+  langcode: string
 }
 
 function NewsList(props: NewsListProps): JSX.Element {
-  const { field_title, field_short_list, field_news_list_desc } = props
+  const { field_title, field_short_list, field_news_list_desc, langcode } = props
   const { t } = useTranslation()
   const [newsIndex, setNewsIndex] = useState<number>(1)
   const [paginatedNews, setPaginatedNews] = useState<Node[]>([])
-  const fetcher = () => getNews(field_short_list)
+  const fetcher = () => getNews(field_short_list, langcode)
   const { data: news, error } = useSWR(
     `/news`,
     fetcher

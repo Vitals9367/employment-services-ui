@@ -8,7 +8,7 @@ interface NodeLandingPageProps {
 }
 
 function NodeLandingPage({ node, ...props }: NodeLandingPageProps): JSX.Element {
-  const { title, field_content, field_hero, field_notification} = node
+  const { title, field_content, field_hero, field_notification, langcode} = node
 
   return (
     <article>
@@ -26,7 +26,7 @@ function NodeLandingPage({ node, ...props }: NodeLandingPageProps): JSX.Element 
             </Container>
           )}
           {field_content?.length > 0 && (
-            <ContentMapper content={node.field_content}/>
+            <ContentMapper content={node.field_content} langcode={langcode}/>
           )}
         </div>
       </div>
