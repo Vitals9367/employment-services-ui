@@ -1,10 +1,12 @@
-import { getResourceCollection, Locale } from 'next-drupal'
+import { getResourceCollection, getResourceByPath, Locale, translatePath } from 'next-drupal'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { EventsQueryParams } from '@/lib/types'
 import { baseEventQueryParams, baseArticlePageQueryParams, baseTprUnitQueryParams } from './params'
 
 export const getEvents = async (queryParams: EventsQueryParams) => {
   const { tags, locationId } = queryParams
+  const defaultLocale: Locale = 'fi'
+  const locale: Locale = queryParams.locale != undefined ? queryParams.locale : defaultLocale
 
   let eventParams = () =>
     baseEventQueryParams()
@@ -18,7 +20,11 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
         .addFilter('field_location_id', locationId)
         .getQueryObject()
 
-    return await getResourceCollection(NODE_TYPES.EVENT, { params: filteredEventParams() })
+    return await getResourceCollection(NODE_TYPES.EVENT, { 
+      locale,
+      defaultLocale,
+      params: filteredEventParams() 
+    })
   }
 
   if (tags) {
@@ -27,7 +33,11 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
         .addFilter('field_tags', tags, 'IN')
         .getQueryObject()
 
-    return await getResourceCollection(NODE_TYPES.EVENT, { params: filteredEventParams() })
+    return await getResourceCollection(NODE_TYPES.EVENT, { 
+      locale,
+      defaultLocale,
+      params: filteredEventParams() 
+    })
   }
 
   if (locationId) {
@@ -36,14 +46,21 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
         .addFilter('field_location_id', locationId)
         .getQueryObject()
 
-    return await getResourceCollection(NODE_TYPES.EVENT, { params: filteredEventParams() })
+    return await getResourceCollection(NODE_TYPES.EVENT, { 
+      locale,
+      defaultLocale,
+      params: filteredEventParams() 
+    })
   }
 
-  return await getResourceCollection(NODE_TYPES.EVENT, { params: eventParams().getQueryObject() })
+  return await getResourceCollection(NODE_TYPES.EVENT, { 
+    locale,
+    defaultLocale,
+    params: eventParams().getQueryObject() 
+  })
 }
 
-export const getNews = async (shortList: string, langcode: string) => {
-  const locale: Locale = langcode
+export const getNews = async (shortList: string, locale: Locale) => {
   const defaultLocale: Locale = 'fi'
 
   if (shortList === 'true') {
@@ -79,4 +96,15 @@ export const getUnits = async () => {
       .addSort('name_override', 'ASC')
 
   return await getResourceCollection(NODE_TYPES.TPR_UNIT, { params: unitsParams().getQueryObject() })
+}
+
+/**
+ * @TODO These may be better solution to fetch translated path for Events.
+ */
+export const getByPath = async (path: string) => {
+  return await getResourceByPath(path)
+}
+
+export const getTranslatedPath = async (path: string) => {
+  return await translatePath(path)
 }

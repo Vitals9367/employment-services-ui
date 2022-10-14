@@ -2,6 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 
 import { EventsQueryParams } from '@/lib/types'
+import { Locale } from 'next-drupal'
 
 /** The Client API urls  */
 const EVENTS_URL = '/api/events'
@@ -26,8 +27,8 @@ export const getEventsSearch = async (eventsIndex: number) => {
   return data
 }
 
-export const getNews = async (shortList: boolean, langcode: string) => {
-  const { data } = await axios(`${NEWS_URL}`, { params: { limit: shortList, langcode: langcode } })
+export const getNews = async (shortList: boolean, locale: Locale) => {
+  const { data } = await axios(`${NEWS_URL}`, { params: { limit: shortList, locale: locale } })
   return data
 }
 
