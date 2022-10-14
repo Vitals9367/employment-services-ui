@@ -88,14 +88,18 @@ export const getNews = async (shortList: string, locale: Locale) => {
   })
 }
 
-
-export const getUnits = async () => {
+export const getUnits = async (locale: Locale) => {
+  const defaultLocale: Locale = 'fi'
+  
   const unitsParams = () =>
     baseTprUnitQueryParams()
       .addFilter('menu_link', null, 'IS NOT NULL')
       .addSort('name_override', 'ASC')
 
-  return await getResourceCollection(NODE_TYPES.TPR_UNIT, { params: unitsParams().getQueryObject() })
+  return await getResourceCollection(NODE_TYPES.TPR_UNIT, { 
+    locale,
+    defaultLocale,
+    params: unitsParams().getQueryObject() })
 }
 
 /**

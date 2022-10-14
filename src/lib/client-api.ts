@@ -32,8 +32,8 @@ export const getNews = async (shortList: boolean, locale: Locale) => {
   return data
 }
 
-export const getUnits = async () => {
-  const { data } = await axios(`${UNITS_URL}`)
+export const getUnits = async (locale: Locale) => {
+  const { data } = await axios(`${UNITS_URL}`, { params: { locale: locale } })
   return data
 }
 
