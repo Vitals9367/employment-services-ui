@@ -55,7 +55,7 @@ export const useReactAndShare = (
 
     const script = document.createElement("script")
     const resourceUrl = 'https://cdn.reactandshare.com/plugin/rns.js'
-    script.src = resourceUrl;
+    script.src = resourceUrl
     script.type = "text/javascript"
 
     window.rnsData = {

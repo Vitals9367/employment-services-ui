@@ -6,26 +6,25 @@ import { GetStaticPropsContext, GetStaticPathsContext, GetStaticPathsResult, Get
 import getConfig from 'next/config'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Locale } from "next-drupal"
-
-import { getCookieConsentValue } from "react-cookie-consent"
+import { useTranslation } from 'next-i18next'
+import { getCookieConsentValue } from 'react-cookie-consent'
 import { Container } from 'hds-react'
 
 import NodeBasicPage from '@/components/pageTemplates/NodeBasicPage'
 import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
 import NodeEventPage from '@/components/pageTemplates/NodeEventPage'
 import NodeArticlePage from '@/components/pageTemplates/NodeArticlePage'
-import NodeTprUnitPage from "@/components/pageTemplates/NodeTprUnitPage"
+import NodeTprUnitPage from '@/components/pageTemplates/NodeTprUnitPage'
 import { Layout } from '@/components/layout/Layout'
 
-import { getDrupalClient } from "@/lib/drupal-client"
+import { getDrupalClient } from '@/lib/drupal-client'
 import getMenu from '@/lib/get-menu'
 import { Node } from '@/lib/types'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getQueryParamsFor } from '@/lib/params'
-import { NavProps, FooterProps } from "@/lib/types"
+import { NavProps, FooterProps } from '@/lib/types'
 import { getBreadCrumb, getDefaultImage, getDescription, getLanguageLinks, getPathAlias, getTitle } from '@/lib/helpers'
 import { useReactAndShare } from '@/hooks/useAnalytics'
-import { useTranslation } from "next-i18next"
 
 interface PageProps {
   node: Node
