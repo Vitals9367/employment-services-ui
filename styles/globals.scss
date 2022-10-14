@@ -73,27 +73,8 @@ h5, .h5,
   line-height: var(--lineheight-m);
 }
 
-.content-region {
-  ul, ol {
-    margin-top: var(--spacing-l);
-    margin-bottom: var(--spacing-l);
-    padding-top: 0;
-    padding-left: var(--spacing-s);
-    list-style-position: outside;
-  }
-
-  li {
-    padding-left: var(--spacing-m);
-  }
-
-  ul li::marker {
-    color: var(--color-metro);
-  }
-
-  li li::marker {
-    color: var(--color-black-90);
-  }
-
+.content-region,
+.content-region-landing {
   a.link-internal,
   a.link-external,
   a[data-is-external="true"],
@@ -131,6 +112,28 @@ h5, .h5,
   .link-external:hover::after,
   a[data-is-external="true"]:hover::after {
     transform: translate(4px, -4px);
+  }
+}
+
+.content-region {
+  ul, ol {
+    margin-top: var(--spacing-l);
+    margin-bottom: var(--spacing-l);
+    padding-top: 0;
+    padding-left: var(--spacing-s);
+    list-style-position: outside;
+  }
+
+  li {
+    padding-left: var(--spacing-m);
+  }
+
+  ul li::marker {
+    color: var(--color-metro);
+  }
+
+  li li::marker {
+    color: var(--color-black-90);
   }
 }
 
