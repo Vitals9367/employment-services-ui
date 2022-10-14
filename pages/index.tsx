@@ -1,20 +1,25 @@
+import { useState } from 'react'
 import { GetStaticPropsContext, GetStaticPropsResult } from 'next'
 import { Locale } from 'next-drupal'
-
 import getConfig from 'next/config'
+import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { getCookieConsentValue } from 'react-cookie-consent'
+import Head from 'next/head';
+import { useTranslation } from 'next-i18next';
+import { Container } from 'hds-react'
 
-import { getDrupalClient } from "@/lib/drupal-client"
+import { getDrupalClient } from '@/lib/drupal-client'
 import getMenu from '@/lib/get-menu'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { Layout } from '@/components/layout/Layout'
 import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
 import { Node, NavProps, FooterProps } from '@/lib/types'
 import { getQueryParamsFor } from '@/lib/params'
-import { useTranslation } from "next-i18next";
-import { getDefaultImage, getDescription, getTitle } from "@/lib/helpers";
-import Head from "next/head";
+import { getDefaultImage, getDescription, getTitle } from '@/lib/helpers';
+import { useReactAndShare } from '@/hooks/useAnalytics'
+
 
 interface HomePageProps {
   node: Node
@@ -65,8 +70,16 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 }
 
 export default function HomePage({ node, nav, footer }: HomePageProps) {
+  const router = useRouter()
+  const [cookieConsent] = useState<string>(getCookieConsentValue('tyollisyyspalvelut_cookie_consent'))
   const { t } = useTranslation('common')
-  if (!node) return <ErrorPage statusCode={404} />
+  useReactAndShare(cookieConsent, router.locale, node && getTitle(node, t('site_title')))
+
+  if (!router.isFallback && !node?.id) {
+    return <ErrorPage statusCode={404} />
+  }
+
+  if (!node) return null
 
   const metaTitle = getTitle(node, t('site_title'))
   const metaDescription = getDescription(node)
@@ -85,6 +98,10 @@ export default function HomePage({ node, nav, footer }: HomePageProps) {
         <meta property="og:image" content={metaImage} />
       </Head>
       <NodeLandingPage node={node} />
+      {/* React and share */}
+      <Container className="container">
+        <div className="rns" />
+      </Container>
     </Layout>
   )
 }
