@@ -6,10 +6,13 @@ import { getUnits } from '@/lib/client-api'
 
 import MediaImage from '../mediaImage/MediaImage'
 import styles from './units.module.scss'
+import { getPathAlias } from '@/lib/helpers'
+import { useRouter } from 'next/router'
 
 function UnitsList(): JSX.Element {
   const { t } = useTranslation()
-  const fetcher = () => getUnits()
+  const { locale } = useRouter()
+  const fetcher = () => getUnits(locale != undefined ? locale : 'fi')
   const { data: units, error } = useSWR(
     `/units`,
     fetcher
@@ -31,7 +34,7 @@ function UnitsList(): JSX.Element {
                   {`${unit.address.postal_code ? unit.address.postal_code + ', ' : ''}`}
                   {`${unit.address.locality ? unit.address.locality : ''}`}
                 </p>
-                <div className={styles.link}><a href={unit.path.alias}></a><span>{t('unit.more_info')}</span><IconArrowRight /></div>
+                <div className={styles.link}><a href={getPathAlias(unit.path)}></a><span>{t('unit.more_info')}</span><IconArrowRight /></div>
               </div>
             </div>
           ))}

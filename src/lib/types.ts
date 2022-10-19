@@ -60,6 +60,7 @@ export interface Tags {
 export interface EventsQueryParams {
   tags?: string | string[],
   locationId?: string | null
+  locale?: Locale
 }
 
 export interface EventData {

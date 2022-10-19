@@ -8,7 +8,7 @@ import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, IconArrowRight
 
 import { DrupalFormattedText, EventsQueryParams, EventState } from '@/lib/types'
 import { getEvents, getEventsSearch } from '@/lib/client-api'
-import { eventTags, getPath } from '@/lib/helpers'
+import { eventTags, getPath, getPathAlias } from '@/lib/helpers'
 
 import HtmlBlock from '@/components/HtmlBlock'
 import TagList from './TagList'
@@ -32,14 +32,15 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
   const { field_title, field_events_list_short, field_event_tag_filter: tags, field_background_color, field_events_list_desc } = props
   const bgColor = field_background_color?.field_css_name || 'white'
   const { t } = useTranslation()
+  const { locale, asPath } = useRouter()
 
   const queryParams: EventsQueryParams = {
     tags: tags,
-    locationId: pageType === 'tpr_unit' ? locationId : null
+    locationId: pageType === 'tpr_unit' ? locationId : null,
+    locale: locale
   }
 
   const fetcher = () => getEvents(queryParams)
-  const { locale, asPath } = useRouter()
   const { data, error } = useSWR(
     `/${locale}/${asPath}`,
     fetcher
@@ -72,7 +73,7 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
                 linkboxAriaLabel="List of links Linkbox"
                 linkAriaLabel="Linkbox link"
                 key={key}
-                href={event.path.alias}
+                href={getPathAlias(event.path)}
                 withBorder
               >
                 <Image
@@ -105,6 +106,7 @@ const getKey = (eventsIndex: number) => {
 export function EventListWithFilters(props: EventListProps): JSX.Element {
   const { field_title, field_events_list_desc } = props
   const { t } = useTranslation()
+  const { locale } = useRouter()
   const fetcher = (eventsIndex: number) => getEventsSearch(eventsIndex)
   const { data, size, setSize } = useSWRInfinite(getKey, fetcher)
   const [filter, setFilter] = useState<any | null>(t('search.clear'))
@@ -115,6 +117,19 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
 
   const loadMoreText = t('list.load_more')
   const resultsText = t('list.results_text')
+
+  /**
+   * @TODO Check ssr-api.js for maybe better solution via "getResourceByPath" or "translatePath"
+   */
+  const getLangPath = (event: any): string => {
+    const nodePath: string = event.url[0].substring(event.url[0].lastIndexOf('/'))
+    const eventPaths: any = {
+      'sv': '/sv/aktuellt/evenemang',
+      'en': '/en/current-matters/events'
+    }
+
+    return locale !== 'fi' && locale != undefined ? `${eventPaths[locale]}${nodePath}` : getPath(event.url[0])
+  }
 
   useEffect(() => {
     const filterEvents = () => {
@@ -189,7 +204,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
                 linkboxAriaLabel="List of links Linkbox"
                 linkAriaLabel="Linkbox link"
                 key={key}
-                href={getPath(event.url[0])}
+                href={getLangPath(event)}
                 withBorder
               >
                 <Image

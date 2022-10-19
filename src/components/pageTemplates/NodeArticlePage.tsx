@@ -10,7 +10,7 @@ interface NodeArticlePageProps {
 }
 
 export function NodeArticlePage({ node, ...props }: NodeArticlePageProps): JSX.Element {
-  const { title, field_lead, created, field_content} = node
+  const { title, field_lead, created, field_content, langcode} = node
   return (
     <article>
       <Container className="container content-region">
@@ -24,7 +24,7 @@ export function NodeArticlePage({ node, ...props }: NodeArticlePageProps): JSX.E
             <p className={styles.articleDate}><time dateTime={created}>{`${dateformat(created, 'dd.mm.yyyy')}`}</time></p>
           )}
           {field_content?.length > 0 && (
-            <ContentMapper content={node.field_content}/>
+            <ContentMapper content={node.field_content} langcode={langcode} />
           )}
         </div>
       </Container>

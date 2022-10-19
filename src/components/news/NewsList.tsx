@@ -6,7 +6,7 @@ import { Button as HDSButton, IconPlus, IconArrowRight, Container } from 'hds-re
 import dateformat from 'dateformat'
 
 import { DrupalFormattedText, Node } from '@/lib/types'
-import { getPath } from '@/lib/helpers'
+import { getPathAlias } from '@/lib/helpers'
 import { getNews } from '@/lib/client-api'
 
 import HtmlBlock from '@/components/HtmlBlock'
@@ -17,14 +17,15 @@ interface NewsListProps {
   field_title: string
   field_short_list: boolean
   field_news_list_desc: DrupalFormattedText
+  langcode: string
 }
 
 function NewsList(props: NewsListProps): JSX.Element {
-  const { field_title, field_short_list, field_news_list_desc } = props
+  const { field_title, field_short_list, field_news_list_desc, langcode } = props
   const { t } = useTranslation()
   const [newsIndex, setNewsIndex] = useState<number>(1)
   const [paginatedNews, setPaginatedNews] = useState<Node[]>([])
-  const fetcher = () => getNews(field_short_list)
+  const fetcher = () => getNews(field_short_list, langcode)
   const { data: news, error } = useSWR(
     `/news`,
     fetcher
@@ -60,7 +61,7 @@ function NewsList(props: NewsListProps): JSX.Element {
         <div className={`${styles.newsList} ${field_short_list && styles.short}`}>
           { paginatedNews && paginatedNews.map((news: any, key: any) => (
             <div className={styles.newsCard} key={key}>
-                <a href={news.path.alias}>
+                <a href={getPathAlias(news.path)}>
                   <h3 className={styles.newsTitle}>{news.title}</h3>
                 </a>
               <p className={styles.articleDate}><time dateTime={news.created}>{`${dateformat(news.created, 'dd.mm.yyyy')}`}</time></p>

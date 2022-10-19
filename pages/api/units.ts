@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getUnits } from '@/lib/ssr-api'
+import { Locale } from 'next-drupal'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
@@ -10,7 +11,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return
   }
 
-  units = await getUnits().catch((e) => {
+  const { locale }:any = req?.query
+
+  units = await getUnits(locale).catch((e) => {
     console.log('Error fetching units from Drupal: ', e)
     throw e
   })
