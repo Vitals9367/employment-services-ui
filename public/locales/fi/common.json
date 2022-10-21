@@ -10,14 +10,14 @@
     "navigate_to_page": "Siirry sivulle",
     "frontpage": "Etusivu",
     "breadcrumb_label": "Murupolku",
-    "theme_dropdown": "Lisäkielet"
+    "theme_dropdown": "Muut kielet"
   },
   "search": {
     "filter": "Suodata tapahtumia",
     "clear": "Poista valinta"
   },
   "list": {
-    "load_more": "Lataa lisää",
+    "load_more": "Näytä lisää",
     "read_more": "Lue lisää",
     "read_more_blogs": "Lue kaikki blogit",
     "read_more_news": "Lue kaikki uutiset",
@@ -41,11 +41,12 @@
   "cookies": {
     "text": "Tämä sivusto käyttää evästeitä yleisen käytön seurantaan. Lisäksi käytämme kohdennusevästeitä käyttäjäkokemuksen parantamiseksi ja analytiikkaan.",
     "link_text": "Lue lisää evästeistä",
-    "accept": "Hyväksy evästeet",
-    "decline": "Kieltäydy evästeistä",
+    "accept": "Hyväksy kaikki evästeet",
+    "decline": "Hyväksy vain välttämättömät",
     "url": "/evastekaytanto"
   },
   "footer": {
+    "copyright": "Helsingin kaupunki",
     "accessibility": "Saavutettavuusseloste",
     "accessibilityLink": "/saavutettavuusseloste",
     "feedback": "Anna palautetta",

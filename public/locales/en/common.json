@@ -10,7 +10,7 @@
     "navigate_to_page": "Navigate to page",
     "frontpage": "Front page",
     "breadcrumb_label": "Breadcrumb",
-    "theme_dropdown": "Additional languages"
+    "theme_dropdown": "Other languages"
   },
   "search": {
     "filter": "Filter events",
@@ -41,11 +41,12 @@
   "cookies": {
     "text": "We use cookies on our website to improve the user experience of the site. By continuing to use this site, you agree to the use of our cookies in your browser.",
     "link_text": "Read more on cookies",
-    "accept": "Accept cookies",
-    "decline": "Decline cookies",
+    "accept": "Accept all cookies",
+    "decline": "Accept only essential cookies",
     "url": "/en/cookie-policy"
   },
   "footer": {
+    "copyright": "City of Helsinki",
     "accessibility": "Accessibility statement",
     "accessibilityLink": "/en/accessibility_statement",
     "feedback": "Give feedback",
@@ -56,14 +57,14 @@
   },
   "map": {
     "location": "Location",
-    "new_window": "Open the map on a new window"
+    "new_window": "Open the map in a new window"
   },
   "unit": {
     "contact_information": "Contact information",
     "visit_address": "Visiting address",
-    "open_hours": "Open hours",
+    "open_hours": "Opening hours",
     "phone_service": "Phone service",
     "postal_address": "Postal address",
-    "more_info": "See opening hours and contact information"
+    "more_info": "See opening hours and contact details"
   }
 }
