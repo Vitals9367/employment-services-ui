@@ -38,7 +38,7 @@ function Footer(props: FooterProps): JSX.Element {
       <HDSFooter.Navigation navigationAriaLabel="Footer navigation">
         {renderFooterNav(footerNav)}
       </HDSFooter.Navigation>
-      <HDSFooter.Base copyrightHolder="Copyright" copyrightText="All rights reserved">
+      <HDSFooter.Base copyrightHolder={t("footer.copyright")}>
         <HDSFooter.Item href={t("footer.accessibilityLink")} label={t("footer.accessibility")} />
         <HDSFooter.Item href={t("cookies.url")} label={t("footer.cookies")} />
         <HDSFooter.Item href="#" label={t("footer.cookie_settings")} onClick={(e: any) => {

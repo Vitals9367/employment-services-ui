@@ -10,7 +10,7 @@
     "navigate_to_page": "Navigera till sidan",
     "frontpage": "Framsida",
     "breadcrumb_label": "Synlig sökväg",
-    "theme_dropdown": "Övriga Språk"
+    "theme_dropdown": "Andra språk"
   },
   "search": {
     "filter": "Filtrera evenemang",
@@ -30,7 +30,7 @@
     "events_page_url": "/sv/evenemang"
   },
   "event": {
-    "remote_event": "Virtuellt evenemang",
+    "remote_event": "Distansevenemang",
     "info_url_text": "Evenemangets hemsida",
     "info_url_text_teams": "Öppna Teams-evenemanget"
   },
@@ -41,11 +41,12 @@
   "cookies": {
     "text": "Vi använder kakor på vår webbplats för att förbättra användarupplevelsen på webbplatsen. Genom att fortsätta använda denna webbplats godkänner du att kakorna lagras i din webbläsare.",
     "link_text": "Mer information",
-    "accept": "Avvisa cookies",
-    "decline": "Godkänn cookies",
+    "accept": "Acceptera alla cookies",
+    "decline": "Acceptera endast nödvändiga cookies",
     "url": "/sv/cookie-policy"
   },
   "footer": {
+    "copyright": "Helsingfors stad 2022",
     "accessibility": "Tillgänglighetsbeskrivning",
     "accessibilityLink": "/sv/tillganglighetsbeskrivning",
     "feedback": "Ge respons",
@@ -56,10 +57,10 @@
   },
   "map": {
     "location": "Plats",
-    "new_window": "Öppna kartan i ett nytt fönster"
+    "new_window": "Öppna kartan i nytt fönster"
   },
   "unit": {
-    "contact_information": "Kontaktinformation",
+    "contact_information": "Kontaktuppgifter",
     "visit_address": "Besöksadress",
     "open_hours": "Öppettider",
     "phone_service": "Telefontjänst",
