@@ -64,10 +64,6 @@ export const useCookieConsents = (): any => {
         },
       ],
     },
-    onAllConsentsGiven: (consents: any) => {
-      // Update Matomo tracking status
-      //useMatomo(consents.matomo)
-    },
   };
 } 
 
