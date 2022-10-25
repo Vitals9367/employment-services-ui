@@ -6,7 +6,6 @@ import { DrupalMenuLinkContent } from 'next-drupal'
 import { FooterProps } from '@/lib/types'
 
 import styles from './navigation.module.scss'
-import { deleteCookie } from '@/lib/helpers'
 
 function Footer(props: FooterProps): JSX.Element {
   const { t } = useTranslation()
@@ -41,9 +40,7 @@ function Footer(props: FooterProps): JSX.Element {
       <HDSFooter.Base copyrightHolder={t("footer.copyright")}>
         <HDSFooter.Item href={t("footer.accessibilityLink")} label={t("footer.accessibility")} />
         <HDSFooter.Item href={t("cookies.url")} label={t("footer.cookies")} />
-        <HDSFooter.Item href="#" label={t("footer.cookie_settings")} onClick={(e: any) => {
-          deleteCookie(e ,'tyollisyyspalvelut_cookie_consent', history)
-        }}/>
+        <HDSFooter.Item href={locale === 'fi' ? '/cookies' : `${locale}/cookies`} label={t("footer.cookie_settings")} />
         <HDSFooter.Item
           className={styles.backToTopButton}
           onClick={(e: any) => scrollToTop(e)}

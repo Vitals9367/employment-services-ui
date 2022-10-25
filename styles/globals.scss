@@ -304,15 +304,6 @@ h5, .h5,
   } 
 }
 
-// Cookie banner
-#rcc-confirm-button:hover,
-#rcc-confirm-button:focus,
-#rcc-decline-button:hover,
-#rcc-decline-button:focus {
-  background: var(--color-white) !important;
-  color: var(--color-bus) !important;
-}
-
 @media (min-width: $breakpoint-s) {
   .col {
     margin-left: var(--spacing-s);

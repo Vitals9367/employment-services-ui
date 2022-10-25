@@ -1,11 +1,9 @@
-import { useState } from 'react'
 import { GetStaticPropsContext, GetStaticPropsResult } from 'next'
 import { Locale } from 'next-drupal'
 import getConfig from 'next/config'
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { getCookieConsentValue } from 'react-cookie-consent'
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 import { Container } from 'hds-react'
@@ -18,7 +16,7 @@ import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
 import { Node, NavProps, FooterProps } from '@/lib/types'
 import { getQueryParamsFor } from '@/lib/params'
 import { getDefaultImage, getDescription, getTitle } from '@/lib/helpers';
-import { useReactAndShare } from '@/hooks/useAnalytics'
+import { useConsentStatus, useReactAndShare } from '@/hooks/useAnalytics'
 
 
 interface HomePageProps {
@@ -71,9 +69,8 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 
 export default function HomePage({ node, nav, footer }: HomePageProps) {
   const router = useRouter()
-  const [cookieConsent] = useState<string>(getCookieConsentValue('tyollisyyspalvelut_cookie_consent'))
   const { t } = useTranslation('common')
-  useReactAndShare(cookieConsent, router.locale, node && getTitle(node, t('site_title')))
+  useReactAndShare(useConsentStatus('rns'), router.locale, node && getTitle(node, t('site_title')))
 
   if (!router.isFallback && !node?.id) {
     return <ErrorPage statusCode={404} />
