@@ -1,8 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import getConfig from 'next/config'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 import { Locale } from 'next-drupal'
 import { useCookies } from 'hds-react'
 
