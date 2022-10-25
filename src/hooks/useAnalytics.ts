@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import getConfig from 'next/config'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { Locale } from 'next-drupal'
 import { useCookies } from 'hds-react'
 
-export const getConsentStatus = (cookieId: string) => {
+export const useConsentStatus = (cookieId: string) => {
   const { getAllConsents } = useCookies();
   const consents = getAllConsents();
   return consents[cookieId];
 };
 
-export const getCookieConsents = (): any => {
+export const useCookieConsents = (): any => {
   const { locale } = useRouter()
   const { t } = useTranslation()
   const [language, setLanguage] = useState(locale);
@@ -66,7 +67,7 @@ export const getCookieConsents = (): any => {
     },
     onAllConsentsGiven: (consents: any) => {
       // Update Matomo tracking status
-      useMatomo(consents.matomo)
+      //useMatomo(consents.matomo)
     },
   };
 } 
@@ -74,27 +75,29 @@ export const getCookieConsents = (): any => {
 export const useMatomo = (cookieConsent: boolean) => {
   const { MATOMO_URL: url, MATOMO_SITE_ID: siteId } = getConfig().publicRuntimeConfig
 
-  const _paq = (window._paq = window._paq || [])
-  const script = document.createElement("script")
-  script.async = true
-  script.src = `${url}piwik.min.js`
-  script.type = "text/javascript"
-  document.head.appendChild(script)
-
-  // This means no tracking or cookies unless consent is given.
-  _paq.push(['requireConsent'])
-
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-  _paq.push(["setCookieDomain", "*.tyollisyyspalvelut.hel.fi"])
-
-  _paq.push(["trackPageView"])
-
-  _paq.push(["enableLinkTracking"])
-  _paq.push(["setTrackerUrl", `${url}tracker.php`])
-  _paq.push(["setSiteId", siteId])
-
-  // Enable or disable tracking by the selected consent
-  cookieConsent ? window._paq.push(['setConsentGiven']) : window._paq.push(['forgetConsentGiven'])
+  useEffect(() => {
+    const _paq = (window._paq = window._paq || [])
+    const script = document.createElement("script")
+    script.async = true
+    script.src = `${url}piwik.min.js`
+    script.type = "text/javascript"
+    document.head.appendChild(script)
+  
+    // This means no tracking or cookies unless consent is given.
+    _paq.push(['requireConsent'])
+  
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(["setCookieDomain", "*.tyollisyyspalvelut.hel.fi"])
+  
+    _paq.push(["trackPageView"])
+  
+    _paq.push(["enableLinkTracking"])
+    _paq.push(["setTrackerUrl", `${url}tracker.php`])
+    _paq.push(["setSiteId", siteId])
+  
+    // Enable or disable tracking by the selected consent
+    cookieConsent ? window._paq.push(['setConsentGiven']) : window._paq.push(['forgetConsentGiven'])
+  }, [cookieConsent])
 }
 
 export const useReactAndShare = (

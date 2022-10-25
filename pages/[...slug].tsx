@@ -22,7 +22,7 @@ import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getQueryParamsFor } from '@/lib/params'
 import { NavProps, FooterProps } from '@/lib/types'
 import { getBreadCrumb, getDefaultImage, getDescription, getLanguageLinks, getPathAlias, getTitle } from '@/lib/helpers'
-import { getConsentStatus, useReactAndShare } from '@/hooks/useAnalytics'
+import { useConsentStatus, useReactAndShare } from '@/hooks/useAnalytics'
 
 interface PageProps {
   node: Node
@@ -115,7 +115,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 export default function Page({ node, nav, footer }: PageProps) {
   const router = useRouter()
   const { t } = useTranslation('common')
-  useReactAndShare(getConsentStatus('rns'), router.locale, node && getTitle(node, t('site_title')))
+  useReactAndShare(useConsentStatus('rns'), router.locale, node && getTitle(node, t('site_title')))
 
   if (!router.isFallback && !node?.id) {
     return <ErrorPage statusCode={404} />

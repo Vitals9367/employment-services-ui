@@ -10,9 +10,8 @@ import getMenu from '@/lib/get-menu'
 import { Layout } from '@/components/layout/Layout'
 import { NavProps, FooterProps } from '@/lib/types'
 
-import { getCookieConsents } from '@/hooks/useAnalytics'
-
 import { CookiePage } from 'hds-react';
+import { useCookieConsents } from '@/hooks/useAnalytics';
 
 interface CookiePageProps {
   nav: NavProps
@@ -47,7 +46,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 
 export default function Cookies({ nav, footer }: CookiePageProps) {
   const { t } = useTranslation('common')
-  const contentSource = getCookieConsents()
+  const contentSource = useCookieConsents()
 
   return (
     <Layout header={nav} footer={footer}>

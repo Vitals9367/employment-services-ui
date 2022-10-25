@@ -1,12 +1,14 @@
 import '../styles/globals.scss'
 import { appWithTranslation } from 'next-i18next'
 import type { AppProps } from 'next/app'
-import { getCookieConsents } from '@/hooks/useAnalytics'
 import { CookieModal } from 'hds-react';
+import { useConsentStatus, useCookieConsents, useMatomo } from '@/hooks/useAnalytics';
 
 export const MyApp = ({ Component, pageProps }: AppProps) => {
-  const contentSource = getCookieConsents()
-  
+  const contentSource = useCookieConsents()
+
+  useMatomo(useConsentStatus('matomo'))
+
   return (
     <>
       <CookieModal contentSource={contentSource} />

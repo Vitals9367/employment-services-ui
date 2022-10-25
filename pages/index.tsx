@@ -16,7 +16,7 @@ import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
 import { Node, NavProps, FooterProps } from '@/lib/types'
 import { getQueryParamsFor } from '@/lib/params'
 import { getDefaultImage, getDescription, getTitle } from '@/lib/helpers';
-import { getConsentStatus, useReactAndShare } from '@/hooks/useAnalytics'
+import { useConsentStatus, useReactAndShare } from '@/hooks/useAnalytics'
 
 
 interface HomePageProps {
@@ -70,7 +70,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 export default function HomePage({ node, nav, footer }: HomePageProps) {
   const router = useRouter()
   const { t } = useTranslation('common')
-  useReactAndShare(getConsentStatus('rns'), router.locale, node && getTitle(node, t('site_title')))
+  useReactAndShare(useConsentStatus('rns'), router.locale, node && getTitle(node, t('site_title')))
 
   if (!router.isFallback && !node?.id) {
     return <ErrorPage statusCode={404} />
