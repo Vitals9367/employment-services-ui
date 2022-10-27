@@ -17,6 +17,32 @@ export const useCookieConsents = (): any => {
   const [language, setLanguage] = useState(locale);
   const onLanguageChange = (newLang: Locale) => setLanguage(newLang);
 
+  /**
+   * @TODO Any better solution for translations on modal window?
+   */
+  const text: any = {
+    matomo_description: {
+      fi: 'Matomo-tilastointijärjestelmän eväste.',
+      en: 'Matomo Analytics - used to store a few details about the user such as the unique visitor ID.',
+      sv: 'Statistiksystemets kaka samlar information om hur webbplatsen används.'
+    },
+    rns_description: {
+      fi: 'React & Share -reaktionappien toimintaan liittyvä tietue.',
+      en: 'A record related to the operation of the React & Share react buttons.',
+      sv: 'En post relaterad till driften av reaktionsknappen React & Share.'
+    },
+    period_minutes: {
+      fi: 'minuuttia',
+      en: 'minutes',
+      sv: 'minuter',
+    },
+    period_days: {
+      fi: 'päivää',
+      en: 'days',
+      sv: 'dagar'
+    }
+  }
+
   return {
     siteName: t('site_title'),
     currentLanguage: language,
@@ -33,42 +59,42 @@ export const useCookieConsents = (): any => {
               id: 'matomo',
               hostName: 'tyollisyyspalvelut.hel.fi',
               name: '_pk_id.*',
-              description: t('cookies.matomo_description'),
-              expiration: `393 ${t('cookies.period_minutes')}`,
+              description: text['matomo_description'][language as string],
+              expiration: `393 ${text['period_days'][language as string]}`,
             },
             {
               id: 'matomo_ses',
               hostName: 'tyollisyyspalvelut.hel.fi',
               name: '_pk_ses.*',
-              description: t('cookies.matomo_description'),
-              expiration: `30 ${t('cookies.period_minutes')}`,
+              description: text['matomo_description'][language as string],
+              expiration: `30 ${text['period_minutes'][language as string]}`,
             },
             {
               id: 'matomo_id_kartta',
               name: '_pk_id.*',
               hostName: 'palvelukartta.hel.fi',
-              description: t('cookies.matomo_description'),
-              expiration: `393 ${t('cookies.period_days')}`,
+              description: text['matomo_description'][language as string],
+              expiration: `393 ${text['period_days'][language as string]}`,
             },
             {
               id: 'rns',
               name: 'rnsbid',
               hostName: 'reactandshare.com',
-              description: t('cookies.rns_description'),
+              description: text['rns_description'][language as string],
               expiration: '-',
             },
             {
               id: 'rnsbid_ts',
               name: 'rnsbid_ts',
               hostName: 'reactandshare.com',
-              description: t('cookies.rns_description'),
+              description: text['rns_description'][language as string],
               expiration: '-',
             },
             {
               id: 'rns_reaction',
               name: 'rns_reaction_*',
               hostName: 'reactandshare.com',
-              description: t('cookies.rns_description'),
+              description: text['rns_description'][language as string],
               expiration: '-',
             },
           ],
