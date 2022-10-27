@@ -43,7 +43,6 @@
     "link_text": "Lue lisää evästeistä",
     "accept": "Hyväksy kaikki evästeet",
     "decline": "Hyväksy vain välttämättömät",
-    "url": "/evastekaytanto"
   },
   "footer": {
     "copyright": "Helsingin kaupunki",
@@ -52,7 +51,6 @@
     "feedback": "Anna palautetta",
     "feedbackLink": "https://www.hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/palaute/",
     "goup": "Sivun alkuun",
-    "cookies": "Evästekäytäntö",
     "cookie_settings": "Evästeasetukset"
   },
   "map": {
