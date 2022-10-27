@@ -38,12 +38,6 @@
     "cookie_consent": "Et ole antanut lupaa asettaa evästeitä.",
     "link_text": "Hyväksythän evästeet nähdäksesi sisällön"
   },
-  "cookies": {
-    "text": "Tämä sivusto käyttää evästeitä yleisen käytön seurantaan. Lisäksi käytämme kohdennusevästeitä käyttäjäkokemuksen parantamiseksi ja analytiikkaan.",
-    "link_text": "Lue lisää evästeistä",
-    "accept": "Hyväksy kaikki evästeet",
-    "decline": "Hyväksy vain välttämättömät",
-  },
   "footer": {
     "copyright": "Helsingin kaupunki",
     "accessibility": "Saavutettavuusseloste",
