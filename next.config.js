@@ -1,4 +1,5 @@
 const { i18n } = require('./next-i18next.config')
+const { redirects } = require('./redirects')
 
 const publicRuntimeConfig = {
   NEXT_PUBLIC_DRUPAL_BASE_URL: process.env.NEXT_PUBLIC_DRUPAL_BASE_URL,
@@ -36,7 +37,8 @@ const nextConfig = {
   images: {
     domains: [process.env.NEXT_IMAGE_DOMAIN, 'api.hel.fi'],
     deviceSizes: [576, 768, 992, 1200]
-  }
+  },
+  redirects
 }
 
 module.exports = nextConfig
