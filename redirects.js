@@ -1,3 +1,4 @@
+// Redirects from old site urls to new ones.
 module.exports = {
   async redirects() {
     return [
