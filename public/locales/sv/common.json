@@ -43,16 +43,14 @@
     "link_text": "Mer information",
     "accept": "Acceptera alla cookies",
     "decline": "Acceptera endast nödvändiga cookies",
-    "url": "/sv/cookie-policy"
   },
   "footer": {
-    "copyright": "Helsingfors stad 2022",
-    "accessibility": "Tillgänglighetsbeskrivning",
-    "accessibilityLink": "/sv/tillganglighetsbeskrivning",
+    "copyright": "Helsingfors stad",
+    "accessibility": "Tillgänglighetsutlåtande",
+    "accessibilityLink": "/sv/tillganglighetsutlatande",
     "feedback": "Ge respons",
     "feedbackLink": "https://www.hel.fi/helsinki/sv/stad-och-forvaltning/delta/feedback",
     "goup": "Till början av sidan",
-    "cookies": "Policy för kakor",
     "cookie_settings": "Cookie inställningar"
   },
   "map": {

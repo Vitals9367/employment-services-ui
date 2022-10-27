@@ -43,16 +43,14 @@
     "link_text": "Read more on cookies",
     "accept": "Accept all cookies",
     "decline": "Accept only essential cookies",
-    "url": "/en/cookie-policy"
   },
   "footer": {
     "copyright": "City of Helsinki",
     "accessibility": "Accessibility statement",
-    "accessibilityLink": "/en/accessibility_statement",
+    "accessibilityLink": "/en/accessibility-statement",
     "feedback": "Give feedback",
     "feedbackLink": "https://www.hel.fi/helsinki/en/administration/participate/feedback",
     "goup": "Back to the top",
-    "cookies": "Cookie policy",
     "cookie_settings": "Cookie settings"
   },
   "map": {
