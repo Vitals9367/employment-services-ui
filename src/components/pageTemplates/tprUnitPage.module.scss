@@ -1,5 +1,19 @@
-.sidebarContent {
+@import '/styles/variables.scss';
+
+.contactInfo {
   margin-top: 50px;
+  
+  @media (min-width: $breakpoint-l) {
+    display: none;
+  }
+
+  &.aside {
+    display: none;
+
+    @media (min-width: $breakpoint-l) {
+      display: block;
+    }
+  }
 
   .contentTitle {
     border-bottom: 2px solid var(--color-black);
@@ -13,7 +27,7 @@
   }
 }
 
-.sidebarBlock {
+.infoBlock {
   display: flex;
   column-gap: 15px;
   border-bottom: 2px solid var(--color-silver);
