@@ -20,7 +20,7 @@ interface CookiePageProps {
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<CookiePageProps>> {
   const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
   const { REVALIDATE_TIME } = getConfig().serverRuntimeConfig  
-  const langLinks = { fi: '/', en: '/en', sv: '/sv'}
+  const langLinks = { fi: '/cookies', en: '/en/cookies', sv: '/sv/cookies'}
   const { tree: menu } = await getMenu('main', locale, defaultLocale)
   const { tree: themes } = await getMenu('additional-languages', locale, defaultLocale)
   const { tree: footerNav } = await getMenu('footer', locale, defaultLocale)

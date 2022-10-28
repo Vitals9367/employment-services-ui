@@ -38,12 +38,6 @@
     "cookie_consent": "You have not allowed the use of cookies on this site.",
     "link_text": "Please accept cookies to see the content."
   },
-  "cookies": {
-    "text": "We use cookies on our website to improve the user experience of the site. By continuing to use this site, you agree to the use of our cookies in your browser.",
-    "link_text": "Read more on cookies",
-    "accept": "Accept all cookies",
-    "decline": "Accept only essential cookies",
-  },
   "footer": {
     "copyright": "City of Helsinki",
     "accessibility": "Accessibility statement",

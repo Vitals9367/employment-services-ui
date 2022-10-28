@@ -38,12 +38,6 @@
     "cookie_consent": "Du har inte gett tillstånd att installera cookies.",
     "link_text": "Godkänn cookies för att se innehållet."
   },
-  "cookies": {
-    "text": "Vi använder kakor på vår webbplats för att förbättra användarupplevelsen på webbplatsen. Genom att fortsätta använda denna webbplats godkänner du att kakorna lagras i din webbläsare.",
-    "link_text": "Mer information",
-    "accept": "Acceptera alla cookies",
-    "decline": "Acceptera endast nödvändiga cookies",
-  },
   "footer": {
     "copyright": "Helsingfors stad",
     "accessibility": "Tillgänglighetsutlåtande",
