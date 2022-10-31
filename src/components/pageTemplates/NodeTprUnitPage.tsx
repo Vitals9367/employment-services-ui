@@ -73,7 +73,6 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
   const ContactInfo = ({aside}: ContactInfoProps): JSX.Element => {
     return (
       <div className={`${styles.contactInfo} ${aside ? styles.aside : ''}`}>
-        {console.log(aside)}
         <div className={styles.contentTitle}>
           <span>{t('unit.contact_information')}</span>
         </div>
