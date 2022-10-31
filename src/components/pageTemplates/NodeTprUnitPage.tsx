@@ -19,6 +19,10 @@ interface BlockProps {
   content: any
 }
 
+interface ContactInfoProps {
+  aside?: boolean
+}
+
 function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Element {
   const {
     name,
@@ -52,7 +56,7 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
     const IconTag = iconsMap[icon]
 
     return (
-      <div className={styles.sidebarBlock}>
+      <div className={ `${styles.infoBlock} onSidebar` }>
         <div className={styles.icon}><IconTag aria-hidden="true" /></div>
         <div className={styles.blockContent}>
           <div className={styles.title}>{title}</div>
@@ -62,6 +66,32 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
             </p>
           </div>
         </div>
+      </div>
+    )
+  }
+
+  const ContactInfo = ({aside}: ContactInfoProps): JSX.Element => {
+    return (
+      <div className={`${styles.contactInfo} ${aside ? styles.aside : ''}`}>
+        <div className={styles.contentTitle}>
+          <span>{t('unit.contact_information')}</span>
+        </div>
+
+        {address.address_line1 && (
+          <Block title={t('unit.visit_address')} icon="location" content={[address.address_line1, address.postal_code, address.locality]} />
+        )}
+
+        {opening_hours && (
+          <Block title={t('unit.open_hours')} icon="clock" content={[opening_hours[0].value]} />
+        )}
+
+        {phone && (
+          <Block title={t('unit.phone_service')} icon="phone" content={[`${phone} (${call_charge_info.value})`]} />
+        )}
+
+        {address_postal && (
+          <Block title={t('unit.postal_address')} icon="envelope" content={[address_postal]} />
+        )}
       </div>
     )
   }
@@ -82,35 +112,15 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
               </div>
             )}
 
+            <ContactInfo />
+            
             {field_content?.length > 0 && (
               <ContentMapper content={field_content} pageType='tpr_unit' locationId={drupal_internal__id} mapId={service_map_embed} />
             )}
-            
           </div>
           <div className="sidebar col col-4 flex-order-first">
             <Sidebar {...sidebar}/>
-
-            <div className={styles.sidebarContent}>
-              <div className={styles.contentTitle}>
-                <span>{t('unit.contact_information')}</span>
-              </div>
-
-              {address.address_line1 && (
-                <Block title={t('unit.visit_address')} icon="location" content={[address.address_line1, address.postal_code, address.locality]} />
-              )}
-
-              {opening_hours && (
-                <Block title={t('unit.open_hours')} icon="clock" content={[opening_hours[0].value]} />
-              )}
-
-              {phone && (
-                <Block title={t('unit.phone_service')} icon="phone" content={[`${phone} (${call_charge_info.value})`]} />
-              )}
-
-              {address_postal && (
-                <Block title={t('unit.postal_address')} icon="envelope" content={[address_postal]} />
-              )}
-            </div>
+            <ContactInfo aside={true} />
           </div>
         </div>
         <div className="columns">
