@@ -5,9 +5,7 @@ import { SearchHit, SearchTotalHits } from '@elastic/elasticsearch/lib/api/types
 
 type Data = EventState
 
-interface Index {
-  [key: string]: string | string[]
-}
+type Index = Partial<{ [key: string]: string | string[] }>
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   // No posts allowed, no missing params-errors revealed.
