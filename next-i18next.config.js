@@ -10,9 +10,7 @@ module.exports = {
   i18n: {
     reloadOnPrerender: typeof process.env.development !== 'undefined',
     locales,
-    languages,
     defaultLocale: 'fi',
-    fallbackLocale: 'fi',
     localeDetection: false
   }
 }
