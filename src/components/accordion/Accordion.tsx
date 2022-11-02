@@ -5,7 +5,7 @@ import ContentMapper from '@/components/ContentMapper'
 import HtmlBlock from '@/components/HtmlBlock'
 import { DrupalFormattedText } from '@/lib/types'
 import styles from './accordion.module.scss'
-
+import { useRouter } from "next/router"
 
 interface AccordionProps {
   field_accordion_type: 'basic' | 'numbered'
@@ -21,6 +21,7 @@ interface AccordionProps {
 function Accordion(props: AccordionProps): JSX.Element {
   const { field_accordion_type, field_accordion_title, field_accordion_title_level, field_accordion_text, field_accordion_items } = props
   const HeadingTag = field_accordion_title_level ? `h${field_accordion_title_level}` as keyof JSX.IntrinsicElements : 'h2'
+  const { locale } = useRouter() as any
 
   return (
     <div className='component'>
@@ -57,6 +58,7 @@ function Accordion(props: AccordionProps): JSX.Element {
                   '--header-line-height': 'var(--lineheight-m)',
                   '--button-size': 'var(--spacing-layout-m)'
                 }}
+                language={locale}
               >
                 {field_accordion_item_content?.length > 0 && (
                   <ContentMapper content={field_accordion_item_content}/>
