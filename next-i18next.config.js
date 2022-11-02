@@ -8,7 +8,7 @@ const locales = languages.map(({ code }) => code)
 
 module.exports = {
   i18n: {
-    reloadOnPrerender: typeof process.env.development !== 'undefined',
+    ...(process.env.NODE_ENV === 'development' && { reloadOnPrerender: true }),
     locales,
     defaultLocale: 'fi',
     localeDetection: false
