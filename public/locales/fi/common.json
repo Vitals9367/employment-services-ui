@@ -58,6 +58,11 @@
     "phone_service": "Puhelinpalvelu",
     "postal_address": "Postiosoite",
     "more_info": "Katso aukioloajat ja yhteystiedot"
+  },
+  "consent_info": {
+    "title": "Sivun palautenappeja ei voida näyttää",
+    "text": "Toiminnon käyttämiseksi vaaditaan, että hyväksyt sivuston evästeet. Pääset antamaan palautetta tästä sivusta sallimalla evästeasetuksista tilastointiin liittyvät evästeet.",
+    "button": "Muokkaa evästeasetuksia"
   }
 
 }
