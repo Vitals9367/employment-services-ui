@@ -66,33 +66,36 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
           </div>
         }
         <div className={`${styles.eventList} ${field_events_list_short && styles.short}`}>
-          { events && events.map((event: any, key: any) => (
-            <div className={`${styles.eventCard} event-card`} key={key}>
-              <Linkbox
-                className={styles.linkBox}
-                linkboxAriaLabel="List of links Linkbox"
-                linkAriaLabel="Linkbox link"
-                key={key}
-                href={getPathAlias(event.path)}
-                withBorder
-              >
-                <Image
-                  src={event.field_image_url}
-                  alt=''
-                  layout='responsive'
-                  objectFit='cover'
-                  width={384}
-                  height={158}
-                />
-                <div className={styles.eventCardContent}>
-                  {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
-                  <DateTime startTime={event.field_start_time} endTime={event.field_end_time} />
-                  <h3>{event.title}</h3>
-                  <p>{event.field_location}</p>
+          { events?.length
+            ? events.map((event: any, key: any) => (
+                <div className={`${styles.eventCard} event-card`} key={key}>
+                  <Linkbox
+                    className={styles.linkBox}
+                    linkboxAriaLabel="List of links Linkbox"
+                    linkAriaLabel="Linkbox link"
+                    key={key}
+                    href={getPathAlias(event.path)}
+                    withBorder
+                  >
+                    <Image
+                      src={event.field_image_url}
+                      alt=''
+                      layout='responsive'
+                      objectFit='cover'
+                      width={384}
+                      height={158}
+                    />
+                    <div className={styles.eventCardContent}>
+                      {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
+                      <DateTime startTime={event.field_start_time} endTime={event.field_end_time} />
+                      <h3>{event.title}</h3>
+                      <p>{event.field_location}</p>
+                    </div>
+                  </Linkbox>
                 </div>
-              </Linkbox>
-            </div>
-          ))}
+              )) 
+            : t('list.no_events')
+          }
         </div>
       </Container>
     </div>

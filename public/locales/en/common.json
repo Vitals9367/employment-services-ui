@@ -27,7 +27,8 @@
     "news_url": "/en/news",
     "results_text": "search results",
     "show_all_events": "Show all events",
-    "events_page_url": "/en/current-matters/events"
+    "events_page_url": "/en/current-matters/events",
+    "no_events": "No upcoming events on this topic."
   },
   "event": {
     "remote_event": "Remote event",
