@@ -27,7 +27,8 @@
     "news_url": "/fi/uutiset",
     "results_text": "hakutulosta",
     "show_all_events": "Näytä kaikki tapahtumat",
-    "events_page_url": "/ajankohtaista/tapahtumat"
+    "events_page_url": "/ajankohtaista/tapahtumat",
+    "no_events": "Ei tulevia tapahtumia tästä aiheesta."
   },
   "event": {
     "remote_event": "Etätapahtuma",

@@ -27,7 +27,8 @@
     "news_url": "/sv/nyheter",
     "results_text": "sökresultat",
     "show_all_events": "Visa alla evenemang",
-    "events_page_url": "/sv/aktuellt/evenemang"
+    "events_page_url": "/sv/aktuellt/evenemang",
+    "no_events": "Det finns inga kommande evenemang om detta ämne."
   },
   "event": {
     "remote_event": "Distansevenemang",
