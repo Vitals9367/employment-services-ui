@@ -58,5 +58,10 @@
     "phone_service": "Phone service",
     "postal_address": "Postal address",
     "more_info": "See opening hours and contact details"
+  },
+  "consent_info": {
+    "title": "Feedback buttons cannot be displayed",
+    "text": "To use this feature, you must accept cookies from the site. You can provide feedback on this page by enabling statistics-related cookies.",
+    "button": "Change cookie settings"
   }
 }

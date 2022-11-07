@@ -17,6 +17,7 @@ import { Node, NavProps, FooterProps } from '@/lib/types'
 import { getQueryParamsFor } from '@/lib/params'
 import { getDefaultImage, getDescription, getTitle } from '@/lib/helpers';
 import { useConsentStatus, useReactAndShare } from '@/hooks/useAnalytics'
+import ConsentInfo from '@/components/consentInfo/ConsentInfo'
 
 
 interface HomePageProps {
@@ -69,7 +70,8 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 export default function HomePage({ node, nav, footer }: HomePageProps) {
   const router = useRouter()
   const { t } = useTranslation('common')
-  useReactAndShare(useConsentStatus('rns'), router.locale, node && getTitle(node, t('site_title')))
+  const rnsStatus = useConsentStatus('rns')
+  useReactAndShare(rnsStatus, router.locale, node && getTitle(node, t('site_title')))
 
   if (!router.isFallback && !node?.id) {
     return <ErrorPage statusCode={404} />
@@ -95,8 +97,10 @@ export default function HomePage({ node, nav, footer }: HomePageProps) {
       </Head>
       <NodeLandingPage node={node} />
       {/* React and share */}
-      <Container className="container">
-        <div className="rns" />
+      <Container className="container">      
+        <div className="rns">
+          {rnsStatus !== true ? <ConsentInfo /> : ''}
+        </div>
       </Container>
     </Layout>
   )
