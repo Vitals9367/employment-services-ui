@@ -16,6 +16,9 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <style data-used-styles dangerouslySetInnerHTML={{ __html: this.props.hdsCriticalRules }} />
+          { process.env.NEXT_PUBLIC_SITE_URL !== 'https://tyollisyyspalvelut.hel.fi' && 
+            <meta name="robots" content="noindex, nofollow" />
+          }
         </Head>
         <body>
           <Main />
