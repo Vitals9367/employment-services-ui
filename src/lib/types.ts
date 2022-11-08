@@ -73,6 +73,7 @@ export interface EventData {
   field_location: string
   field_location_id?: string
   field_tags: string[]
+  field_street_address?: string
 }
 
 export interface TprUnitData extends DrupalNode {

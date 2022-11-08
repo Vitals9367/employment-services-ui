@@ -26,6 +26,7 @@ interface EventListProps {
   } | null
   field_events_list_desc:  DrupalFormattedText
   locationId: string | null
+  field_street_address: string
 }
 
 export function EventList({ pageType, locationId, ...props }: EventListProps): JSX.Element {
@@ -222,7 +223,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
                   {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
                   <DateTime startTime={event.field_start_time[0]} endTime={event.field_end_time[0]} />
                   <h3>{event.title[0]}</h3>
-                  <p>{event.field_location[0]}</p>
+                  <p>{event.field_location[0]}{ event.field_street_address ? `, ${event.field_street_address[0]}` : ''}</p>
                 </div>
               </Linkbox>
             </div>
