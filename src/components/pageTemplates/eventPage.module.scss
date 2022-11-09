@@ -28,7 +28,13 @@
     margin-top: var(--spacing-2-xs);
     
     svg {
-      margin-right: var(--spacing-2-xs);
+      margin-right: var(--spacing-xs);
+    }
+
+    a svg {
+      vertical-align: bottom;
+      margin-left: var(--spacing-xs);
+      margin-right: 0;
     }
   }
 }
