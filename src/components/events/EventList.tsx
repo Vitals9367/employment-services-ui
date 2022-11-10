@@ -90,7 +90,7 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
                       {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
                       <DateTime startTime={event.field_start_time} endTime={event.field_end_time} />
                       <h3>{event.title}</h3>
-                      <p>{event.field_location}</p>
+                      <p>{event.field_location}{ event.field_street_address ? `, ${event.field_street_address}` : ''}</p>
                     </div>
                   </Linkbox>
                 </div>
