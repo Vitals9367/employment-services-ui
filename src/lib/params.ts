@@ -149,6 +149,7 @@ export const baseEventQueryParams = () =>
       'path',
       'field_text',
       'field_location',
+      'field_location_id',
       'field_start_time',
       'field_end_time',
       'field_tags',
@@ -157,7 +158,8 @@ export const baseEventQueryParams = () =>
       'field_image_alt',
       'field_external_links',
       'field_info_url',
-      'field_short_description'
+      'field_short_description',
+      'field_street_address'
     ])
 
 const getEventPageQueryParams = () =>
