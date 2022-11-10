@@ -33,7 +33,13 @@ interface PageProps {
 
 export async function getStaticPaths(context: GetStaticPathsContext): Promise<GetStaticPathsResult> {
   const drupal = getDrupalClient()
-  const types = Object.values(NODE_TYPES)
+  let types = Object.values(NODE_TYPES)
+
+  // Prebuild only landing pages for staging.
+  if (process.env.NEXT_PUBLIC_DRUPAL_BASE_URL === 'https://tyollisyyspalvelut-edit.stage.hel.ninja') {
+    types = [NODE_TYPES.LANDING_PAGE]
+  }
+
   const paths = await drupal.getStaticPathsFromContext(types, context)
 
   return {
