@@ -204,105 +204,137 @@ h5, .h5,
   }
 }
 
-// React and share
+/* React & Share */
 .rns {
   border-top: 1px solid var(--color-black-90);
   border-bottom: 1px solid var(--color-black-90);
   margin-top: var(--spacing-4-xl);
   margin-bottom: var(--spacing-4-xl);
 
+  /*
+  React & Share CSS Style Guide
+  Ref: https://docs.reactandshare.com/#custom-styling
+  */
+
+  /* General styles */
   .rns-plugin {
     margin: var(--spacing-l) 0;
+  }
 
-    .rns-header {
-      font-size: var(--fontsize-heading-m);
-    }
+  .rns-plugin .rns-header {
+    font-size: var(--fontsize-heading-m);
+    line-height: var(--fontsize-heading-m);
+  }
 
-    @media (min-width: $breakpoint-m) {
-      .rns-reactions .reactions .rns-reaction {
-        flex: 0 0 11rem;
-      }
+  /* Reactions */
+  /*
+  All React & Share buttons share the same structure:
+    Button
+      Label
+      Icon
+      Count
+  */
+  @media (min-width: $breakpoint-m) {
+    .rns-plugin .rns-reactions .reactions .rns-reaction {
+      flex: 0 0 11rem;
     }
-    
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button {
-      border-color: var(--color-black-90);
-    }
-    
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label {
-      color: var(--color-black-90);
-      display: flex;
-    }
+  }
 
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label:after {
-      content: "";
-      display: flex;
-      height: 24px;
-      width: 24px;
-      margin-left: 16px;
-      mask-size: 24px 24px;
-      background-color: var(--color-black);
-      background-size: contain;
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: auto;
-    }
+  /* Button */
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button {
+    border-color: var(--color-black-90);
+  }
 
-    .rns-reactions .reactions .rns-reaction:first-child .rns-label:after {
-      @extend .hds-icon--face-smile !optional;
-    }
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover,
+  .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button {
+    background: var(--color-black-90) !important;
+    color: var(--color-white);
+  }
 
-    .rns-reactions .reactions .rns-reaction:nth-child(2) .rns-label:after {
-      @extend .hds-icon--face-neutral !optional;
-    }
+  /* Label */
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label {
+    color: var(--color-black-90);
+    display: flex;
+  }
 
-    .rns-reactions .reactions .rns-reaction:last-child .rns-label:after {
-      @extend .hds-icon--face-sad !optional;
-    }
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover .rns-label:after,
+  .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button .rns-label:after {
+    background-color: var(--color-white);
+  }
 
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover .rns-label:after,
-    .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button .rns-label:after {
-      background-color: var(--color-white);
-    }
-    
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover {
-      background: var(--color-black-90) !important;
-      color: var(--color-white) !important;
-    }
-    
-     .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button {
-      background: var(--color-black-90) !important;
-      color: var(--color-white) !important;
-    }
-    
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button:focus {
-      color: var(--color-white) !important;
-    }
-    
-    .rns-reaction.selected .rns-reaction-button:focus .rns-label {
-      color: var(--color-white) !important;
-    }
+  /* HDS Icons */
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label:after {
+    content: "";
+    display: flex;
+    height: 24px;
+    width: 24px;
+    margin-left: 16px;
+    mask-size: 24px 24px;
+    background-color: var(--color-black);
+    background-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: auto;
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction:first-child .rns-label:after {
+    @extend .hds-icon--face-smile !optional;
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction:nth-child(2) .rns-label:after {
+    @extend .hds-icon--face-neutral !optional;
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction:last-child .rns-label:after {
+    @extend .hds-icon--face-sad !optional;
+  }
+
+  /* For hover/active styles, just add :hover after .rns-reaction-button */
+  /* For selected button styles, add .selected to rns-reaction (e.g. .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button) */
+  /*
+  All React & Share buttons share the same structure:
+    Button
+      Label
+      Icon
+      Count
+  */
+
+  /* Shares */
+  .rns-plugin .rns-shares .rns-share {
+    padding: 0 .2rem .4rem !important;
+    width: 25%;
+  }
+
+  /* Button */
+  .rns-plugin .rns-shares .rns-share-button {
+    background: var(--color-black-90);
+    border: 2px solid transparent;
+    color: var(--color-white);
+  }
   
-    .rns-shares {
-      .rns-share {
-        padding: 0 .2rem .4rem !important;
-        width: 25%;
-      }
-  
-      .rns-share-button {
-        background: var(--color-black-90);
-        border: 2px solid transparent;
-        color: var(--color-white);
-      }
-  
-      .rns-share-button:hover,
-      .rns-share-button:focus {
-        background: var(--color-white) !important;
-        border: 2px solid var(--color-black-90) !important;
-        color: var(--color-black-90) !important;
-      }
-    }
-  } 
-}
+  .rns-plugin .rns-shares .rns-share-button:hover,
+  .rns-plugin .rns-shares .rns-share-button:focus {
+    background: var(--color-white);
+    border: 2px solid var(--color-black-90);
+    color: var(--color-black-90);
+  }
+
+  /* Submit button */
+  .rns-plugin .rns-inputs .rns-form-submit {
+    background: var(--color-black-90);
+    border: 2px solid transparent;
+    color: var(--color-white);
+  }
+
+  .rns-plugin .rns-inputs .rns-form-submit:hover,
+  .rns-plugin .rns-inputs .rns-form-submit:focus {
+    background: var(--color-white);
+    border: 2px solid var(--color-black-90);
+    color: var(--color-black-90);
+  }
+ }
+
+
 
 @media (min-width: $breakpoint-s) {
   .col {
