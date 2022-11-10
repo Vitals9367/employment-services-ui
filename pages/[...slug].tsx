@@ -36,8 +36,8 @@ export async function getStaticPaths(context: GetStaticPathsContext): Promise<Ge
   let types = Object.values(NODE_TYPES)
 
   // Prebuild only landing pages for staging.
-  if (process.env.NEXT_PUBLIC_SITE_URL === 'https://tyollisyyspalvelut-ui.stage.hel.ninja') {
-    types = ['node--landing_page']
+  if (process.env.NEXT_PUBLIC_DRUPAL_BASE_URL === 'https://tyollisyyspalvelut-edit.stage.hel.ninja') {
+    types = [NODE_TYPES.LANDING_PAGE]
   }
 
   const paths = await drupal.getStaticPathsFromContext(types, context)
