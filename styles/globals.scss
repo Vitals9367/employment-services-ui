@@ -73,27 +73,8 @@ h5, .h5,
   line-height: var(--lineheight-m);
 }
 
-.content-region {
-  ul, ol {
-    margin-top: var(--spacing-l);
-    margin-bottom: var(--spacing-l);
-    padding-top: 0;
-    padding-left: var(--spacing-s);
-    list-style-position: outside;
-  }
-
-  li {
-    padding-left: var(--spacing-m);
-  }
-
-  ul li::marker {
-    color: var(--color-metro);
-  }
-
-  li li::marker {
-    color: var(--color-black-90);
-  }
-
+.content-region,
+.content-region-landing {
   a.link-internal,
   a.link-external,
   a[data-is-external="true"],
@@ -134,9 +115,36 @@ h5, .h5,
   }
 }
 
+.content-region {
+  ul, ol {
+    margin-top: var(--spacing-l);
+    margin-bottom: var(--spacing-l);
+    padding-top: 0;
+    padding-left: var(--spacing-s);
+    list-style-position: outside;
+  }
+
+  li {
+    padding-left: var(--spacing-m);
+  }
+
+  ul li::marker {
+    color: var(--color-metro);
+  }
+
+  li li::marker {
+    color: var(--color-black-90);
+  }
+}
+
 .container {
   margin-left: auto;
   margin-right: auto;
+
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .columns {
@@ -161,9 +169,22 @@ h5, .h5,
   order: -1;
 }
 
+.content-region {
+  .component {
+    margin-top: var(--spacing-4-xl);
+    margin-bottom: var(--spacing-4-xl);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
 .component {
-  margin-top: var(--spacing-4-xl);
-  margin-bottom: var(--spacing-4-xl);
+  padding-top: var(--spacing-4-xl);
+  padding-bottom: var(--spacing-4-xl);
+
+  h2 {
+    margin-top: 0;
+  }
 }
 
 .lead-in {
@@ -183,130 +204,152 @@ h5, .h5,
   }
 }
 
-// React and share
+/* React & Share */
 .rns {
   border-top: 1px solid var(--color-black-90);
   border-bottom: 1px solid var(--color-black-90);
+  margin-top: var(--spacing-4-xl);
+  margin-bottom: var(--spacing-4-xl);
 
+  /*
+  React & Share CSS Style Guide
+  Ref: https://docs.reactandshare.com/#custom-styling
+  */
+
+  /* General styles */
   .rns-plugin {
     margin: var(--spacing-l) 0;
+  }
 
-    .rns-header {
-      font-size: var(--fontsize-heading-m);
-    }
+  .rns-plugin .rns-header {
+    font-size: var(--fontsize-heading-m);
+    line-height: var(--fontsize-heading-m);
+  }
 
-    @media (min-width: $breakpoint-m) {
-      .rns-reactions .reactions .rns-reaction {
-        flex: 0 0 11rem;
-      }
+  /* Reactions */
+  /*
+  All React & Share buttons share the same structure:
+    Button
+      Label
+      Icon
+      Count
+  */
+  @media (min-width: $breakpoint-m) {
+    .rns-plugin .rns-reactions .reactions .rns-reaction {
+      flex: 0 0 11rem;
     }
-    
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button {
-      border-color: var(--color-black-90);
-    }
-    
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label {
-      color: var(--color-black-90);
-      display: flex;
-    }
+  }
 
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label:after {
-      content: "";
-      display: flex;
-      height: 24px;
-      width: 24px;
-      margin-left: 16px;
-      mask-size: 24px 24px;
-      background-color: var(--color-black);
-      background-size: contain;
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: auto;
-    }
+  /* Button */
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button {
+    border-color: var(--color-black-90);
+  }
 
-    .rns-reactions .reactions .rns-reaction:first-child .rns-label:after {
-      @extend .hds-icon--face-smile !optional;
-    }
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover,
+  .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button {
+    background: var(--color-black-90) !important;
+    color: var(--color-white);
+  }
 
-    .rns-reactions .reactions .rns-reaction:nth-child(2) .rns-label:after {
-      @extend .hds-icon--face-neutral !optional;
-    }
+  /* Label */
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label {
+    color: var(--color-black-90);
+    display: flex;
+  }
 
-    .rns-reactions .reactions .rns-reaction:last-child .rns-label:after {
-      @extend .hds-icon--face-sad !optional;
-    }
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover .rns-label:after,
+  .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button .rns-label:after {
+    background-color: var(--color-white);
+  }
 
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover .rns-label:after,
-    .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button .rns-label:after {
-      background-color: var(--color-white);
-    }
-    
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover {
-      background: var(--color-black-90) !important;
-      color: var(--color-white) !important;
-    }
-    
-     .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button {
-      background: var(--color-black-90) !important;
-      color: var(--color-white) !important;
-    }
-    
-    .rns-reactions .reactions .rns-reaction .rns-reaction-button:focus {
-      color: var(--color-white) !important;
-    }
-    
-    .rns-reaction.selected .rns-reaction-button:focus .rns-label {
-      color: var(--color-white) !important;
-    }
+  /* HDS Icons */
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label:after {
+    content: "";
+    display: flex;
+    height: 24px;
+    width: 24px;
+    margin-left: 16px;
+    mask-size: 24px 24px;
+    background-color: var(--color-black);
+    background-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: auto;
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction:first-child .rns-label:after {
+    @extend .hds-icon--face-smile !optional;
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction:nth-child(2) .rns-label:after {
+    @extend .hds-icon--face-neutral !optional;
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction:last-child .rns-label:after {
+    @extend .hds-icon--face-sad !optional;
+  }
+
+  /* For hover/active styles, just add :hover after .rns-reaction-button */
+  /* For selected button styles, add .selected to rns-reaction (e.g. .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button) */
+  /*
+  All React & Share buttons share the same structure:
+    Button
+      Label
+      Icon
+      Count
+  */
+
+  /* Shares */
+  .rns-plugin .rns-shares .rns-share {
+    padding: 0 .2rem .4rem !important;
+    width: 25%;
+  }
+
+  /* Button */
+  .rns-plugin .rns-shares .rns-share-button {
+    background: var(--color-black-90);
+    border: 2px solid transparent;
+    color: var(--color-white);
+  }
   
-    .rns-shares {
-      .rns-share {
-        padding: 0 .2rem .4rem !important;
-        width: 25%;
-      }
-  
-      .rns-share-button {
-        background: var(--color-black-90);
-        border: 2px solid transparent;
-        color: var(--color-white);
-      }
-  
-      .rns-share-button:hover,
-      .rns-share-button:focus {
-        background: var(--color-white) !important;
-        border: 2px solid var(--color-black-90) !important;
-        color: var(--color-black-90) !important;
-      }
-    }
-  } 
-}
+  .rns-plugin .rns-shares .rns-share-button:hover,
+  .rns-plugin .rns-shares .rns-share-button:focus {
+    background: var(--color-white);
+    border: 2px solid var(--color-black-90);
+    color: var(--color-black-90);
+  }
 
-// Cookie banner
-#rcc-confirm-button:hover,
-#rcc-confirm-button:focus,
-#rcc-decline-button:hover,
-#rcc-decline-button:focus {
-  background: var(--color-white) !important;
-  color: var(--color-bus) !important;
-}
+  /* Submit button */
+  .rns-plugin .rns-inputs .rns-form-submit {
+    background: var(--color-black-90);
+    border: 2px solid transparent;
+    color: var(--color-white);
+  }
+
+  .rns-plugin .rns-inputs .rns-form-submit:hover,
+  .rns-plugin .rns-inputs .rns-form-submit:focus {
+    background: var(--color-white);
+    border: 2px solid var(--color-black-90);
+    color: var(--color-black-90);
+  }
+ }
+
+
 
 @media (min-width: $breakpoint-s) {
   .col {
     margin-left: var(--spacing-s);
     margin-right: var(--spacing-s);
   }
-
+  // for basic page's narrower content region.
   .content-region .link-item,
-  .content-region .link-box {
+  .content-region .link-box,
+  .content-region .event-card {
     width: calc(50% - var(--spacing-l));
   }
 }
 
 @media (min-width: $breakpoint-m) {
-  .content-region .link-box {
-    width: calc(33.33% - var(--spacing-l));
-  }
-
   main h1, main .h1 {
     font-size: var(--fontsize-heading-xl);
     line-height: var(--lineheight-m);
@@ -377,9 +420,5 @@ h5, .h5,
 
   .col-12 {
     width: 100%;
-  }
-
-  .content-region .link-box {
-    width: calc(33.33% - var(--spacing-l));
   }
 }

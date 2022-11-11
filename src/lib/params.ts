@@ -36,12 +36,13 @@ const baseQueryParams = () =>
     .addFields(CONTENT_TYPES.LIST_OF_LINKS, [
       'field_list_of_links_design',
       'field_list_of_links_links',
-      'field_list_of_links_title'
+      'field_list_of_links_title',
+      'field_background_color'
     ])
     .addFields(CONTENT_TYPES.LIST_OF_LINKS_ITEM, [
       'field_list_of_links_link',
       'field_list_of_links_image',
-      'field_list_of_links_desc'
+      'field_list_of_links_desc',
     ])
     .addFields(CONTENT_TYPES.LIFTUP_WITH_IMAGE, [
       'field_liftup_with_image_title',
@@ -49,7 +50,10 @@ const baseQueryParams = () =>
       'field_liftup_with_image_design',
       'field_liftup_with_image_desc'
     ])
-    .addFields(CONTENT_TYPES.COLOR, ['name', 'field_css_name'])
+    .addFields(CONTENT_TYPES.COLOR, [
+      'name',
+      'field_css_name'
+    ])
     .addFields(CONTENT_TYPES.FILE, [
       'uri',
       'url',
@@ -84,16 +88,22 @@ const getPageQueryParams = () =>
       'field_content',
       'field_lead_in',
       'field_metatags',
-      'field_notification'
+      'field_notification',
+      'field_lower_content',
+      'field_hide_sidebar'
     ])
     .addInclude([
       'field_content.field_accordion_items.field_accordion_item_content',
+      'field_lower_content'
     ])
     .addFields(CONTENT_TYPES.TEXT, [
       'field_text'
     ])
     .addFields(CONTENT_TYPES.SUBHEADING, [
       'field_subheading_title'
+    ])
+    .addFields(CONTENT_TYPES.SUJO_EMBEDDED, [
+      'field_training'
     ])
     .getQueryObject()
 
@@ -121,6 +131,7 @@ const getLandingPageQueryParams = () =>
       'field_title',
       'field_events_list_short',
       'field_event_tag_filter',
+      'field_background_color',
       'field_events_list_desc'
     ])
     .addFields(CONTENT_TYPES.NEWS_LIST, [
@@ -138,6 +149,7 @@ export const baseEventQueryParams = () =>
       'path',
       'field_text',
       'field_location',
+      'field_location_id',
       'field_start_time',
       'field_end_time',
       'field_tags',
@@ -145,7 +157,9 @@ export const baseEventQueryParams = () =>
       'field_image_name',
       'field_image_alt',
       'field_external_links',
-      'field_info_url'
+      'field_info_url',
+      'field_short_description',
+      'field_street_address'
     ])
 
 const getEventPageQueryParams = () =>
@@ -189,6 +203,75 @@ const getArticlePageQueryParams = () =>
   baseArticlePageQueryParams()
     .getQueryObject()
 
+export const baseTprUnitQueryParams = () =>
+  new DrupalJsonApiParams()
+    .addInclude([
+      'field_content',
+      'field_lower_content',
+      'picture_url_override.field_media_image',
+      'field_content.field_accordion_items.field_accordion_item_content',
+      'field_content.field_list_of_links_links.field_list_of_links_image.field_media_image',
+    ])
+    .addFields(NODE_TYPES.TPR_UNIT, [
+      'id',
+      'path',
+      'name',
+      'name_override',
+      'description',
+      'field_metatags',
+      'field_content',
+      'field_lower_content',
+      'phone',
+      'address',
+      'address_postal',
+      'opening_hours',
+      'call_charge_info',
+      'service_map_embed',
+      'picture_url_override',
+      'picture_url',
+      'drupal_internal__id'
+    ])    
+    .addFields(CONTENT_TYPES.ACCORDION, [
+      'field_accordion_type',
+      'field_accordion_title_level',
+      'field_accordion_text',
+      'field_accordion_title',
+      'field_accordion_items'
+    ])
+    .addFields(CONTENT_TYPES.ACCORDION_ITEM, [
+      'field_accordion_item_content',
+      'field_accordion_item_heading'
+    ])    
+    .addFields(CONTENT_TYPES.LIST_OF_LINKS, [
+      'field_list_of_links_design',
+      'field_list_of_links_links',
+      'field_list_of_links_title',
+      'field_background_color'
+    ])
+    .addFields(CONTENT_TYPES.LIST_OF_LINKS_ITEM, [
+      'field_list_of_links_link',
+      'field_list_of_links_image',
+      'field_list_of_links_desc',
+    ])
+    .addFields(CONTENT_TYPES.NOTIFICATION, [
+      'field_notification_title',
+      'field_notification_description'
+    ])
+    .addFields(CONTENT_TYPES.EVENTS_LIST, [
+      'field_title',
+      'field_events_list_short',
+      'field_event_tag_filter',
+      'field_background_color',
+      'field_events_list_desc'
+    ])
+    .addFields(CONTENT_TYPES.UNIT_MAP, [
+      'field_unit_map'
+    ])
+
+const getTprUnitQueryParams = () =>
+  baseTprUnitQueryParams()
+    .getQueryObject()
+
 export const getQueryParamsFor = (type: string) => {
   switch (type) {
     case NODE_TYPES.PAGE:
@@ -205,5 +288,10 @@ export const getQueryParamsFor = (type: string) => {
   switch (type) {
     case NODE_TYPES.ARTICLE:
       return getArticlePageQueryParams()
+  }
+
+  switch (type) {
+    case NODE_TYPES.TPR_UNIT:
+      return getTprUnitQueryParams()
   }
 }

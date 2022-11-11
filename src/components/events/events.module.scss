@@ -38,6 +38,7 @@
 }
 
 .eventCard {
+  background-color: var(--color-white);
   flex-grow: 1;
   width: 100%;
 
@@ -115,7 +116,7 @@
   }
 }
 
-.tags {
+ul.tags {
   display: flex;
   flex-wrap: wrap;
   position: relative;

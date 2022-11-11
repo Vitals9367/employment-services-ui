@@ -1,11 +1,11 @@
 import React from "react"
-import { Accordion as HDSAccordion, useAccordion, Button, Card, IconAngleUp, IconAngleDown } from 'hds-react'
+import { Accordion as HDSAccordion, useAccordion, Button, Card, IconAngleUp, IconAngleDown, Container } from 'hds-react'
 
 import ContentMapper from '@/components/ContentMapper'
 import HtmlBlock from '@/components/HtmlBlock'
 import { DrupalFormattedText } from '@/lib/types'
 import styles from './accordion.module.scss'
-
+import { useRouter } from "next/router"
 
 interface AccordionProps {
   field_accordion_type: 'basic' | 'numbered'
@@ -21,60 +21,64 @@ interface AccordionProps {
 function Accordion(props: AccordionProps): JSX.Element {
   const { field_accordion_type, field_accordion_title, field_accordion_title_level, field_accordion_text, field_accordion_items } = props
   const HeadingTag = field_accordion_title_level ? `h${field_accordion_title_level}` as keyof JSX.IntrinsicElements : 'h2'
+  const { locale } = useRouter() as any
 
   return (
     <div className='component'>
-      {field_accordion_title && 
-        <HeadingTag>{field_accordion_title}</HeadingTag>
-      }
-
-      {field_accordion_text?.processed && 
-        <HtmlBlock field_text={field_accordion_text} />
-      }
-
-      {field_accordion_items.map(
-        (
-          {
-            field_accordion_item_content,
-            field_accordion_item_heading,
-            id,
-            type,
-          }: any,
-          i: number
-        ) => {
-          return field_accordion_type === 'basic'
-            ? (
-            <HDSAccordion
-              id={id}
-              key={`${type}-${id}`}
-              heading={field_accordion_item_heading}
-              headingLevel={3}
-              className={styles.HDSAccordion}
-              theme={{
-                '--border-color': 'var(--color-black-20)',
-                '--header-font-size': 'var(--fontsize-heading-m)',
-                '--header-line-height': 'var(--lineheight-m)',
-                '--button-size': 'var(--spacing-layout-m)'
-              }}
-            >
-              {field_accordion_item_content?.length > 0 && (
-                <ContentMapper content={field_accordion_item_content}/>
-              )}
-            </HDSAccordion>
-          ) : (
-            <NumberedAccordion 
-              id={id}
-              key={`${type}-${id}`}
-              index={i + 1}
-              field_accordion_item_heading={field_accordion_item_heading}
-            >
-              {field_accordion_item_content?.length > 0 && (
-                <ContentMapper content={field_accordion_item_content}/>
-              )}
-            </NumberedAccordion>
-          )
+      <Container className='container'>
+        {field_accordion_title && 
+          <HeadingTag>{field_accordion_title}</HeadingTag>
         }
-      )}
+
+        {field_accordion_text?.processed && 
+          <HtmlBlock field_text={field_accordion_text} />
+        }
+
+        {field_accordion_items.map(
+          (
+            {
+              field_accordion_item_content,
+              field_accordion_item_heading,
+              id,
+              type,
+            }: any,
+            i: number
+          ) => {
+            return field_accordion_type === 'basic'
+              ? (
+              <HDSAccordion
+                id={id}
+                key={`${type}-${id}`}
+                heading={field_accordion_item_heading}
+                headingLevel={3}
+                className={styles.HDSAccordion}
+                theme={{
+                  '--border-color': 'var(--color-black-20)',
+                  '--header-font-size': 'var(--fontsize-heading-m)',
+                  '--header-line-height': 'var(--lineheight-m)',
+                  '--button-size': 'var(--spacing-layout-m)'
+                }}
+                language={locale}
+              >
+                {field_accordion_item_content?.length > 0 && (
+                  <ContentMapper content={field_accordion_item_content}/>
+                )}
+              </HDSAccordion>
+            ) : (
+              <NumberedAccordion 
+                id={id}
+                key={`${type}-${id}`}
+                index={i + 1}
+                field_accordion_item_heading={field_accordion_item_heading}
+              >
+                {field_accordion_item_content?.length > 0 && (
+                  <ContentMapper content={field_accordion_item_content}/>
+                )}
+              </NumberedAccordion>
+            )
+          }
+        )}
+      </Container>
     </div>
   )
 }

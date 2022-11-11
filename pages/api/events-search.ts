@@ -5,9 +5,7 @@ import { SearchHit, SearchTotalHits } from '@elastic/elasticsearch/lib/api/types
 
 type Data = EventState
 
-interface Index {
-  [key: string]: string | string[]
-}
+type Index = Partial<{ [key: string]: string | string[] }>
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   // No posts allowed, no missing params-errors revealed.
@@ -47,8 +45,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     res.json({
       total: total?.value,
       events: hits.map((hit: any) => {
-        const { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags } = hit._source as EventData
-        return { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags }
+        const { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags, field_street_address } = hit._source as EventData
+        return { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags, field_street_address }
       }),
     })
   } catch (err) {

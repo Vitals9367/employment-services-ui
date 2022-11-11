@@ -1,6 +1,7 @@
 {
   "locale": "sv",
   "site_name": "Sysselsättningstjänster",
+  "site_title": "Helsingfors sysselsättningstjänster",
   "link_copied": "Länken har kopierats",
   "navigation": {
     "button_text": "E-Tjänster",
@@ -9,7 +10,7 @@
     "navigate_to_page": "Navigera till sidan",
     "frontpage": "Framsida",
     "breadcrumb_label": "Synlig sökväg",
-    "theme_dropdown": "Övriga Språk"
+    "theme_dropdown": "Andra språk"
   },
   "search": {
     "filter": "Filtrera evenemang",
@@ -26,10 +27,11 @@
     "news_url": "/sv/nyheter",
     "results_text": "sökresultat",
     "show_all_events": "Visa alla evenemang",
-    "events_page_url": "/sv/evenemang"
+    "events_page_url": "/sv/aktuellt/evenemang",
+    "no_events": "Det finns inga kommande evenemang om detta ämne."
   },
   "event": {
-    "remote_event": "Virtuellt evenemang",
+    "remote_event": "Distansevenemang",
     "info_url_text": "Evenemangets hemsida",
     "info_url_text_teams": "Öppna Teams-evenemanget"
   },
@@ -37,20 +39,30 @@
     "cookie_consent": "Du har inte gett tillstånd att installera cookies.",
     "link_text": "Godkänn cookies för att se innehållet."
   },
-  "cookies": {
-    "text": "Vi använder kakor på vår webbplats för att förbättra användarupplevelsen på webbplatsen. Genom att fortsätta använda denna webbplats godkänner du att kakorna lagras i din webbläsare.",
-    "link_text": "Mer information",
-    "accept": "Avvisa cookies",
-    "decline": "Godkänn cookies",
-    "url": "/sv/cookie-policy"
-  },
   "footer": {
-    "accessibility": "Tillgänglighetsbeskrivning",
-    "accessibilityLink": "/sv/tillganglighetsbeskrivning",
+    "copyright": "Helsingfors stad",
+    "accessibility": "Tillgänglighetsutlåtande",
+    "accessibilityLink": "/sv/tillganglighetsutlatande",
     "feedback": "Ge respons",
     "feedbackLink": "https://www.hel.fi/helsinki/sv/stad-och-forvaltning/delta/feedback",
     "goup": "Till början av sidan",
-    "cookies": "Policy för kakor",
     "cookie_settings": "Cookie inställningar"
+  },
+  "map": {
+    "location": "Plats",
+    "new_window": "Öppna kartan i nytt fönster"
+  },
+  "unit": {
+    "contact_information": "Kontaktuppgifter",
+    "visit_address": "Besöksadress",
+    "open_hours": "Öppettider",
+    "phone_service": "Telefontjänst",
+    "postal_address": "Postadress",
+    "more_info": "Se öppettider och kontaktuppgifter"
+  },
+  "consent_info": {
+    "title": "Feedbackknappar kan inte visas",
+    "text": "För att använda denna funktion måste du acceptera cookies från webbplatsen. Du kan ge feedback på den här sidan genom att aktivera statistikrelaterade cookies.",
+    "button": "Ändra inställningarna för cookies"
   }
 }

@@ -1,14 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getEvents } from '@/lib/ssr-api'
-import { Tags } from '@/lib/types'
+import { EventsQueryParams } from '@/lib/types'
+import qs from "qs";
 
 type Data = {
   name: string
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const tags: Tags = req?.query
-  
+  const query: any = req?.query
+  const queryParams: EventsQueryParams = qs.parse(query)
+
   let events: any = []
   // No posts allowed, no missing params-errors revealed.
   if (req.method !== 'GET') {
@@ -16,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     return
   }
 
-  events = await getEvents(tags).catch((e) => {
+  events = await getEvents(queryParams).catch((e) => {
     console.log('Error fetching events from Drupal: ', e)
     throw e
   })

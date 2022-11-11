@@ -10,7 +10,6 @@ import styles from './navigation.module.scss'
 
 
 export function Sidebar(sidebar:NavProps): JSX.Element {
-
   const { locale, menu, langLinks } = sidebar
   const { t } = useTranslation('common')
 
@@ -96,7 +95,8 @@ export function Sidebar(sidebar:NavProps): JSX.Element {
     })
     return {nav, defaultOpenMainLevels}
   }
-  const {nav, defaultOpenMainLevels} = getSideNavi(menu)
+
+  const { nav, defaultOpenMainLevels } = getSideNavi(menu)
 
   return (
     <SideNavigation

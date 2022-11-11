@@ -1,3 +1,5 @@
+import { Container } from 'hds-react'
+
 import HtmlBlock from '@/components/HtmlBlock'
 import { CONTENT_TYPES } from '@/lib/drupalApiTypes'
 import ListOfLinks from '@/components/listOfLinks/ListOfLinks'
@@ -9,13 +11,20 @@ import { EventList, EventListWithFilters } from '@/components/events/EventList'
 import NewsList from '@/components/news/NewsList'
 import ParagraphImage from '@/components/paragraphImage/ParagraphImage'
 import Quote from '@/components/quote/Quote'
+import SujoEmbedded from '@/components/sujoEmbedded/sujoEmbedded'
+import UnitsList from './tprUnits/UnitsList'
+import MapEmbedded from './mapEmbedded/MapEmbedded'
 
 
 interface ContentMapperProps {
-  content: any
+  content: any,
+  pageType?: string
+  mapId?: number | null
+  locationId?: string | null
+  langcode?: string
 }
 
-export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.Element {
+export function ContentMapper({ content, pageType, locationId, mapId, langcode, ...props }: ContentMapperProps): JSX.Element {
  // console.log('content: ', content)
 
   return content.map((item: any) => {
@@ -27,7 +36,13 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
         if (!item?.field_text?.processed) {
           return null
         }
-        return <HtmlBlock {...item} key={key} />
+        return (
+          <div className='component' key={key}>
+            <Container className='container'>
+              <HtmlBlock {...item} key={key} />
+            </Container>
+          </div>
+        )
 
       case CONTENT_TYPES.ACCORDION:
         if (!item?.field_accordion_items) {
@@ -60,7 +75,9 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
         }
         return (
           <div className='component' key={key}>
-            <h2>{item.field_subheading_title}</h2>
+            <Container className='container'>
+              <h2>{item.field_subheading_title}</h2>
+            </Container>
           </div>
         )
 
@@ -69,7 +86,7 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
           return null
         }
         if (item.field_events_list_short) {
-          return <EventList {...item} key={key} />
+          return <EventList {...item} pageType={pageType} key={key} locationId={locationId}/>
         }
         return <EventListWithFilters {...item} key={key} />
 
@@ -77,7 +94,7 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
         if (!item?.id) {
           return null
         }
-        return <NewsList {...item} key={key} />
+        return <NewsList {...item} langcode={langcode} key={key} />
 
 
       case CONTENT_TYPES.LIFTUP_WITH_IMAGE:
@@ -97,6 +114,21 @@ export function ContentMapper({ content, ...props }: ContentMapperProps): JSX.El
           return null
         }
         return <Quote {...item} key={key} />
+
+      case CONTENT_TYPES.SUJO_EMBEDDED:
+        if (typeof item.field_training !== 'boolean') {
+          return null
+        }
+        return <SujoEmbedded {...item} key={key} />
+
+      case CONTENT_TYPES.UNIT_MAP:
+        return <MapEmbedded mapId={mapId} {...item} key={key} />
+
+      case CONTENT_TYPES.UNITS_LIST:
+        if (!item?.id) {
+          return null
+        }
+        return <UnitsList key={key} />
 
       default:
         console.log('unmapped type: ', type)

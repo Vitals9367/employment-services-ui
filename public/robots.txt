@@ -1,2 +1,11 @@
+# *
 User-agent: *
-Allow: /
+Allow: /*
+Disallow: /api/
+Disallow: /404
+
+# Host
+Host: https://tyollisyyspalvelut.hel.fi
+
+# Sitemaps
+Sitemap: https://tyollisyyspalvelut.hel.fi/sitemap.xml

@@ -1,3 +1,5 @@
+import { Container } from 'hds-react'
+
 import { DrupalFormattedText } from '@/lib/types'
 import HtmlBlock from '@/components/HtmlBlock'
 import 'hds-core/lib/icons/icon.min.css'
@@ -20,23 +22,24 @@ function Banner(props: BannerProps): JSX.Element {
 
   return (
     <div className='component'>
-      <div className={styles.banner} style={{ backgroundColor: `var(--color-${bgColor})` }}>
-        
-        { field_icon && 
-          <div className={styles.bannerIcon}>
-            <i className={`hds-icon hds-icon--${field_icon} hds-icon--size-xl`}></i>
-          </div>
-        }
+      <Container className='container'>
+        <div className={styles.banner} style={{ backgroundColor: `var(--color-${bgColor})` }}>
+          { field_icon && 
+            <div className={styles.bannerIcon}>
+              <i className={`hds-icon hds-icon--${field_icon} hds-icon--size-xl`}></i>
+            </div>
+          }
 
-        <div className="banner-content">
-          {field_banner_title && 
-            <h2>{field_banner_title}</h2>
-          }
-          {field_banner_desc?.processed && 
-            <HtmlBlock field_text={field_banner_desc} />
-          }
+          <div className="banner-content">
+            {field_banner_title && 
+              <h2>{field_banner_title}</h2>
+            }
+            {field_banner_desc?.processed && 
+              <HtmlBlock field_text={field_banner_desc} />
+            }
+          </div>
         </div>
-      </div>
+      </Container>
     </div>
   )
 }

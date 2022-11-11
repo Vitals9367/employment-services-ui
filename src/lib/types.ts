@@ -13,6 +13,18 @@ export interface Node extends DrupalNode {
   field_lead_in?: string
   field_content: any
   field_notification: any
+  field_lower_content: any
+  field_hide_sidebar: boolean
+  name: string
+  name_override: string
+  description: DrupalFormattedText
+  phone: any
+  address: any
+  address_postal: string
+  opening_hours: any
+  picture_url: string
+  picture_url_override: any
+  drupal_internal__id: string
 }
 
 type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text'
@@ -45,6 +57,12 @@ export interface Tags {
   [key: string]: string | string[]
 }
 
+export interface EventsQueryParams {
+  tags?: string | string[],
+  locationId?: string | null
+  locale?: Locale
+}
+
 export interface EventData {
   title: string
   url: string
@@ -53,7 +71,24 @@ export interface EventData {
   field_start_time: number
   field_end_time: number
   field_location: string
+  field_location_id?: string
   field_tags: string[]
+  field_street_address?: string
+}
+
+export interface TprUnitData extends DrupalNode {
+  name: string
+  name_override: string
+  description: DrupalFormattedText
+  field_content: any
+  field_lower_content: any
+  phone: any
+  address: any
+  address_postal: string
+  opening_hours: any
+  picture_url: string
+  picture_url_override: any
+  drupal_internal__id: string
 }
 
 export interface EventState {

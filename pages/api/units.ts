@@ -1,23 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getNews } from '@/lib/ssr-api'
+import { getUnits } from '@/lib/ssr-api'
+import { Locale } from 'next-drupal'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-  let news: any = []
+  let units: any = []
   // No posts allowed, no missing params-errors revealed.
   if (req.method !== 'GET') {
-    res.status(400).json(news)
+    res.status(400).json(units)
     return
   }
 
-  const { limit, locale }:any = req?.query
+  const { locale }:any = req?.query
 
-  news = await getNews(limit, locale).catch((e) => {
-    console.log('Error fetching news from Drupal: ', e)
+  units = await getUnits(locale).catch((e) => {
+    console.log('Error fetching units from Drupal: ', e)
     throw e
   })
 
   res
     .status(200)
-    .json(news)
+    .json(units)
 }
