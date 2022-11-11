@@ -158,7 +158,7 @@ export function EventListWithFilters(props: EventListProps): JSX.Element {
   })
   // Prioritise tags order by eventTags.
   tags && tags.sort((a: string, b: string) => eventTags.indexOf(a) - eventTags.indexOf(b))
-  const finalTags = tags && tags.map((tag: string) => tag.replace('_', ' '))
+  const finalTags = tags && tags.map((tag: string) => tag !== undefined && tag.replace('_', ' '))
   finalTags && finalTags.push(t('search.clear'))
 
   return (
