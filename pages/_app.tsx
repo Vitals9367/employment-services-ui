@@ -3,17 +3,24 @@ import { appWithTranslation } from 'next-i18next'
 import type { AppProps } from 'next/app'
 import { CookieModal } from 'hds-react';
 import { useConsentStatus, useCookieConsents, useMatomo } from '@/hooks/useAnalytics';
-import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export const MyApp = ({ Component, pageProps }: AppProps) => {
-  const { isPreview } = useRouter()
+  const [ cookieModal, setCookieModal ] = useState<boolean>(true)
+  
+  useEffect(() => {
+    if (window.top !== window.self) {
+      setCookieModal(false)
+    }
+  },[])
+
   const contentSource = useCookieConsents()
 
   useMatomo(useConsentStatus('matomo'))
 
   return (
     <>
-      { !isPreview && <CookieModal contentSource={contentSource} /> }
+      { cookieModal && <CookieModal contentSource={contentSource} /> }
       <Component {...pageProps} />
     </>
   );
