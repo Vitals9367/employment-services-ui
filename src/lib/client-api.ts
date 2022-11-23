@@ -22,8 +22,8 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
   return data
 }
 
-export const getEventsSearch = async (eventsIndex: number) => {
-  const { data } = await axios(`${EVENTS_SEARCH_URL}`, { params: { index: eventsIndex } })
+export const getEventsSearch = async (eventsIndex: number, filter: string | null) => {
+  const { data } = await axios(`${EVENTS_SEARCH_URL}`, { params: { index: eventsIndex, filter: filter } })
   return data
 }
 
