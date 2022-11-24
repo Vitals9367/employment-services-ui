@@ -14,7 +14,7 @@ import Quote from '@/components/quote/Quote'
 import SujoEmbedded from '@/components/sujoEmbedded/sujoEmbedded'
 import UnitsList from './tprUnits/UnitsList'
 import MapEmbedded from './mapEmbedded/MapEmbedded'
-import Events from './events/Events'
+import Events from '@/components/events/Events'
 
 
 interface ContentMapperProps {

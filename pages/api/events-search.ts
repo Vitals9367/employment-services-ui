@@ -41,13 +41,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       hits: { total, hits }
     } = searchRes as { hits: { total: SearchTotalHits, hits: SearchHit<unknown>[] }}
 
-    Object.assign(response, {
+    response =  {...response,
       total: total?.value,
       events: hits.map((hit: any) => {
         const { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags, field_street_address } = hit._source as EventData
         return { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags, field_street_address }
       }),
-    })
+    }
 
   } catch (err) {
     console.log('err', err)
@@ -69,13 +69,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         hits: { total, hits }
       } = searchRes as { hits: { total: SearchTotalHits, hits: SearchHit<unknown>[] }}
 
-      Object.assign(response, {
+      response = { ...response, 
         maxTotal: total?.value,
         tags: hits.map((hit: any) => {
           const { field_tags } = hit._source as EventData
           return { field_tags }
         }),
-      })
+      }
 
     } catch (err) {
       console.log('err', err)
