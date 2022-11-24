@@ -95,6 +95,20 @@ export interface EventState {
   total: number
   events: EventData[]
 }
+
+export interface EventListProps {
+  pageType?: string
+  field_title: string
+  field_events_list_short: boolean
+  field_event_tag_filter: string[]
+  field_background_color: {
+    field_css_name: string
+  } | null
+  field_events_list_desc:  DrupalFormattedText
+  locationId: string | null
+  field_street_address: string
+}
+
 declare global {
   interface Window {
     _paq: any

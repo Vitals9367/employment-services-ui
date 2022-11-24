@@ -7,13 +7,14 @@ import Accordion from '@/components/accordion/Accordion'
 import Banner from '@/components/banner/Banner'
 import LiftupWithImage from '@/components/liftupWithImage/LiftupWithImage'
 import Notification from '@/components/notification/Notification'
-import { EventList, EventListWithFilters } from '@/components/events/EventList'
+import { EventList } from '@/components/events/EventList'
 import NewsList from '@/components/news/NewsList'
 import ParagraphImage from '@/components/paragraphImage/ParagraphImage'
 import Quote from '@/components/quote/Quote'
 import SujoEmbedded from '@/components/sujoEmbedded/sujoEmbedded'
 import UnitsList from './tprUnits/UnitsList'
 import MapEmbedded from './mapEmbedded/MapEmbedded'
+import Events from '@/components/events/Events'
 
 
 interface ContentMapperProps {
@@ -88,7 +89,7 @@ export function ContentMapper({ content, pageType, locationId, mapId, langcode, 
         if (item.field_events_list_short) {
           return <EventList {...item} pageType={pageType} key={key} locationId={locationId}/>
         }
-        return <EventListWithFilters {...item} key={key} />
+        return <Events {...item} key={key} />
 
       case CONTENT_TYPES.NEWS_LIST:
         if (!item?.id) {
