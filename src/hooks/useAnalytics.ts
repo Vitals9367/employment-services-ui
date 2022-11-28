@@ -102,6 +102,9 @@ export const useCookieConsents = (): any => {
         },
       ],
     },
+    onAllConsentsGiven: (consents: any) => {
+      window.location.reload()
+    },
   };
 } 
 
