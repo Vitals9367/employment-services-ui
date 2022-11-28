@@ -221,6 +221,10 @@ h5, .h5,
     margin: var(--spacing-l) 0;
   }
 
+  .rns-label {
+    font-weight: 500 !important;
+  }
+
   .rns-plugin .rns-header {
     font-size: var(--fontsize-heading-m);
     line-height: var(--fontsize-heading-m);
@@ -243,11 +247,18 @@ h5, .h5,
   /* Button */
   .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button {
     border-color: var(--color-black-90);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover,
   .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button {
     background: var(--color-black-90) !important;
+    color: var(--color-white);
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button .rns-label {
     color: var(--color-white);
   }
 
@@ -289,6 +300,13 @@ h5, .h5,
     @extend .hds-icon--face-sad !optional;
   }
 
+  .rns-plugin .rns-reaction-button, 
+  .rns-plugin .rns-share-button {
+    font-size: 14px;
+    line-height: 30px !important;
+    cursor: pointer;
+  }
+
   /* For hover/active styles, just add :hover after .rns-reaction-button */
   /* For selected button styles, add .selected to rns-reaction (e.g. .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button) */
   /*
@@ -310,13 +328,27 @@ h5, .h5,
     background: var(--color-black-90);
     border: 2px solid transparent;
     color: var(--color-white);
+    padding: 0;
   }
   
   .rns-plugin .rns-shares .rns-share-button:hover,
   .rns-plugin .rns-shares .rns-share-button:focus {
     background: var(--color-white);
     border: 2px solid var(--color-black-90);
+    opacity: 1;
+  }
+
+  .rns-plugin .rns-shares .rns-share-button:hover .rns-label,
+  .rns-plugin .rns-shares .rns-share-button:focus .rns-label {
     color: var(--color-black-90);
+  }
+
+  .rns-plugin .rns-shares .rns-share-button .rns-label {
+    color: var(--color-white);
+  }
+
+  .rns-plugin .rns-shares .rns-icon {
+    display: none;
   }
 
   /* Submit button */
