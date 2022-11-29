@@ -83,8 +83,11 @@
   color: var(--color-white);
   margin-right: var(--spacing-xs);
   margin-bottom: var(--spacing-s);
-  text-transform: capitalize;
   width: auto;
+
+  span:first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .supplementary {
