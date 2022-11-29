@@ -4,7 +4,7 @@ import ErrorPage from 'next/error'
 import { GetStaticPropsContext, GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsResult } from 'next'
 import getConfig from 'next/config'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { Locale } from "next-drupal"
+import { Locale } from 'next-drupal'
 import { useTranslation } from 'next-i18next'
 import { Container } from 'hds-react'
 
@@ -17,10 +17,10 @@ import { Layout } from '@/components/layout/Layout'
 
 import { getDrupalClient } from '@/lib/drupal-client'
 import getMenu from '@/lib/get-menu'
-import { Node } from '@/lib/types'
+import { Node, NavProps, FooterProps } from '@/lib/types'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getQueryParamsFor } from '@/lib/params'
-import { NavProps, FooterProps } from '@/lib/types'
+import { getNode } from '@/lib/ssr-api'
 import { getBreadCrumb, getDefaultImage, getDescription, getLanguageLinks, getPathAlias, getTitle } from '@/lib/helpers'
 import { useConsentStatus, useReactAndShare } from '@/hooks/useAnalytics'
 import ConsentInfo from '@/components/consentInfo/ConsentInfo'
@@ -49,7 +49,7 @@ export async function getStaticPaths(context: GetStaticPathsContext): Promise<Ge
 }
 
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<PageProps>> {
-  const { REVALIDATE_TIME } = getConfig().serverRuntimeConfig
+  const { REVALIDATE_TIME, BUILD_PHASE } = getConfig().serverRuntimeConfig
   const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
   let withAuth = false
 
@@ -79,9 +79,14 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     }
   }
 
-  const node = await drupal.getResourceFromContext<Node>(type, context, {
-    params: getQueryParamsFor(type),
-  })
+  let node: any = {}
+
+  if (BUILD_PHASE) {
+    // Try a few times, sometimes Drupal router just gives random errors.
+    node = await getNode({type, context, drupal, path, retry: 5})
+  } else {
+    node = await getNode({type, context, drupal, path})
+  }
 
   // Return 404 if node was null
   if (!node || node?.notFound || (!context.preview && node?.status === false)) {

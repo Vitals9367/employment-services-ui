@@ -1,7 +1,8 @@
-import { getResourceCollection, getResourceByPath, Locale, translatePath } from 'next-drupal'
+import { getResourceCollection, getResourceByPath, Locale, translatePath, DrupalClient, DrupalTranslatedPath } from 'next-drupal'
+import { GetStaticPropsContext } from 'next'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
-import { EventsQueryParams } from '@/lib/types'
-import { baseEventQueryParams, baseArticlePageQueryParams, baseTprUnitQueryParams } from './params'
+import { EventsQueryParams, Node } from '@/lib/types'
+import { baseEventQueryParams, baseArticlePageQueryParams, baseTprUnitQueryParams, getQueryParamsFor } from '@/lib/params'
 
 export const getEvents = async (queryParams: EventsQueryParams) => {
   const { tags, locationId } = queryParams
@@ -111,4 +112,55 @@ export const getByPath = async (path: string) => {
 
 export const getTranslatedPath = async (path: string) => {
   return await translatePath(path)
+}
+
+interface GetNodeProps {
+  type: string
+  context: GetStaticPropsContext
+  drupal: DrupalClient
+  path: DrupalTranslatedPath
+  retry?: number
+}
+
+const RETRY_LIMIT = 10
+export const getNode = async (props: GetNodeProps) => {
+  const { type, context, drupal, path, retry = 0 } = props
+
+  const getter: any = () => 
+    drupal.getResourceFromContext<Node>(type, context, {
+      params: getQueryParamsFor(type),
+    })  
+    .catch((e: any) => {
+      console.log(`Error requesting node %s`, path.entity.path, {
+        type,
+        e,
+      })
+      return null
+    })
+
+  if (retry < 1) {
+    return getter()
+  }
+
+  let node = null
+  let attempts = 0
+  while (node === null && attempts <= retry - 1 && attempts <= RETRY_LIMIT) {
+    if (attempts > 0) {
+      console.log('Retry attempts %s for %s', attempts, path.entity.path)
+      await new Promise((res) => setTimeout(res, 1000))
+    }
+
+    node = await getter()
+    attempts++
+  }
+  if (!node) {
+    console.log(
+      'Unable to get page %s after %s attempts',
+      path.entity.path,
+      attempts
+    )
+    throw `Unable to get page ${path.entity.path} after ${retry} attempts`
+  }
+
+  return node
 }
