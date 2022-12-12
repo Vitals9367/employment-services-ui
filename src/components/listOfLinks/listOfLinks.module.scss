@@ -1,0 +1,70 @@
+@import '/styles/variables.scss';
+
+.listOfLinks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: var(--spacing-l);
+}
+
+.linkItem {
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+}
+
+.linkBox {
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+
+  & > div {
+    height: 100%;
+
+    & > div {
+      padding-left: var(--spacing-2-xs);
+      padding-right: var(--spacing-2-xs);
+    }
+  }
+
+  svg {
+    bottom: 0;
+    left: 6px;
+    transition: transform .2s linear;
+  }
+
+  &:hover svg {
+    transform: translateX(0.5rem);
+  }
+
+  div[role="heading"] {
+    font-weight: 500;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+}
+
+@media (min-width: $breakpoint-s) {
+  .linkItem,
+  .linkBox {
+    flex-grow: 0;
+    width: calc(50% - var(--spacing-l));
+  }
+}
+
+@media (min-width: $breakpoint-l) {
+  .linkItem,
+  .linkBox {
+    flex-grow: 0;
+    width: calc(33.3333% - var(--spacing-l));
+  }
+}
+
+@media (min-width: $breakpoint-xl) {
+  .linkBox {
+    flex-grow: 0;
+    width: calc(25% - var(--spacing-l));
+  }
+}

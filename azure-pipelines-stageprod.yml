@@ -3,7 +3,7 @@
 trigger:
   branches:
     include:
-    - new-main
+    - main
   paths:
     exclude:
     - README.md
@@ -44,3 +44,4 @@ extends:
   template: azure-pipelines-tyollisyyspalvelut-ui-stageprod.yml@tyollisyyspalvelut-pipelines
   #parameters:
     #imagetag: ${{ parameters.imagetag }}
+    

@@ -1,0 +1,75 @@
+@import '/styles/variables.scss';
+
+.unitsList {
+    > * {
+        @media (min-width: $breakpoint-l) {
+            display: flex;
+            flex-flow: row wrap;
+            flex: 1 auto;
+        }
+    }
+
+    .card {
+        border: 2px solid var(--color-black);
+        margin-bottom: var(--spacing-m);
+        min-height: 260px;
+        position: relative;
+    }
+
+    .media {
+
+        @media (min-width: $breakpoint-l) {
+            width: 33.33%;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .description {
+        display: flex;
+        flex-flow: column wrap;        
+        padding: var(--spacing-m);
+
+        @media (min-width: $breakpoint-l) {
+            width: 66.66%;
+        }
+
+        h3 {
+            margin: 0;
+        }
+
+        .link {
+            margin-top: auto;
+            display: flex;
+
+            @media (min-width: $breakpoint-l) {
+                align-self: flex-end;
+            }
+
+            a {
+                font-weight: 500; 
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                
+            }
+
+            span {
+                padding-right: var(--spacing-2-xs);
+            }
+
+            svg {
+                transition: transform .2s linear;
+            }
+        
+            &:hover svg {
+                transform: translateX(0.5rem);
+            }
+        }
+    }
+}

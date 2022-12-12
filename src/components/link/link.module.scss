@@ -1,0 +1,39 @@
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: underline;
+  text-underline-offset: var(--spacing-3-xs);
+  width: 100%;
+
+  &.fullAreaLink {
+    justify-content: space-between;
+
+    &:before {
+      content: "";
+      display: block;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  svg {
+    min-width: 48px;
+    transition: transform .2s linear;
+  }
+
+  &.internal:hover svg {
+    transform: translateX(8px);
+  }
+
+  &.external:hover svg {
+    transform: translate(4px, -4px);
+  }
+
+}

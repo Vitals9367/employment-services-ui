@@ -1,0 +1,77 @@
+@import '/styles/variables.scss';
+
+.liftupWithImage {
+  position: relative;
+}
+
+.liftupWithImageContentWrapper {
+  width: 100%;
+  margin: 0 auto;
+
+  .liftupWithImageContent {
+    background-color: var(--color-suomenlinna);
+    padding: var(--spacing-l);
+  }
+
+  .contentBgSecondary {
+    background-color: var(--color-fog-medium-light);
+  }
+}
+
+@media (min-width: $breakpoint-m) {
+  .imageFullWidth {
+    &.textRight {
+      .liftupWithImageImage {
+        padding-right: 0;
+      }
+      .liftupWithImageContentWrapper {
+        right: var(--spacing-2-xl);
+      }
+    }
+  
+    &.textLeft {
+      .liftupWithImageImage {
+        padding-left: 0;
+      }
+      .liftupWithImageContentWrapper {
+        left: var(--spacing-2-xl); 
+      }
+    }
+  
+    .liftupWithImageImage {
+      padding: 0;
+    }
+  }
+
+  .textLeft {
+    .liftupWithImageImage {
+      padding-left: 20%;
+    }
+  }
+  
+  .textRight {
+    .liftupWithImageImage {
+      padding-right: 20%;
+    }
+  
+    .liftupWithImageContentWrapper {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  .liftupWithImageContentWrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 29rem;
+
+    .liftupWithImageContent {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}

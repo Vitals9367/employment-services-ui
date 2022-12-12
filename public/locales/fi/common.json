@@ -1,0 +1,69 @@
+{
+  "locale": "fi",
+  "site_name": "Työllisyyspalvelut",
+  "site_title": "Helsingin työllisyyspalvelut",
+  "link_copied": "Linkki kopioitu",
+  "navigation": {
+    "button_text": "Oma asiointi",
+    "button_link": "https://asiointi.mol.fi/omaasiointi/",
+    "title_aria_label": "Helsinki: Työllisyyspalvelut",
+    "navigate_to_page": "Siirry sivulle",
+    "frontpage": "Etusivu",
+    "breadcrumb_label": "Murupolku",
+    "theme_dropdown": "Muut kielet"
+  },
+  "search": {
+    "filter": "Suodata tapahtumia",
+    "clear": "Poista valinta"
+  },
+  "list": {
+    "load_more": "Näytä lisää",
+    "read_more": "Lue lisää",
+    "read_more_blogs": "Lue kaikki blogit",
+    "read_more_news": "Lue kaikki uutiset",
+    "blog_url": "/fi/blogi",
+    "events_url": "/fi/tapahtuma",
+    "show_all_news": "Näytä kaikki uutiset",
+    "news_url": "/fi/uutiset",
+    "results_text": "hakutulosta",
+    "show_all_events": "Näytä kaikki tapahtumat",
+    "events_page_url": "/ajankohtaista/tapahtumat",
+    "no_events": "Ei tulevia tapahtumia tästä aiheesta."
+  },
+  "event": {
+    "remote_event": "Etätapahtuma",
+    "info_url_text": "Tapahtuman kotisivut",
+    "info_url_text_teams": "Avaa Teams-tapahtuma"
+  },
+  "video": {
+    "cookie_consent": "Et ole antanut lupaa asettaa evästeitä.",
+    "link_text": "Hyväksythän evästeet nähdäksesi sisällön"
+  },
+  "footer": {
+    "copyright": "Helsingin kaupunki",
+    "accessibility": "Saavutettavuusseloste",
+    "accessibilityLink": "/saavutettavuusseloste",
+    "feedback": "Anna palautetta",
+    "feedbackLink": "https://www.hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/palaute/",
+    "goup": "Sivun alkuun",
+    "cookie_settings": "Evästeasetukset"
+  },
+  "map": {
+    "location": "Sijainti",
+    "new_window": "Avaa kartta uuteen ikkunaan"
+  },
+  "unit": {
+    "contact_information": "Yhteystiedot",
+    "visit_address": "Käyntiosoite",
+    "open_hours": "Aukioloajat",
+    "phone_service": "Puhelinpalvelu",
+    "postal_address": "Postiosoite",
+    "more_info": "Katso aukioloajat ja yhteystiedot"
+  },
+  "consent_info": {
+    "title": "Sivun palautenappeja ei voida näyttää",
+    "text": "Toiminnon käyttämiseksi vaaditaan, että hyväksyt sivuston evästeet. Pääset antamaan palautetta tästä sivusta sallimalla evästeasetuksista tilastointiin liittyvät evästeet.",
+    "button": "Muokkaa evästeasetuksia"
+  }
+
+}

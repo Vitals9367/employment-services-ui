@@ -1,0 +1,456 @@
+@import '~hds-core/lib/icons/ui/icon-face-sad';
+@import '~hds-core/lib/icons/ui/icon-face-smile';
+@import '~hds-core/lib/icons/ui/icon-face-neutral';
+@import '/styles/variables.scss';
+
+:root {
+  --max-width: 1440px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  -webkit-text-size-adjust: 100%;
+  line-height: var(--lineheight-m);
+}
+
+body {
+  background: var(--color-white);
+  color: var(--color-black-90);
+  font-family: var(--font-default);
+  font-size: var(--fontsize-body-m);
+  line-height: var(--lineheight-l);
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+}
+
+main h1.small, main .h1-small,
+.small-text main h1, .small-text main .h1,
+main h1, main .h1 {
+  font-size: var(--fontsize-heading-l);
+  font-weight: 400;
+  line-height: var(--lineheight-m);
+}
+
+h2.small, .h2-small,
+h2, .h2,
+.small-text h2, .small-text .h2 {
+  font-size: var(--fontsize-heading-m);
+  font-weight: 400;
+  line-height: var(--lineheight-m);
+}
+
+h3.small, .h3-small,
+h3, .h3,
+.small-text h3, .small-text .h3  {
+  font-size: var(--fontsize-heading-s);
+  font-weight: 400;
+  line-height: var(--lineheight-m);
+}
+
+h4.small, .h4-small,
+h4, .h4,
+.small-text h4, .small-text .h4 {
+  font-size: var(--fontsize-heading-xs);
+  font-weight: 400;
+  line-height: var(--lineheight-m);
+}
+
+h6, .h6, h5.small, .h5-small,
+h5, .h5,
+.small-text h5, .small-text .h5 {
+  font-size: var(--fontsize-heading-xxs);
+  font-weight: 400;
+  line-height: var(--lineheight-m);
+}
+
+.content-region,
+.content-region-landing {
+  a.link-internal,
+  a.link-external,
+  a[data-is-external="true"],
+  a[data-entity-type="node"] {
+    display: inline-flex;
+  }
+
+  a.link-internal::after,
+  a.link-external::after,
+  a[data-is-external="true"]::after,
+  a[data-entity-type="node"]::after {
+    content: '';
+    margin-left: var(--spacing-3-xs);
+    transition: transform .2s linear;
+    width: 2rem;
+  }
+
+  .link-internal::after,
+  a[data-entity-type="node"]::after {
+    margin-right: var(--spacing-3-xs);
+    background: url('../src/assets/arrow-right.svg') no-repeat center top;
+  }
+
+  .link-external::after,
+  a[data-is-external="true"]::after {
+    margin-right: var(--spacing-3-xs);
+    background: url('../src/assets/arrow-top-right.svg') no-repeat center top;
+  }
+
+  .link-internal:hover::after,
+  a[data-entity-type="node"]:hover::after {
+    transform: translateX(8px);
+  }
+
+  .link-external:hover::after,
+  a[data-is-external="true"]:hover::after {
+    transform: translate(4px, -4px);
+  }
+}
+
+.content-region {
+  ul, ol {
+    margin-top: var(--spacing-l);
+    margin-bottom: var(--spacing-l);
+    padding-top: 0;
+    padding-left: var(--spacing-s);
+    list-style-position: outside;
+  }
+
+  li {
+    padding-left: var(--spacing-m);
+  }
+
+  ul li::marker {
+    color: var(--color-metro);
+  }
+
+  li li::marker {
+    color: var(--color-black-90);
+  }
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.columns {
+  display: flex;
+  flex-direction: column;
+}
+
+.col {
+  margin-left: var(--spacing-xs);
+  margin-right: var(--spacing-xs);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-order-first {
+  order: -1;
+}
+
+.content-region {
+  .component {
+    margin-top: var(--spacing-4-xl);
+    margin-bottom: var(--spacing-4-xl);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.component {
+  padding-top: var(--spacing-4-xl);
+  padding-bottom: var(--spacing-4-xl);
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
+.lead-in {
+  font-size: var(--fontsize-body-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.not-found {
+  margin: var(--spacing-4-xl) auto;
+
+  h1 {
+    text-align: center;
+  }
+
+  a {
+    justify-content: center;
+  }
+}
+
+/* React & Share */
+.rns {
+  border-top: 1px solid var(--color-black-90);
+  border-bottom: 1px solid var(--color-black-90);
+  margin-top: var(--spacing-4-xl);
+  margin-bottom: var(--spacing-4-xl);
+
+  /*
+  React & Share CSS Style Guide
+  Ref: https://docs.reactandshare.com/#custom-styling
+  */
+
+  /* General styles */
+  .rns-plugin {
+    margin: var(--spacing-l) 0;
+  }
+
+  .rns-label {
+    font-weight: 500 !important;
+  }
+
+  .rns-plugin .rns-header {
+    font-size: var(--fontsize-heading-m);
+    line-height: var(--fontsize-heading-m);
+  }
+
+  /* Reactions */
+  /*
+  All React & Share buttons share the same structure:
+    Button
+      Label
+      Icon
+      Count
+  */
+  @media (min-width: $breakpoint-m) {
+    .rns-plugin .rns-reactions .reactions .rns-reaction {
+      flex: 0 0 11rem;
+    }
+  }
+
+  /* Button */
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button {
+    border-color: var(--color-black-90);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover,
+  .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button {
+    background: var(--color-black-90) !important;
+    color: var(--color-white);
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button .rns-label {
+    color: var(--color-white);
+  }
+
+  /* Label */
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label {
+    color: var(--color-black-90);
+    display: flex;
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button:hover .rns-label:after,
+  .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button .rns-label:after {
+    background-color: var(--color-white);
+  }
+
+  /* HDS Icons */
+  .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button .rns-label:after {
+    content: "";
+    display: flex;
+    height: 24px;
+    width: 24px;
+    margin-left: 16px;
+    mask-size: 24px 24px;
+    background-color: var(--color-black);
+    background-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: auto;
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction:first-child .rns-label:after {
+    @extend .hds-icon--face-smile !optional;
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction:nth-child(2) .rns-label:after {
+    @extend .hds-icon--face-neutral !optional;
+  }
+
+  .rns-plugin .rns-reactions .reactions .rns-reaction:last-child .rns-label:after {
+    @extend .hds-icon--face-sad !optional;
+  }
+
+  .rns-plugin .rns-reaction-button, 
+  .rns-plugin .rns-share-button {
+    font-size: 14px;
+    line-height: 30px !important;
+    cursor: pointer;
+  }
+
+  /* For hover/active styles, just add :hover after .rns-reaction-button */
+  /* For selected button styles, add .selected to rns-reaction (e.g. .rns-plugin .rns-reactions .reactions .rns-reaction.selected .rns-reaction-button) */
+  /*
+  All React & Share buttons share the same structure:
+    Button
+      Label
+      Icon
+      Count
+  */
+
+  /* Shares */
+  .rns-plugin .rns-shares .rns-share {
+    padding: 0 .2rem .4rem !important;
+    width: 25%;
+  }
+
+  /* Button */
+  .rns-plugin .rns-shares .rns-share-button {
+    background: var(--color-black-90);
+    border: 2px solid transparent;
+    color: var(--color-white);
+    padding: 0;
+  }
+  
+  .rns-plugin .rns-shares .rns-share-button:hover,
+  .rns-plugin .rns-shares .rns-share-button:focus {
+    background: var(--color-white);
+    border: 2px solid var(--color-black-90);
+    opacity: 1;
+  }
+
+  .rns-plugin .rns-shares .rns-share-button:hover .rns-label,
+  .rns-plugin .rns-shares .rns-share-button:focus .rns-label {
+    color: var(--color-black-90);
+  }
+
+  .rns-plugin .rns-shares .rns-share-button .rns-label {
+    color: var(--color-white);
+  }
+
+  .rns-plugin .rns-shares .rns-icon {
+    display: none;
+  }
+
+  /* Submit button */
+  .rns-plugin .rns-inputs .rns-form-submit {
+    background: var(--color-black-90);
+    border: 2px solid transparent;
+    color: var(--color-white);
+  }
+
+  .rns-plugin .rns-inputs .rns-form-submit:hover,
+  .rns-plugin .rns-inputs .rns-form-submit:focus {
+    background: var(--color-white);
+    border: 2px solid var(--color-black-90);
+    color: var(--color-black-90);
+  }
+ }
+
+
+
+@media (min-width: $breakpoint-s) {
+  .col {
+    margin-left: var(--spacing-s);
+    margin-right: var(--spacing-s);
+  }
+  // for basic page's narrower content region.
+  .content-region .link-item,
+  .content-region .link-box,
+  .content-region .event-card {
+    width: calc(50% - var(--spacing-l));
+  }
+}
+
+@media (min-width: $breakpoint-m) {
+  main h1, main .h1 {
+    font-size: var(--fontsize-heading-xl);
+    line-height: var(--lineheight-m);
+  }
+
+  h2, .h2 {
+    font-size: var(--fontsize-heading-l);
+    line-height: var(--lineheight-m);
+  }
+
+  h3, .h3 {
+    font-size: var(--fontsize-heading-m);
+    line-height: var(--lineheight-m);
+  }
+
+  h4, .h4 {
+    font-size: var(--fontsize-heading-s);
+    line-height: var(--lineheight-m);
+  }
+
+  h5, .h5 {
+    font-size: var(--fontsize-heading-xs);
+    line-height: var(--lineheight-m);
+  }
+}
+
+@media (min-width: $breakpoint-l) {
+  body {
+    font-size: var(--fontsize-body-l);
+  }
+
+  .columns {
+    flex-direction: row;
+  }
+
+  .col {
+    margin-left: var(--spacing-m);
+    margin-right: var(--spacing-m);
+  }
+
+  .col-3 {
+    width: 25%;
+  }
+
+  .col-4 {
+    width: 33%;
+  }
+
+  .col-5 {
+    width: 58%;
+  }
+
+  .col-6 {
+    width: 50%;
+  }
+
+  .col-7 {
+    width: 42%;
+  }
+
+  .col-8 {
+    width: 67%;
+  }
+
+  .col-9 {
+    width: 75%;
+  }
+
+  .col-12 {
+    width: 100%;
+  }
+}
