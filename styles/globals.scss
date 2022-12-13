@@ -366,7 +366,54 @@ h5, .h5,
   }
  }
 
+.search-page {
+  margin-bottom: var(--spacing-4-xl);
 
+  h1 {
+    @media (min-width: $breakpoint-m) {
+      font-size: var(--fontsize-heading-xxl);
+    }
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .summary p {
+    font-size: var(--fontsize-body-xl);
+  }
+
+  .item {
+    background-color: var(--color-black-5);
+    padding: var(--spacing-s);
+    margin-bottom: var(--spacing-s);
+    position: relative;
+
+    @media (min-width: $breakpoint-m) {
+      padding: var(--spacing-l);
+    }
+  }
+
+  .item-text {
+    font-size: var(--fontsize-body-m)
+  }
+
+  .item-link {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    span {
+      display: none;
+    }
+  }
+}
 
 @media (min-width: $breakpoint-s) {
   .col {

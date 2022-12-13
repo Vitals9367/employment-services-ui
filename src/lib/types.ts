@@ -110,6 +110,20 @@ export interface EventListProps {
   field_street_address: string
 }
 
+export interface SearchState {
+  total: number
+  results: SearchData[]
+} 
+
+export interface SearchData {
+  entity_type: string
+  type: string
+  title: string
+  field_lead_in: string
+  field_description: string
+  url: string
+}
+
 declare global {
   interface Window {
     _paq: any

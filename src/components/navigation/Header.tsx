@@ -8,11 +8,13 @@ import { Breadcrumb } from './Breadcrumb'
 import classNames from '@/lib/classNames'
 
 import styles from './navigation.module.scss'
+import { useRouter } from 'next/router'
 
 function Header(header:NavProps): JSX.Element {
 
   const { locale, menu, themes, langLinks, breadcrumb } = header
   const { t } = useTranslation('common')
+  const router = useRouter()
 
   const activePath = langLinks[locale]
 
@@ -78,6 +80,10 @@ function Header(header:NavProps): JSX.Element {
     return <></>
   }
 
+  const onSearch = (searchValue: string) => {
+    router.push(`/search?q=${searchValue}`, undefined, { shallow: true })
+  }
+
   return (
     <>
     <Navigation
@@ -94,7 +100,7 @@ function Header(header:NavProps): JSX.Element {
         {getNavi(menu)}
       </Navigation.Row>
       <Navigation.Actions>
-        {/* <Navigation.Search searchLabel="Search" searchPlaceholder="Search page" /> */}
+        <Navigation.Search onSearch={onSearch} searchLabel={t('navigation.search_label')} searchPlaceholder={t('navigation.search_placeholder')} />
         <Navigation.User
           id='navigation_blue_button'
           key='navigation_button'
@@ -107,6 +113,7 @@ function Header(header:NavProps): JSX.Element {
         />
         <Navigation.LanguageSelector label={locale.toUpperCase()}>
           <Navigation.Item
+            lang="fi"
             key="fi_lang"
             href={langLinks.fi}
             hrefLang='fi'
@@ -114,6 +121,7 @@ function Header(header:NavProps): JSX.Element {
             active={langLinks.fi === activePath}
           />
           <Navigation.Item
+            lang="sv"
             key="sv_lang"
             href={langLinks.sv}
             hrefLang='sv'
@@ -121,6 +129,7 @@ function Header(header:NavProps): JSX.Element {
             active={langLinks.sv === activePath}
           />
           <Navigation.Item
+            lang="en"
             key="en_lang"
             href={langLinks.en}
             hrefLang='en'

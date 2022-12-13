@@ -10,11 +10,23 @@
     "navigate_to_page": "Navigera till sidan",
     "frontpage": "Framsida",
     "breadcrumb_label": "Synlig sökväg",
-    "theme_dropdown": "Andra språk"
+    "theme_dropdown": "Andra språk",
+    "search_label": "Sök",
+    "search_placeholder": "Sök innehåll"
   },
   "search": {
     "filter": "Filtrera evenemang",
-    "clear": "Töm sökfilter"
+    "clear": "Töm sökfilter",
+    "title": "Hae työllisyyspalveluiden sivuilta",
+    "input_label": "Mitä haet?",
+    "input_placeholder": "Haettava teksti",
+    "input_submit": "Hae",
+    "keyword": "Hakusana",
+    "result_text": "Hakutulosta",
+    "item_link_text": "Avaa hakutulos",
+    "pagination_aria_label": "Sivunumerointi",
+    "entity_type_event": "Tapahtuma",
+    "entity_type_article": "Uutinen"
   },
   "list": {
     "load_more": "Visa fler",

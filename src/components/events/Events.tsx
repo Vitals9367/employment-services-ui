@@ -123,7 +123,7 @@ export default function Events(props: EventListProps): JSX.Element {
               linkboxAriaLabel="List of links Linkbox"
               linkAriaLabel="Linkbox link"
               key={key}
-              href={getLangPath(event)}
+              href={event.url}
               withBorder
             >
               <Image
