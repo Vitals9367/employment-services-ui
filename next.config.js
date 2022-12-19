@@ -69,6 +69,7 @@ const nextConfig = {
     domains: [process.env.NEXT_IMAGE_DOMAIN, 'api.hel.fi'],
     deviceSizes: [576, 768, 992, 1200]
   },
+  productionBrowserSourceMaps: true,
   sentry: sentryConfig,
   async redirects() {
     return [
