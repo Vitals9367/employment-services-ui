@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as Elastic from '@/lib/elasticsearch'
 import { SearchState, SearchData } from '@/lib/types'
-import { SearchHit, SearchTotalHits } from '@elastic/elasticsearch/lib/api/types'
+import { SearchHit, SearchTotalHits, MsearchMultisearchBody } from '@elastic/elasticsearch/lib/api/types'
 import { Locale } from 'next-drupal'
 
 type Data = SearchState
@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const elastic = Elastic.getElasticClient()
   const size = 20
   const from: number = index > 0 ? size * index : 0
-  const body: any = {
+  const body: MsearchMultisearchBody = {
     size: size,
     from: from,
     query: {
