@@ -9,6 +9,7 @@ const EVENTS_URL = '/api/events'
 const EVENTS_SEARCH_URL = '/api/events-search'
 const NEWS_URL = '/api/news'
 const UNITS_URL = '/api/units'
+const SEARCH_URL = '/api/search'
 
 export const getEvents = async (queryParams: EventsQueryParams) => {
   const { data } = await axios(`${EVENTS_URL}`, {
@@ -37,3 +38,7 @@ export const getUnits = async (locale: Locale) => {
   return data
 }
 
+export const getSearch = async (index: number, query: string | undefined, locale: Locale) => {
+  const { data } = await axios(`${SEARCH_URL}`, { params: { index: index, q: query, locale: locale } })
+  return data
+}

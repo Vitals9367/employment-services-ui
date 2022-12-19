@@ -102,6 +102,12 @@ export const useCookieConsents = (): any => {
         },
       ],
     },
+    onAllConsentsGiven: (consents: any) => {
+      /**
+       * @TODO Check for better solution to get rid of Cookies needed infobox, when accepting cookies.
+       */
+      window.location.reload()
+    },
   };
 } 
 
