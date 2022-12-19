@@ -11,13 +11,14 @@ import Link from '@/components/link/Link'
 
 import styles from './eventPage.module.scss'
 import { useRouter } from 'next/router'
+import EventStatus from '../events/EventStatus'
 
 interface NodeEventPageProps {
   node: Node
 }
 
 function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element { 
-  const { title, field_text, field_location, field_location_id, field_start_time, field_end_time, field_tags, field_image_url, field_image_alt, field_info_url, field_external_links, field_street_address } = node
+  const { title, field_text, field_location, field_location_id, field_start_time, field_end_time, field_tags, field_image_url, field_image_alt, field_info_url, field_external_links, field_street_address, field_event_status } = node
   const { t } = useTranslation('common')
   const { locale } = useRouter()
   const infoUrlText = field_info_url && field_info_url.startsWith('https://teams.microsoft') ? t('event.info_url_text_teams') : t('event.info_url_text')
@@ -38,7 +39,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
               </div>
               <div className={styles.headingContainer}>
                 {field_tags && field_tags.length !== 0 && <TagList tags={field_tags} /> }
-                <h1>{title}</h1>
+                <h1><EventStatus {...{'field_event_status': field_event_status}} />{title}</h1>
                 <DateTime startTime={field_start_time} endTime={field_end_time}  />
                 <div className={styles.location}>
                   <div>

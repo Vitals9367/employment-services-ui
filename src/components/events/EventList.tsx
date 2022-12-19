@@ -15,6 +15,7 @@ import TagList from './TagList'
 import DateTime from './DateTime'
 
 import styles from './events.module.scss'
+import EventStatus from './EventStatus'
 
 export function EventList({ pageType, locationId, ...props }: EventListProps): JSX.Element {
   const { field_title, field_events_list_short, field_event_tag_filter: tags, field_background_color, field_events_list_desc } = props
@@ -76,7 +77,7 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
                     <div className={styles.eventCardContent}>
                       {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
                       <DateTime startTime={event.field_start_time} endTime={event.field_end_time} />
-                      <h3>{event.title}</h3>
+                      <h3><EventStatus {...event} />{event.title}</h3>
                       <p>{event.field_location}{ event.field_street_address ? `, ${event.field_street_address}` : ''}</p>
                     </div>
                   </Linkbox>
