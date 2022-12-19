@@ -33,7 +33,8 @@
   "event": {
     "remote_event": "Remote event",
     "info_url_text": "Event homepage",
-    "info_url_text_teams": "Open Teams-event"
+    "info_url_text_teams": "Open Teams-event",
+    "cancelled_text": "Event cancelled: "
   },
   "video": {
     "cookie_consent": "You have not allowed the use of cookies on this site.",

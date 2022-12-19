@@ -153,6 +153,7 @@ export const baseEventQueryParams = () =>
       'field_location_id',
       'field_start_time',
       'field_end_time',
+      'field_event_status',
       'field_tags',
       'field_image_url',
       'field_image_name',

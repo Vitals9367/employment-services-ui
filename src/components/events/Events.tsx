@@ -10,6 +10,7 @@ import Image from 'next/image'
 import styles from './events.module.scss'
 import DateTime from "./DateTime"
 import TagList from "./TagList"
+import EventStatus from "./EventStatus"
 import { eventTags, getPath } from "@/lib/helpers"
 import { useEffect, useState } from "react"
 
@@ -135,7 +136,7 @@ export default function Events(props: EventListProps): JSX.Element {
               <div className={styles.eventCardContent}>
                 {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
                 <DateTime startTime={event.field_start_time[0]} endTime={event.field_end_time[0]} />
-                <h3>{event.title[0]}</h3>
+                <h3><EventStatus {...event} />{event.title[0]}</h3>
                 <p>{event.field_location[0]}{ event.field_street_address ? `, ${event.field_street_address[0]}` : ''}</p>
               </div>
             </Linkbox>

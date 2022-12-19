@@ -44,8 +44,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     response =  {...response,
       total: total?.value,
       events: hits.map((hit: any) => {
-        const { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags, field_street_address } = hit._source as EventData
-        return { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags, field_street_address }
+        const { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags, field_street_address, field_event_status } = hit._source as EventData
+        return { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags, field_street_address, field_event_status }
       }),
     }
 
