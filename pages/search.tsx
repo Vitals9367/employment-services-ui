@@ -52,13 +52,21 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 }
 
 const ItemBlock = (props: any): JSX.Element => {
+  const getText = (content: any): string | JSX.Element | JSX.Element[] => {
+    if (content.field_lead_in !== undefined) {
+      return parse(content.field_lead_in[0])
+    }
+  
+    if (content.field_description !== undefined) {
+      return parse(content.field_description[0])
+    }
+
+    return ''
+  }
+
   const content = props.result
   const title = content.title[0]
-  const text = content.field_lead_in === undefined 
-    ? content.field_description === undefined 
-      ? ''
-      : parse(content.field_description[0])
-    : parse(content.field_lead_in[0])
+  const text = getText(content)
   const url = content.url === undefined ? '#' : content.url[0]
 
   return (
