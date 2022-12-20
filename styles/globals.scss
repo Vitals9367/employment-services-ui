@@ -402,6 +402,10 @@ h5, .h5,
     font-size: var(--fontsize-body-m)
   }
 
+  .item-badge {
+    margin-top: var(--spacing-s);
+  }
+
   .item-link {
     position: absolute;
     top: 0;

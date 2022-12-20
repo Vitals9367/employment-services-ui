@@ -76,7 +76,7 @@ const ItemBlock = (props: any): JSX.Element => {
         {text}
       </div>
       { props.badgeText && 
-        <div>
+        <div className="item-badge">
           <RoundedTag aria-label={props.badgeText} theme={{'--tag-background': '#ffffff' }}>{props.badgeText}</RoundedTag>
         </div>
       }
@@ -135,7 +135,7 @@ export default function Search({ nav, footer }: SearchPageProps) {
   }
 
   const hasBadge = (type: string) => {
-    if (type === 'event' || type === 'news') {
+    if (type === 'event' || type === 'article') {
       return t(`search.entity_type_${type}`)
     }
     return false
