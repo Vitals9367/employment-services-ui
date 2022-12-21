@@ -121,7 +121,8 @@ const getLandingPageQueryParams = () =>
       'field_notification'
     ])
     .addInclude([
-      'field_hero.field_custom_hero_image.field_media_image'
+      'field_hero.field_custom_hero_image.field_media_image',
+      'field_content.field_accordion_items.field_accordion_item_content'
     ])
     .addFields(CONTENT_TYPES.HERO, [
       'field_hero_desc',
