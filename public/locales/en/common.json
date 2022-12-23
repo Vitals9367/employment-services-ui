@@ -12,21 +12,21 @@
     "breadcrumb_label": "Breadcrumb",
     "theme_dropdown": "Other languages",
     "search_label": "Search",
-    "search_placeholder": "Search content"
+    "search_placeholder": "Search for content"
   },
   "search": {
     "filter": "Filter events",
     "clear": "Clear filter",
-    "title": "Hae työllisyyspalveluiden sivuilta",
-    "input_label": "Mitä haet?",
-    "input_placeholder": "Haettava teksti",
-    "input_submit": "Hae",
-    "keyword": "Hakusana",
-    "result_text": "Hakutulosta",
-    "item_link_text": "Avaa hakutulos",
-    "pagination_aria_label": "Sivunumerointi",
-    "entity_type_event": "Tapahtuma",
-    "entity_type_article": "Uutinen"
+    "title": "Search the Employment Services website",
+    "input_label": "What are you looking for?",
+    "input_placeholder": "Search text",
+    "input_submit": "Search",
+    "keyword": "Keyword",
+    "result_text": "Search results",
+    "item_link_text": "Open search result",
+    "pagination_aria_label": "Page numbers",
+    "entity_type_event": "Event",
+    "entity_type_article": "News"
   },
   "list": {
     "load_more": "Show more",
