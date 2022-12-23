@@ -1,6 +1,6 @@
-import { getEventsSearch } from "@/lib/client-api"
+import { getEventsSearch, getEventsTags } from "@/lib/client-api"
 import { EventListProps } from "@/lib/types"
-import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, IconArrowRight, Container } from "hds-react"
+import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, Container } from "hds-react"
 import { useTranslation } from "next-i18next"
 import { useRouter } from "next/router"
 import useSWRInfinite from 'swr/infinite'
@@ -15,20 +15,6 @@ import { useEffect, useState } from "react"
 
 const getKey = (eventsIndex: number) => {
   return `${eventsIndex}`
-}
-
-const getTags = (props: any) => {
-  const { data, events } = props
-  const handler = data[0].tags ? data[0].tags : events
-
-  return handler
-    .reduce((acc:any, curr:any) => { 
-      return [...acc, curr.field_tags]
-        .flat()
-        .filter((value:any, index:any, array:any) => {
-          return array.indexOf(value) === index && value !== undefined})
-    }, [])
-    .sort((a: string, b: string) => eventTags.indexOf(a) - eventTags.indexOf(b))
 }
 
 const getEvents = (data: any) => {
@@ -52,7 +38,7 @@ export default function Events(props: EventListProps): JSX.Element {
   const { data, size, setSize } = useSWRInfinite(getKey, fetcher)
   const events = data && getEvents(data)
   const total = data && getTotal(data)
-  const tags = events && getTags({data, events})
+  const [ eventsTags, setEventsTags ] = useState<any>([])
 
   const resultText = !total ? '' : total.current < total.max ? `${total.current} / ${total.max} ${t('list.results_text')}` : `${total.max} ${t('list.results_text')}`
 
@@ -68,6 +54,21 @@ export default function Events(props: EventListProps): JSX.Element {
 
     return locale !== 'fi' && locale != undefined ? `${eventPaths[locale]}${nodePath}` : getPath(event.url[0])
   }
+
+  const updateTags = () => {
+    getEventsTags().then((result) => {
+      const tags: any = result
+        .filter((item: any) => { return item.key === undefined ? false : item })
+        .map((item: any) => { return item.key })
+        .sort((a: string, b: string) => eventTags.indexOf(a) - eventTags.indexOf(b))
+
+      setEventsTags(tags)
+    })
+  }
+
+  useEffect(() => {
+    updateTags()
+  }, [])
 
   useEffect(() => {
     setSize(1)
@@ -93,13 +94,13 @@ export default function Events(props: EventListProps): JSX.Element {
       <div className={styles.filter}>{t('search.filter')}</div>
 
       <div className={styles.filterTags}>
-        { tags && tags.map((tag: any, i: number) => (
+        { eventsTags && eventsTags.map((tag: any, i: number) => (
           <HDSButton
             key={`tagFilter-${i}`}
             className={filter === tag ? styles.selected: styles.filterTag}
             onClick={() => { setFilter(tag.replace(' ', '_')) }}
           >
-            { tag.replace('_', ' ') }
+          { tag.replace('_', ' ') }
           </HDSButton>
           ))
         }
