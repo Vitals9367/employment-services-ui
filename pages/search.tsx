@@ -7,14 +7,12 @@ import { Button, Container, Pagination, SearchInput, RoundedTag } from 'hds-reac
 import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
 import { GetStaticPropsContext, GetStaticPropsResult } from 'next'
-import { NavProps, FooterProps } from '@/lib/types'
+import { NavProps, FooterProps, SearchInputValue } from '@/lib/types'
 import getMenu from '@/lib/get-menu'
 import { useEffect, useState } from 'react';
 import { getSearch } from '@/lib/client-api';
 import { integer } from '@elastic/elasticsearch/lib/api/types';
 import { useRouter } from 'next/router';
-
-type SearchInputValue = string | undefined
 
 interface SearchPageProps {
   nav: NavProps
@@ -76,7 +74,7 @@ const ItemBlock = (props: any): JSX.Element => {
         {text}
       </div>
       { props.badgeText && 
-        <div>
+        <div className="item-badge">
           <RoundedTag aria-label={props.badgeText} theme={{'--tag-background': '#ffffff' }}>{props.badgeText}</RoundedTag>
         </div>
       }
@@ -104,13 +102,16 @@ export default function Search({ nav, footer }: SearchPageProps) {
     return round >= diff ? round : round + 1
   }
 
-  /**
-   * @TODO Find a solution to fetch / display search suggestions.
-   */
   const getSuggestions = async (inputValue: SearchInputValue) => {
-    const searchResults =  await getSearch(pageIndex, inputValue, locale)
+    const searchResults =  await getSearch(0, inputValue, locale)
     const suggestions = searchResults.results.map((result: any, key: any) => {
-      return {'value': result.title[0]}
+      const { highlight } = result
+  
+      if (highlight) {
+        return {'value': highlight[0]}
+      }
+  
+      return {'value': ''}
     }).filter((current: any, index: number, self: any) =>
         index === self.findIndex((diff: any) => (
           diff.value === current.value
@@ -135,7 +136,7 @@ export default function Search({ nav, footer }: SearchPageProps) {
   }
 
   const hasBadge = (type: string) => {
-    if (type === 'event' || type === 'news') {
+    if (type === 'event' || type === 'article') {
       return t(`search.entity_type_${type}`)
     }
     return false
@@ -174,7 +175,7 @@ export default function Search({ nav, footer }: SearchPageProps) {
           <SearchInput        
             onSubmit={onSubmit}
             onChange={updateSearchValue}
-            // getSuggestions={getSuggestions}
+            getSuggestions={getSuggestions}
             suggestionLabelField="value"
             placeholder={t('search.input_placeholder')}
             label={t('search.input_label')}

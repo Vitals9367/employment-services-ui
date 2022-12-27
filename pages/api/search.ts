@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as Elastic from '@/lib/elasticsearch'
 import { SearchState, SearchData } from '@/lib/types'
-import { SearchHit, SearchTotalHits, MsearchMultisearchBody } from '@elastic/elasticsearch/lib/api/types'
+import { SearchHit, SearchTotalHits, MsearchMultisearchBody, SearchRequest } from '@elastic/elasticsearch/lib/api/types'
 import { Locale } from 'next-drupal'
 
 type Data = SearchState
@@ -10,6 +10,17 @@ interface QueryParams {
   q: string
   index: number
   locale: Locale
+}
+
+function pick_highlight(highlight: any) {
+  const highlight_priority = ['title', 'field_lead_in', 'field_description'];
+  for (const field of highlight_priority) {
+    if (highlight.hasOwnProperty(field)) {
+      return highlight[field];
+    }
+  }
+
+  return Object.values(highlight)[0] // Return *_text
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -23,7 +34,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const elastic = Elastic.getElasticClient()
   const size = 20
   const from: number = index > 0 ? size * index : 0
-  const body: MsearchMultisearchBody = {
+  const body: SearchRequest = {
+    index: `*_${locale}`,
     size: size,
     from: from,
     query: {
@@ -39,13 +51,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         operator: "and",
         fuzziness: "AUTO"
       }
+    },
+    highlight: {
+      pre_tags: [""],
+      post_tags: [""],
+      number_of_fragments: 1,
+      fragment_size: 60,
+      fields : {
+        "title": { },
+        "field_lead_in": { },
+        "field_description": { },
+        "*_text": { }
+      }
     }
   }
 
   try {
     const searchRes = await elastic.search({
-      index: `*_${locale}`,
-      body: body
+      ...body
     })
 
     const {
@@ -57,7 +80,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       total: total?.value,
       results: hits.map((hit: any) => {
         const { entity_type, type, title, field_lead_in, field_description, url } = hit._source as SearchData
-        return { entity_type, type, title, field_lead_in, field_description, url }
+        const highlight = hit.highlight && pick_highlight(hit.highlight)
+
+        return { entity_type, type, title, field_lead_in, field_description, url, highlight }
       }),
     })
 

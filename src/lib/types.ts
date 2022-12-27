@@ -123,6 +123,8 @@ export interface SearchData {
   url: string
 }
 
+export type SearchInputValue = string | undefined
+
 declare global {
   interface Window {
     _paq: any
