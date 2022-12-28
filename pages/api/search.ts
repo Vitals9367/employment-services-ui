@@ -56,7 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       pre_tags: [""],
       post_tags: [""],
       number_of_fragments: 1,
-      fragment_size: 60,
+      fragment_size: 10,
       fields : {
         "title": { },
         "field_lead_in": { },
