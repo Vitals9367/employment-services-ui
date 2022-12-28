@@ -1,5 +1,4 @@
 const { i18n } = require('./next-i18next.config')
-const { withSentryConfig } = require("@sentry/nextjs");
 
 const publicRuntimeConfig = {
   NEXT_PUBLIC_DRUPAL_BASE_URL: process.env.NEXT_PUBLIC_DRUPAL_BASE_URL,
@@ -28,37 +27,6 @@ const serverRuntimeConfig = {
   REDIS_PREFIX: process.env.REDIS_PREFIX
 }
 
-const sentryConfig = {
-  // Optional build-time configuration options
-  sentry: {
-    // See the sections below for information on the following options:
-    //   'Configure Source Maps':
-    //     - disableServerWebpackPlugin
-    //     - disableClientWebpackPlugin
-    //     - hideSourceMaps
-    //     - widenClientFileUpload
-    //   'Configure Legacy Browser Support':
-    //     - transpileClientSDK
-    //   'Configure Serverside Auto-instrumentation':
-    //     - autoInstrumentServerFunctions
-    //     - excludeServerRoutes
-    //   'Configure Tunneling to avoid Ad-Blockers':
-    //     - tunnelRoute
-  },
-}
-
-const sentryWebpackPluginOptions = {
-  // Additional config options for the Sentry Webpack plugin. Keep in mind that
-  // the following options are set automatically, and overriding them is not
-  // recommended:
-  //   release, url, org, project, authToken, configFile, stripPrefix,
-  //   urlPrefix, include, ignore
-
-  silent: true, // Suppresses all logs
-  // For all available options, see:
-  // https://github.com/getsentry/sentry-webpack-plugin#options.
-};
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   i18n,
@@ -69,8 +37,6 @@ const nextConfig = {
     domains: [process.env.NEXT_IMAGE_DOMAIN, 'api.hel.fi'],
     deviceSizes: [576, 768, 992, 1200]
   },
-  productionBrowserSourceMaps: true,
-  sentry: sentryConfig,
   async redirects() {
     return [
       {
@@ -602,4 +568,4 @@ const nextConfig = {
   },
 }
 
-module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions);
+module.exports = nextConfig
