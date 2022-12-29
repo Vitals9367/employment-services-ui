@@ -17,5 +17,5 @@ export default function EventStatus(event: StatusProps): JSX.Element {
     return (<></>)
   }
 
-  return (<strong style={{'color': 'var(--color-brick)'}}>{t('event.cancelled_text')}</strong>)
+  return (<strong style={{'color': 'var(--color-brick)'}}>{t('event.cancelled_text')}: </strong>)
 }
