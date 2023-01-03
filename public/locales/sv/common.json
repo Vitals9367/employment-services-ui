@@ -45,7 +45,8 @@
   "event": {
     "remote_event": "Distansevenemang",
     "info_url_text": "Evenemangets hemsida",
-    "info_url_text_teams": "Öppna Teams-evenemanget"
+    "info_url_text_teams": "Öppna Teams-evenemanget",
+    "cancelled_text": "Inställt"
   },
   "video": {
     "cookie_consent": "Du har inte gett tillstånd att installera cookies.",
