@@ -18,6 +18,7 @@
     "filter": "Suodata tapahtumia",
     "clear": "Poista valinta",
     "title": "Hae työllisyyspalveluiden sivuilta",
+    "page_title": "Haku",
     "input_label": "Mitä haet?",
     "input_placeholder": "Haettava teksti",
     "input_submit": "Hae",

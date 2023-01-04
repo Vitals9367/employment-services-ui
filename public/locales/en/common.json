@@ -18,6 +18,7 @@
     "filter": "Filter events",
     "clear": "Clear filter",
     "title": "Search the Employment Services website",
+    "page_title": "Search",
     "input_label": "What are you looking for?",
     "input_placeholder": "Search text",
     "input_submit": "Search",

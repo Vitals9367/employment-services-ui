@@ -165,7 +165,7 @@ export default function Search({ nav, footer }: SearchPageProps) {
   return (
     <Layout header={nav} footer={footer}>
       <Head>
-        <title>{t('site_title')}</title>
+        <title>{t('site_title')} | {t('search.page_title')}</title>
       </Head>
       <article className="search-page">
         <Container className="container">

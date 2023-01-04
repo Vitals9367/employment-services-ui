@@ -18,6 +18,7 @@
     "filter": "Filtrera evenemang",
     "clear": "Töm sökfilter",
     "title": "Sök på sysselsättningstjänsternas webbplats",
+    "page_title": "Sök",
     "input_label": "Vad söker du?",
     "input_placeholder": "Text som söks",
     "input_submit": "Sök",
