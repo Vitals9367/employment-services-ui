@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import * as Elastic from '@/lib/elasticsearch'
-import { EventState, EventData } from '@/lib/types'
-import { SearchHit, SearchTotalHits } from '@elastic/elasticsearch/lib/api/types'
 
 type Data = any
 
@@ -23,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     "aggs": {
       "events_tags": {
         "terms": {
-          "field": "field_tags",
+          "field": "field_tags.keyword",
           "size": 100,
           "order": {
             "_term": "asc"
