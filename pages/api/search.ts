@@ -43,13 +43,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         query: q,
         type: "best_fields",
         fields: [
-          "title^3",
+          "field_search_keywords^8",
+          "title^5",
+          "*_title^3",
           "*_text",
           "field_lead_in^2",
           "field_description^2"
         ],
         operator: "and",
-        fuzziness: "AUTO"
+        fuzziness: "auto",
       }
     },
     highlight: {
@@ -58,7 +60,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       number_of_fragments: 1,
       fragment_size: 10,
       fields : {
+        "field_search_keywords": { },
         "title": { },
+        "*_title": { },
         "field_lead_in": { },
         "field_description": { },
         "*_text": { }
