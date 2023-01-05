@@ -22,10 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       "events_tags": {
         "terms": {
           "field": "field_tags.keyword",
-          "size": 100,
-          "order": {
-            "_term": "asc"
-          }
+          "size": 100
         }
       }
     }
