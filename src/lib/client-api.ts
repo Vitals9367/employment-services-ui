@@ -11,6 +11,7 @@ const EVENTS_TAGS_URL = '/api/events-tags'
 const NEWS_URL = '/api/news'
 const UNITS_URL = '/api/units'
 const SEARCH_URL = '/api/search'
+const SEARCH_SUGGEST_URL = '/api/search-suggest'
 
 export const getEvents = async (queryParams: EventsQueryParams) => {
   const { data } = await axios(`${EVENTS_URL}`, {
@@ -46,5 +47,10 @@ export const getSearch = async (index: number, query: string | undefined, locale
 
 export const getEventsTags = async () => {
   const { data } = await axios(`${EVENTS_TAGS_URL}`, {})
+  return data
+}
+
+export const getSearchSuggestions = async (query: string | undefined, locale: Locale) => {
+  const { data } = await axios(`${SEARCH_SUGGEST_URL}`, { params: { q: query, locale: locale } })
   return data
 }
