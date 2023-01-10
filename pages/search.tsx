@@ -10,7 +10,7 @@ import { GetStaticPropsContext, GetStaticPropsResult } from 'next'
 import { NavProps, FooterProps, SearchInputValue } from '@/lib/types'
 import getMenu from '@/lib/get-menu'
 import { useEffect, useState } from 'react';
-import { getSearch } from '@/lib/client-api';
+import { getSearch, getSearchSuggestions } from '@/lib/client-api';
 import { integer } from '@elastic/elasticsearch/lib/api/types';
 import { useRouter } from 'next/router';
 
@@ -103,7 +103,7 @@ export default function Search({ nav, footer }: SearchPageProps) {
   }
 
   const getSuggestions = async (inputValue: SearchInputValue) => {
-    const searchResults =  await getSearch(0, inputValue, locale)
+    const searchResults =  await getSearchSuggestions(inputValue, locale)
     const suggestions = searchResults.results.map((result: any, key: any) => {
       const { highlight } = result
   
