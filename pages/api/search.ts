@@ -58,9 +58,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     res.json({
       total: total?.value,
       results: hits.map((hit: any) => {
-        const { entity_type, type, title, field_lead_in, field_description, url } = hit._source as SearchData
+        const { entity_type, type, title, field_lead_in, field_description, url, field_start_time, field_end_time, changed } = hit._source as SearchData
 
-        return { entity_type, type, title, field_lead_in, field_description, url }
+        return { entity_type, type, title, field_lead_in, field_description, url, field_start_time, field_end_time, changed }
       }),
     })
 

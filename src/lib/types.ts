@@ -121,6 +121,9 @@ export interface SearchData {
   title: string
   field_lead_in: string
   field_description: string
+  field_start_time: number
+  field_end_time: number
+  changed: number
   url: string
 }
 
