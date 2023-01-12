@@ -73,9 +73,22 @@ const ItemBlock = (props: any): JSX.Element => {
       <div className="item-text">
         {text}
       </div>
-      { props.badgeText && 
-        <div className="item-badge">
-          <RoundedTag aria-label={props.badgeText} theme={{'--tag-background': '#ffffff' }}>{props.badgeText}</RoundedTag>
+      { (props.badgeText || props.date) &&
+        <div className="item-meta">
+          { props.badgeText && 
+            <div className="item-badge">
+              <RoundedTag aria-label={props.badgeText} theme={{'--tag-background': '#ffffff' }}>{props.badgeText}</RoundedTag>
+            </div>
+          }
+          { props.date && 
+            props.date.map((item: any, key: any) => {
+              return (
+                <div key={key} className="item-badge">
+                  <RoundedTag key={key} aria-label={item} theme={{'--tag-background': '#ffffff' }}>{item}</RoundedTag>
+                </div>
+              )
+            })
+          }
         </div>
       }
       <a href={url} className="item-link"><span>{props.linkText}</span></a>
@@ -142,6 +155,22 @@ export default function Search({ nav, footer }: SearchPageProps) {
     return false
   }
 
+  const hasDate = (item: any): any => {
+    if (item.type[0] === 'article') {
+      return [new Date(item.changed[0]*1000).toLocaleDateString('fi-fi', {dateStyle: 'short'})]
+    }
+
+    if (item.type[0] === 'event') {
+      const startDate = new Date(item.field_start_time[0]).toLocaleDateString('fi-fi', {dateStyle: 'short'})
+      const startTime = new Date(item.field_start_time[0]).toLocaleTimeString('en-US', {timeStyle: 'short', hour12: false})
+      const endTime = new Date(item.field_end_time[0]).toLocaleTimeString('en-US', {timeStyle: 'short', hour12: false})
+      
+      return [startDate, `${startTime} - ${endTime}`]
+    }
+
+   return false
+  }
+
   useEffect(() => {   
     const validateQuery = () => {
       if (q === undefined || q === '') {
@@ -206,7 +235,8 @@ export default function Search({ nav, footer }: SearchPageProps) {
                   {...{
                     result, 
                     linkText: t('search.item_link_text'),
-                    badgeText: result.type !== undefined ? hasBadge(result.type[0]) : false
+                    badgeText: result.type !== undefined ? hasBadge(result.type[0]) : false,
+                    date: result.type !== undefined ? hasDate(result) : false
                   }}
                   key={key} 
                 />

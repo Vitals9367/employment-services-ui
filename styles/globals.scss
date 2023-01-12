@@ -402,8 +402,15 @@ h5, .h5,
     font-size: var(--fontsize-body-m)
   }
 
-  .item-badge {
+  .item-meta {
     margin-top: var(--spacing-s);
+    display: flex;
+    flex-flow: column;
+    gap: var(--spacing-2-xs);
+
+    @media (min-width: $breakpoint-m) {
+      flex-flow: row;
+    }
   }
 
   .item-link {
