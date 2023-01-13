@@ -36,18 +36,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     index: `*_${locale}`,
     size: size,
     query: {
-      multi_match: {
-        query: q,
-        type: "phrase_prefix",
-        fields: [
-          "field_search_keywords^8",
-          "title^5",
-          "*_title^3",
-          "*_text",
-          "field_lead_in^2",
-          "field_description^2"
-        ],
-        operator: "and"
+      bool: {
+        must: {
+          multi_match: {
+            query: q,
+            type: "phrase_prefix",
+            fields: [
+              "field_search_keywords^8",
+              "title^5",
+              "*_title^3",
+              "*_text",
+              "field_lead_in^2",
+              "field_description^2"
+            ],
+            operator: "and"
+          }
+        },
+        must_not: {
+          term: {
+            field_hide_search: "true"
+          }
+        }
       }
     },
     highlight: {

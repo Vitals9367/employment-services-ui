@@ -28,19 +28,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     size: size,
     from: from,
     query: {
-      multi_match: {
-        query: q,
-        type: "best_fields",
-        fields: [
-          "field_search_keywords^8",
-          "title^5",
-          "*_title^3",
-          "*_text",
-          "field_lead_in^2",
-          "field_description^2"
-        ],
-        operator: "and",
-        fuzziness: "auto",
+      bool: {
+        must: {
+          multi_match: {
+            query: q,
+            type: "best_fields",
+            fields: [
+              "field_search_keywords^8",
+              "title^3",
+              "*_title^3",
+              "*_text",
+              "field_lead_in^2",
+              "field_description^2"
+            ],
+            operator: "and",
+            fuzziness: "auto"
+          }
+        },
+        must_not: {
+          term: {
+            field_hide_search: "true"
+          }
+        }
       }
     }
   }
