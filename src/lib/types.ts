@@ -70,6 +70,7 @@ export interface EventData {
   field_image_alt: string
   field_start_time: number
   field_end_time: number
+  field_event_status: string
   field_location: string
   field_location_id?: string
   field_tags: string[]
