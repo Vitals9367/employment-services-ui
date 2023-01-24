@@ -206,6 +206,7 @@ export default function Search({ nav, footer }: SearchPageProps) {
             onChange={updateSearchValue}
             getSuggestions={getSuggestions}
             suggestionLabelField="value"
+            loadingSpinnerText={t('search.loading_suggestions')}
             placeholder={t('search.input_placeholder')}
             label={t('search.input_label')}
             hideSearchButton

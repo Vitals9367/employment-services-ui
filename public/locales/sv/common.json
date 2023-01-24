@@ -27,7 +27,8 @@
     "item_link_text": "Öppna sökresultat",
     "pagination_aria_label": "Sidnumrering",
     "entity_type_event": "Evenemang",
-    "entity_type_article": "Nyhet"
+    "entity_type_article": "Nyhet",
+    "loading_suggestions": "Laddar förslag"
   },
   "list": {
     "load_more": "Visa fler",

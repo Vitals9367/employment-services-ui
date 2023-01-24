@@ -27,7 +27,8 @@
     "item_link_text": "Avaa hakutulos",
     "pagination_aria_label": "Sivunumerointi",
     "entity_type_event": "Tapahtuma",
-    "entity_type_article": "Uutinen"
+    "entity_type_article": "Uutinen",
+    "loading_suggestions": "Ladataan ehdotuksia"
   },
   "list": {
     "load_more": "Näytä lisää",
