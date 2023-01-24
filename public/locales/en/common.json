@@ -27,7 +27,8 @@
     "item_link_text": "Open search result",
     "pagination_aria_label": "Page numbers",
     "entity_type_event": "Event",
-    "entity_type_article": "News"
+    "entity_type_article": "News",
+    "loading_suggestions": "Loading suggestions"
   },
   "list": {
     "load_more": "Show more",
