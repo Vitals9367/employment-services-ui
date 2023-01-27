@@ -38,7 +38,7 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
   const events = data && (pageType === 'basic' || pageType === 'tpr_unit') ? data.slice(0, 2) : data
 
   return (
-    <div className='component' style={{ backgroundColor: `var(--color-${bgColor})` }}>
+    <div className='component hide-print' style={{ backgroundColor: `var(--color-${bgColor})` }}>
       <Container className='container'>
         <div className={styles.eventListTitleArea}>
           {field_title &&

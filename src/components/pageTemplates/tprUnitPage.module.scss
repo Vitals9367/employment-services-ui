@@ -7,6 +7,10 @@
     display: none;
   }
 
+  @media print {
+    page-break-inside: avoid;
+  }
+
   &.aside {
     display: none;
 

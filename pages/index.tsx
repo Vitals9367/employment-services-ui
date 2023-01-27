@@ -98,7 +98,7 @@ export default function HomePage({ node, nav, footer }: HomePageProps) {
       </Head>
       <NodeLandingPage node={node} />
       {/* React and share */}
-      <Container className="container">      
+      <Container className="container hide-print">      
         <div className="rns">
           {rnsStatus !== true ? <ConsentInfo /> : ''}
         </div>

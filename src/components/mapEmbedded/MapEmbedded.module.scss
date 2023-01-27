@@ -2,6 +2,10 @@
   background-color: var(--color-silver-light);
   padding: 24px;
 
+  @media print {
+    page-break-inside: avoid;
+  }
+
   .mapTitle {
     display: flex;
     gap: 5px;

@@ -8,6 +8,7 @@ import { Breadcrumb } from './Breadcrumb'
 import classNames from '@/lib/classNames'
 
 import styles from './navigation.module.scss'
+import PrintButton from '../printButton/PrintButton'
 import { useRouter } from 'next/router'
 
 function Header(header:NavProps): JSX.Element {
@@ -148,7 +149,12 @@ function Header(header:NavProps): JSX.Element {
         </Navigation.Dropdown> */}
       </Navigation.Actions>
     </Navigation>
-    {activePath !== '/' && <Breadcrumb breadcrumb={breadcrumb}/>}
+    {activePath !== '/' && breadcrumb?.length > 0 && (
+      <div className={styles.subHeader}>
+        <Breadcrumb breadcrumb={breadcrumb}/>
+        <PrintButton onClick={() => window?.print()} buttonText={t('text_print')}/>
+      </div>
+      )}
     </>
   )
 }

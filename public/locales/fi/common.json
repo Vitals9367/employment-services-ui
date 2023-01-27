@@ -3,6 +3,8 @@
   "site_name": "Työllisyyspalvelut",
   "site_title": "Helsingin työllisyyspalvelut",
   "link_copied": "Linkki kopioitu",
+  "text_print": "Tulosta",
+  "text_print_section": "Tulosta tämä osio",
   "navigation": {
     "button_text": "Oma asiointi",
     "button_link": "https://asiointi.mol.fi/omaasiointi/",

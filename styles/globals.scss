@@ -90,18 +90,34 @@ h5, .h5,
     margin-left: var(--spacing-3-xs);
     transition: transform .2s linear;
     width: 2rem;
+
+    @media print {
+      margin: 0;
+      width: auto;
+      transition: none;
+    }
   }
 
   .link-internal::after,
   a[data-entity-type="node"]::after {
     margin-right: var(--spacing-3-xs);
     background: url('../src/assets/arrow-right.svg') no-repeat center top;
+
+    @media print {
+      margin: 0;
+      background: none;
+    }
   }
 
   .link-external::after,
   a[data-is-external="true"]::after {
     margin-right: var(--spacing-3-xs);
     background: url('../src/assets/arrow-top-right.svg') no-repeat center top;
+
+    @media print {
+      margin: 0;
+      background: none;
+    }
   }
 
   .link-internal:hover::after,
@@ -175,6 +191,18 @@ h5, .h5,
     margin-bottom: var(--spacing-4-xl);
     padding-top: 0;
     padding-bottom: 0;
+
+    @media print {
+      margin:0;
+      padding: 0 !important;
+    }
+  }
+
+  @media print {
+    > .component {
+      margin-top: 1cm;
+      padding: inherit;
+    }
   }
 }
 
@@ -364,7 +392,7 @@ h5, .h5,
     border: 2px solid var(--color-black-90);
     color: var(--color-black-90);
   }
- }
+}
 
 .search-page {
   margin-bottom: var(--spacing-4-xl);
@@ -505,3 +533,69 @@ h5, .h5,
     width: 100%;
   }
 }
+
+@media print {
+  @page {
+    margin: 2cm;
+    size: A4;
+  }
+
+  h1 {
+    margin-top: 0 !important;
+  }
+
+  .block-text,
+  table, 
+  img, 
+  svg {
+    break-inside: avoid;
+  }
+
+  .hide-print,
+  .button-print {
+    display: none !important;
+  }
+
+  .component-print {
+    [class*="Accordion-module_contentWithCloseButton"],
+    .component {
+      margin-top: 0 !important;
+      padding: 0 !important;
+    }
+  }
+
+  .accordion-component {
+    .component {
+      padding: 0 !important;
+    }
+  }
+
+  [class^="Accordion-module_accordion"] {
+    border: none !important;    
+  
+    [role*="heading"] svg {
+      display: none;
+    }
+  }  
+
+  [class^="accordion_accordionContent"],
+  [class^="Accordion-module_accordionContent"] {
+    display: flex !important;
+
+    > .component {
+      margin: 0 !important;
+    }
+
+    [class^=".button_hds-button"] {
+      display: none;
+    }
+  }
+
+  [class*="Accordion-module_accordionContent"] {
+    [class*="Accordion-module_closeButton"] {
+      display: none !important;
+    }
+  } 
+
+}
+
