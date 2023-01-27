@@ -8,6 +8,7 @@ import { Breadcrumb } from './Breadcrumb'
 import classNames from '@/lib/classNames'
 
 import styles from './navigation.module.scss'
+import PrintButton from '../printButton/PrintButton'
 import { useRouter } from 'next/router'
 import PrintButton from '../printButton/PrintButton'
 import { useRouter } from 'next/router'
