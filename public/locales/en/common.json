@@ -3,6 +3,8 @@
   "site_name": "Employment services",
   "site_title": "Helsinki Employment Services",
   "link_copied": "Link copied",
+  "text_print": "Print",
+  "text_print_section": "Print this section",
   "navigation": {
     "button_text": "E-Services",
     "button_link": "https://asiointi.mol.fi/omaasiointi/",

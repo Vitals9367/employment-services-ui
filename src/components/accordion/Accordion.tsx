@@ -1,11 +1,15 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Accordion as HDSAccordion, useAccordion, Button, Card, IconAngleUp, IconAngleDown, Container } from 'hds-react'
 
 import ContentMapper from '@/components/ContentMapper'
 import HtmlBlock from '@/components/HtmlBlock'
 import { DrupalFormattedText } from '@/lib/types'
 import styles from './accordion.module.scss'
-import { useRouter } from "next/router"
+import { useRouter } from 'next/router'
+import { useRef } from 'react'
+import { useReactToPrint } from 'react-to-print'
+import PrintButton from "../printButton/PrintButton"
+import { useTranslation } from "next-i18next"
 
 interface AccordionProps {
   field_accordion_type: 'basic' | 'numbered'
@@ -22,9 +26,17 @@ function Accordion(props: AccordionProps): JSX.Element {
   const { field_accordion_type, field_accordion_title, field_accordion_title_level, field_accordion_text, field_accordion_items } = props
   const HeadingTag = field_accordion_title_level ? `h${field_accordion_title_level}` as keyof JSX.IntrinsicElements : 'h2'
   const { locale } = useRouter() as any
-
+  const { t } = useTranslation()
+  
+  const ref = useRef(null);  
+  const handlePrint = useReactToPrint({
+    content: () => ref.current,
+    documentTitle: field_accordion_title,
+    bodyClass: 'component-print'
+  })
+  
   return (
-    <div className='component'>
+    <div ref={ref} className='component'>
       <Container className='container'>
         {field_accordion_title && 
           <HeadingTag>{field_accordion_title}</HeadingTag>
@@ -79,6 +91,7 @@ function Accordion(props: AccordionProps): JSX.Element {
           }
         )}
       </Container>
+      <PrintButton onClick={handlePrint} buttonText={t('text_print_section')} />
     </div>
   )
 }

@@ -168,7 +168,7 @@ export default function Page({ node, nav, footer }: PageProps) {
         <NodeTprUnitPage node={node} sidebar={nav} />
       )}
       {/* React and share */}
-      <Container className="container">
+      <Container className="container hide-print">
         <div className="rns">
           {rnsStatus !== true ? <ConsentInfo /> : ''}
         </div>

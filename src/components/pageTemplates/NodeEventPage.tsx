@@ -12,6 +12,7 @@ import Link from '@/components/link/Link'
 import styles from './eventPage.module.scss'
 import { useRouter } from 'next/router'
 import EventStatus from '../events/EventStatus'
+import PrintButton from '../printButton/PrintButton'
 
 interface NodeEventPageProps {
   node: Node
@@ -53,6 +54,9 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                   </div> 
                 </div>
               </div>
+            </div>
+            <div style={{'textAlign': 'right'}}>
+              <PrintButton onClick={() => window?.print()} buttonText={t('text_print')} />
             </div>
             <div className={`${styles.contentContainer} content-region`}>
               {field_text?.processed && 

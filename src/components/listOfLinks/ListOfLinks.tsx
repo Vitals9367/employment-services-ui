@@ -20,7 +20,7 @@ function ListOfLinks(props: ListOfLinksProps): JSX.Element {
   const bgColor = field_background_color?.field_css_name || 'white'
 
   return (
-    <div className='component' style={{ backgroundColor: `var(--color-${bgColor})` }}>
+    <div className='component hide-print' style={{ backgroundColor: `var(--color-${bgColor})` }}>
       <Container className='container'>
         <h2>{field_list_of_links_title}</h2>
         <div className={styles.listOfLinks}>
