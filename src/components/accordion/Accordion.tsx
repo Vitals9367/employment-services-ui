@@ -38,9 +38,12 @@ function Accordion(props: AccordionProps): JSX.Element {
   return (
     <div ref={ref} className='component'>
       <Container className='container'>
-        {field_accordion_title && 
-          <HeadingTag>{field_accordion_title}</HeadingTag>
-        }
+        <div className={styles.componentHeader}>
+          {field_accordion_title && 
+            <HeadingTag>{field_accordion_title}</HeadingTag>
+          }
+          <PrintButton onClick={handlePrint} buttonText={t('text_print_section')} />
+        </div>
 
         {field_accordion_text?.processed && 
           <HtmlBlock field_text={field_accordion_text} />
@@ -91,7 +94,7 @@ function Accordion(props: AccordionProps): JSX.Element {
           }
         )}
       </Container>
-      <PrintButton onClick={handlePrint} buttonText={t('text_print_section')} />
+      
     </div>
   )
 }

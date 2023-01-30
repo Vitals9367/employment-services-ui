@@ -544,7 +544,7 @@ h5, .h5,
     margin-top: 0 !important;
   }
 
-  .block-text,
+  .block-text p,
   table, 
   img, 
   svg {
@@ -597,5 +597,8 @@ h5, .h5,
     }
   } 
 
+  [class*="Accordion-module_contentWithCloseButton"] {
+    padding-bottom: 0 !important;
+  }
 }
 

@@ -10,10 +10,21 @@
 .imageContainer {
   position: relative;
   min-height: 360px;
+
+  @media print {
+    display: none;
+  }
 }
+
 
 .headingContainer {
   padding: var(--spacing-s);
+
+  ul[class*="events_tags"] {
+    @media print {
+      display: none;
+    }
+  }
 
   h1 {
     font-size: var(--fontsize-heading-l);
@@ -40,6 +51,13 @@
 
 .contentContainer {
   padding: var(--spacing-s);
+
+  @media print {
+    ul {
+      margin-top: var(--spacing-s) !important;
+      margin-bottom: var(--spacing-s) !important;
+    }
+  }
 }
 
 @media (min-width: $breakpoint-l) {
