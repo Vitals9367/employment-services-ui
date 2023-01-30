@@ -113,6 +113,22 @@
   }
 }
 
+.componentHeader {
+  margin-bottom: var(--spacing-s);
+
+  h2 {
+    margin: 0;
+  }
+
+  > button {
+    margin-left: -2px;
+  }
+
+  [class*="Button-module_icon"] {
+    margin-left: 0 !important;
+  }
+}
+
 @media (min-width: $breakpoint-s) {
   .button[id="numbered-accordion-button"] {
     padding: var(--spacing-2-xs) var(--spacing-s);
