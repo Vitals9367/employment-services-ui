@@ -5,9 +5,20 @@
   flex-direction: column;
   padding: var(--spacing-l);
 
+  @media print {    
+    border: 1px solid var(--color-black-90);
+    background: none !important;
+    break-inside: avoid;
+    flex-direction: column;
+  }
+
   .bannerIcon {
     margin-right: var(--spacing-m);
     margin-bottom: var(--spacing-s);
+
+    @media print {
+      print-color-adjust: exact;
+    }    
   }
 
   h2 {

@@ -8,7 +8,7 @@ interface HtmlBlockProps {
 
 export function HtmlBlock({ field_text }: HtmlBlockProps): JSX.Element {
   return (
-    <div>
+    <div className="block-text">
       {parse(field_text?.processed)}
     </div>
   )

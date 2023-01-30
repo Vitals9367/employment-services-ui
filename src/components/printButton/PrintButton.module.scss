@@ -1,0 +1,27 @@
+.printButton {
+  --background-color: transparent !important;
+  --background-color-hover: transparent !important;
+  --background-color-focus: transparent !important;
+  --background-color-hover-focus: transparent !important;
+  --color: var(--color-bus-dark) !important;
+  --color-hover: var(--color-bus-dark) !important;
+  --color-focus: var(--color-bus-dark) !important;
+  --color-hover-focus: var(--color-bus-dark) !important;
+
+  --border-color: transparent !important;
+  --border-color-hover: transparent !important;
+  --border-color-focus: var(--color-black-90) !important;
+  --border-color-hover-focus: var(--color-black-90) !important;
+
+  > * {
+    white-space: nowrap;
+  }
+
+  [class*="Button-module_icon"] {
+    min-width: var(--spacing-m);
+  }
+
+  @media print {
+    display: none !important;
+  }
+}
