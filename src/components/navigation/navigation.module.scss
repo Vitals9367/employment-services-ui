@@ -217,6 +217,10 @@
   @media (min-width: $breakpoint-m) {
     flex-wrap: nowrap;
   }
+
+  @media print {
+    display: none;
+  }
 }
 
 @media (min-width: $breakpoint-s) {
