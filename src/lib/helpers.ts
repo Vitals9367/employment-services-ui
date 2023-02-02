@@ -6,8 +6,10 @@ import getConfig from 'next/config'
 import { i18n } from "next-i18next.config"
 
 import { BreadcrumbContent } from "./types"
+import { NODE_TYPES } from '@/lib/drupalApiTypes'
 
 export const eventTags = ['maahanmuuttajat', 'nuoret', 'info', 'koulutus', 'messut', 'neuvonta', 'rekrytointi', 'työpajat', 'digitaidot', 'etätapahtuma', 'palkkatuki', 'työnhaku']
+export const printablePages = [NODE_TYPES.ARTICLE, NODE_TYPES.EVENT, NODE_TYPES.PAGE, NODE_TYPES.TPR_UNIT]
 
 export const isExternalLink = (href: string): boolean|undefined => {
   const isExternalLink = href && (href.startsWith('https://') || href.startsWith('https://'))
