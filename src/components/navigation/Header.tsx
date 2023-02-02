@@ -24,7 +24,7 @@ function Header(header:NavProps): JSX.Element {
   useEffect(() => { 
     setPageProps(router.components[router.route].props.pageProps)
 
-    if (!pageProps) return
+    if (!pageProps || pageProps.node === undefined) return
 
     if (printablePages.includes(pageProps.node.type)) {
       setIsPrintable(true)
