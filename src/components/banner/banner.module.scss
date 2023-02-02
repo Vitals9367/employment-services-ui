@@ -17,7 +17,8 @@
     margin-bottom: var(--spacing-s);
 
     @media print {
-      print-color-adjust: exact;
+      display: none;
+      margin: 0;
     }    
   }
 
