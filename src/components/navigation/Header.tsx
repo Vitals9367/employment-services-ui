@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import { DrupalMenuLinkContent } from 'next-drupal'
 import { Navigation, IconArrowTopRight, IconGlobe } from 'hds-react'
@@ -6,6 +6,7 @@ import { Navigation, IconArrowTopRight, IconGlobe } from 'hds-react'
 import { NavProps } from '@/lib/types'
 import { Breadcrumb } from './Breadcrumb'
 import classNames from '@/lib/classNames'
+import { printablePages } from '@/lib/helpers'
 
 import styles from './navigation.module.scss'
 import PrintButton from '../printButton/PrintButton'
@@ -15,9 +16,20 @@ function Header(header:NavProps): JSX.Element {
 
   const { locale, menu, themes, langLinks, breadcrumb } = header
   const { t } = useTranslation('common')
-  const router = useRouter()
-
+  const router: any = useRouter()  // @TODO Fix type for proper
   const activePath = langLinks[locale]
+  const [ pageProps, setPageProps ]: any | null = useState(null)
+  const [ isPrintable, setIsPrintable ] = useState(false)
+
+  useEffect(() => { 
+    setPageProps(router.components[router.route].props.pageProps)
+
+    if (!pageProps) return
+
+    if (printablePages.includes(pageProps.node.type)) {
+      setIsPrintable(true)
+    }    
+  }, [pageProps])
 
   const getNavi = (menuArray: DrupalMenuLinkContent[]|undefined) => {
     const nav: ReactElement[] = []
@@ -149,10 +161,10 @@ function Header(header:NavProps): JSX.Element {
         </Navigation.Dropdown> */}
       </Navigation.Actions>
     </Navigation>
-    {activePath !== '/' && breadcrumb?.length > 0 && (
+    {activePath !== '/' && (
       <div className={styles.subHeader}>
         <Breadcrumb breadcrumb={breadcrumb}/>
-        <PrintButton onClick={() => window?.print()} buttonText={t('text_print')}/>
+        {isPrintable && <PrintButton onClick={() => window?.print()} buttonText={t('text_print')}/>}
       </div>
       )}
     </>
