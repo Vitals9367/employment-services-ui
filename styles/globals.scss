@@ -73,6 +73,26 @@ h5, .h5,
   line-height: var(--lineheight-m);
 }
 
+[id="HdsCookieConsentContainer"] {
+  [class*="CookieConsent-module_container"] {
+    --focus-outline-color: var(--color-black-90) !important;
+  }
+  
+  [class*="CookieConsent-module_languageSwitcher"] {
+    [class*="MenuButton-module_menuButton"]:focus-within {
+      --menu-button-focus-outline-color: var(--color-black-90) !important;
+    }
+  }
+  
+  [class*="checkbox_hds-checkbox"] {
+    --focus-outline-color: var(--color-black-90) !important;
+  }
+}
+
+[class*="button_hds-button--secondary"] {
+  --focus-outline-color: var(--color-black-90) !important;
+}
+
 .content-region,
 .content-region-landing {
   a.link-internal,

@@ -18,10 +18,11 @@
   --mobile-menu-background-color: var(--color-white);
   --mobile-menu-color: var(--color-black-90);
   --navigation-row-background-color: var(--color-white);
-  --navigation-row-focus-outline-color: var(--color-coat-of-arms);
+  --navigation-row-focus-outline-color: var(--color-black-90) !important;
   margin: 0 auto;
   width: 100%;
   max-width: var(--breakpoint-xl);
+
   .blueButton {
     --background-color: var(--color-bus) !important;
   }
@@ -84,7 +85,7 @@
   --side-navigation-active-indicator-background-color: var(--color-metro) !important;
   --side-navigation-background-color: var(--color-white) !important;
   --side-navigation-level-border-color: var(--color-fog-light);
-  --side-navigation-level-border-color-focus: var(--color-coat-of-arms);
+  --side-navigation-level-border-color-focus: var(--color-black-90) !important;
   --side-navigation-level-border-color-hover: var(--color-white) !important;
   --side-navigation-level-background-color: var(--color-white) !important;
   --side-navigation-level-background-color-active: var(--color-white) !important;
