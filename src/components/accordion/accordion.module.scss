@@ -5,10 +5,15 @@
     font-weight: 400;
   }
 
-  [class^="Accordion-module_closeButton"] {
-    color: blue !important;
-    display: none !important;
+  [class*="Accordion-module_closeButton"] {
+    --border-color-focus: var(--color-black-90) !important;
+    --border-color-hover-focus: var(--color-black-90) !important;
   }
+
+  [class*="Accordion-module_headingContainer"] {
+    --header-focus-outline-color: var(--color-black-90);
+  }
+
   @media print {
     break-inside: avoid;
   }
@@ -24,6 +29,8 @@
   --color-hover: var(--color-black-90);
   --color-focus: var(--color-black-90);
   --color-hover-focus: var(--color-black-90);  
+
+  --focus-outline-color: var(--color-black-90) !important;
 
   border: none;
   display: grid;
