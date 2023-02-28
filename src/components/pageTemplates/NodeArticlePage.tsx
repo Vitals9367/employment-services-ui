@@ -20,9 +20,9 @@ export function NodeArticlePage({ node, ...props }: NodeArticlePageProps): JSX.E
             <div className='lead-in'>{field_lead}</div>
           )}
           <div className={styles.pageDivider}></div>
-          {published_at === null ?
-            <p className={styles.articleDate}><time dateTime={created}>{`${dateformat(created, 'dd.mm.yyyy')}`}</time></p> :
-            <p className={styles.articleDate}><time dateTime={published_at}>{`${dateformat(published_at, 'dd.mm.yyyy')}`}</time></p>
+          {published_at !== null ?
+            <p className={styles.articleDate}><time dateTime={published_at}>{`${dateformat(published_at, 'dd.mm.yyyy')}`}</time></p>:
+            <p className={styles.articleDate}><time dateTime={created}>{`${dateformat(created, 'dd.mm.yyyy')}`}</time></p>
           }
           {field_content?.length > 0 && (
             <ContentMapper content={node.field_content} langcode={langcode} />
