@@ -39,6 +39,9 @@
   height: 480px;
   margin-top: -70px;
   position: relative;
+  > span {
+    left: 0.5px !important;
+  }
 }
 
 .heroMobileKoros {
@@ -53,7 +56,7 @@
   .heroContainer {
     height: 480px;
   }
-  
+
   .heroTextContainer {
     display: flex;
     min-height: 480px;
