@@ -10,7 +10,9 @@ interface NodeArticlePageProps {
 }
 
 export function NodeArticlePage({ node, ...props }: NodeArticlePageProps): JSX.Element {
-  const { title, field_lead, created, field_content, langcode, published_at } = node
+  const { title, field_lead, created, field_content, langcode, published_at } = node;
+  const articleDate = published_at !== null ? published_at : created;
+
   return (
     <article>
       <Container className="container content-region">
@@ -20,10 +22,7 @@ export function NodeArticlePage({ node, ...props }: NodeArticlePageProps): JSX.E
             <div className='lead-in'>{field_lead}</div>
           )}
           <div className={styles.pageDivider}></div>
-          {published_at !== null ?
-            <p className={styles.articleDate}><time dateTime={published_at}>{`${dateformat(published_at, 'dd.mm.yyyy')}`}</time></p>:
-            <p className={styles.articleDate}><time dateTime={created}>{`${dateformat(created, 'dd.mm.yyyy')}`}</time></p>
-          }
+          { articleDate && <p className={styles.articleDate}><time dateTime={articleDate}>{`${dateformat(articleDate, 'dd.mm.yyyy')}`}</time></p>}
           {field_content?.length > 0 && (
             <ContentMapper content={node.field_content} langcode={langcode} />
           )}
