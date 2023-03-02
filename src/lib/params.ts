@@ -161,7 +161,8 @@ export const baseEventQueryParams = () =>
       'field_external_links',
       'field_info_url',
       'field_short_description',
-      'field_street_address'
+      'field_street_address',
+      'field_location_extra_info'
     ])
 
 const getEventPageQueryParams = () =>
@@ -232,7 +233,7 @@ export const baseTprUnitQueryParams = () =>
       'picture_url_override',
       'picture_url',
       'drupal_internal__id'
-    ])    
+    ])
     .addFields(CONTENT_TYPES.ACCORDION, [
       'field_accordion_type',
       'field_accordion_title_level',
@@ -243,7 +244,7 @@ export const baseTprUnitQueryParams = () =>
     .addFields(CONTENT_TYPES.ACCORDION_ITEM, [
       'field_accordion_item_content',
       'field_accordion_item_heading'
-    ])    
+    ])
     .addFields(CONTENT_TYPES.LIST_OF_LINKS, [
       'field_list_of_links_design',
       'field_list_of_links_links',
