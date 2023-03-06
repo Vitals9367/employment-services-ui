@@ -73,6 +73,26 @@ h5, .h5,
   line-height: var(--lineheight-m);
 }
 
+[id="HdsCookieConsentContainer"] {
+  [class*="CookieConsent-module_container"] {
+    --focus-outline-color: var(--color-black-90) !important;
+  }
+  
+  [class*="CookieConsent-module_languageSwitcher"] {
+    [class*="MenuButton-module_menuButton"]:focus-within {
+      --menu-button-focus-outline-color: var(--color-black-90) !important;
+    }
+  }
+  
+  [class*="checkbox_hds-checkbox"] {
+    --focus-outline-color: var(--color-black-90) !important;
+  }
+}
+
+[class*="button_hds-button--secondary"] {
+  --focus-outline-color: var(--color-black-90) !important;
+}
+
 .content-region,
 .content-region-landing {
   a.link-internal,
@@ -229,6 +249,28 @@ h5, .h5,
 
   a {
     justify-content: center;
+  }
+}
+
+[class*="CookieConsent-module_buttons"] {
+  button {
+    --background-color: var(--color-bus);
+    --background-color-hover: var(--color-bus-dark);
+    --background-color-focus: var(--color-bus);
+    --background-color-hover-focus: var(--color-bus-dark);
+    --background-color-disabled: var(--color-black-20);
+    --border-color: var(--color-bus);
+    --border-color-hover: var(--color-bus-dark);
+    --border-color-focus: var(--color-bus);
+    --border-color-hover-focus: var(--color-bus-dark);
+    --border-color-disabled: var(--color-black-20);
+    --color: var(--color-white);
+    --color-hover: var(--color-white);
+    --color-focus: var(--color-white);
+    --color-hover-focus: var(--color-white);
+    --color-disabled: var(--color-white);
+    --submit-input-focus-gutter-color: var(--color-white);
+    --focus-outline-color: var(--color-black-90);
   }
 }
 
