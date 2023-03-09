@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react'
-import useSWR from 'swr'
 import { useTranslation } from 'next-i18next'
 import { Button as HDSButton, IconPlus, IconArrowRight, Container } from 'hds-react'
-
 import dateformat from 'dateformat'
+import useSWR from 'swr'
 
 import { DrupalFormattedText, Node } from '@/lib/types'
 import { getPathAlias } from '@/lib/helpers'
 import { getNews } from '@/lib/client-api'
-
 import HtmlBlock from '@/components/HtmlBlock'
-
 import styles from './news.module.scss'
 
 interface NewsListProps {
@@ -21,6 +18,7 @@ interface NewsListProps {
 }
 interface News {
   published_at?: string,
+  created: string,
   path: Path,
   title: string,
   status: boolean,
@@ -43,11 +41,12 @@ function NewsList(props: NewsListProps): JSX.Element {
     fetcher
   )
   const total: number = news && news.length || 0
-
   useEffect(() => {
     const filterNews = () => {
-      const pn = news && news.slice(0, 4*newsIndex)
-      setPaginatedNews(pn)
+      const paginatedArticle = news && news
+      .filter((newsArticle: News) => newsArticle.status !== false )
+      .slice(0, 4*newsIndex)
+      setPaginatedNews(paginatedArticle)
     }
     filterNews()
   }, [news, newsIndex]) // eslint-disable-line
@@ -71,7 +70,7 @@ function NewsList(props: NewsListProps): JSX.Element {
           </div>
         }
         <div className={`${styles.newsList} ${field_short_list && styles.short}`}>
-          { paginatedNews && paginatedNews.map((news: any, key: any) => (
+          { paginatedNews && paginatedNews.map((news: News, key: number) => (
             <div className={styles.newsCard} key={key}>
                 <a href={getPathAlias(news.path)}>
                   <h3 className={styles.newsTitle}>{news.title}</h3>
