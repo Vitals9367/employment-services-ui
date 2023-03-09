@@ -183,7 +183,8 @@ export const baseArticlePageQueryParams = () =>
       'langcode',
       'field_lead',
       'field_content',
-      'status'
+      'status',
+      'published_at',
     ])
     .addFields(CONTENT_TYPES.TEXT, [
       'field_text'
