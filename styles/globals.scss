@@ -77,13 +77,13 @@ h5, .h5,
   [class*="CookieConsent-module_container"] {
     --focus-outline-color: var(--color-black-90) !important;
   }
-  
+
   [class*="CookieConsent-module_languageSwitcher"] {
     [class*="MenuButton-module_menuButton"]:focus-within {
       --menu-button-focus-outline-color: var(--color-black-90) !important;
     }
   }
-  
+
   [class*="checkbox_hds-checkbox"] {
     --focus-outline-color: var(--color-black-90) !important;
   }
@@ -98,14 +98,16 @@ h5, .h5,
   a.link-internal,
   a.link-external,
   a[data-is-external="true"],
-  a[data-entity-type="node"] {
+  a[data-entity-type="node"],
+  a[data-entity-type="tpr_unit"] {
     display: inline-flex;
   }
 
   a.link-internal::after,
   a.link-external::after,
   a[data-is-external="true"]::after,
-  a[data-entity-type="node"]::after {
+  a[data-entity-type="node"]::after,
+  a[data-entity-type="tpr_unit"]::after {
     content: '';
     margin-left: var(--spacing-3-xs);
     transition: transform .2s linear;
@@ -119,7 +121,8 @@ h5, .h5,
   }
 
   .link-internal::after,
-  a[data-entity-type="node"]::after {
+  a[data-entity-type="node"]::after,
+  a[data-entity-type="tpr_unit"]::after {
     margin-right: var(--spacing-3-xs);
     background: url('../src/assets/arrow-right.svg') no-repeat center top;
 
@@ -141,7 +144,8 @@ h5, .h5,
   }
 
   .link-internal:hover::after,
-  a[data-entity-type="node"]:hover::after {
+  a[data-entity-type="node"]:hover::after,
+  a[data-entity-type="tpr_unit"]:hover::after {
     transform: translateX(8px);
   }
 
@@ -370,7 +374,7 @@ h5, .h5,
     @extend .hds-icon--face-sad !optional;
   }
 
-  .rns-plugin .rns-reaction-button, 
+  .rns-plugin .rns-reaction-button,
   .rns-plugin .rns-share-button {
     font-size: 14px;
     line-height: 30px !important;
@@ -400,7 +404,7 @@ h5, .h5,
     color: var(--color-white);
     padding: 0;
   }
-  
+
   .rns-plugin .rns-shares .rns-share-button:hover,
   .rns-plugin .rns-shares .rns-share-button:focus {
     background: var(--color-white);
@@ -594,8 +598,8 @@ h5, .h5,
   }
 
   .block-text p,
-  table, 
-  img, 
+  table,
+  img,
   svg {
     break-inside: avoid;
   }
@@ -620,12 +624,12 @@ h5, .h5,
   }
 
   [class^="Accordion-module_accordion"] {
-    border: none !important;    
-  
+    border: none !important;
+
     [role*="heading"] svg {
       display: none;
     }
-  }  
+  }
 
   [class^="accordion_accordionContent"],
   [class^="Accordion-module_accordionContent"] {
@@ -644,7 +648,7 @@ h5, .h5,
     [class*="Accordion-module_closeButton"] {
       display: none !important;
     }
-  } 
+  }
 
   [class*="Accordion-module_contentWithCloseButton"] {
     padding-bottom: 0 !important;
