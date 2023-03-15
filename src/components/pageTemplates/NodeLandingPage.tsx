@@ -11,7 +11,7 @@ function NodeLandingPage({ node, ...props }: NodeLandingPageProps): JSX.Element 
   const { title, field_content, field_hero, field_notification, langcode} = node
 
   return (
-    <article>
+    <article id="content">
       {field_hero && (
         <Hero title={title} {...field_hero} />
       )}

@@ -22,7 +22,7 @@ function NodeBasicPage({ node, sidebar, ...props }: NodeBasicPageProps): JSX.Ele
 
   return (
     <article>
-      <Container className="container">
+      <Container className="container" id="content">
         <div className="columns">
           <div className={`content-region col col-8${!field_hide_sidebar ? " flex-grow" : "" }`}>
             {field_notification?.length > 0 && (

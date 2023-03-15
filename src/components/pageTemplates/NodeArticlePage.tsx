@@ -14,7 +14,7 @@ export function NodeArticlePage({ node, ...props }: NodeArticlePageProps): JSX.E
   const articleDate = published_at !== null ? published_at : created;
 
   return (
-    <article>
+    <article id="content">
       <Container className="container content-region">
         <div className={styles.newsArticle}>
           <h1>{title}</h1>

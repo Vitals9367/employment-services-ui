@@ -28,7 +28,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
 
   return (
     <article>
-      <Container className="container">
+      <Container className="container" id="content">
         <div className="columns">
           <div className="col-12">
             <div className={styles.eventHero}>
