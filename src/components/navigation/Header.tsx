@@ -103,7 +103,7 @@ function Header(header:NavProps): JSX.Element {
       menuToggleAriaLabel="Menu"
       logoLanguage={locale === 'sv' ? 'sv' : 'fi'}
       skipTo="#content"
-      skipToContentLabel="Skip to main content"
+      skipToContentLabel={t('skip-to-main-content')}
       title={t('site_name')}
       titleAriaLabel={t('navigation.title_aria_label')}
       titleUrl={locale === 'fi' ? '/' : `/${locale}`}
@@ -124,7 +124,7 @@ function Header(header:NavProps): JSX.Element {
           }}
           className={styles.blueButton}
         />
-        <Navigation.LanguageSelector label={locale && locale.toUpperCase()}>
+        <Navigation.LanguageSelector label={t('lang-code').toUpperCase()}>
           <Navigation.Item
             lang="fi"
             key="fi_lang"

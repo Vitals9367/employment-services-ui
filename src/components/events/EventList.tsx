@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react'
 import useSWR from 'swr'
-import useSWRInfinite from 'swr/infinite'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, IconArrowRight, Container } from 'hds-react'
+import { Linkbox, IconArrowRight, Container } from 'hds-react'
 
-import { DrupalFormattedText, EventsQueryParams, EventState, EventListProps } from '@/lib/types'
-import { getEvents, getEventsSearch } from '@/lib/client-api'
-import { eventTags, getPath, getPathAlias } from '@/lib/helpers'
+import { EventsQueryParams, EventListProps } from '@/lib/types'
+import { getEvents } from '@/lib/client-api'
+import { getPathAlias } from '@/lib/helpers'
 
 import HtmlBlock from '@/components/HtmlBlock'
 import TagList from './TagList'
@@ -82,7 +80,7 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
                     </div>
                   </Linkbox>
                 </div>
-              )) 
+              ))
             : t('list.no_events')
           }
         </div>

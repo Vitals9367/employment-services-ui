@@ -33,7 +33,7 @@ export default function Events(props: EventListProps): JSX.Element {
   const { field_title, field_events_list_desc } = props
   const { t } = useTranslation()
   const { locale } = useRouter()
-  const [filter, setFilter] = useState<string | null>(null)
+  const [ filter, setFilter ] = useState<string | null>(null)
 
   const fetcher = (eventsIndex: number) => getEventsSearch(eventsIndex, filter)
   const { data, size, setSize } = useSWRInfinite(getKey, fetcher)
@@ -78,8 +78,8 @@ export default function Events(props: EventListProps): JSX.Element {
   return (
     <div className='component'>
     <Container className='container'>
-      { field_title && 
-        <h2>{field_title}</h2> 
+      { field_title &&
+        <h2>{field_title}</h2>
       }
 
       { field_events_list_desc?.processed &&
@@ -88,40 +88,42 @@ export default function Events(props: EventListProps): JSX.Element {
         </div>
       }
 
-      <div className={styles.results}>
-        { resultText }  
-      </div>
+      <fieldset role="group">
+        <a aria-label={t('search.filter')} className={styles.filter}>{t('search.filter')}</a>
 
-      <div className={styles.filter}>{t('search.filter')}</div>
-
-      <div className={styles.filterTags}>
-        { eventsTags && eventsTags.map((tag: any, i: number) => (
+        <div className={styles.filterTags}>
+          { eventsTags && eventsTags.map((tag: any, i: number) => (
+            <HDSButton
+              key={`tagFilter-${i}`}
+              className={filter === tag ? styles.selected: styles.filterTag}
+              onClick={() => { setFilter(tag.replace(' ', '_')) }}
+              role="checkbox"
+              aria-checked={filter === tag ?? true}
+            >
+            { tag.replace('_', ' ') }
+            </HDSButton>
+            ))
+          }
           <HDSButton
-            key={`tagFilter-${i}`}
-            className={filter === tag ? styles.selected: styles.filterTag}
-            onClick={() => { setFilter(tag.replace(' ', '_')) }}
+            variant="supplementary"
+            iconLeft={<IconCrossCircle />}
+            className={styles.supplementary}
+            onClick={() => { setFilter(null) }}
           >
-          { tag.replace('_', ' ') }
+            { t('search.clear') }
           </HDSButton>
-          ))
-        }
-        <HDSButton
-          variant="supplementary"
-          iconLeft={<IconCrossCircle />}
-          className={styles.supplementary}
-          onClick={() => { setFilter(null) }}
-        >
-          { t('search.clear') }
-        </HDSButton>
-      </div>
-
+        </div>
+        <div className={styles.results}>
+          { resultText }
+        </div>
+      </fieldset>
       <div className={styles.eventList}>
         { events && events.map((event: any, key: any) => (
           <div className={styles.eventCard} key={key}>
             <Linkbox
               className={styles.linkBox}
-              linkboxAriaLabel="List of links Linkbox"
-              linkAriaLabel="Linkbox link"
+              linkboxAriaLabel={`${t('list.even_title')} ${event.title}`}
+              linkAriaLabel={`${t('list.event_link')} ${event.title}`}
               key={key}
               href={event.url}
               withBorder
