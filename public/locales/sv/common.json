@@ -1,10 +1,12 @@
 {
   "locale": "sv",
+  "lang-code": "På Svenska",
   "site_name": "Sysselsättningstjänster",
   "site_title": "Helsingfors sysselsättningstjänster",
   "link_copied": "Länken har kopierats",
   "text_print": "Skriva ut",
   "text_print_section": "Skriv ut detta avsnitt",
+  "skip-to-main-content": "Hoppa till innehåll",
   "navigation": {
     "button_text": "E-Tjänster",
     "button_link": "https://asiointi.mol.fi/omaasiointi/?kieli=sv",
@@ -44,7 +46,9 @@
     "results_text": "sökresultat",
     "show_all_events": "Visa alla evenemang",
     "events_page_url": "/sv/aktuellt/evenemang",
-    "no_events": "Det finns inga kommande evenemang om detta ämne."
+    "no_events": "Det finns inga kommande evenemang om detta ämne.",
+    "even_title": "Eevenemang",
+    "event_link": "Evenemangslänk till"
   },
   "event": {
     "remote_event": "Distansevenemang",

@@ -1,10 +1,12 @@
 {
   "locale": "en",
+  "lang-code": "In English",
   "site_name": "Employment services",
   "site_title": "Helsinki Employment Services",
   "link_copied": "Link copied",
   "text_print": "Print",
   "text_print_section": "Print this section",
+  "skip-to-main-content": "Skip to main content",
   "navigation": {
     "button_text": "E-Services",
     "button_link": "https://asiointi.mol.fi/omaasiointi/",
@@ -44,7 +46,9 @@
     "results_text": "search results",
     "show_all_events": "Show all events",
     "events_page_url": "/en/current-matters/events",
-    "no_events": "No upcoming events on this topic."
+    "no_events": "No upcoming events on this topic.",
+    "even_title": "Event",
+    "event_link": "Event link to"
   },
   "event": {
     "remote_event": "Remote event",

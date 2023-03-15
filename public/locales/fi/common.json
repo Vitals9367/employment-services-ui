@@ -1,10 +1,12 @@
 {
   "locale": "fi",
+  "lang-code": "Suomeksi",
   "site_name": "Työllisyyspalvelut",
   "site_title": "Helsingin työllisyyspalvelut",
   "link_copied": "Linkki kopioitu",
   "text_print": "Tulosta",
   "text_print_section": "Tulosta tämä osio",
+  "skip-to-main-content": "Suoraan sisältöön",
   "navigation": {
     "button_text": "Oma asiointi",
     "button_link": "https://asiointi.mol.fi/omaasiointi/",
@@ -44,7 +46,9 @@
     "results_text": "hakutulosta",
     "show_all_events": "Näytä kaikki tapahtumat",
     "events_page_url": "/ajankohtaista/tapahtumat",
-    "no_events": "Ei tulevia tapahtumia tästä aiheesta."
+    "no_events": "Ei tulevia tapahtumia tästä aiheesta.",
+    "even_title": "Tapahtuma",
+    "event_link": "Tapahtuma linkki"
   },
   "event": {
     "remote_event": "Etätapahtuma",
