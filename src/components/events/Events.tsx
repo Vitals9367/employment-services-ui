@@ -88,7 +88,7 @@ export default function Events(props: EventListProps): JSX.Element {
         </div>
       }
 
-      <fieldset role="group">
+      <div role="group">
         <a aria-label={t('search.filter')} className={styles.filter}>{t('search.filter')}</a>
 
         <div className={styles.filterTags}>
@@ -116,7 +116,7 @@ export default function Events(props: EventListProps): JSX.Element {
         <div className={styles.results}>
           { resultText }
         </div>
-      </fieldset>
+      </div>
       <div className={styles.eventList}>
         { events && events.map((event: any, key: any) => (
           <div className={styles.eventCard} key={key}>

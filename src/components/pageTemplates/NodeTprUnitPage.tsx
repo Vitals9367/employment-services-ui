@@ -98,7 +98,7 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
 
   return (
     <article>
-      <Container className="container" id="content">
+      <Container className="container">
         <div className="columns">
           <div className="content-region col col-8 flex-grow">
             <h1>{pageTitle}</h1>

@@ -57,7 +57,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   if (context.preview) {
     withAuth = true
   }
-  
+
   const drupal = getDrupalClient(withAuth)
 
   const path = await drupal.translatePathFromContext(context)
@@ -152,6 +152,7 @@ export default function Page({ node, nav, footer }: PageProps) {
         <meta property="og:url" content={metaUrl} />
         <meta property="og:image" content={metaImage} />
       </Head>
+      <a id="content" tabIndex={-1}></a>
       { node.type === NODE_TYPES.PAGE && (
         <NodeBasicPage node={node} sidebar={nav} />
       )}
