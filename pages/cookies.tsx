@@ -19,7 +19,7 @@ interface CookiePageProps {
 
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<CookiePageProps>> {
   const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
-  const { REVALIDATE_TIME } = getConfig().serverRuntimeConfig  
+  const { REVALIDATE_TIME } = getConfig().serverRuntimeConfig 
   const langLinks = { fi: '/cookies', en: '/en/cookies', sv: '/sv/cookies'}
   const { tree: menu } = await getMenu('main', locale, defaultLocale)
   const { tree: themes } = await getMenu('additional-languages', locale, defaultLocale)
@@ -46,6 +46,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 export default function Cookies({ nav, footer }: CookiePageProps) {
   const { t } = useTranslation('common')
   const contentSource = useCookieConsents()
+  const { COOKIE_DOMAIN } = getConfig().publicRuntimeConfig
 
   return (
     <Layout header={nav} footer={footer}>
@@ -53,7 +54,7 @@ export default function Cookies({ nav, footer }: CookiePageProps) {
         <title>{t('site_title')}</title>
       </Head>
       <Container className="container">
-        <CookiePage contentSource={contentSource} />
+        <CookiePage cookieDomain={COOKIE_DOMAIN} contentSource={contentSource} />
       </Container>
     </Layout>
   )
