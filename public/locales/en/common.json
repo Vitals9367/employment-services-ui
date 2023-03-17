@@ -50,7 +50,8 @@
     "remote_event": "Remote event",
     "info_url_text": "Event homepage",
     "info_url_text_teams": "Open Teams-event",
-    "cancelled_text": "Cancelled"
+    "cancelled_text": "Cancelled",
+    "field_offers_info_url": "Sign up"
   },
   "video": {
     "cookie_consent": "You have not allowed the use of cookies on this site.",

@@ -50,7 +50,8 @@
     "remote_event": "Etätapahtuma",
     "info_url_text": "Tapahtuman kotisivut",
     "info_url_text_teams": "Avaa Teams-tapahtuma",
-    "cancelled_text": "Peruttu"
+    "cancelled_text": "Peruttu",
+    "field_offers_info_url": "Ilmoittaudu"
   },
   "video": {
     "cookie_consent": "Et ole antanut lupaa asettaa evästeitä.",

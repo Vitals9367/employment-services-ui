@@ -1,16 +1,15 @@
 import Image from 'next/image'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 import { Container } from 'hds-react'
-import { IconLocation, IconLinkExternal, IconAlertCircle } from 'hds-react'
+import { IconLocation, IconLinkExternal, IconAlertCircle, Button } from 'hds-react'
 
 import { Node } from '@/lib/types'
 import HtmlBlock from '@/components/HtmlBlock'
 import TagList from '@/components/events/TagList'
 import DateTime from '@/components/events/DateTime'
 import Link from '@/components/link/Link'
-
 import styles from './eventPage.module.scss'
-import { useRouter } from 'next/router'
 import EventStatus from '../events/EventStatus'
 
 interface NodeEventPageProps {
@@ -18,10 +17,14 @@ interface NodeEventPageProps {
 }
 
 function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
-  const { title, field_text, field_location, field_location_id, field_start_time, field_end_time, field_tags, field_image_url, field_image_alt, field_info_url, field_external_links, field_street_address, field_event_status, field_location_extra_info } = node
+  const { title, field_text, field_location, field_location_id, field_start_time, field_end_time, field_tags, field_image_url, field_image_alt, field_info_url, field_external_links, field_street_address, field_event_status, field_location_extra_info, field_offers_info_url  } = node
   const { t } = useTranslation('common')
   const { locale } = useRouter()
   const infoUrlText = field_info_url && field_info_url.startsWith('https://teams.microsoft') ? t('event.info_url_text_teams') : t('event.info_url_text')
+
+  const onClick = () => {
+    location.href = field_offers_info_url;
+  }
 
   return (
     <article>
@@ -86,7 +89,11 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                 ))
               }
             </div>
-
+            {field_offers_info_url &&
+              <Button onClick={onClick} theme="black" iconRight={<IconLinkExternal size="m" aria-hidden="true" />}>
+                { t('event.field_offers_info_url') }
+              </Button>
+            }
           </div>
         </div>
       </Container>
