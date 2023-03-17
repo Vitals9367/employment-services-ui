@@ -50,7 +50,6 @@ export const useCookieConsents = (): any => {
       onLanguageChange,
     },
     focusTargetSelector: '#focused-element-after-cookie-consent-closed',
-    CookieDomain: 'tyollisyyspalvelut.hel.fi',
     optionalCookies: {
       groups: [
         {
