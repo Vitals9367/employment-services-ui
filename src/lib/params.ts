@@ -162,7 +162,8 @@ export const baseEventQueryParams = () =>
       'field_info_url',
       'field_short_description',
       'field_street_address',
-      'field_location_extra_info'
+      'field_location_extra_info',
+      'field_offers_info_url'
     ])
 
 const getEventPageQueryParams = () =>
