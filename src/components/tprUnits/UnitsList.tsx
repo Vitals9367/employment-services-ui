@@ -1,28 +1,104 @@
-import useSWR from 'swr'
+import { useState, useEffect, useCallback } from 'react'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
+import useSWR from 'swr'
 import { IconArrowRight, Container } from 'hds-react'
 
 import { getUnits } from '@/lib/client-api'
-
+import { getPathAlias, sortArrayByOtherArray } from '@/lib/helpers'
+import { NavProps } from '@/lib/types'
 import MediaImage from '../mediaImage/MediaImage'
 import styles from './units.module.scss'
-import { getPathAlias } from '@/lib/helpers'
-import { useRouter } from 'next/router'
 
-function UnitsList(): JSX.Element {
-  const { t } = useTranslation()
-  const { locale } = useRouter()
-  const fetcher = () => getUnits(locale != undefined ? locale : 'fi')
+interface MenuItemFilterProperties {
+  menuContactInfo: string;
+  subMenuOffice: string;
+}
+
+function UnitsList( sidebar: NavProps ): JSX.Element {
+  const [offices, setOffices] = useState<string[]>([]);
+  const [menuFilters, setMenuFilters] =
+    useState<MenuItemFilterProperties>({menuContactInfo: '', subMenuOffice: ''})
+  const { t } = useTranslation();
+  const { locale } = useRouter();
+  const fetcher = () => getUnits(locale != undefined ? locale : 'fi');
   const { data: units, error } = useSWR(
     `/units`,
     fetcher
-  )
+  );
+
+  const getFilterValues = useCallback(() => {
+    let filterValues
+    switch (locale) {
+      case 'en':
+        filterValues = {
+          menuContactInfo: 'Contact information',
+          subMenuOffice: 'Offices',
+        }
+        break
+      case 'sv':
+        filterValues = {
+          menuContactInfo: 'Kontaktuppgifter',
+          subMenuOffice: 'Verksamhetsställen',
+        }
+        break
+      default:
+        filterValues = {
+          menuContactInfo: 'Yhteystiedot',
+          subMenuOffice: 'Toimipisteet',
+        }
+    }
+    return filterValues
+  }, [locale])
+
+  const getOfficeOrderFromMenu = (
+    menu: any,
+    mainMenu: string | null,
+    subMenu: string | null
+  ) => {
+    const officeList: string[] = []
+    menu
+      ?.filter(
+        (menuItems: {title: string | null}) => menuItems.title === mainMenu
+      )
+      .map((menuItem: {items: any[]}) =>
+        menuItem.items?.filter(
+          (subMenuItems: {title: string | null}) =>
+            subMenuItems.title === subMenu
+        )
+      )
+      .map((subMenuItem: {items: any[]}[]) =>
+        subMenuItem?.map((offices: {items: any[]}) =>
+          offices.items?.map((office: {title: string}) =>
+            officeList.push(office.title)
+          )
+        )
+      )
+    return officeList
+  }
+
+  useEffect(() => {
+    setMenuFilters(getFilterValues())
+    setOffices(
+      getOfficeOrderFromMenu(
+        sidebar?.menu,
+        menuFilters.menuContactInfo,
+        menuFilters.subMenuOffice
+      )
+    )
+  }, [
+    sidebar?.menu,
+    locale,
+    getFilterValues,
+    menuFilters.menuContactInfo,
+    menuFilters.subMenuOffice,
+  ])
 
   return (
     <div className='component'>
       <Container className='container'>
         <div className={styles.unitsList}>
-          { units && units.map((unit: any, key: any) => (
+          { units && sortArrayByOtherArray(units, offices)?.map((unit: any, key: any) => (
             <div key={key} className={styles.card}>
               <div className={styles.media}>
                 <MediaImage media={unit.picture_url_override ? unit.picture_url_override : unit.picture_url} />
