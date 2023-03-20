@@ -17,7 +17,7 @@ interface NewsListProps {
   langcode: string
 }
 interface News {
-  created: string,
+  published_at?: string,
   path: Path,
   title: string,
   status: boolean,
@@ -74,7 +74,7 @@ function NewsList(props: NewsListProps): JSX.Element {
                 <a href={getPathAlias(news.path)}>
                   <h3 className={styles.newsTitle}>{news.title}</h3>
                 </a>
-              <p className={styles.articleDate}><time dateTime={news.created}>{`${dateformat(news.created, 'dd.mm.yyyy')}`}</time></p>
+              {news.published_at && <p className={styles.articleDate}><time dateTime={news.published_at}>{`${dateformat(news.published_at, 'dd.mm.yyyy')}`}</time></p>}
             </div>
           ))}
         </div>
