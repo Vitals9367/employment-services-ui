@@ -124,7 +124,7 @@ function Header(header:NavProps): JSX.Element {
           }}
           className={styles.blueButton}
         />
-        <Navigation.LanguageSelector label={locale.toUpperCase()}>
+        <Navigation.LanguageSelector label={locale && locale.toUpperCase()}>
           <Navigation.Item
             lang="fi"
             key="fi_lang"
