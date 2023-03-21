@@ -7,7 +7,8 @@ const publicRuntimeConfig = {
   MATOMO_URL: process.env.MATOMO_URL,
   REACT_AND_SHARE_FI: process.env.REACT_AND_SHARE_FI,
   REACT_AND_SHARE_SV: process.env.REACT_AND_SHARE_SV,
-  REACT_AND_SHARE_EN: process.env. REACT_AND_SHARE_EN
+  REACT_AND_SHARE_EN: process.env.REACT_AND_SHARE_EN,
+  COOKIE_DOMAIN: process.env.COOKIE_DOMAIN
 }
 
 const serverRuntimeConfig = {
