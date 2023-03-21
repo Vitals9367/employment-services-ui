@@ -1,34 +1,34 @@
 import { ReactElement, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import { DrupalMenuLinkContent } from 'next-drupal'
-import { Navigation, IconArrowTopRight, IconGlobe } from 'hds-react'
+import { Navigation, IconArrowTopRight } from 'hds-react'
 
 import { NavProps } from '@/lib/types'
-import { Breadcrumb } from './Breadcrumb'
 import classNames from '@/lib/classNames'
 import { printablePages } from '@/lib/helpers'
-
+import { Breadcrumb } from './Breadcrumb'
 import styles from './navigation.module.scss'
 import PrintButton from '../printButton/PrintButton'
-import { useRouter } from 'next/router'
+
 
 function Header(header:NavProps): JSX.Element {
 
   const { locale, menu, themes, langLinks, breadcrumb } = header
   const { t } = useTranslation('common')
   const router: any = useRouter()  // @TODO Fix type for proper
-  const activePath = langLinks[locale]
+  const activePath = langLinks[locale ? locale : 'fi']
   const [ pageProps, setPageProps ]: any | null = useState(null)
   const [ isPrintable, setIsPrintable ] = useState(false)
 
-  useEffect(() => { 
+  useEffect(() => {
     setPageProps(router.components[router.route].props.pageProps)
 
     if (!pageProps || pageProps.node === undefined) return
 
     if (printablePages.includes(pageProps.node.type)) {
       setIsPrintable(true)
-    }    
+    }
   }, [pageProps])
 
   const getNavi = (menuArray: DrupalMenuLinkContent[]|undefined) => {
@@ -150,15 +150,6 @@ function Header(header:NavProps): JSX.Element {
             active={langLinks.en === activePath}
           />
         </Navigation.LanguageSelector>
-        {/* <Navigation.Dropdown
-          label=""
-          aria-label={t("navigation.theme_dropdown")}
-          icon={<IconGlobe size='s' aria-label="Globe"/>}
-          key='theme_dropdown'
-          id='theme_dropdown'
-        >
-          {getThemes(themes)}
-        </Navigation.Dropdown> */}
       </Navigation.Actions>
     </Navigation>
     {activePath !== '/' && (
