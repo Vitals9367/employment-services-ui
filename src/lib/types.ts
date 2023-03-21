@@ -35,7 +35,7 @@ export interface DrupalFormattedText {
 }
 
 export interface NavProps {
-  locale: Locale
+  locale?: Locale
   menu?: DrupalMenuLinkContent[]
   themes?: DrupalMenuLinkContent[]
   langLinks?: any
@@ -113,7 +113,7 @@ export interface EventListProps {
 export interface SearchState {
   total: number
   results: SearchData[]
-} 
+}
 
 export interface SearchData {
   entity_type: string

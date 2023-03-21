@@ -203,3 +203,9 @@ export const getDefaultImage = (node: Node): string => {
 
   return process.env.NEXT_PUBLIC_SITE_URL + "/tyollisyyspalvelut.png"
 }
+
+export const sortArrayByOtherArray = (array: any[], sortArray: string[]) => {
+  return [...array].sort(
+    (a , b) => sortArray.indexOf(a.name_override) - sortArray.indexOf(b.name_override)
+  )
+}
