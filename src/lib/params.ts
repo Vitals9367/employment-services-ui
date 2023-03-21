@@ -181,7 +181,9 @@ export const baseArticlePageQueryParams = () =>
       'revision_timestamp',
       'langcode',
       'field_lead',
-      'field_content'
+      'field_content',
+      'status',
+      'published_at',
     ])
     .addFields(CONTENT_TYPES.TEXT, [
       'field_text'
