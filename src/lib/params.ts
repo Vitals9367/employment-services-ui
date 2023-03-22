@@ -235,7 +235,8 @@ export const baseTprUnitQueryParams = () =>
       'service_map_embed',
       'picture_url_override',
       'picture_url',
-      'drupal_internal__id'
+      'drupal_internal__id',
+      'accessibility_sentences'
     ])
     .addFields(CONTENT_TYPES.ACCORDION, [
       'field_accordion_type',

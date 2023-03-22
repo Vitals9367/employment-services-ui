@@ -76,7 +76,8 @@
     "open_hours": "Aukioloajat",
     "phone_service": "Puhelinpalvelu",
     "postal_address": "Postiosoite",
-    "more_info": "Katso aukioloajat ja yhteystiedot"
+    "more_info": "Katso aukioloajat ja yhteystiedot",
+    "accessibility_information": "Esteettömyystiedot"
   },
   "consent_info": {
     "title": "Sivun palautenappeja ei voida näyttää",

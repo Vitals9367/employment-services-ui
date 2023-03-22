@@ -76,7 +76,8 @@
     "open_hours": "Öppettider",
     "phone_service": "Telefontjänst",
     "postal_address": "Postadress",
-    "more_info": "Se öppettider och kontaktuppgifter"
+    "more_info": "Se öppettider och kontaktuppgifter",
+    "accessibility_information": "Tillgänglighetsuppgifter"
   },
   "consent_info": {
     "title": "Feedbackknappar kan inte visas",

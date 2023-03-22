@@ -76,7 +76,8 @@
     "open_hours": "Opening hours",
     "phone_service": "Phone service",
     "postal_address": "Postal address",
-    "more_info": "See opening hours and contact details"
+    "more_info": "See opening hours and contact details",
+    "accessibility_information": "Accessibility information"
   },
   "consent_info": {
     "title": "Feedback buttons cannot be displayed",
