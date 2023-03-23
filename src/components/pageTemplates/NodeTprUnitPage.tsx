@@ -100,6 +100,10 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
     <article>
       <Container className="container">
         <div className="columns">
+          <div className="sidebar col col-4 flex-order-first">
+            <Sidebar {...sidebar}/>
+            <ContactInfo aside={true} />
+          </div>
           <div className="content-region col col-8 flex-grow">
             <h1>{pageTitle}</h1>
             {description && (
@@ -117,10 +121,6 @@ function NodeTprUnitPage({ node, sidebar, ...props }: NodeTprUnitProps): JSX.Ele
             {field_content?.length > 0 && (
               <ContentMapper content={field_content} pageType='tpr_unit' locationId={drupal_internal__id} mapId={service_map_embed} />
             )}
-          </div>
-          <div className="sidebar col col-4 flex-order-first">
-            <Sidebar {...sidebar}/>
-            <ContactInfo aside={true} />
           </div>
         </div>
         <div className="columns">
