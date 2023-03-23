@@ -89,11 +89,12 @@ export default function Events(props: EventListProps): JSX.Element {
       }
 
       <div role="group">
-        <a aria-label={t('search.filter')} className={styles.filter}>{t('search.filter')}</a>
+        <div aria-label={t('search.filter')} className={styles.filter}>{t('search.filter')}</div>
 
-        <div className={styles.filterTags}>
-          { eventsTags && eventsTags.map((tag: any, i: number) => (
+        <div role="group" className={styles.filterTags}>
+          { eventsTags && eventsTags.map((tag: string, i: number) => (
             <HDSButton
+              aria-label={`${t('search.filter')} ${tag.replace('_', ' ')}`}
               key={`tagFilter-${i}`}
               className={filter === tag ? styles.selected: styles.filterTag}
               onClick={() => { setFilter(tag.replace(' ', '_')) }}
@@ -113,7 +114,7 @@ export default function Events(props: EventListProps): JSX.Element {
             { t('search.clear') }
           </HDSButton>
         </div>
-        <div className={styles.results}>
+        <div role="status" className={styles.results}>
           { resultText }
         </div>
       </div>
