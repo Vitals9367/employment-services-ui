@@ -91,7 +91,7 @@ export default function Events(props: EventListProps): JSX.Element {
       <div role="group">
         <div aria-label={t('search.filter')} className={styles.filter}>{t('search.filter')}</div>
 
-        <div role="group" className={styles.filterTags}>
+        <div role="group" aria-label={t('search.group_description')} className={styles.filterTags}>
           { eventsTags && eventsTags.map((tag: string, i: number) => (
             <HDSButton
               aria-label={`${t('search.filter')} ${tag.replace('_', ' ')}`}
