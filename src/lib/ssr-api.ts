@@ -21,10 +21,10 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
         .addFilter('field_location_id', locationId)
         .getQueryObject()
 
-    return await getResourceCollection(NODE_TYPES.EVENT, { 
+    return await getResourceCollection(NODE_TYPES.EVENT, {
       locale,
       defaultLocale,
-      params: filteredEventParams() 
+      params: filteredEventParams()
     })
   }
 
@@ -34,10 +34,10 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
         .addFilter('field_tags', tags, 'IN')
         .getQueryObject()
 
-    return await getResourceCollection(NODE_TYPES.EVENT, { 
+    return await getResourceCollection(NODE_TYPES.EVENT, {
       locale,
       defaultLocale,
-      params: filteredEventParams() 
+      params: filteredEventParams()
     })
   }
 
@@ -47,17 +47,17 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
         .addFilter('field_location_id', locationId)
         .getQueryObject()
 
-    return await getResourceCollection(NODE_TYPES.EVENT, { 
+    return await getResourceCollection(NODE_TYPES.EVENT, {
       locale,
       defaultLocale,
-      params: filteredEventParams() 
+      params: filteredEventParams()
     })
   }
 
-  return await getResourceCollection(NODE_TYPES.EVENT, { 
+  return await getResourceCollection(NODE_TYPES.EVENT, {
     locale,
     defaultLocale,
-    params: eventParams().getQueryObject() 
+    params: eventParams().getQueryObject()
   })
 }
 
@@ -68,9 +68,10 @@ export const getNews = async (shortList: string, locale: Locale) => {
     const newsParamsLimited = () =>
       baseArticlePageQueryParams()
         .addSort('created', 'DESC')
+        .addFilter("status", "1")
         .addPageLimit(4)
 
-    return await getResourceCollection(NODE_TYPES.ARTICLE, { 
+    return await getResourceCollection(NODE_TYPES.ARTICLE, {
       params: newsParamsLimited().getQueryObject(),
       locale,
       defaultLocale
@@ -80,24 +81,25 @@ export const getNews = async (shortList: string, locale: Locale) => {
   const newsParams = () =>
     baseArticlePageQueryParams()
       .addSort('created', 'DESC')
+      .addFilter("status", "1")
       .addFilter('langcode', locale)
 
-  return await getResourceCollection(NODE_TYPES.ARTICLE, { 
+  return await getResourceCollection(NODE_TYPES.ARTICLE, {
     locale,
     defaultLocale,
-    params: newsParams().getQueryObject() 
+    params: newsParams().getQueryObject()
   })
 }
 
 export const getUnits = async (locale: Locale) => {
   const defaultLocale: Locale = 'fi'
-  
+
   const unitsParams = () =>
     baseTprUnitQueryParams()
       .addFilter('menu_link', null, 'IS NOT NULL')
       .addSort('name_override', 'ASC')
 
-  return await getResourceCollection(NODE_TYPES.TPR_UNIT, { 
+  return await getResourceCollection(NODE_TYPES.TPR_UNIT, {
     locale,
     defaultLocale,
     params: unitsParams().getQueryObject() })
@@ -126,10 +128,10 @@ const RETRY_LIMIT = 10
 export const getNode = async (props: GetNodeProps) => {
   const { type, context, drupal, path, retry = 0 } = props
 
-  const getter: any = () => 
+  const getter: any = () =>
     drupal.getResourceFromContext<Node>(type, context, {
       params: getQueryParamsFor(type),
-    })  
+    })
     .catch((e: any) => {
       console.log(`Error requesting node %s`, path.entity.path, {
         type,
