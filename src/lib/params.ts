@@ -187,7 +187,6 @@ export const baseArticlePageQueryParams = () =>
       'field_content',
       'status',
       'published_at',
-      'field_add_to_news_lift'
     ])
     .addFields(CONTENT_TYPES.TEXT, [
       'field_text'
