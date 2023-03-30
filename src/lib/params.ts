@@ -173,6 +173,7 @@ const getEventPageQueryParams = () =>
 export const baseArticlePageQueryParams = () =>
   new DrupalJsonApiParams()
     .addInclude([
+      'field_content.field_list_of_links_links.field_list_of_links_image.field_media_image',
       'field_content.field_image.field_media_image',
     ])
     .addFields(NODE_TYPES.ARTICLE, [
@@ -203,6 +204,17 @@ export const baseArticlePageQueryParams = () =>
       'field_quote_author_first_name',
       'field_quote_author_last_name',
       'field_quote_author_title'
+    ])
+    .addFields(CONTENT_TYPES.LIST_OF_LINKS, [
+      'field_list_of_links_design',
+      'field_list_of_links_links',
+      'field_list_of_links_title',
+      'field_background_color'
+    ])
+    .addFields(CONTENT_TYPES.LIST_OF_LINKS_ITEM, [
+      'field_list_of_links_link',
+      'field_list_of_links_image',
+      'field_list_of_links_desc',
     ])
 
 const getArticlePageQueryParams = () =>
