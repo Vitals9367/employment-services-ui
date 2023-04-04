@@ -133,7 +133,8 @@ const getLandingPageQueryParams = () =>
       'field_events_list_short',
       'field_event_tag_filter',
       'field_background_color',
-      'field_events_list_desc'
+      'field_events_list_desc',
+      'field_event_tags'
     ])
     .addFields(CONTENT_TYPES.NEWS_LIST, [
       'field_title',
@@ -144,6 +145,10 @@ const getLandingPageQueryParams = () =>
 
 export const baseEventQueryParams = () =>
   new DrupalJsonApiParams()
+  .addInclude([
+    'field_event_tags.content_translation_uid',
+    'field_event_tags.parent',
+  ])
     .addFields(NODE_TYPES.EVENT, [
       'id',
       'title',
@@ -163,7 +168,8 @@ export const baseEventQueryParams = () =>
       'field_short_description',
       'field_street_address',
       'field_location_extra_info',
-      'field_offers_info_url'
+      'field_offers_info_url',
+      'field_event_tags'
     ])
 
 const getEventPageQueryParams = () =>

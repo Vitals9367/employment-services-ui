@@ -1,5 +1,6 @@
-import { DrupalJsonApiParams } from "drupal-jsonapi-params"
+import { NextApiResponse } from "next"
 import { DrupalMenuLinkContent, DrupalNode, getResource } from "next-drupal"
+import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { Node } from '@/lib/types'
 import getConfig from 'next/config'
 
@@ -208,4 +209,13 @@ export const sortArrayByOtherArray = (array: any[], sortArray: string[]) => {
   return [...array].sort(
     (a , b) => sortArray.indexOf(a.name_override) - sortArray.indexOf(b.name_override)
   )
+}
+
+export const getLocale = (res: NextApiResponse<any>) => {
+  const host = res.req.headers.host
+  const url = res.req.headers.referer
+    ?.replace(`http://${host}/`, '')
+    .slice(0, 2)
+  const locale = url === 'en' || url === 'sv' ? url : 'fi'
+  return locale
 }

@@ -2,12 +2,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import * as Elastic from '@/lib/elasticsearch'
 import { EventState, EventData } from '@/lib/types'
 import { SearchHit, SearchTotalHits } from '@elastic/elasticsearch/lib/api/types'
+import { getLocale } from '@/lib/helpers'
 
 type Data = EventState
 
 type Index = Partial<{ [key: string]: string | string[] }>
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  const locale = getLocale(res);
   // No posts allowed, no missing params-errors revealed.
   if (req.method !== 'GET') {
     res.status(400)
@@ -32,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
   try {
     const searchRes = await elastic.search({
-      index: 'events_fi',
+      index: `events_${locale}`,
       body: body,
       sort: "field_end_time:asc"
     })
@@ -41,11 +43,39 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       hits: { total, hits }
     } = searchRes as { hits: { total: SearchTotalHits, hits: SearchHit<unknown>[] }}
 
-    response =  {...response,
+
+
+    response = {
+      ...response,
       total: total?.value,
       events: hits.map((hit: any) => {
-        const { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags, field_street_address, field_event_status } = hit._source as EventData
-        return { title, url, field_image_url, field_image_alt, field_start_time, field_end_time, field_location, field_tags, field_street_address, field_event_status }
+        const {
+          title,
+          url,
+          field_image_url,
+          field_image_alt,
+          field_start_time,
+          field_end_time,
+          field_location,
+          field_tags,
+          field_event_tags,
+          field_street_address,
+          field_event_status,
+        } = hit._source as EventData
+
+        return {
+          title,
+          url,
+          field_image_url,
+          field_image_alt,
+          field_start_time,
+          field_end_time,
+          field_location,
+          field_tags,
+          field_event_tags,
+          field_street_address,
+          field_event_status,
+        }
       }),
     }
 
@@ -60,16 +90,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   if (filter) {
     try {
       const searchRes = await elastic.search({
-        index: 'events_fi',
+        index: `events_${locale}`,
         body: { query: { match_all: {} } },
         sort: "field_end_time:asc"
       })
-
       const {
         hits: { total, hits }
       } = searchRes as { hits: { total: SearchTotalHits, hits: SearchHit<unknown>[] }}
 
-      response = { ...response, 
+      response = { ...response,
         maxTotal: total?.value,
         tags: hits.map((hit: any) => {
           const { field_tags } = hit._source as EventData

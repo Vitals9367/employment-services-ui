@@ -1,15 +1,17 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import * as Elastic from '@/lib/elasticsearch'
+import type { NextApiRequest, NextApiResponse } from 'next';
+import * as Elastic from '@/lib/elasticsearch';
+import { getLocale } from '@/lib/helpers';
 
 type Data = any
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+const locale = getLocale(res);
+
   // No posts allowed, no missing params-errors revealed.
   if (req.method !== 'GET') {
     res.status(400)
     return
   }
-
   const elastic = Elastic.getElasticClient()
 
   const body: any = {
@@ -29,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
   try {
     const searchRes = await elastic.search({
-      index: 'events_fi',
+      index: `events_${locale}`,
       body: body
     })
 

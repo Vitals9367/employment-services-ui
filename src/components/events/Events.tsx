@@ -62,10 +62,10 @@ export default function Events(props: EventListProps): JSX.Element {
         .filter((item: any) => { return item.key === undefined ? false : item })
         .map((item: any) => { return item.key })
         .sort((a: string, b: string) => eventTags.indexOf(a) - eventTags.indexOf(b))
-
       setEventsTags(tags)
     })
   }
+
 
   useEffect(() => {
     updateTags()
@@ -78,8 +78,8 @@ export default function Events(props: EventListProps): JSX.Element {
   return (
     <div className='component'>
     <Container className='container'>
-      { field_title && 
-        <h2>{field_title}</h2> 
+      { field_title &&
+        <h2>{field_title}</h2>
       }
 
       { field_events_list_desc?.processed &&
@@ -89,7 +89,7 @@ export default function Events(props: EventListProps): JSX.Element {
       }
 
       <div className={styles.results}>
-        { resultText }  
+        { resultText }
       </div>
 
       <div className={styles.filter}>{t('search.filter')}</div>
@@ -135,7 +135,7 @@ export default function Events(props: EventListProps): JSX.Element {
                 height={158}
               />
               <div className={styles.eventCardContent}>
-                {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
+                {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_event_tags} /> }
                 <DateTime startTime={event.field_start_time[0]} endTime={event.field_end_time[0]} />
                 <h3><EventStatus {...event} />{event.title[0]}</h3>
                 <p>{event.field_location[0]}{ event.field_street_address ? `, ${event.field_street_address[0]}` : ''}</p>

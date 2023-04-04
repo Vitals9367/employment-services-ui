@@ -17,15 +17,16 @@ interface NodeEventPageProps {
 }
 
 function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
-  const { title, field_text, field_location, field_location_id, field_start_time, field_end_time, field_tags, field_image_url, field_image_alt, field_info_url, field_external_links, field_street_address, field_event_status, field_location_extra_info, field_offers_info_url  } = node
+  const { title, field_text, field_location, field_location_id, field_start_time, field_end_time, field_tags, field_image_url, field_image_alt, field_info_url, field_external_links, field_street_address, field_event_status, field_location_extra_info, field_offers_info_url, field_event_tags  } = node
   const { t } = useTranslation('common')
   const { locale } = useRouter()
-  const infoUrlText = field_info_url && field_info_url.startsWith('https://teams.microsoft') ? t('event.info_url_text_teams') : t('event.info_url_text')
+  const infoUrlText = field_info_url && field_info_url.startsWith('https://teams.microsoft') ? t('event.info_url_text_teams') : t('event.info_url_text');
+  const event_tags : string[] = [];
+  field_event_tags.map((tag: { name: string }) => event_tags.push(tag.name))
 
   const onClick = () => {
     location.href = field_offers_info_url;
   }
-
   return (
     <article>
       <Container className="container">
@@ -41,7 +42,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                 />
               </div>
               <div className={styles.headingContainer}>
-                {field_tags && field_tags.length !== 0 && <TagList tags={field_tags} /> }
+                {field_tags && field_tags.length !== 0 && <TagList tags={event_tags} /> }
                 <h1><EventStatus {...{'field_event_status': field_event_status}} />{title}</h1>
                 <DateTime startTime={field_start_time} endTime={field_end_time}  />
                 <div className={styles.location}>

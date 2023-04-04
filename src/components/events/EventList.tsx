@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react'
 import useSWR from 'swr'
-import useSWRInfinite from 'swr/infinite'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, IconArrowRight, Container } from 'hds-react'
+import { Linkbox, IconArrowRight, Container } from 'hds-react'
 
-import { DrupalFormattedText, EventsQueryParams, EventState, EventListProps } from '@/lib/types'
-import { getEvents, getEventsSearch } from '@/lib/client-api'
-import { eventTags, getPath, getPathAlias } from '@/lib/helpers'
+import { EventsQueryParams, EventListProps } from '@/lib/types'
+import { getEvents } from '@/lib/client-api'
+import { getPathAlias } from '@/lib/helpers'
 
 import HtmlBlock from '@/components/HtmlBlock'
 import TagList from './TagList'
@@ -18,10 +16,13 @@ import styles from './events.module.scss'
 import EventStatus from './EventStatus'
 
 export function EventList({ pageType, locationId, ...props }: EventListProps): JSX.Element {
-  const { field_title, field_events_list_short, field_event_tag_filter: tags, field_background_color, field_events_list_desc } = props
+  const { field_title, field_events_list_short, field_event_tag_filter: tags, field_background_color, field_events_list_desc, field_event_tags } = props
   const bgColor = field_background_color?.field_css_name || 'white'
   const { t } = useTranslation()
   const { locale, asPath } = useRouter()
+  const event_tags : string[] = [];
+  field_event_tags?.map((tag: { name: any }) => event_tags.push(tag.name))
+  console.log('event_tags',event_tags);
 
   const queryParams: EventsQueryParams = {
     tags: tags,
@@ -75,14 +76,14 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
                       height={158}
                     />
                     <div className={styles.eventCardContent}>
-                      {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
+                      {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event_tags} /> }
                       <DateTime startTime={event.field_start_time} endTime={event.field_end_time} />
                       <h3><EventStatus {...event} />{event.title}</h3>
                       <p>{event.field_location}{ event.field_street_address ? `, ${event.field_street_address}` : ''}</p>
                     </div>
                   </Linkbox>
                 </div>
-              )) 
+              ))
             : t('list.no_events')
           }
         </div>
