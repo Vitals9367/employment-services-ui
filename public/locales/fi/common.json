@@ -32,7 +32,8 @@
     "pagination_aria_label": "Sivunumerointi",
     "entity_type_event": "Tapahtuma",
     "entity_type_article": "Uutinen",
-    "loading_suggestions": "Ladataan ehdotuksia"
+    "loading_suggestions": "Ladataan ehdotuksia",
+    "group_description": "Voit valita seuraavista suodattimista yhden kerrallaan"
   },
   "list": {
     "load_more": "Näytä lisää",
@@ -47,7 +48,7 @@
     "show_all_events": "Näytä kaikki tapahtumat",
     "events_page_url": "/ajankohtaista/tapahtumat",
     "no_events": "Ei tulevia tapahtumia tästä aiheesta.",
-    "even_title": "Tapahtuma",
+    "event_title": "Tapahtuma",
     "event_link": "Tapahtuma linkki"
   },
   "event": {
