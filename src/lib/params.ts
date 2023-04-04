@@ -10,7 +10,7 @@ const baseQueryParams = () =>
       'field_content.field_liftup_with_image_image.field_media_image',
       'field_content.field_image.field_media_image',
       'field_content.field_background_color',
-      'field_notification'
+      'field_notification',
     ])
     .addFields(CONTENT_TYPES.MEDIA_IMAGE, [
       'field_media_image',
@@ -138,7 +138,8 @@ const getLandingPageQueryParams = () =>
     .addFields(CONTENT_TYPES.NEWS_LIST, [
       'field_title',
       'field_short_list',
-      'field_news_list_desc'
+      'field_news_list_desc',
+      'field_background_color',
     ])
     .getQueryObject()
 

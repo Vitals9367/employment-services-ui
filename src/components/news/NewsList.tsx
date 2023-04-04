@@ -11,11 +11,14 @@ import HtmlBlock from '@/components/HtmlBlock'
 import styles from './news.module.scss'
 
 interface NewsListProps {
-  field_title: string
-  field_short_list: boolean
-  field_news_list_desc: DrupalFormattedText
-  langcode: string
-}
+  field_title: string;
+  field_short_list: boolean;
+  field_news_list_desc: DrupalFormattedText;
+  langcode: string;
+  field_background_color: {
+    field_css_name: string;
+  }
+};
 interface News {
   published_at?: string,
   path: Path,
@@ -29,56 +32,69 @@ interface Path {
   pid: number,
 }
 
-function NewsList(props: NewsListProps): JSX.Element {
-  const { field_title, field_short_list, field_news_list_desc, langcode } = props
+function NewsList({
+  field_title,
+  field_short_list,
+  field_news_list_desc,
+  langcode,
+  field_background_color,
+}: NewsListProps): JSX.Element {
   const { t } = useTranslation()
   const [newsIndex, setNewsIndex] = useState<number>(1)
   const [paginatedNews, setPaginatedNews] = useState<Node[]>([])
+  const bgColor = field_background_color?.field_css_name || 'white'
   const fetcher = () => getNews(field_short_list, langcode)
-  const { data: news, error } = useSWR(
-    `/news`,
-    fetcher
-  )
-  const total: number = news && news.length || 0
+  const { data: news, error } = useSWR(`/news`, fetcher)
+
+  const total: number = (news && news.length) || 0
   useEffect(() => {
     const filterNews = () => {
-      const paginatedArticle = news && news
-      .filter((newsArticle: News) => newsArticle.status !== false )
-      .slice(0, 4*newsIndex)
+      const paginatedArticle = news && news.slice(0, 4 * newsIndex)
       setPaginatedNews(paginatedArticle)
     }
     filterNews()
   }, [news, newsIndex]) // eslint-disable-line
 
   const loadMoreText = t('list.load_more')
-
   return (
-    <div className='component'>
+    <div
+      className='component'
+      style={{ backgroundColor: `var(--color-${bgColor})` }}>
       <Container className='container'>
         <div className={styles.newsListTitleArea}>
-          {field_title &&
-            <h2>{field_title}</h2>
-          }
-          {field_short_list &&
-            <a href={t('list.news_url')}>{t('list.show_all_news')} <IconArrowRight size="l" /></a>
-          }
+          {field_title && <h2>{field_title}</h2>}
+          {field_short_list && (
+            <a href={t('list.news_url')}>
+              {t('list.show_all_news')} <IconArrowRight size='l' />
+            </a>
+          )}
         </div>
-        {field_news_list_desc?.processed &&
+        {field_news_list_desc?.processed && (
           <div className={styles.newsListDescription}>
             <HtmlBlock field_text={field_news_list_desc} />
           </div>
-        }
-        <div className={`${styles.newsList} ${field_short_list && styles.short}`}>
-          { paginatedNews && paginatedNews.map((news: News, key: number) => (
-            <div className={styles.newsCard} key={key}>
+        )}
+        <div
+          className={`${styles.newsList} ${field_short_list && styles.short}`}>
+          {paginatedNews &&
+            paginatedNews.map((news: News, key: number) => (
+              <div className={styles.newsCard} key={key}>
                 <a href={getPathAlias(news.path)}>
                   <h3 className={styles.newsTitle}>{news.title}</h3>
                 </a>
-              {news.published_at && <p className={styles.articleDate}><time dateTime={news.published_at}>{`${dateformat(news.published_at, 'dd.mm.yyyy')}`}</time></p>}
-            </div>
-          ))}
+                {news.published_at && (
+                  <p className={styles.articleDate}>
+                    <time dateTime={news.published_at}>{`${dateformat(
+                      news.published_at,
+                      'dd.mm.yyyy'
+                    )}`}</time>
+                  </p>
+                )}
+              </div>
+            ))}
         </div>
-        {paginatedNews && total > paginatedNews.length && (
+
+        {!field_short_list && paginatedNews && total > paginatedNews.length && (
           <div className={styles.loadMore}>
             <HDSButton
               variant='supplementary'
@@ -86,8 +102,7 @@ function NewsList(props: NewsListProps): JSX.Element {
               style={{ background: 'none' }}
               onClick={() => {
                 setNewsIndex(newsIndex + 1)
-              }}
-            >
+              }}>
               {loadMoreText}
             </HDSButton>
           </div>
