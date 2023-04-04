@@ -49,11 +49,7 @@ function NewsList({
   const total: number = (news && news.length) || 0
   useEffect(() => {
     const filterNews = () => {
-      const paginatedArticle =
-        news &&
-        news
-          .filter((newsArticle: News) => newsArticle.status !== false)
-          .slice(0, 4 * newsIndex)
+      const paginatedArticle = news && news.slice(0, 4 * newsIndex)
       setPaginatedNews(paginatedArticle)
     }
     filterNews()
@@ -61,7 +57,9 @@ function NewsList({
 
   const loadMoreText = t('list.load_more')
   return (
-    <div className='component' style={{ backgroundColor: `var(--color-${bgColor})` }}>
+    <div
+      className='component'
+      style={{ backgroundColor: `var(--color-${bgColor})` }}>
       <Container className='container'>
         <div className={styles.newsListTitleArea}>
           {field_title && <h2>{field_title}</h2>}
@@ -96,7 +94,7 @@ function NewsList({
             ))}
         </div>
 
-        {!field_short_list  && paginatedNews && total > paginatedNews.length && (
+        {!field_short_list && paginatedNews && total > paginatedNews.length && (
           <div className={styles.loadMore}>
             <HDSButton
               variant='supplementary'
@@ -109,7 +107,6 @@ function NewsList({
             </HDSButton>
           </div>
         )}
-
       </Container>
     </div>
   )
