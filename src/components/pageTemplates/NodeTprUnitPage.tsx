@@ -174,19 +174,23 @@ function NodeTprUnitPage({
             )}
           </div>
         </div>
-        <AccordionWithIcon
-          ariaLabel={t('unit.accessibility_information')}
-          accordionTitle={t('unit.accessibility_information')}
-          data={node.accessibility_sentences}
-          backgroundColor={{background: 'var(--color-silver-medium-light)'}}
-          leftIcon={
-            <IconPersonWheelchair
-              size='xl'
-              color='var(--color-black)'
-              aria-hidden='true'
-            />
-          }
-        />
+        {    console.log(node.accessibility_sentences.length)}
+        {node.accessibility_sentences.length !== 0 && (
+          <AccordionWithIcon
+            ariaLabel={t('unit.accessibility_information')}
+            accordionTitle={t('unit.accessibility_information')}
+            data={node.accessibility_sentences}
+            backgroundColor={{ background: 'var(--color-silver-medium-light)' }}
+            leftIcon={
+              <IconPersonWheelchair
+                size='xl'
+                color='var(--color-black)'
+                aria-hidden='true'
+              />
+
+            }
+          />
+        )}
       </Container>
     </article>
   )
