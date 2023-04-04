@@ -174,7 +174,6 @@ function NodeTprUnitPage({
             )}
           </div>
         </div>
-        {    console.log(node.accessibility_sentences.length)}
         {node.accessibility_sentences.length !== 0 && (
           <AccordionWithIcon
             ariaLabel={t('unit.accessibility_information')}
@@ -187,7 +186,6 @@ function NodeTprUnitPage({
                 color='var(--color-black)'
                 aria-hidden='true'
               />
-
             }
           />
         )}
