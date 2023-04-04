@@ -6,6 +6,7 @@ import {
   useAccordion,
   Container,
 } from 'hds-react';
+import { Key } from 'react';
 
 import styles from './accordion.module.scss';
 
@@ -14,6 +15,7 @@ interface AccordionProps {
   accordionTitle: string;
   ariaLabel: string;
   backgroundColor: React.CSSProperties;
+  group: string[];
   data: [
     {
       group: string;
@@ -28,11 +30,8 @@ function AccordionWithIcon({
   ariaLabel,
   backgroundColor,
   data,
+  group
 }: AccordionProps): JSX.Element {
-  const groups: string[] = [];
-  data.map((item) =>
-    groups.indexOf(item.group) === -1 ? groups.push(item.group) : null
-  )
   const initiallyOpen = false
   const {isOpen, buttonProps, contentProps} = useAccordion({initiallyOpen})
 
@@ -55,7 +54,7 @@ function AccordionWithIcon({
         <div className={styles.iconAccordionHeaderIcon}>{icon}</div>
       </Button>
       <Card aria-label={ariaLabel} style={backgroundColor} {...contentProps}>
-        {groups.map((groupName, i) => (
+        {group.map((groupName: {} | null | undefined, i: Key | null | undefined) => (
           <div key={i}>
             <h3>{groupName}</h3>
             {Object.values(data).map((group, key) => (
