@@ -16,7 +16,7 @@ import styles from './events.module.scss'
 import EventStatus from './EventStatus'
 
 export function EventList({ pageType, locationId, ...props }: EventListProps): JSX.Element {
-  const { field_title, field_events_list_short, field_event_tag_filter: tags, field_background_color, field_events_list_desc, field_event_tags } = props
+  const { field_title, field_events_list_short, field_event_tag_filter: tags, field_background_color, field_events_list_desc } = props
   const bgColor = field_background_color?.field_css_name || 'white'
   const { t } = useTranslation()
   const { locale, asPath } = useRouter()

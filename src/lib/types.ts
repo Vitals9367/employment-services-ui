@@ -109,7 +109,7 @@ export interface EventListProps {
   field_events_list_desc:  DrupalFormattedText
   locationId: string | null
   field_street_address: string
-  field_event_tags: any
+  field_event_tags: string[]
 }
 
 export interface SearchState {
