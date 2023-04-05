@@ -1,12 +1,11 @@
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { DrupalMenuLinkContent, DrupalNode, getResource } from "next-drupal"
-import { Node } from '@/lib/types'
 import getConfig from 'next/config'
-
 import { i18n } from "next-i18next.config"
 
 import { BreadcrumbContent } from "./types"
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
+import { GroupingProps, Node } from '@/lib/types'
 
 export const eventTags = ['maahanmuuttajat', 'nuoret', 'info', 'koulutus', 'messut', 'neuvonta', 'rekrytointi', 'työpajat', 'digitaidot', 'etätapahtuma', 'palkkatuki', 'työnhaku']
 export const printablePages = [NODE_TYPES.ARTICLE, NODE_TYPES.EVENT, NODE_TYPES.PAGE, NODE_TYPES.TPR_UNIT]
@@ -208,4 +207,12 @@ export const sortArrayByOtherArray = (array: any[], sortArray: string[]) => {
   return [...array].sort(
     (a , b) => sortArray.indexOf(a.name_override) - sortArray.indexOf(b.name_override)
   )
+}
+
+export const groupData = (data: GroupingProps[]) => {
+  const groups: string[] = []
+  data.map((item: GroupingProps) =>
+    groups.indexOf(item.group) === -1 ? groups.push(item.group) : null
+  )
+  return groups;
 }

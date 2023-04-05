@@ -135,3 +135,8 @@ declare global {
     rnsData: any
   }
 }
+
+export interface GroupingProps {
+  group: string
+  value: string
+}

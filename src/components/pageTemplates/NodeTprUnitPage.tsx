@@ -10,6 +10,7 @@ import {
 } from 'hds-react'
 
 import {NavProps, TprUnitData} from '@/lib/types'
+import { groupData } from '@/lib/helpers'
 import ContentMapper from '@/components/ContentMapper'
 import {Sidebar} from '@/components/navigation/Sidebar'
 import HtmlBlock from '@/components/HtmlBlock'
@@ -30,11 +31,6 @@ interface BlockProps {
 
 interface ContactInfoProps {
   aside?: boolean
-}
-
-interface accessibilityProps {
-  group: string
-  value: string
 }
 
 function NodeTprUnitPage({
@@ -62,10 +58,6 @@ function NodeTprUnitPage({
   const {t} = useTranslation('common')
   const pageTitle = name_override ? name_override : name
   const picture = picture_url_override ? picture_url_override : picture_url
-  const groups: string[] = [];
-  node.accessibility_sentences.map((item : accessibilityProps) =>
-    groups.indexOf(item.group) === -1 ? groups.push(item.group) : null
-  )
 
   const Block = (block: BlockProps): JSX.Element => {
     const {title, icon, content} = block
@@ -188,7 +180,7 @@ function NodeTprUnitPage({
             ariaLabel={t('unit.accessibility_information')}
             accordionTitle={t('unit.accessibility_information')}
             data={node.accessibility_sentences}
-            group={groups}
+            group={groupData(node.accessibility_sentences)}
             backgroundColor={{ background: 'var(--color-silver-medium-light)' }}
             leftIcon={
               <IconPersonWheelchair
