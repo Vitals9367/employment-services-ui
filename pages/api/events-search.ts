@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const body = {
     size: 9,
     from: (9*Number(index)),
-    query: filter ? { match: { field_tags: String(filter) } } : { match_all: {} }
+    query: filter ? { match: { field_event_tags: String(filter) } } : { match_all: {} }
   }
 
   try {
@@ -101,8 +101,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       response = { ...response,
         maxTotal: total?.value,
         tags: hits.map((hit: any) => {
-          const { field_tags } = hit._source as EventData
-          return { field_tags }
+          const { field_event_tags } = hit._source as EventData
+          return { field_event_tags }
         }),
       }
 

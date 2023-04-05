@@ -22,7 +22,7 @@ const locale = getLocale(res);
     "aggs": {
       "events_tags": {
         "terms": {
-          "field": "field_tags.keyword",
+          "field": "field_event_tags.keyword",
           "size": 100
         }
       }

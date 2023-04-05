@@ -43,19 +43,6 @@ export default function Events(props: EventListProps): JSX.Element {
 
   const resultText = !total ? '' : total.current < total.max ? `${total.current} / ${total.max} ${t('list.results_text')}` : `${total.max} ${t('list.results_text')}`
 
-  /**
-   * @TODO Check ssr-api.js for maybe better solution via "getResourceByPath" or "translatePath"
-   */
-  const getLangPath = (event: any): string => {
-    const nodePath: string = event.url[0].substring(event.url[0].lastIndexOf('/'))
-    const eventPaths: any = {
-      'sv': '/sv/aktuellt/evenemang',
-      'en': '/en/current-matters/events'
-    }
-
-    return locale !== 'fi' && locale != undefined ? `${eventPaths[locale]}${nodePath}` : getPath(event.url[0])
-  }
-
   const updateTags = () => {
     getEventsTags().then((result) => {
       const tags: any = result
@@ -99,7 +86,7 @@ export default function Events(props: EventListProps): JSX.Element {
           <HDSButton
             key={`tagFilter-${i}`}
             className={filter === tag ? styles.selected: styles.filterTag}
-            onClick={() => { setFilter(tag.replace(' ', '_')) }}
+            onClick={() => { setFilter(tag) }}
           >
           { tag.replace('_', ' ') }
           </HDSButton>

@@ -134,7 +134,6 @@ const getLandingPageQueryParams = () =>
       'field_event_tag_filter',
       'field_background_color',
       'field_events_list_desc',
-      'field_event_tags'
     ])
     .addFields(CONTENT_TYPES.NEWS_LIST, [
       'field_title',
