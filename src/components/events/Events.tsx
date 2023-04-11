@@ -43,29 +43,16 @@ export default function Events(props: EventListProps): JSX.Element {
 
   const resultText = !total ? '' : total.current < total.max ? `${total.current} / ${total.max} ${t('list.results_text')}` : `${total.max} ${t('list.results_text')}`
 
-  /**
-   * @TODO Check ssr-api.js for maybe better solution via "getResourceByPath" or "translatePath"
-   */
-  const getLangPath = (event: any): string => {
-    const nodePath: string = event.url[0].substring(event.url[0].lastIndexOf('/'))
-    const eventPaths: any = {
-      'sv': '/sv/aktuellt/evenemang',
-      'en': '/en/current-matters/events'
-    }
-
-    return locale !== 'fi' && locale != undefined ? `${eventPaths[locale]}${nodePath}` : getPath(event.url[0])
-  }
-
   const updateTags = () => {
     getEventsTags().then((result) => {
       const tags: any = result
         .filter((item: any) => { return item.key === undefined ? false : item })
         .map((item: any) => { return item.key })
         .sort((a: string, b: string) => eventTags.indexOf(a) - eventTags.indexOf(b))
-
       setEventsTags(tags)
     })
   }
+
 
   useEffect(() => {
     updateTags()
@@ -78,8 +65,8 @@ export default function Events(props: EventListProps): JSX.Element {
   return (
     <div className='component'>
     <Container className='container'>
-      { field_title && 
-        <h2>{field_title}</h2> 
+      { field_title &&
+        <h2>{field_title}</h2>
       }
 
       { field_events_list_desc?.processed &&
@@ -89,7 +76,7 @@ export default function Events(props: EventListProps): JSX.Element {
       }
 
       <div className={styles.results}>
-        { resultText }  
+        { resultText }
       </div>
 
       <div className={styles.filter}>{t('search.filter')}</div>
@@ -99,7 +86,7 @@ export default function Events(props: EventListProps): JSX.Element {
           <HDSButton
             key={`tagFilter-${i}`}
             className={filter === tag ? styles.selected: styles.filterTag}
-            onClick={() => { setFilter(tag.replace(' ', '_')) }}
+            onClick={() => { setFilter(tag) }}
           >
           { tag.replace('_', ' ') }
           </HDSButton>
@@ -135,7 +122,7 @@ export default function Events(props: EventListProps): JSX.Element {
                 height={158}
               />
               <div className={styles.eventCardContent}>
-                {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_tags} /> }
+                {event.field_tags && event.field_tags.length !== 0 && <TagList tags={event.field_event_tags} /> }
                 <DateTime startTime={event.field_start_time[0]} endTime={event.field_end_time[0]} />
                 <h3><EventStatus {...event} />{event.title[0]}</h3>
                 <p>{event.field_location[0]}{ event.field_street_address ? `, ${event.field_street_address[0]}` : ''}</p>

@@ -74,6 +74,7 @@ export interface EventData {
   field_location: string
   field_location_id?: string
   field_tags: string[]
+  field_event_tags: string[]
   field_street_address?: string
 }
 
@@ -108,6 +109,7 @@ export interface EventListProps {
   field_events_list_desc:  DrupalFormattedText
   locationId: string | null
   field_street_address: string
+  field_event_tags: string[]
 }
 
 export interface SearchState {
