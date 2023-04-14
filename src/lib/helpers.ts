@@ -1,25 +1,26 @@
-import { NextApiResponse } from "next";
-import { DrupalMenuLinkContent, DrupalNode, getResource } from "next-drupal";
-import { Node } from "@/lib/types";
-import getConfig from "next/config";
+import { DrupalMenuLinkContent } from 'next-drupal';
+import { GroupingProps, Node } from '@/lib/types';
+import getConfig from 'next/config';
 
+import { i18n } from 'next-i18next.config';
 
-import { BreadcrumbContent } from "./types";
-import { NODE_TYPES } from "@/lib/drupalApiTypes";
+import { BreadcrumbContent } from './types';
+import { NODE_TYPES } from '@/lib/drupalApiTypes';
+import { NextApiResponse } from 'next';
 
 export const eventTags = [
-  "maahanmuuttajat",
-  "nuoret",
-  "info",
-  "koulutus",
-  "messut",
-  "neuvonta",
-  "rekrytointi",
-  "työpajat",
-  "digitaidot",
-  "etätapahtuma",
-  "palkkatuki",
-  "työnhaku",
+  'maahanmuuttajat',
+  'nuoret',
+  'info',
+  'koulutus',
+  'messut',
+  'neuvonta',
+  'rekrytointi',
+  'työpajat',
+  'digitaidot',
+  'etätapahtuma',
+  'palkkatuki',
+  'työnhaku',
 ];
 export const printablePages = [
   NODE_TYPES.ARTICLE,
@@ -44,7 +45,7 @@ export const getImageUrl = (url: string): string => {
   url = url.substring(url.indexOf('/sites'));
 
   return url ? `https://${host}${url}` : '';
-}
+};
 
 export const getPath = (url: string): string => {
   const newUrl = new URL(url);
@@ -54,11 +55,11 @@ export const getPath = (url: string): string => {
 
 export const getPathAlias = (path: any): string => {
   if (!path) {
-    return "";
+    return '';
   }
 
-  return path.langcode === 'fi' ? path.alias : `/${path.langcode}${path.alias}`
-}
+  return path.langcode === 'fi' ? path.alias : `/${path.langcode}${path.alias}`;
+};
 
 export const getBreadCrumb = (
   menuItems: DrupalMenuLinkContent[],
@@ -228,4 +229,12 @@ export const getLocale = (res: NextApiResponse<any>) => {
     .slice(0, 2);
   const locale = url === 'en' || url === 'sv' ? url : 'fi';
   return locale;
+};
+
+export const groupData = (data: GroupingProps[]) => {
+  const groups: string[] = [];
+  data.map((item: GroupingProps) =>
+    groups.indexOf(item.group) === -1 ? groups.push(item.group) : null
+  );
+  return groups;
 };
