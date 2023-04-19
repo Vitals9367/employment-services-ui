@@ -35,7 +35,7 @@ export default function Events(props: EventListProps): JSX.Element {
   const { locale } = useRouter()
   const [filter, setFilter] = useState<string | null>(null)
 
-  const fetcher = (eventsIndex: number) => getEventsSearch(eventsIndex, filter)
+  const fetcher = (eventsIndex: number) => getEventsSearch(eventsIndex, filter, locale != undefined ? locale : 'fi')
   const { data, size, setSize } = useSWRInfinite(getKey, fetcher)
   const events = data && getEvents(data)
   const total = data && getTotal(data)
@@ -44,7 +44,7 @@ export default function Events(props: EventListProps): JSX.Element {
   const resultText = !total ? '' : total.current < total.max ? `${total.current} / ${total.max} ${t('list.results_text')}` : `${total.max} ${t('list.results_text')}`
 
   const updateTags = () => {
-    getEventsTags().then((result) => {
+    getEventsTags(locale != undefined ? locale : 'fi').then((result) => {
       const tags: any = result
         .filter((item: any) => { return item.key === undefined ? false : item })
         .map((item: any) => { return item.key })

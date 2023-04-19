@@ -5,7 +5,8 @@ import { getLocale } from '@/lib/helpers';
 type Data = any
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-const locale = getLocale(res);
+
+  const { locale }:any = req?.query
 
   // No posts allowed, no missing params-errors revealed.
   if (req.method !== 'GET') {

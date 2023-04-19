@@ -25,8 +25,8 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
   return data
 }
 
-export const getEventsSearch = async (eventsIndex: number, filter: string | null) => {
-  const { data } = await axios(`${EVENTS_SEARCH_URL}`, { params: { index: eventsIndex, filter: filter } })
+export const getEventsSearch = async (eventsIndex: number, filter: string | null, locale: Locale) => {
+  const { data } = await axios(`${EVENTS_SEARCH_URL}`, { params: { index: eventsIndex, filter: filter, locale: locale } })
   return data
 }
 
@@ -45,8 +45,8 @@ export const getSearch = async (index: number, query: string | undefined, locale
   return data
 }
 
-export const getEventsTags = async () => {
-  const { data } = await axios(`${EVENTS_TAGS_URL}`, {})
+export const getEventsTags = async (locale: Locale) => {
+  const { data } = await axios(`${EVENTS_TAGS_URL}`, { params: { locale: locale}})
   return data
 }
 
