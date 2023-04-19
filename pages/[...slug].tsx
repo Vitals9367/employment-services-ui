@@ -63,7 +63,7 @@ export async function getStaticProps(
   if (context.preview) {
     withAuth = true;
   }
-
+  
   const drupal = getDrupalClient(withAuth);
 
   const path = await drupal.translatePathFromContext(context);
@@ -202,7 +202,8 @@ export default function Page({ node, nav, footer }: PageProps) {
         <meta property="og:url" content={metaUrl} />
         <meta property="og:image" content={metaImage} />
       </Head>
-      {node.type === NODE_TYPES.PAGE && (
+      <a id="content" tabIndex={-1}></a>
+      { node.type === NODE_TYPES.PAGE && (
         <NodeBasicPage node={node} sidebar={nav} />
       )}
       {node.type === NODE_TYPES.LANDING_PAGE && <NodeLandingPage node={node} />}

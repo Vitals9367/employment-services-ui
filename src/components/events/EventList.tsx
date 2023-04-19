@@ -65,8 +65,8 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
                 <div className={`${styles.eventCard} event-card`} key={key}>
                   <Linkbox
                     className={styles.linkBox}
-                    linkboxAriaLabel='List of links Linkbox'
-                    linkAriaLabel='Linkbox link'
+                    linkboxAriaLabel={`${t('list.event_title')} ${event.title}`}
+                    linkAriaLabel={`${t('list.event_link')} ${event.title}`}
                     key={key}
                     href={getPathAlias(event.path)}
                     withBorder>
@@ -103,8 +103,9 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
                     </div>
                   </Linkbox>
                 </div>
-              ))
-            : t('list.no_events')}
+            ))
+            : t('list.no_events')
+          }
         </div>
       </Container>
     </div>

@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import * as Elastic from '@/lib/elasticsearch';
-import { getLocale } from '@/lib/helpers';
 
 type Data = any
 

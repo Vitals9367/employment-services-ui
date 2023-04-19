@@ -29,7 +29,8 @@ interface ContentMapperProps {
   sidebar?: NavProps,
 }
 
-export function ContentMapper({ content, pageType, locationId, mapId, langcode, sidebar, ...props }: ContentMapperProps): JSX.Element {
+export function ContentMapper({ content, pageType, locationId, mapId, langcode,  sidebar, ...props }: ContentMapperProps): JSX.Element {
+
   return content.map((item: any) => {
     const { type, id } = item
     const key = `paragraph--${type}-${id}`

@@ -133,9 +133,13 @@ function NodeTprUnitPage({
 
   return (
     <article>
-      <Container className='container'>
-        <div className='columns'>
-          <div className='content-region col col-8 flex-grow'>
+      <Container className="container">
+        <div className="columns">
+          <div className="sidebar col col-4 flex-order-first">
+            <Sidebar {...sidebar}/>
+            <ContactInfo aside={true} />
+          </div>
+          <div className="content-region col col-8 flex-grow">
             <h1>{pageTitle}</h1>
             {description && (
               <div className='lead-in'>
@@ -151,6 +155,7 @@ function NodeTprUnitPage({
 
             <ContactInfo />
 
+
             {field_content?.length > 0 && (
               <ContentMapper
                 content={field_content}
@@ -159,10 +164,6 @@ function NodeTprUnitPage({
                 mapId={service_map_embed}
               />
             )}
-          </div>
-          <div className='sidebar col col-4 flex-order-first'>
-            <Sidebar {...sidebar} />
-            <ContactInfo aside={true} />
           </div>
         </div>
         <div className='columns'>

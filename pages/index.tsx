@@ -28,7 +28,7 @@ interface HomePageProps {
 
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<HomePageProps>> {
   const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
-  const { REVALIDATE_TIME, DRUPAL_FRONT_PAGE } = getConfig().serverRuntimeConfig  
+  const { REVALIDATE_TIME, DRUPAL_FRONT_PAGE } = getConfig().serverRuntimeConfig
   const drupal = getDrupalClient()
 
   const node = await drupal.getResourceByPath<Node>(DRUPAL_FRONT_PAGE, {
@@ -96,9 +96,10 @@ export default function HomePage({ node, nav, footer }: HomePageProps) {
         <meta property="og:url" content={metaUrl} />
         <meta property="og:image" content={metaImage} />
       </Head>
+      <a id="content" tabIndex={-1}></a>
       <NodeLandingPage node={node} />
       {/* React and share */}
-      <Container className="container hide-print">      
+      <Container className="container hide-print">
         <div className="rns">
           {rnsStatus !== true ? <ConsentInfo /> : ''}
         </div>
