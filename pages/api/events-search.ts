@@ -9,7 +9,7 @@ type Data = EventState
 type Index = Partial<{ [key: string]: string | string[] }>
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const locale = getLocale(res);
+  const { locale }:any = req?.query
   // No posts allowed, no missing params-errors revealed.
   if (req.method !== 'GET') {
     res.status(400)
