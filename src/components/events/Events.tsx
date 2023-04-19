@@ -84,6 +84,8 @@ export default function Events(props: EventListProps): JSX.Element {
             {eventsTags &&
               eventsTags.map((tag: any, i: number) => (
                 <HDSButton
+                  role="checkbox"
+                  aria-checked={filter === tag ?? true}
                   aria-label={`${t('search.filter')} ${tag.replace('_', ' ')}`}
                   key={`tagFilter-${i}`}
                   className={
@@ -117,7 +119,7 @@ export default function Events(props: EventListProps): JSX.Element {
               <div className={styles.eventCard} key={key}>
                 <Linkbox
                   className={styles.linkBox}
-                  linkboxAriaLabel={`${t('list.even_title')} ${event.title}`}
+                  linkboxAriaLabel={`${t('list.event_title')} ${event.title}`}
                   linkAriaLabel={`${t('list.event_link')} ${event.title}`}
                   key={key}
                   href={event.url}
