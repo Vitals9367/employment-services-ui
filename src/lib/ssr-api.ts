@@ -79,6 +79,7 @@ export const getNews = async (shortList: string, locale: Locale) => {
       baseArticlePageQueryParams()
         .addSort('created', 'DESC')
         .addFilter('status', '1')
+        .addFilter('langcode', locale)
         .addPageLimit(4);
 
     return await drupal.getResourceCollection(NODE_TYPES.ARTICLE, {
