@@ -190,9 +190,9 @@ export default function Page({ node, nav, footer }: PageProps) {
   const metaDescription = getDescription(node);
   const metaUrl = process.env.NEXT_PUBLIC_SITE_URL + router.asPath;
   const metaImage = getDefaultImage(node);
-
+  
   return (
-    <Layout header={nav} footer={footer}>
+    <Layout header={nav} footer={footer} hideNav={node.field_hide_navigation}>
       <Head>
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
@@ -206,7 +206,9 @@ export default function Page({ node, nav, footer }: PageProps) {
       { node.type === NODE_TYPES.PAGE && (
         <NodeBasicPage node={node} sidebar={nav} />
       )}
-      {node.type === NODE_TYPES.LANDING_PAGE && <NodeLandingPage node={node} />}
+      {node.type === NODE_TYPES.LANDING_PAGE && (
+        <NodeLandingPage node={node} />
+      )}
       {node.type === NODE_TYPES.EVENT && <NodeEventPage node={node} />}
       {node.type === NODE_TYPES.ARTICLE && <NodeArticlePage node={node} />}
       {node.type === NODE_TYPES.TPR_UNIT && (

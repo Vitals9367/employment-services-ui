@@ -1,46 +1,44 @@
-import { ReactElement, useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { useTranslation } from 'next-i18next'
-import { DrupalMenuLinkContent } from 'next-drupal'
-import { Navigation, IconArrowTopRight } from 'hds-react'
+import { ReactElement, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import { DrupalMenuLinkContent } from 'next-drupal';
+import { Navigation, IconArrowTopRight } from 'hds-react';
 
-import { NavProps } from '@/lib/types'
-import classNames from '@/lib/classNames'
-import { printablePages } from '@/lib/helpers'
-import { Breadcrumb } from './Breadcrumb'
-import styles from './navigation.module.scss'
-import PrintButton from '../printButton/PrintButton'
+import { NavProps } from '@/lib/types';
+import classNames from '@/lib/classNames';
+import { printablePages } from '@/lib/helpers';
+import { Breadcrumb } from './Breadcrumb';
+import styles from './navigation.module.scss';
+import PrintButton from '../printButton/PrintButton';
 
-
-function Header(header:NavProps): JSX.Element {
-
-  const { locale, menu, themes, langLinks, breadcrumb } = header
-  const { t } = useTranslation('common')
-  const router: any = useRouter()  // @TODO Fix type for proper
-  const activePath = langLinks[locale ? locale : 'fi']
-  const [ pageProps, setPageProps ]: any | null = useState(null)
-  const [ isPrintable, setIsPrintable ] = useState(false)
+function Header(header: NavProps): JSX.Element {
+  const { locale, menu, themes, langLinks, breadcrumb, hideNav } = header;
+  const { t } = useTranslation('common');
+  const router: any = useRouter(); // @TODO Fix type for proper
+  const activePath = langLinks[locale ? locale : 'fi'];
+  const [pageProps, setPageProps]: any | null = useState(null);
+  const [isPrintable, setIsPrintable] = useState(false);
 
   useEffect(() => {
-    setPageProps(router.components[router.route].props.pageProps)
+    setPageProps(router.components[router.route].props.pageProps);
 
-    if (!pageProps || pageProps.node === undefined) return
+    if (!pageProps || pageProps.node === undefined) return;
 
     if (printablePages.includes(pageProps.node.type)) {
-      setIsPrintable(true)
+      setIsPrintable(true);
     }
-  }, [pageProps])
+  }, [pageProps]);
 
-  const getNavi = (menuArray: DrupalMenuLinkContent[]|undefined) => {
-    const nav: ReactElement[] = []
+  const getNav = (menuArray: DrupalMenuLinkContent[] | undefined) => {
+    const nav: ReactElement[] = [];
     if (!menuArray) {
-      return <></>
+      return <></>;
     }
     menuArray.map((item: DrupalMenuLinkContent, index: number) => {
-      const subs: ReactElement[] = []
-      let childActive = false
+      const subs: ReactElement[] = [];
+      let childActive = false;
       item.items?.map((sub: DrupalMenuLinkContent, i: number) => {
-        childActive = sub.url === activePath || childActive
+        childActive = sub.url === activePath || childActive;
         subs.push(
           <Navigation.Item
             key={sub.title}
@@ -49,10 +47,10 @@ function Header(header:NavProps): JSX.Element {
             label={sub.title}
             active={sub.url === activePath}
           />
-        )
-        return subs
-      })
-      const isActive = item.url === activePath || childActive
+        );
+        return subs;
+      });
+      const isActive = item.url === activePath || childActive;
       nav.push(
         <Navigation.DropdownLink
           label={item.title}
@@ -64,38 +62,19 @@ function Header(header:NavProps): JSX.Element {
         >
           {subs}
         </Navigation.DropdownLink>
-      )
-      return nav
-    })
-    return nav
-  }
+      );
+      return nav;
+    });
+    return nav;
+  };
 
-  const getThemes = (links: DrupalMenuLinkContent[]|undefined) => {
-    if (!links) {
-      return <></>
-    }
-    const nav: ReactElement[] = []
-    links.map((item: DrupalMenuLinkContent, index: number) => {
-      nav.push(
-        <Navigation.Item
-          key={item.title}
-          href={item.url}
-          label={item.title}
-          lang="und"
-          active={item.url === activePath}
-        />
-      )
-    })
-    return nav
-  }
-
-  if (!menu&&!themes&&!langLinks) {
-    return <></>
+  if (!menu && !themes && !langLinks) {
+    return <></>;
   }
 
   const onSearch = (searchValue: string) => {
-    router.push(`/search?q=${searchValue}`, undefined, { shallow: true })
-  }
+    router.push(`/search?q=${searchValue}`, undefined, { shallow: true });
+  };
 
   return (
     <>
@@ -108,7 +87,7 @@ function Header(header:NavProps): JSX.Element {
         titleAriaLabel={t('navigation.title_aria_label')}
         titleUrl={locale === 'fi' ? '/' : `/${locale}`}
         className={classNames(styles.navigation, styles.zover)}>
-        <Navigation.Row>{getNavi(menu)}</Navigation.Row>
+        {!hideNav && <Navigation.Row>{getNav(menu)}</Navigation.Row>}
         <Navigation.Actions>
           <Navigation.Search
             onSearch={onSearch}
@@ -167,7 +146,7 @@ function Header(header:NavProps): JSX.Element {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;
