@@ -68,8 +68,9 @@ export const getNews = async (shortList: string, locale: Locale) => {
     const newsParamsLimited = () =>
       baseArticlePageQueryParams()
         .addSort('created', 'DESC')
-        .addFilter("status", "1")
-        .addPageLimit(4)
+        .addFilter('status', '1')
+        .addFilter('langcode', locale)
+        .addPageLimit(4);
 
     return await getResourceCollection(NODE_TYPES.ARTICLE, {
       params: newsParamsLimited().getQueryObject(),
