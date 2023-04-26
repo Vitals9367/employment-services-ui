@@ -72,7 +72,7 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
                     withBorder>
                     <Image
                       src={event.field_image_url}
-                      alt=''
+                      alt={event.field_image_alt}
                       layout='responsive'
                       objectFit='cover'
                       width={384}
