@@ -2,7 +2,8 @@ import { ReactElement, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { DrupalMenuLinkContent } from 'next-drupal';
-import { Navigation, IconArrowTopRight } from 'hds-react';
+import { Navigation, IconArrowTopRight, Link, Select, IconGlobe, Button, IconAngleDown, IconAngleUp} from 'hds-react';
+// import Link from 'next/link';
 
 import { NavProps } from '@/lib/types';
 import classNames from '@/lib/classNames';
@@ -18,6 +19,7 @@ function Header(header: NavProps): JSX.Element {
   const activePath = langLinks[locale ? locale : 'fi'];
   const [pageProps, setPageProps]: any | null = useState(null);
   const [isPrintable, setIsPrintable] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setPageProps(router.components[router.route].props.pageProps);
@@ -79,14 +81,15 @@ function Header(header: NavProps): JSX.Element {
   return (
     <>
       <Navigation
-        menuToggleAriaLabel='Menu'
+        menuToggleAriaLabel="Menu"
         logoLanguage={locale === 'sv' ? 'sv' : 'fi'}
-        skipTo='#content'
+        skipTo="#content"
         skipToContentLabel={t('skip-to-main-content')}
         title={t('site_name')}
         titleAriaLabel={t('navigation.title_aria_label')}
         titleUrl={locale === 'fi' ? '/' : `/${locale}`}
-        className={classNames(styles.navigation, styles.zover)}>
+        className={classNames(styles.navigation, styles.zover)}
+      >
         {!hideNav && <Navigation.Row>{getNav(menu)}</Navigation.Row>}
         <Navigation.Actions>
           <Navigation.Search
@@ -95,45 +98,47 @@ function Header(header: NavProps): JSX.Element {
             searchPlaceholder={t('navigation.search_placeholder')}
           />
           <Navigation.User
-            id='navigation_blue_button'
-            key='navigation_button'
+            id="navigation_blue_button"
+            key="navigation_button"
             label={t('navigation.button_text')}
-            icon={<IconArrowTopRight size='l' />}
+            icon={<IconArrowTopRight size="l" />}
             onSignIn={() => {
-              window.open(t('navigation.button_link'), '_blank')?.focus()
+              window.open(t('navigation.button_link'), '_blank')?.focus();
             }}
             className={styles.blueButton}
           />
-          <Navigation.LanguageSelector
-            label={locale && locale.toUpperCase()}
-            buttonAriaLabel={t('lang-code')}>
-            <Navigation.Item
-              lang='fi'
-              key='fi_lang'
-              href={langLinks.fi}
-              hrefLang='fi'
-              label='Suomeksi'
-              active={langLinks.fi === activePath}
-            />
-            <Navigation.Item
-              lang='sv'
-              key='sv_lang'
-              href={langLinks.sv}
-              hrefLang='sv'
-              label='På svenska'
-              active={langLinks.sv === activePath}
-            />
-            <Navigation.Item
-              lang='en'
-              key='en_lang'
-              href={langLinks.en}
-              hrefLang='en'
-              label='In English'
-              active={langLinks.en === activePath}
-            />
-          </Navigation.LanguageSelector>
         </Navigation.Actions>
       </Navigation>
+      <nav className={styles.LanguageSelector}>
+        <div className={styles.languageSelect}>
+          <Link aria-current={langLinks.fi === activePath} href={langLinks.fi}>
+            Suomi
+          </Link>
+          <Link aria-current={langLinks.sv === activePath} href={langLinks.sv}>
+            Svenska
+          </Link>
+          <Link aria-current={langLinks.en === activePath} href={langLinks.en}>
+            English
+          </Link>
+        </div>
+        <Button
+          className={styles.buttonGlobe}
+          onClick={() => setOpen(!open) }
+          iconRight={!open ? <IconAngleDown size="s" /> : <IconAngleUp size="s" />}
+
+        ><IconGlobe size="s" /></Button>
+
+      </nav>
+      {open && (
+        <ul className={styles.box}>
+          <li>Apple</li>
+          <li>Banana</li>
+          <li>Pear</li>
+          <li>Cherry</li>
+          <li>Grape</li>
+          <li>Lemon</li>
+        </ul>
+      )}
       {activePath !== '/' && (
         <div className={styles.subHeader}>
           <Breadcrumb breadcrumb={breadcrumb} />

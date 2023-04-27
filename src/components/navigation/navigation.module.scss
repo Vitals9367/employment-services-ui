@@ -26,7 +26,130 @@
   .blueButton {
     --background-color: var(--color-bus) !important;
   }
+
+  button span {
+    padding: 0;
+  }
 }
+
+.LanguageSelector {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px;
+  background-color: var(--color-black-5);
+  
+  [class*="Select-module_root"] {
+    --border-width: 0px;
+    --dropdown-background-default: --color-black-5;
+  }
+
+  [class*="Menu-module_menu"] {
+    transform: scale(1);
+    z-index: 1000;
+    overflow: hidden;
+    max-height: inherit;
+    box-sizing: border-box;
+    left: -120px !important;
+    --menu-button-focus-outline-color: --color-black-5
+  }
+
+  
+  [class*="Select-module_open"] {
+    min-width: 200px;
+  }
+
+  &:first-child {
+    margin-left: 2px;
+  }
+
+  a {
+    color: #1a1a1a !important;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: var(--line-height);
+    color: #1a1a1a;
+    margin-left: 0px;
+    margin-right: 8px;
+    &[aria-current=true] {
+      font-weight: 700;
+      border-bottom: 3px solid #1a1a1a !important;
+      cursor: default;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .languageSelect {
+    display: flex;
+    align-items: center ;
+  }
+}
+
+nav .buttonGlobe {
+  margin: 0;
+  padding: 0;
+}
+
+.buttonGlobe {
+
+  transform: scale(1);
+  padding: 0;
+  transform-origin: center;
+  background-color: var(--color-black-5)  !important;
+  border-color: var(--color-black-5)  !important;
+  --color: var(--color-black) !important;
+  --color-hover: var(--color-black) !important;
+  --color-focus: var(--color-black) !important;
+  --color-hover-focus: var(--color-black) !important;
+  --border-width: 0 !important;
+  &::after {
+    padding: 0;
+    margin: 0;
+  }
+  &:hover {
+    border-color: var(--color-black-5)  !important;
+    transform: scale(1);
+    transform-origin: center;
+  }
+  &:focus {
+    transform: scale(1);
+    transform-origin: center;
+  }
+  svg {
+    padding: 0;
+    margin: 0;
+    right: 0;
+  }
+  span {
+    padding: 0;
+    transform: scale(1);
+  }
+}
+
+
+.box{
+  background-color:var(--color-black-10);
+  color: var(--color-black);
+  padding: 20px;
+  width: 100%;
+  height: auto;            
+  position: absolute;
+  top: 90px;
+  left: 0;
+  z-index: 2000;
+  li {
+    margin: 1rem;
+  }
+}
+
+#hds-select-920-menu {
+  width: 100% !important;
+}
+
+
 
 .navDropDown {
   --item-active-color: var(--color-metro) !important;
