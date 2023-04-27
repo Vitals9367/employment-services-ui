@@ -1,7 +1,7 @@
 import { Container } from 'hds-react'
+import { DrupalMenuLinkContent } from 'next-drupal'
 
 import HtmlBlock from '@/components/HtmlBlock'
-import { CONTENT_TYPES } from '@/lib/drupalApiTypes'
 import ListOfLinks from '@/components/listOfLinks/ListOfLinks'
 import Accordion from '@/components/accordion/Accordion'
 import Banner from '@/components/banner/Banner'
@@ -12,21 +12,24 @@ import NewsList from '@/components/news/NewsList'
 import ParagraphImage from '@/components/paragraphImage/ParagraphImage'
 import Quote from '@/components/quote/Quote'
 import SujoEmbedded from '@/components/sujoEmbedded/sujoEmbedded'
+import Events from '@/components/events/Events'
+import { CONTENT_TYPES } from '@/lib/drupalApiTypes'
+import { NavProps } from '@/lib/types'
 import UnitsList from './tprUnits/UnitsList'
 import MapEmbedded from './mapEmbedded/MapEmbedded'
-import Events from '@/components/events/Events'
+
 
 
 interface ContentMapperProps {
   content: any,
-  pageType?: string
-  mapId?: number | null
-  locationId?: string | null
-  langcode?: string
+  pageType?: string,
+  mapId?: number | null,
+  locationId?: string | null,
+  langcode?: string,
+  sidebar?: NavProps,
 }
 
-export function ContentMapper({ content, pageType, locationId, mapId, langcode, ...props }: ContentMapperProps): JSX.Element {
- // console.log('content: ', content)
+export function ContentMapper({ content, pageType, locationId, mapId, langcode,  sidebar, ...props }: ContentMapperProps): JSX.Element {
 
   return content.map((item: any) => {
     const { type, id } = item
@@ -129,7 +132,7 @@ export function ContentMapper({ content, pageType, locationId, mapId, langcode, 
         if (!item?.id) {
           return null
         }
-        return <UnitsList key={key} />
+        return <UnitsList {...sidebar} key={key}/>
 
       default:
         console.log('unmapped type: ', type)

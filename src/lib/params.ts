@@ -10,7 +10,7 @@ const baseQueryParams = () =>
       'field_content.field_liftup_with_image_image.field_media_image',
       'field_content.field_image.field_media_image',
       'field_content.field_background_color',
-      'field_notification'
+      'field_notification',
     ])
     .addFields(CONTENT_TYPES.MEDIA_IMAGE, [
       'field_media_image',
@@ -90,7 +90,8 @@ const getPageQueryParams = () =>
       'field_metatags',
       'field_notification',
       'field_lower_content',
-      'field_hide_sidebar'
+      'field_hide_sidebar',
+      'field_hide_navigation',
     ])
     .addInclude([
       'field_content.field_accordion_items.field_accordion_item_content',
@@ -118,7 +119,8 @@ const getLandingPageQueryParams = () =>
       'field_content',
       'field_hero',
       'field_metatags',
-      'field_notification'
+      'field_notification',
+      'field_hide_navigation'
     ])
     .addInclude([
       'field_hero.field_custom_hero_image.field_media_image',
@@ -133,17 +135,22 @@ const getLandingPageQueryParams = () =>
       'field_events_list_short',
       'field_event_tag_filter',
       'field_background_color',
-      'field_events_list_desc'
+      'field_events_list_desc',
     ])
     .addFields(CONTENT_TYPES.NEWS_LIST, [
       'field_title',
       'field_short_list',
-      'field_news_list_desc'
+      'field_news_list_desc',
+      'field_background_color',
     ])
     .getQueryObject()
 
 export const baseEventQueryParams = () =>
   new DrupalJsonApiParams()
+  .addInclude([
+    'field_event_tags.content_translation_uid',
+    'field_event_tags.parent',
+  ])
     .addFields(NODE_TYPES.EVENT, [
       'id',
       'title',
@@ -161,7 +168,10 @@ export const baseEventQueryParams = () =>
       'field_external_links',
       'field_info_url',
       'field_short_description',
-      'field_street_address'
+      'field_street_address',
+      'field_location_extra_info',
+      'field_offers_info_url',
+      'field_event_tags'
     ])
 
 const getEventPageQueryParams = () =>
@@ -171,6 +181,7 @@ const getEventPageQueryParams = () =>
 export const baseArticlePageQueryParams = () =>
   new DrupalJsonApiParams()
     .addInclude([
+      'field_content.field_list_of_links_links.field_list_of_links_image.field_media_image',
       'field_content.field_image.field_media_image',
     ])
     .addFields(NODE_TYPES.ARTICLE, [
@@ -201,6 +212,17 @@ export const baseArticlePageQueryParams = () =>
       'field_quote_author_first_name',
       'field_quote_author_last_name',
       'field_quote_author_title'
+    ])
+    .addFields(CONTENT_TYPES.LIST_OF_LINKS, [
+      'field_list_of_links_design',
+      'field_list_of_links_links',
+      'field_list_of_links_title',
+      'field_background_color'
+    ])
+    .addFields(CONTENT_TYPES.LIST_OF_LINKS_ITEM, [
+      'field_list_of_links_link',
+      'field_list_of_links_image',
+      'field_list_of_links_desc',
     ])
 
 const getArticlePageQueryParams = () =>
@@ -233,8 +255,9 @@ export const baseTprUnitQueryParams = () =>
       'service_map_embed',
       'picture_url_override',
       'picture_url',
-      'drupal_internal__id'
-    ])    
+      'drupal_internal__id',
+      'accessibility_sentences'
+    ])
     .addFields(CONTENT_TYPES.ACCORDION, [
       'field_accordion_type',
       'field_accordion_title_level',
@@ -245,7 +268,7 @@ export const baseTprUnitQueryParams = () =>
     .addFields(CONTENT_TYPES.ACCORDION_ITEM, [
       'field_accordion_item_content',
       'field_accordion_item_heading'
-    ])    
+    ])
     .addFields(CONTENT_TYPES.LIST_OF_LINKS, [
       'field_list_of_links_design',
       'field_list_of_links_links',

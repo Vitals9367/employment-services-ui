@@ -1,10 +1,12 @@
 {
   "locale": "en",
+  "lang-code": "Language Selector In English",
   "site_name": "Employment services",
   "site_title": "Helsinki Employment Services",
   "link_copied": "Link copied",
   "text_print": "Print",
   "text_print_section": "Print this section",
+  "skip-to-main-content": "Skip to main content",
   "navigation": {
     "button_text": "E-Services",
     "button_link": "https://asiointi.mol.fi/omaasiointi/",
@@ -30,7 +32,8 @@
     "pagination_aria_label": "Page numbers",
     "entity_type_event": "Event",
     "entity_type_article": "News",
-    "loading_suggestions": "Loading suggestions"
+    "loading_suggestions": "Loading suggestions",
+    "group_description": "You can select one of the following filters at a time"
   },
   "list": {
     "load_more": "Show more",
@@ -44,13 +47,16 @@
     "results_text": "search results",
     "show_all_events": "Show all events",
     "events_page_url": "/en/current-matters/events",
-    "no_events": "No upcoming events on this topic."
+    "no_events": "No upcoming events on this topic.",
+    "event_title": "Event",
+    "event_link": "Event link to"
   },
   "event": {
     "remote_event": "Remote event",
     "info_url_text": "Event homepage",
     "info_url_text_teams": "Open Teams-event",
-    "cancelled_text": "Cancelled"
+    "cancelled_text": "Cancelled",
+    "field_offers_info_url": "Sign up"
   },
   "video": {
     "cookie_consent": "You have not allowed the use of cookies on this site.",
@@ -75,7 +81,8 @@
     "open_hours": "Opening hours",
     "phone_service": "Phone service",
     "postal_address": "Postal address",
-    "more_info": "See opening hours and contact details"
+    "more_info": "See opening hours and contact details",
+    "accessibility_information": "Accessibility information"
   },
   "consent_info": {
     "title": "Feedback buttons cannot be displayed",
