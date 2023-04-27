@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     "aggs": {
       "events_tags": {
         "terms": {
-          "field": "field_event_tags",
+          "field": "field_event_tags.keyword",
           "size": 100
         }
       }
