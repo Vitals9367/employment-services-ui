@@ -30,6 +30,40 @@
   button span {
     padding: 0;
   }
+
+  [class*="Button-module_icon"] {
+    margin-right: 0 !important;
+  }
+
+}
+
+.mobileNav {
+  display: none;
+}
+
+@media (max-width: $breakpoint-m) {
+  .mobileNav {
+    display: block;
+  }
+  .mainNav {
+    display: none;
+  }
+}
+
+.mainNav {
+  .buttonGlobe {
+    background-color: var(--color-white) !important;
+  }
+  .LanguageSelector {
+    background-color: var(--color-white);
+  }
+}
+
+
+.loggingButton span {
+  padding: 0;
+  font-weight: 500;
+  margin-right: 10px;
 }
 
 .LanguageSelector {
@@ -37,6 +71,7 @@
   justify-content: space-between;
   padding: 0px;
   background-color: var(--color-black-5);
+  position: relative;
   
   [class*="Select-module_root"] {
     --border-width: 0px;
@@ -89,12 +124,11 @@
 }
 
 nav .buttonGlobe {
-  margin: 0;
+  margin-top: 0.5rem;
   padding: 0;
 }
 
 .buttonGlobe {
-
   transform: scale(1);
   padding: 0;
   transform-origin: center;
@@ -130,16 +164,16 @@ nav .buttonGlobe {
 }
 
 
-.box{
+.box {
   background-color:var(--color-black-10);
   color: var(--color-black);
   padding: 20px;
   width: 100%;
   height: auto;            
   position: absolute;
-  top: 90px;
+  top: 1.6rem;
   left: 0;
-  z-index: 2000;
+  z-index: 10;
   li {
     margin: 1rem;
   }

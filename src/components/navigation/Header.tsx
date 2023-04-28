@@ -2,8 +2,8 @@ import { ReactElement, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { DrupalMenuLinkContent } from 'next-drupal';
-import { Navigation, IconArrowTopRight, Link, Select, IconGlobe, Button, IconAngleDown, IconAngleUp} from 'hds-react';
-// import Link from 'next/link';
+import { Navigation as NavigationHDS } from "hds-react";
+
 
 import { NavProps } from '@/lib/types';
 import classNames from '@/lib/classNames';
@@ -11,6 +11,8 @@ import { printablePages } from '@/lib/helpers';
 import { Breadcrumb } from './Breadcrumb';
 import styles from './navigation.module.scss';
 import PrintButton from '../printButton/PrintButton';
+import Navigation from './Navigation';
+import MobileNavigation from './MobileNavigation';
 
 function Header(header: NavProps): JSX.Element {
   const { locale, menu, themes, langLinks, breadcrumb, hideNav } = header;
@@ -31,45 +33,6 @@ function Header(header: NavProps): JSX.Element {
     }
   }, [pageProps]);
 
-  const getNav = (menuArray: DrupalMenuLinkContent[] | undefined) => {
-    const nav: ReactElement[] = [];
-    if (!menuArray) {
-      return <></>;
-    }
-    menuArray.map((item: DrupalMenuLinkContent, index: number) => {
-      const subs: ReactElement[] = [];
-      let childActive = false;
-      item.items?.map((sub: DrupalMenuLinkContent, i: number) => {
-        childActive = sub.url === activePath || childActive;
-        subs.push(
-          <Navigation.Item
-            key={sub.title}
-            as="a"
-            href={sub.url}
-            label={sub.title}
-            active={sub.url === activePath}
-          />
-        );
-        return subs;
-      });
-      const isActive = item.url === activePath || childActive;
-      nav.push(
-        <Navigation.DropdownLink
-          label={item.title}
-          key={item.title}
-          id={item.title}
-          active={isActive}
-          className={classNames(styles.navDropDown, isActive && styles.active)}
-          href={item.url}
-        >
-          {subs}
-        </Navigation.DropdownLink>
-      );
-      return nav;
-    });
-    return nav;
-  };
-
   if (!menu && !themes && !langLinks) {
     return <></>;
   }
@@ -78,67 +41,35 @@ function Header(header: NavProps): JSX.Element {
     router.push(`/search?q=${searchValue}`, undefined, { shallow: true });
   };
 
+  const onClick = () => {
+    window.open(t('navigation.button_link'), '_blank')?.focus();
+  }
+
   return (
     <>
       <Navigation
-        menuToggleAriaLabel="Menu"
-        logoLanguage={locale === 'sv' ? 'sv' : 'fi'}
-        skipTo="#content"
-        skipToContentLabel={t('skip-to-main-content')}
-        title={t('site_name')}
-        titleAriaLabel={t('navigation.title_aria_label')}
-        titleUrl={locale === 'fi' ? '/' : `/${locale}`}
-        className={classNames(styles.navigation, styles.zover)}
-      >
-        {!hideNav && <Navigation.Row>{getNav(menu)}</Navigation.Row>}
-        <Navigation.Actions>
-          <Navigation.Search
-            onSearch={onSearch}
-            searchLabel={t('navigation.search_label')}
-            searchPlaceholder={t('navigation.search_placeholder')}
-          />
-          <Navigation.User
-            id="navigation_blue_button"
-            key="navigation_button"
-            label={t('navigation.button_text')}
-            icon={<IconArrowTopRight size="l" />}
-            onSignIn={() => {
-              window.open(t('navigation.button_link'), '_blank')?.focus();
-            }}
-            className={styles.blueButton}
-          />
-        </Navigation.Actions>
-      </Navigation>
-      <nav className={styles.LanguageSelector}>
-        <div className={styles.languageSelect}>
-          <Link aria-current={langLinks.fi === activePath} href={langLinks.fi}>
-            Suomi
-          </Link>
-          <Link aria-current={langLinks.sv === activePath} href={langLinks.sv}>
-            Svenska
-          </Link>
-          <Link aria-current={langLinks.en === activePath} href={langLinks.en}>
-            English
-          </Link>
-        </div>
-        <Button
-          className={styles.buttonGlobe}
-          onClick={() => setOpen(!open) }
-          iconRight={!open ? <IconAngleDown size="s" /> : <IconAngleUp size="s" />}
+        locale={locale}
+        onSearch={onSearch}
+        hideNav={hideNav}
+        menu={menu}
+        activePath={activePath}
+        setOpen={setOpen}
+        open={open}
+        langLinks={langLinks}
+        onClick={onClick}
+      />
 
-        ><IconGlobe size="s" /></Button>
+      <MobileNavigation
+        locale={locale}
+        onSearch={onSearch}
+        hideNav={hideNav}
+        menu={menu}
+        activePath={activePath}
+        setOpen={setOpen}
+        open={open}
+        langLinks={langLinks}
+      />
 
-      </nav>
-      {open && (
-        <ul className={styles.box}>
-          <li>Apple</li>
-          <li>Banana</li>
-          <li>Pear</li>
-          <li>Cherry</li>
-          <li>Grape</li>
-          <li>Lemon</li>
-        </ul>
-      )}
       {activePath !== '/' && (
         <div className={styles.subHeader}>
           <Breadcrumb breadcrumb={breadcrumb} />
@@ -155,3 +86,43 @@ function Header(header: NavProps): JSX.Element {
 }
 
 export default Header;
+
+
+export const getNav = (menuArray: DrupalMenuLinkContent[] | undefined, activePath: any) => {
+  const nav: ReactElement[] = [];
+  if (!menuArray) {
+    return <></>;
+  }
+  menuArray.map((item: DrupalMenuLinkContent, index: number) => {
+    const subs: ReactElement[] = [];
+    let childActive = false;
+    item.items?.map((sub: DrupalMenuLinkContent, i: number) => {
+      childActive = sub.url === activePath || childActive;
+      subs.push(
+        <NavigationHDS.Item
+          key={sub.title}
+          as="a"
+          href={sub.url}
+          label={sub.title}
+          active={sub.url === activePath}
+        />
+      );
+      return subs;
+    });
+    const isActive = item.url === activePath || childActive;
+    nav.push(
+      <NavigationHDS.DropdownLink
+        label={item.title}
+        key={item.title}
+        id={item.title}
+        active={isActive}
+        className={classNames(styles.navDropDown, isActive && styles.active)}
+        href={item.url}
+      >
+        {subs}
+      </NavigationHDS.DropdownLink>
+    );
+    return nav;
+  });
+  return nav;
+};
