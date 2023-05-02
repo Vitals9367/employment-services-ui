@@ -31,6 +31,7 @@ function LanguageSelect({
         <Button
           className={styles.buttonGlobe}
           onClick={() => setOpen(!open)}
+          onBlur= {() => setOpen(false)}
           iconRight={
             !open ? <IconAngleDown size="s" /> : <IconAngleUp size="s" />
           }
@@ -38,7 +39,7 @@ function LanguageSelect({
           <IconGlobe size="s" />
         </Button>
         {open && (
-          <ul className={styles.box}>
+          <ul className={styles.globalDropDown }>
             <li>
               <a href="">Apple</a>
             </li>
