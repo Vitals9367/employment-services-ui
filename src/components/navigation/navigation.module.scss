@@ -39,7 +39,26 @@
 
 .mobileNav {
   display: none;
+
+  [class*="button_hds-button"] {
+    --background-color: var(--color-bus);
+    --background-color-hover: var(--color-bus);
+    --background-color-focus: var(--color-bus);
+    --background-color-hover-focus: var(--color-bus);
+    --background-color-disabled: var(--color-black-20);
+    --border-color: var(--color-bus);
+    --border-color-hover: var(--color-bus);
+    --border-color-focus: var(--color-bus);
+    --border-color-hover-focus: var(--color-bus);
+    --border-color-disabled: var(--color-black-20);
+    --color: var(--color-white);
+    --color-hover: var(--color-white);
+    --color-focus: var(--color-white);
+    --color-hover-focus: var(--color-white);
+    --color-disabled: var(--color-white);
+  }
 }
+
 
 @media (max-width: $breakpoint-m) {
   .mobileNav {
@@ -62,7 +81,6 @@
   }
 }
 
-
 .loggingButton span {
   padding: 0;
   font-weight: 500;
@@ -72,7 +90,7 @@
 .LanguageSelector {
   display: flex;
   justify-content: space-between;
-  padding: 0;
+  padding: 0 0 4px 0;
   background-color: var(--color-black-5);
   position: relative;
 
@@ -96,13 +114,18 @@
       text-decoration: underline;
     }
   }
+  button {
+    margin-right: 4px;
+  }
   .languageSelect {
     display: flex;
     align-items: center ;
+    margin-left: 4px;
   }
 }
 
 nav .buttonGlobe {
+  box-sizing: border-box;
   margin-top: 0.5rem;
   padding: 0;
 }
@@ -112,19 +135,22 @@ nav .buttonGlobe {
   padding: 0;
   transform-origin: center;
   background-color: var(--color-black-5)  !important;
-  border-color: var(--color-black-5)  !important;
+  border-color: transparent  !important;
   --color: var(--color-black) !important;
   --color-hover: var(--color-black) !important;
   --color-focus: var(--color-black) !important;
   --color-hover-focus: var(--color-black) !important;
-  --border-width: 0 !important;
+  --border-width: 3px !important;
   &::after {
     padding: 0;
     margin: 0;
   }
+  &:active::after {
+    border-color: transparent !important;
+  }
   &:focus {
-    transform: scale(1);
     transform-origin: center;
+    border-color: var(--color-black)  !important;
   }
   svg {
     padding: 0;
@@ -133,7 +159,10 @@ nav .buttonGlobe {
   }
   span {
     padding: 0;
-    transform: scale(1);
+    margin-left: 5px;
+    @media (max-width: $breakpoint-m) {
+      margin-left: 1rem;
+    }
   }
 }
 
@@ -145,14 +174,14 @@ nav .buttonGlobe {
   width: 100%;
   height: auto;            
   position: absolute;
-  top: 2.6rem;
+  top: 3rem;
   left: 0;
   z-index: 10;
   li {
     margin: 1rem;
   }
   @media (max-width: $breakpoint-m) {
-    top: 2.2rem;
+    top: 2.35rem;
   }
 }
 
