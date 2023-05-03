@@ -27,9 +27,10 @@ import { i18n } from '@/next-i18next.config'
 import { DrupalJsonApiParams } from 'drupal-jsonapi-params'
 
 interface PageProps {
-  node: Node
-  nav: NavProps
-  footer: FooterProps
+  node: Node;
+  nav: NavProps;
+  footer: FooterProps;
+  preview: any;
 }
 
 export async function getStaticPaths(context: GetStaticPathsContext): Promise<GetStaticPathsResult> {
@@ -130,7 +131,7 @@ export async function getStaticProps(
   }
 
   const langLinks = await getLanguageLinks(node);
-
+  
   const { tree: menu, items: menuItems } = await getMenu(
     'main',
     locale,
@@ -142,6 +143,7 @@ export async function getStaticProps(
     defaultLocale
   );
   const { tree: footerNav } = await getMenu('footer', locale, defaultLocale);
+  const preview = context.preview ? context.preview : false;
 
   const breadcrumb = getBreadCrumb(
     menuItems,
@@ -153,6 +155,7 @@ export async function getStaticProps(
   return {
     props: {
       node,
+      preview,
       nav: {
         locale,
         menu,
@@ -170,7 +173,7 @@ export async function getStaticProps(
   };
 }
 
-export default function Page({ node, nav, footer }: PageProps) {
+export default function Page({ node, nav, footer, preview }: PageProps) {
   const router = useRouter();
   const { t } = useTranslation('common');
   const rnsStatus: boolean = useConsentStatus('rns');
@@ -192,7 +195,7 @@ export default function Page({ node, nav, footer }: PageProps) {
   const metaImage = getDefaultImage(node);
   
   return (
-    <Layout header={nav} footer={footer} hideNav={node.field_hide_navigation}>
+    <Layout header={nav} footer={footer} hideNav={node.field_hide_navigation} preview={preview}>
       <Head>
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
@@ -204,7 +207,7 @@ export default function Page({ node, nav, footer }: PageProps) {
       </Head>
       <a id="content" tabIndex={-1}></a>
       { node.type === NODE_TYPES.PAGE && (
-        <NodeBasicPage node={node} sidebar={nav} />
+        <NodeBasicPage node={node} sidebar={nav} preview={preview}/>
       )}
       {node.type === NODE_TYPES.LANDING_PAGE && (
         <NodeLandingPage node={node} />
@@ -212,7 +215,7 @@ export default function Page({ node, nav, footer }: PageProps) {
       {node.type === NODE_TYPES.EVENT && <NodeEventPage node={node} />}
       {node.type === NODE_TYPES.ARTICLE && <NodeArticlePage node={node} />}
       {node.type === NODE_TYPES.TPR_UNIT && (
-        <NodeTprUnitPage node={node} sidebar={nav} />
+        <NodeTprUnitPage node={node} sidebar={nav} preview={preview}/>
       )}
       {/* React and share */}
       <Container className="container hide-print">

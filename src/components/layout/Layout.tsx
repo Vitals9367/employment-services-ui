@@ -11,6 +11,7 @@ interface LayoutProps {
   header: NavProps;
   footer: FooterProps;
   hideNav?: boolean;
+  preview?: boolean;
 }
 
 export function Layout({
@@ -18,12 +19,13 @@ export function Layout({
   header,
   footer,
   hideNav,
+  preview,
 }: LayoutProps): JSX.Element {
   return (
     <>
       <PreviewAlert />
       <div className={styles.wrapper}>
-        <Header {...header} hideNav={hideNav} />
+        <Header {...header} hideNav={hideNav} preview={preview}/>
         <main>{children}</main>
       </div>
       <Footer {...footer} />

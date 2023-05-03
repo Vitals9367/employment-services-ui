@@ -238,3 +238,13 @@ export const groupData = (data: GroupingProps[]) => {
   );
   return groups;
 };
+
+export const previewNavigation = (path: string, preview: boolean | undefined): void => {
+  if (preview) {
+    window
+      .open(`${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/${path}`, '_parent')
+      ?.focus();
+  } else {
+    return;
+  }
+};

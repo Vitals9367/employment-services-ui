@@ -6,13 +6,14 @@ import { Navigation, IconArrowTopRight } from 'hds-react';
 
 import { NavProps } from '@/lib/types';
 import classNames from '@/lib/classNames';
-import { printablePages } from '@/lib/helpers';
+import { previewNavigation, printablePages } from '@/lib/helpers';
 import { Breadcrumb } from './Breadcrumb';
 import styles from './navigation.module.scss';
 import PrintButton from '../printButton/PrintButton';
 
 function Header(header: NavProps): JSX.Element {
-  const { locale, menu, themes, langLinks, breadcrumb, hideNav } = header;
+  const { locale, menu, themes, langLinks, breadcrumb, hideNav, preview } = header;
+  
   const { t } = useTranslation('common');
   const router: any = useRouter(); // @TODO Fix type for proper
   const activePath = langLinks[locale ? locale : 'fi'];
@@ -34,6 +35,7 @@ function Header(header: NavProps): JSX.Element {
     if (!menuArray) {
       return <></>;
     }
+
     menuArray.map((item: DrupalMenuLinkContent, index: number) => {
       const subs: ReactElement[] = [];
       let childActive = false;
@@ -46,6 +48,7 @@ function Header(header: NavProps): JSX.Element {
             href={sub.url}
             label={sub.title}
             active={sub.url === activePath}
+            onClick={() => previewNavigation(sub.url, preview)}
           />
         );
         return subs;
@@ -59,6 +62,7 @@ function Header(header: NavProps): JSX.Element {
           active={isActive}
           className={classNames(styles.navDropDown, isActive && styles.active)}
           href={item.url}
+          onClick={() => () => previewNavigation(item.url, preview)}
         >
           {subs}
         </Navigation.DropdownLink>
@@ -114,6 +118,7 @@ function Header(header: NavProps): JSX.Element {
               hrefLang='fi'
               label='Suomeksi'
               active={langLinks.fi === activePath}
+              onClick={() => previewNavigation(langLinks.fi, preview)}
             />
             <Navigation.Item
               lang='sv'
@@ -122,6 +127,7 @@ function Header(header: NavProps): JSX.Element {
               hrefLang='sv'
               label='På svenska'
               active={langLinks.sv === activePath}
+              onClick={() => previewNavigation(langLinks.sv, preview)}
             />
             <Navigation.Item
               lang='en'
@@ -130,6 +136,7 @@ function Header(header: NavProps): JSX.Element {
               hrefLang='en'
               label='In English'
               active={langLinks.en === activePath}
+              onClick={() => previewNavigation(langLinks.en, preview)}
             />
           </Navigation.LanguageSelector>
         </Navigation.Actions>

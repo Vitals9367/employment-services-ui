@@ -42,6 +42,7 @@ export interface NavProps {
   langLinks?: any;
   breadcrumb?: any;
   hideNav?: boolean;
+  preview?: boolean;
 }
 
 export interface FooterProps {
