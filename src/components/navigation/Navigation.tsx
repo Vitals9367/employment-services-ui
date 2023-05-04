@@ -2,22 +2,11 @@ import { Button, IconLinkExternal } from 'hds-react';
 import { Navigation as NavigationHDS } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 
+import { NavigationProps } from '@/lib/types';
 import classNames from '@/lib/classNames';
 import { getNav } from './Header';
 import styles from './navigation.module.scss';
 import LanguageSelect from './LanguageSelect';
-
-interface NavigationProps {
-  locale: any;
-  onSearch: any;
-  hideNav: any;
-  menu: any;
-  activePath: any;
-  setOpen: any;
-  langLinks: any;
-  onClick?: any;
-  open: any;
-}
 
 export default function Navigation({
   locale,

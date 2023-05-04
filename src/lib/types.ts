@@ -144,3 +144,21 @@ export interface GroupingProps {
   group: string
   value: string
 }
+
+export interface NavigationProps {
+  locale: string | undefined;
+  onSearch: (searchValue: string) => void;
+  hideNav: boolean | undefined;
+  menu?: DrupalMenuLinkContent[];
+  activePath: string;
+  setOpen: (setOpen: boolean) => void;
+  langLinks: LangLinks;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  open: boolean;
+}
+
+interface LangLinks {
+  en: string;
+  fi: string;
+  sv: string;
+}

@@ -1,21 +1,12 @@
 import { Navigation } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 
-import { getNav } from './Header';
 import styles from './navigation.module.scss';
 import classNames from '@/lib/classNames';
+import { NavigationProps } from '@/lib/types';
 import LanguageSelect from './LanguageSelect';
+import { getNav } from './Header';
 
-interface NavigationProps {
-  locale: any;
-  onSearch: any;
-  hideNav: any;
-  menu: any;
-  activePath: any;
-  setOpen: any;
-  open: any;
-  langLinks: any;
-}
 
 export default function MobileNavigation({
   locale,
