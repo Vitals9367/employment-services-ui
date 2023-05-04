@@ -30,7 +30,7 @@ interface PageProps {
   node: Node;
   nav: NavProps;
   footer: FooterProps;
-  preview: any;
+  preview: boolean | undefined;
 }
 
 export async function getStaticPaths(context: GetStaticPathsContext): Promise<GetStaticPathsResult> {
