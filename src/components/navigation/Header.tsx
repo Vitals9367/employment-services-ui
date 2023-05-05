@@ -143,7 +143,7 @@ function Header(header: NavProps): JSX.Element {
       </Navigation>
       {activePath !== '/' && (
         <div className={styles.subHeader}>
-          <Breadcrumb breadcrumb={breadcrumb} />
+          <Breadcrumb breadcrumb={breadcrumb} preview={preview}/>
           {isPrintable && (
             <PrintButton
               onClick={() => window?.print()}
