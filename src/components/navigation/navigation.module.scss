@@ -198,10 +198,15 @@
   outline: none;
   padding: var(--spacing-3-xs) 0;
   span {
+    color: var(--color-black);
     margin: 0 var(--spacing-2-xs);
     font-weight: 600;
     font-size: var(--fontsize-body-s);
     line-height: var(--lineheight-s);
+  }
+  [class*="link_hds-link"] {
+    --link-visited-color: var(--color-black);
+    --link-color: var(--color-black);
   }
 }
 

@@ -38,6 +38,16 @@ export const printablePages = [
 ];
 
 /* Link and navigation helpers */
+export const previewNavigation = (path: string, preview: boolean | undefined): void => {
+  if (preview) {
+    window
+      .open(`${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/${path}`, '_parent')
+      ?.focus();
+  } else {
+    return;
+  }
+};
+
 export const isExternalLink = (href: string): boolean | undefined => {
   const isExternalLink =
     href && (href.startsWith('https://') || href.startsWith('https://'));

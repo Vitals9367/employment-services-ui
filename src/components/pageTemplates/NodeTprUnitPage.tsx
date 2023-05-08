@@ -19,23 +19,25 @@ import styles from './tprUnitPage.module.scss'
 import AccordionWithIcon from '../accordion/AccordionWithIcon'
 
 interface NodeTprUnitProps {
-  node: TprUnitData
-  sidebar: NavProps
+  node: TprUnitData;
+  sidebar: NavProps;
+  preview: boolean | undefined;
 }
 
 interface BlockProps {
-  title: string
-  icon: string
-  content: any
+  title: string;
+  icon: string;
+  content: any;
 }
 
 interface ContactInfoProps {
-  aside?: boolean
+  aside?: boolean;
 }
 
 function NodeTprUnitPage({
   node,
   sidebar,
+  preview,
   ...props
 }: NodeTprUnitProps): JSX.Element {
   const {
@@ -136,7 +138,7 @@ function NodeTprUnitPage({
       <Container className="container">
         <div className="columns">
           <div className="sidebar col col-4 flex-order-first">
-            <Sidebar {...sidebar}/>
+            <Sidebar {...sidebar} preview={preview}/>
             <ContactInfo aside={true} />
           </div>
           <div className="content-region col col-8 flex-grow">
