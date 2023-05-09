@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { Locale } from 'next-drupal'
 import { useCookies } from 'hds-react'
+import { setInitialLocale } from '@/lib/helpers'
 
 export const useConsentStatus = (cookieId: string) => {
   const { getAllConsents } = useCookies();
@@ -14,7 +15,7 @@ export const useConsentStatus = (cookieId: string) => {
 export const useCookieConsents = (): any => {
   const { locale } = useRouter()
   const { t } = useTranslation()
-  const [language, setLanguage] = useState(locale);
+  const [language, setLanguage] = useState(setInitialLocale(locale));
   const onLanguageChange = (newLang: Locale) => setLanguage(newLang);
 
   /**

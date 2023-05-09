@@ -238,3 +238,7 @@ export const groupData = (data: GroupingProps[]) => {
   );
   return groups;
 };
+
+export const setInitialLocale = (locale: string | undefined): string => {
+  return locale !== 'en' && locale !== 'fi' && locale !== 'sv' ? 'en' : locale;
+};
