@@ -1,6 +1,8 @@
 {
   "locale": "sv",
   "lang-code": "Språkväljare På Svenska",
+  "choose_language": "Välj språk",
+  "other_languages": "Öppna Information på andra språk meny",
   "global_menu_title": "Information på andra språk",
   "site_name": "Sysselsättningstjänster",
   "site_title": "Helsingfors sysselsättningstjänster",

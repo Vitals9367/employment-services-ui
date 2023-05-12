@@ -1,17 +1,22 @@
+import { useRef, useState } from 'react';
 import { Button, IconAngleDown, IconAngleUp, IconGlobe, Link } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 
+import { useBlur } from '@/hooks/useBlur';
 import { primaryLanguages, languageFrontPages } from '@/lib/helpers';
 import styles from './navigationComponents.module.scss';
 import { LanguageSelect } from '@/lib/types';
-import { useState } from 'react';
 
 function LanguageSelect({ langLinks, activePath, langcode }: LanguageSelect) {
   const { t } = useTranslation('common');
   const [open, setOpen] = useState<boolean>(false);
+  const wrapperRef = useRef(null);
+
+  useBlur(wrapperRef, setOpen);
+
   return (
     <div>
-      <nav className={styles.LanguageSelector}>
+      <nav className={styles.LanguageSelector} role="navigation" aria-label={t('choose_language')}>
         <div className={styles.languageSelect}>
           <Link
             aria-current={langLinks.fi === activePath}
@@ -44,34 +49,40 @@ function LanguageSelect({ langLinks, activePath, langcode }: LanguageSelect) {
             English
           </Link>
         </div>
-        <Button
-          className={styles.buttonGlobe}
-          onClick={() => setOpen(!open)}
-          iconRight={
-            !open ? <IconAngleDown size="s" /> : <IconAngleUp size="s" />
-          }
-        >
-          <IconGlobe size="s" />
-        </Button>
-        {open && (
-          <div className={styles.globalDropDown}>
-            <ul>
-              <li>
-                <div className={styles.headerLanguageLink}>
-                  {t('global_menu_title')}
+        <div ref={wrapperRef}>
+          <Button
+            aria-label={t('other_languages')}
+            className={styles.buttonGlobe}
+            onClick={() => setOpen(!open)}
+            iconRight={
+              !open ? <IconAngleDown size="s" /> : <IconAngleUp size="s" />
+            }
+          >
+            <IconGlobe size="s" />
+          </Button>
+          {open && (
+            <div className={styles.globalDropDown}>
+              <div className={styles.headerLanguageLink}>
+                {t('global_menu_title')}
+              </div>
+              <a href={languageFrontPages.uk}>
+                <div className={styles.globalLink}>
+                  <span>Ukrainian</span>
                 </div>
-              </li>
-      
-              <li>
-                <Link href={languageFrontPages.uk}>
-                  <div className={styles.globalLink}>
-                    <span>Ukrainian</span>
-                  </div>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        )}
+              </a>
+              <a href={languageFrontPages.uk}>
+                <div className={styles.globalLink}>
+                  <span>Ukrainian</span>
+                </div>
+              </a>
+              <a href={languageFrontPages.uk}>
+                <div className={styles.globalLink}>
+                  <span>Ukrainian</span>
+                </div>
+              </a>
+            </div>
+          )}
+        </div>
       </nav>
     </div>
   );
