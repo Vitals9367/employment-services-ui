@@ -29,6 +29,14 @@ export const printablePages = [
   NODE_TYPES.TPR_UNIT,
 ];
 
+export const primaryLanguages = ['fi', 'en', 'sv'];
+export const languageFrontPages = {
+    fi: '/',
+    en: '/en',
+    sv: '/sv',
+    uk: '/uk/ukrainian-landing-page',
+  };
+
 export const isExternalLink = (href: string): boolean | undefined => {
   const isExternalLink =
     href && (href.startsWith('https://') || href.startsWith('https://'));
@@ -239,6 +247,6 @@ export const groupData = (data: GroupingProps[]) => {
   return groups;
 };
 
-export const setInitialLocale = (locale: string | undefined): string => {
-  return locale !== 'en' && locale !== 'fi' && locale !== 'sv' ? 'en' : locale;
+export const setInitialLocale = (locale: string ): string => {
+  return primaryLanguages.includes(locale) ? locale : 'en';
 };

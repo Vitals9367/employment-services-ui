@@ -4,24 +4,25 @@ import { useTranslation } from 'next-i18next';
 import { DrupalMenuLinkContent } from 'next-drupal';
 import { Navigation as NavigationHDS } from "hds-react";
 
-
 import { NavProps } from '@/lib/types';
 import classNames from '@/lib/classNames';
 import { printablePages } from '@/lib/helpers';
 import { Breadcrumb } from './Breadcrumb';
 import styles from './navigation.module.scss';
 import PrintButton from '../printButton/PrintButton';
-import Navigation from './Navigation';
-import MobileNavigation from './MobileNavigation';
+import Navigation from '../navigationComponents/Navigation';
+import MobileNavigation from '../navigationComponents/MobileNavigation';
+
 
 function Header(header: NavProps): JSX.Element {
-  const { locale, menu, themes, langLinks, breadcrumb, hideNav } = header;
+  const { locale, menu, themes, langLinks, breadcrumb, hideNav, langcode } =
+    header;
+    
   const { t } = useTranslation('common');
   const router: any = useRouter(); // @TODO Fix type for proper
   const activePath = langLinks[locale ? locale : 'fi'];
   const [pageProps, setPageProps]: any | null = useState(null);
   const [isPrintable, setIsPrintable] = useState(false);
-  const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setPageProps(router.components[router.route].props.pageProps);
@@ -50,26 +51,23 @@ function Header(header: NavProps): JSX.Element {
       <Navigation
         locale={locale}
         onSearch={onSearch}
+        onClick={onClick}
         hideNav={hideNav}
         menu={menu}
         activePath={activePath}
-        setOpen={setOpen}
-        open={open}
         langLinks={langLinks}
-        onClick={onClick}
+        langcode={langcode as string}
       />
-
       <MobileNavigation
         locale={locale}
         onSearch={onSearch}
+        onSignIn={onClick}
         hideNav={hideNav}
         menu={menu}
         activePath={activePath}
-        setOpen={setOpen}
-        open={open}
         langLinks={langLinks}
+        langcode={langcode as string}
       />
-
       {activePath !== '/' && (
         <div className={styles.subHeader}>
           <Breadcrumb breadcrumb={breadcrumb} />

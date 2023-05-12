@@ -3,6 +3,7 @@ import {
   Locale,
   DrupalMenuLinkContent,
 } from 'next-drupal'
+import { MouseEventHandler } from 'react';
 
 export interface Node extends DrupalNode {
   title: string;
@@ -26,6 +27,7 @@ export interface Node extends DrupalNode {
   picture_url_override: any;
   drupal_internal__id: string;
   field_hide_navigation: boolean;
+  langcode: string;
 }
 
 type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text'
@@ -42,6 +44,7 @@ export interface NavProps {
   langLinks?: any;
   breadcrumb?: any;
   hideNav?: boolean;
+  langcode?: string;
 }
 
 export interface FooterProps {
@@ -151,14 +154,20 @@ export interface NavigationProps {
   hideNav: boolean | undefined;
   menu?: DrupalMenuLinkContent[];
   activePath: string;
-  setOpen: (setOpen: boolean) => void;
   langLinks: LangLinks;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  open: boolean;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  langcode: string;
+  onSignIn?: (() => void);
 }
 
+export interface LanguageSelect {
+  langLinks: LangLinks;
+  activePath: string;
+  langcode: string | undefined;
+}
 interface LangLinks {
   en: string;
   fi: string;
   sv: string;
+  uk: string;
 }

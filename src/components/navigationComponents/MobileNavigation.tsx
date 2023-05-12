@@ -1,11 +1,11 @@
 import { Navigation } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 
-import styles from './navigation.module.scss';
+import styles from './navigationComponents.module.scss';
 import classNames from '@/lib/classNames';
 import { NavigationProps } from '@/lib/types';
 import LanguageSelect from './LanguageSelect';
-import { getNav } from './Header';
+import { getNav } from '../navigation/Header';
 
 
 export default function MobileNavigation({
@@ -14,9 +14,9 @@ export default function MobileNavigation({
   hideNav,
   menu,
   activePath,
-  setOpen,
-  open,
   langLinks,
+  langcode,
+  onSignIn
 }: NavigationProps) {
   const { t } = useTranslation('common');
   return (
@@ -41,23 +41,18 @@ export default function MobileNavigation({
             id="navigation_blue_button"
             key="navigation_button"
             label={t('navigation.button_text')}
-            onSignIn={() => {
-              window.open(t('navigation.button_link'), '_blank')?.focus();
-            }}
+            onSignIn={onSignIn}
             className={styles.blueButton}
           />
         </Navigation.Actions>
-
         {!hideNav && (
           <Navigation.Row>{getNav(menu, activePath)}</Navigation.Row>
         )}
       </Navigation>
       <LanguageSelect
-        setOpen={setOpen}
-        open={open}
         langLinks={langLinks}
         activePath={activePath}
-      />
+        langcode={langcode} />
     </div>
   );
 }

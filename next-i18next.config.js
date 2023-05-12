@@ -1,7 +1,8 @@
 const languages = [
   { code: 'fi', text: 'Suomi' },
   { code: 'sv', text: 'Svenska' },
-  { code: 'en', text: 'English' }
+  { code: 'en', text: 'English' },
+  { code: 'uk', text: 'Ukrainian' }
 ]
 
 const locales = languages.map(({ code }) => code)

@@ -4,8 +4,8 @@ import { useTranslation } from 'next-i18next';
 
 import { NavigationProps } from '@/lib/types';
 import classNames from '@/lib/classNames';
-import { getNav } from './Header';
-import styles from './navigation.module.scss';
+import { getNav } from '../navigation/Header';
+import styles from './navigationComponents.module.scss';
 import LanguageSelect from './LanguageSelect';
 
 export default function Navigation({
@@ -13,11 +13,10 @@ export default function Navigation({
   hideNav,
   menu,
   activePath,
-  setOpen,
   langLinks,
   onSearch,
   onClick,
-  open,
+  langcode,
 }: NavigationProps) {
   const { t } = useTranslation('common');
   return (
@@ -34,9 +33,8 @@ export default function Navigation({
       >
         <NavigationHDS.Actions>
           <LanguageSelect
-            setOpen={setOpen}
-            open={open}
             langLinks={langLinks}
+            langcode={langcode}
             activePath={activePath}
           />
           <NavigationHDS.Search

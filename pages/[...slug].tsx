@@ -190,9 +190,14 @@ export default function Page({ node, nav, footer }: PageProps) {
   const metaDescription = getDescription(node);
   const metaUrl = process.env.NEXT_PUBLIC_SITE_URL + router.asPath;
   const metaImage = getDefaultImage(node);
-  
+
   return (
-    <Layout header={nav} footer={footer} hideNav={node.field_hide_navigation}>
+    <Layout
+      header={nav}
+      footer={footer}
+      hideNav={node.field_hide_navigation}
+      langcode={node.langcode}
+    >
       <Head>
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
