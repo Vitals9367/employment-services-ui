@@ -15,7 +15,7 @@ export const useConsentStatus = (cookieId: string) => {
 export const useCookieConsents = (): any => {
   const { locale } = useRouter()
   const { t } = useTranslation()
-  const [language, setLanguage] = useState(setInitialLocale(locale));
+  const [language, setLanguage] = useState<string>(setInitialLocale(locale ? locale : ''));
   const onLanguageChange = (newLang: Locale) => setLanguage(newLang);
 
   /**
