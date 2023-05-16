@@ -209,6 +209,11 @@ h5, .h5,
   order: -1;
 }
 
+.accordion_component {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 .content-region {
   .component {
     margin-top: var(--spacing-4-xl);
