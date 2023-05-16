@@ -1,19 +1,22 @@
-import { IconAngleRight, IconArrowRight } from "hds-react"
+import { IconAngleRight, IconArrowRight } from 'hds-react';
 import { Link } from 'hds-react';
-import { ReactElement } from "react"
-import { useTranslation } from 'next-i18next'
+import { ReactElement } from 'react';
+import { useTranslation } from 'next-i18next';
 
-import classNames from "@/lib/classNames"
-import { BreadcrumbContent } from "@/lib/types"
+import classNames from '@/lib/classNames';
+import { BreadcrumbContent } from '@/lib/types';
 import { previewNavigation } from '@/lib/helpers';
-import styles from './navigation.module.scss'
+import styles from './navigation.module.scss';
 
 interface BreadcrumbProps {
   breadcrumb: BreadcrumbContent[];
   preview: boolean | undefined;
 }
 
-export const Breadcrumb = ({ breadcrumb, preview }: BreadcrumbProps): JSX.Element => {
+export const Breadcrumb = ({
+  breadcrumb,
+  preview,
+}: BreadcrumbProps): JSX.Element => {
   const { t } = useTranslation('common');
 
   if (!breadcrumb || breadcrumb.length == 0) return <></>;
@@ -32,7 +35,7 @@ export const Breadcrumb = ({ breadcrumb, preview }: BreadcrumbProps): JSX.Elemen
           href={crumb.url}
           onClick={() => previewNavigation(crumb.url, preview)}
         >
-          <span>{crumb.title}</span>
+          {crumb.title}
         </Link>
         <IconAngleRight size="s" aria-hidden="true" />
       </div>
@@ -45,8 +48,8 @@ export const Breadcrumb = ({ breadcrumb, preview }: BreadcrumbProps): JSX.Elemen
       aria-label={t('navigation.breadcrumb_label')}
     >
       <div className={styles.breadcrumbElement} key="breadcrumb-frontpage">
-      <Link href="/" onClick={() => previewNavigation("/", preview)}>
-            <span>{t('navigation.frontpage')}</span>
+        <Link href="/" onClick={() => previewNavigation('/', preview)}>
+          {t('navigation.frontpage')}
         </Link>
         <IconAngleRight size="s" aria-hidden="true" />
       </div>
