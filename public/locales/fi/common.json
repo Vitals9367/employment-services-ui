@@ -58,6 +58,10 @@
     "cancelled_text": "Peruttu",
     "field_offers_info_url": "Ilmoittaudu"
   },
+  "news": {
+    "news": "Uutinen",
+    "newsletter": "Uutiskirje"
+  },
   "video": {
     "cookie_consent": "Et ole antanut lupaa asettaa evästeitä.",
     "link_text": "Hyväksythän evästeet nähdäksesi sisällön"

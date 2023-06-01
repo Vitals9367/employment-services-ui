@@ -58,6 +58,10 @@
     "cancelled_text": "Inställt",
     "field_offers_info_url": "Bli Medlem"
   },
+  "news": {
+    "news": "Nyhet",
+    "newsletter": "Nyhetsbrev"
+  },
   "video": {
     "cookie_consent": "Du har inte gett tillstånd att installera cookies.",
     "link_text": "Godkänn cookies för att se innehållet."

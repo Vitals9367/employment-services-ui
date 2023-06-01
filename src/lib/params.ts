@@ -140,6 +140,7 @@ const getLandingPageQueryParams = () =>
     .addFields(CONTENT_TYPES.NEWS_LIST, [
       'field_title',
       'field_short_list',
+      'field_news_filter',
       'field_news_list_desc',
       'field_background_color',
     ])
@@ -193,6 +194,7 @@ export const baseArticlePageQueryParams = () =>
       'langcode',
       'field_lead',
       'field_content',
+      'field_article_category',
       'status',
       'published_at',
     ])

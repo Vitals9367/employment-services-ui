@@ -71,16 +71,30 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
   });
 };
 
-export const getNews = async (shortList: string, locale: Locale) => {
+export const getNews = async (shortList: string, newsFilter: string, locale: Locale) => {
   const defaultLocale: Locale = 'fi';
 
-  if (shortList === 'true') {
-    const newsParamsLimited = () =>
-      baseArticlePageQueryParams()
-        .addSort('created', 'DESC')
-        .addFilter('status', '1')
-        .addFilter('langcode', locale)
+  let newsParams = () =>
+    baseArticlePageQueryParams()
+      .addSort('created', 'DESC')
+      .addFilter('status', '1')
+      .addFilter('langcode', locale)
+
+  if (shortList === 'true' && (newsFilter === 'news' || newsFilter === 'newsletter')) {
+    const newsParamsLimitedFiltered = () =>
+      newsParams()
+        .addFilter('field_article_category', newsFilter)
         .addPageLimit(4);
+
+    return await drupal.getResourceCollection(NODE_TYPES.ARTICLE, {
+      params: newsParamsLimitedFiltered().getQueryObject(),
+      locale,
+      defaultLocale,
+    });
+  }
+
+  if (shortList === 'true') {
+    const newsParamsLimited = () => newsParams().addPageLimit(4);
 
     return await drupal.getResourceCollection(NODE_TYPES.ARTICLE, {
       params: newsParamsLimited().getQueryObject(),
@@ -89,11 +103,16 @@ export const getNews = async (shortList: string, locale: Locale) => {
     });
   }
 
-  const newsParams = () =>
-    baseArticlePageQueryParams()
-      .addSort('created', 'DESC')
-      .addFilter('status', '1')
-      .addFilter('langcode', locale);
+  if (newsFilter === 'news' || newsFilter === 'newsletter') {
+    const newsParamsFiltered = () => newsParams()
+      .addFilter('field_article_category', newsFilter);
+
+    return await drupal.getResourceCollection(NODE_TYPES.ARTICLE, {
+      params: newsParamsFiltered().getQueryObject(),
+      locale,
+      defaultLocale,
+    });
+  }
 
   return await drupal.getResourceCollection(NODE_TYPES.ARTICLE, {
     locale,
