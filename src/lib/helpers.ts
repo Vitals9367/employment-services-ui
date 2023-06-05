@@ -48,6 +48,8 @@ export const previewNavigation = (path: string, preview: boolean | undefined): v
   }
 };
 
+export const primaryLanguages = ['fi', 'en', 'sv'];
+
 export const isExternalLink = (href: string): boolean | undefined => {
   const isExternalLink =
     href && (href.startsWith('https://') || href.startsWith('https://'));
@@ -259,4 +261,8 @@ export const groupData = (data: GroupingProps[]) => {
     groups.indexOf(item.group) === -1 ? groups.push(item.group) : null
   );
   return groups;
+};
+
+export const setInitialLocale = (locale: string ): string => {
+  return primaryLanguages.includes(locale) ? locale : 'en';
 };
