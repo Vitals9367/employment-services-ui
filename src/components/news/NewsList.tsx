@@ -13,6 +13,7 @@ import styles from './news.module.scss'
 interface NewsListProps {
   field_title: string;
   field_short_list: boolean;
+  field_news_filter: string,
   field_news_list_desc: DrupalFormattedText;
   langcode: string;
   field_background_color: {
@@ -24,6 +25,7 @@ interface News {
   path: Path,
   title: string,
   status: boolean,
+  field_article_category: string,
 }
 
 interface Path {
@@ -36,6 +38,7 @@ function NewsList({
   field_title,
   field_short_list,
   field_news_list_desc,
+  field_news_filter,
   langcode,
   field_background_color,
 }: NewsListProps): JSX.Element {
@@ -43,7 +46,7 @@ function NewsList({
   const [newsIndex, setNewsIndex] = useState<number>(1)
   const [paginatedNews, setPaginatedNews] = useState<Node[]>([])
   const bgColor = field_background_color?.field_css_name || 'white'
-  const fetcher = () => getNews(field_short_list, langcode)
+  const fetcher = () => getNews(field_short_list, field_news_filter, langcode)
   const { data: news, error } = useSWR(`/news`, fetcher)
 
   const total: number = (news && news.length) || 0
@@ -61,7 +64,7 @@ function NewsList({
       className='component'
       style={{ backgroundColor: `var(--color-${bgColor})` }}>
       <Container className='container'>
-        <div className={styles.newsListTitleArea}>
+        <div className={styles.newsListTitleArea}>          
           {field_title && <h2>{field_title}</h2>}
           {field_short_list && (
             <a href={t('list.news_url')}>
@@ -82,6 +85,9 @@ function NewsList({
                 <a href={getPathAlias(news.path)}>
                   <h3 className={styles.newsTitle}>{news.title}</h3>
                 </a>
+                {news.field_article_category === 'newsletter' && (
+                  <p>{ t('news.newsletter') }</p>
+                )}
                 {news.published_at && (
                   <p className={styles.articleDate}>
                     <time dateTime={news.published_at}>{`${dateformat(
