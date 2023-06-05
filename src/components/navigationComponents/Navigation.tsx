@@ -7,6 +7,7 @@ import classNames from '@/lib/classNames';
 import { getNav } from '../navigation/Header';
 import styles from './navigationComponents.module.scss';
 import LanguageSelect from './LanguageSelect';
+import { primaryLanguages } from '@/lib/helpers';
 
 export default function Navigation({
   locale,
@@ -37,11 +38,13 @@ export default function Navigation({
             langcode={langcode}
             activePath={activePath}
           />
-          <NavigationHDS.Search
-            onSearch={onSearch}
-            searchLabel={t('navigation.search_label')}
-            searchPlaceholder={t('navigation.search_placeholder')}
-          />
+          {primaryLanguages.includes(langcode as string) && (
+            <NavigationHDS.Search
+              onSearch={onSearch}
+              searchLabel={t('navigation.search_label')}
+              searchPlaceholder={t('navigation.search_placeholder')}
+            />
+          )}
           <Button
             className={styles.loggingButton}
             onClick={onClick}

@@ -6,7 +6,7 @@ import { Navigation as NavigationHDS } from "hds-react";
 
 import { NavProps } from '@/lib/types';
 import classNames from '@/lib/classNames';
-import { printablePages } from '@/lib/helpers';
+import { frontPagePaths, printablePages } from '@/lib/helpers';
 import { Breadcrumb } from './Breadcrumb';
 import styles from './navigation.module.scss';
 import PrintButton from '../printButton/PrintButton';
@@ -15,7 +15,7 @@ import MobileNavigation from '../navigationComponents/MobileNavigation';
 
 
 function Header(header: NavProps): JSX.Element {
-  const { locale, menu, themes, langLinks, breadcrumb, hideNav, langcode } =
+  const { locale, menu, themes, langLinks, breadcrumb, hideNav, langcode, globalMenu } =
     header;
     
   const { t } = useTranslation('common');
@@ -68,9 +68,9 @@ function Header(header: NavProps): JSX.Element {
         langLinks={langLinks}
         langcode={langcode as string}
       />
-      {activePath !== '/' && (
+      { !frontPagePaths.includes(activePath) && activePath !== '/' && (
         <div className={styles.subHeader}>
-          <Breadcrumb breadcrumb={breadcrumb} />
+          <Breadcrumb breadcrumb={breadcrumb} locale={locale}/>
           {isPrintable && (
             <PrintButton
               onClick={() => window?.print()}

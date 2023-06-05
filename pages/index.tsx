@@ -48,6 +48,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   const { tree: menu } = await getMenu('main', locale, defaultLocale)
   const { tree: themes } = await getMenu('additional-languages', locale, defaultLocale)
   const { tree: footerNav } = await getMenu('footer', locale, defaultLocale)
+  const {  tree: globalMenu } = await drupal.getMenu("globalmenu");
 
   return {
     props: {
@@ -57,6 +58,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
         menu,
         themes,
         langLinks,
+        globalMenu,
       },
       footer: {
         locale,

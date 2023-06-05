@@ -162,13 +162,13 @@ nav .buttonGlobe {
   top: 4rem;
   left: 0;
   z-index: 10;
-  padding: 2rem 1.5rem;
+  padding: 1rem 1.5rem 0 1.5rem;
   
   .globalLink {
     width: 100%;
   }
   a:first-of-type {
-    margin-top: 30PX;
+    margin-top: 3PX;
   }
 
   .headerLanguageLink {
@@ -176,7 +176,7 @@ nav .buttonGlobe {
     font-size: 1rem;
     font-weight: 700;
     display: block;
-    margin-bottom: 1rem
+    margin-bottom: 1.5rem
   }
   @media (max-width: $breakpoint-m) {
     top: 3.35rem;

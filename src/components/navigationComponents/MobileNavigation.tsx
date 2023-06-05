@@ -6,7 +6,7 @@ import classNames from '@/lib/classNames';
 import { NavigationProps } from '@/lib/types';
 import LanguageSelect from './LanguageSelect';
 import { getNav } from '../navigation/Header';
-
+import { primaryLanguages } from '@/lib/helpers';
 
 export default function MobileNavigation({
   locale,
@@ -16,7 +16,7 @@ export default function MobileNavigation({
   activePath,
   langLinks,
   langcode,
-  onSignIn
+  onSignIn,
 }: NavigationProps) {
   const { t } = useTranslation('common');
   return (
@@ -32,11 +32,13 @@ export default function MobileNavigation({
         className={classNames(styles.navigation, styles.zover)}
       >
         <Navigation.Actions>
-          <Navigation.Search
-            onSearch={onSearch}
-            searchLabel={t('navigation.search_label')}
-            searchPlaceholder={t('navigation.search_placeholder')}
-          />
+          {primaryLanguages.includes(langcode as string) && (
+            <Navigation.Search
+              onSearch={onSearch}
+              searchLabel={t('navigation.search_label')}
+              searchPlaceholder={t('navigation.search_placeholder')}
+            />
+          )}
           <Navigation.User
             id="navigation_blue_button"
             key="navigation_button"
@@ -52,7 +54,8 @@ export default function MobileNavigation({
       <LanguageSelect
         langLinks={langLinks}
         activePath={activePath}
-        langcode={langcode} />
+        langcode={langcode}
+      />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, IconAngleDown, IconAngleUp, IconGlobe, Link } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 
@@ -9,14 +9,22 @@ import { LanguageSelect } from '@/lib/types';
 
 function LanguageSelect({ langLinks, activePath, langcode }: LanguageSelect) {
   const { t } = useTranslation('common');
+  const [activeLang, setActiveLang] = useState<string | undefined>('');
   const [open, setOpen] = useState<boolean>(false);
   const wrapperRef = useRef(null);
 
   useBlur(wrapperRef, setOpen);
+  useEffect(() => {
+    setActiveLang(langcode);
+  }, [langcode]);
 
   return (
     <div>
-      <nav className={styles.LanguageSelector} role="navigation" aria-label={t('choose_language')}>
+      <nav
+        className={styles.LanguageSelector}
+        role="navigation"
+        aria-label={t('choose_language')}
+      >
         <div className={styles.languageSelect}>
           <Link
             aria-current={langLinks.fi === activePath}
@@ -48,6 +56,31 @@ function LanguageSelect({ langLinks, activePath, langcode }: LanguageSelect) {
           >
             English
           </Link>
+          {langLinks.ru === activePath && activePath !== undefined && (
+            <Link
+              aria-current={langLinks.ru === activePath}
+              href={langLinks.ru}
+            >
+              Russian
+            </Link>
+          )}
+          {langLinks.so === activePath && activePath !== undefined && (
+            <Link
+              aria-current={langLinks.so === activePath}
+              href={langLinks.so}
+            >
+              Somali
+            </Link>
+          )}
+
+          {langLinks.uk === activePath && activePath !== undefined && (
+            <Link
+              aria-current={langLinks.uk === activePath}
+              href={langLinks.uk}
+            >
+              Ukraine
+            </Link>
+          )}
         </div>
         <div ref={wrapperRef}>
           <Button
@@ -65,19 +98,19 @@ function LanguageSelect({ langLinks, activePath, langcode }: LanguageSelect) {
               <div className={styles.headerLanguageLink}>
                 {t('global_menu_title')}
               </div>
-              <a href={languageFrontPages.uk}>
+              <a href={languageFrontPages.ru}>
                 <div className={styles.globalLink}>
-                  <span>Ukrainian</span>
+                  <span>Russian</span>
+                </div>
+              </a>
+              <a href={languageFrontPages.so}>
+                <div className={styles.globalLink}>
+                  <span>Somali</span>
                 </div>
               </a>
               <a href={languageFrontPages.uk}>
                 <div className={styles.globalLink}>
-                  <span>Ukrainian</span>
-                </div>
-              </a>
-              <a href={languageFrontPages.uk}>
-                <div className={styles.globalLink}>
-                  <span>Ukrainian</span>
+                  <span>Ukraine</span>
                 </div>
               </a>
             </div>

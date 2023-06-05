@@ -566,6 +566,24 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/uk',
+        destination: '/uk/ukrainian-landing-page',
+        permanent: true,
+        locale: false,
+      },
+      {
+        source: '/so',
+        destination: 'so/somali-landing-page',
+        permanent: true,
+        locale: false,
+      },
+      {
+        source: '/ru',
+        destination: 'ru/russian-landing-page',
+        permanent: true,
+        locale: false,
+      },
     ]
   },
 }

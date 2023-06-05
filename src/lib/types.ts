@@ -45,6 +45,7 @@ export interface NavProps {
   breadcrumb?: any;
   hideNav?: boolean;
   langcode?: string;
+  globalMenu: DrupalMenuLinkContent[];
 }
 
 export interface FooterProps {
@@ -53,9 +54,9 @@ export interface FooterProps {
 }
 
 export interface BreadcrumbContent {
-  id: string
-  title: string
-  url: string
+  id: string;
+  title: string;
+  url: string;
 }
 
 export interface Tags {
@@ -170,4 +171,6 @@ interface LangLinks {
   fi: string;
   sv: string;
   uk: string;
+  ru: string;
+  so: string;
 }
