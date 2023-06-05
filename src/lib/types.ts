@@ -45,7 +45,7 @@ export interface NavProps {
   breadcrumb?: any;
   hideNav?: boolean;
   langcode?: string;
-  globalMenu: DrupalMenuLinkContent[];
+  globalMenu?: DrupalMenuLinkContent[];
 }
 
 export interface FooterProps {
