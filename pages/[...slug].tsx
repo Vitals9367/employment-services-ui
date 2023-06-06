@@ -20,7 +20,7 @@ import getMenu from '@/lib/get-menu'
 import { Node, NavProps, FooterProps } from '@/lib/types'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getNode } from '@/lib/ssr-api'
-import { getBreadCrumb, getDefaultImage, getDescription, getPathAlias, getTitle, languageFrontPages, primaryLanguages } from '@/lib/helpers'
+import { getBreadCrumb, getDefaultImage, getDescription, getPathAlias, getTitle, primaryLanguages } from '@/lib/helpers'
 import { useConsentStatus, useReactAndShare } from '@/hooks/useAnalytics'
 import ConsentInfo from '@/components/consentInfo/ConsentInfo'
 import { i18n } from '@/next-i18next.config'
@@ -141,9 +141,17 @@ export async function getStaticProps(
     locale,
     defaultLocale
   );
-  const { tree: footerNav } = await getMenu('footer', locale, defaultLocale);
 
-  const {  tree: menuOtherLanguages } = await drupal.getMenu("menu-other-languages");  
+  const getFooterMenu = () => {
+    if (primaryLanguages.includes(locale)) {
+      return 'footer'
+    } else {
+      return 'footer-other-languages'; 
+    }
+  }
+
+  const { tree: footerNav } = await getMenu(getFooterMenu(), locale, defaultLocale);
+  const {  tree: menuOtherLanguages } = await drupal.getMenu('menu-other-languages');  
 
   const breadcrumb = getBreadCrumb(
     menuItems,

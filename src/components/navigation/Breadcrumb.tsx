@@ -8,7 +8,6 @@ import { BreadcrumbContent } from '@/lib/types';
 
 import styles from './navigation.module.scss';
 import { languageFrontPages } from '@/lib/helpers';
-import { getDrupalClient } from '@/lib/drupal-client';
 
 interface BreadcrumbProps {
   breadcrumb: BreadcrumbContent[];
@@ -43,19 +42,24 @@ export const Breadcrumb = ({
     );
   });
 
+const getFrontPageLink = (locale?: string) => {
+  let frontPageLink;
   switch (locale) {
     case 'uk':
-      x = languageFrontPages.uk;
+      frontPageLink = languageFrontPages.uk;
       break;
     case 'so':
-      x = languageFrontPages.so;
+      frontPageLink = languageFrontPages.so;
+      break;
     case 'ru':
-      x = languageFrontPages.ru;
+      frontPageLink = languageFrontPages.ru;
       break;
     default:
-      x = '/';
+      frontPageLink = '/';
       break;
   }
+  return frontPageLink;
+}
 
   return (
     <nav
@@ -63,7 +67,7 @@ export const Breadcrumb = ({
       aria-label={t('navigation.breadcrumb_label')}
     >
       <div className={styles.breadcrumbElement} key="breadcrumb-frontpage">
-        <Link href={`${x}`}>
+        <Link href={`${getFrontPageLink(locale)}`}>
           <a>
             <span>{t('navigation.frontpage')}</span>
           </a>
