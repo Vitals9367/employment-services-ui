@@ -1,0 +1,92 @@
+{
+  "locale": "uk",
+  "lang-code": "Language Selector In English",
+  "site_name": "Employment services",
+  "site_title": "Helsinki Employment Services",
+  "link_copied": "Link copied",
+  "text_print": "Print",
+  "text_print_section": "Print this section",
+  "skip-to-main-content": "Skip to main content",
+  "navigation": {
+    "button_text": "E-Services",
+    "button_link": "https://asiointi.mol.fi/omaasiointi/",
+    "title_aria_label": "Helsinki: Employment services",
+    "navigate_to_page": "Navigate to page",
+    "frontpage": "Front page",
+    "breadcrumb_label": "Breadcrumb",
+    "theme_dropdown": "Other languages",
+    "search_label": "Search",
+    "search_placeholder": "Search for content"
+  },
+  "search": {
+    "filter": "Filter events",
+    "clear": "Clear filter",
+    "title": "Search the Employment Services website",
+    "page_title": "Search",
+    "input_label": "What are you looking for?",
+    "input_placeholder": "Search text",
+    "input_submit": "Search",
+    "keyword": "Keyword",
+    "result_text": "Search results",
+    "item_link_text": "Open search result",
+    "pagination_aria_label": "Page numbers",
+    "entity_type_event": "Event",
+    "entity_type_article": "News",
+    "loading_suggestions": "Loading suggestions",
+    "group_description": "You can select one of the following filters at a time"
+  },
+  "list": {
+    "load_more": "Show more",
+    "read_more": "Read more",
+    "read_more_blogs": "Read all blogs",
+    "read_more_news": "Read all news",
+    "blog_url": "/en/blog",
+    "events_url": "/en/event",
+    "show_all_news": "Show all news",
+    "news_url": "/en/news",
+    "results_text": "search results",
+    "show_all_events": "Show all events",
+    "events_page_url": "/en/current-matters/events",
+    "no_events": "No upcoming events on this topic.",
+    "event_title": "Event",
+    "event_link": "Event link to"
+  },
+  "event": {
+    "remote_event": "Remote event",
+    "info_url_text": "Event homepage",
+    "info_url_text_teams": "Open Teams-event",
+    "cancelled_text": "Cancelled",
+    "field_offers_info_url": "Sign up"
+  },
+  "video": {
+    "cookie_consent": "You have not allowed the use of cookies on this site.",
+    "link_text": "Please accept cookies to see the content."
+  },
+  "footer": {
+    "copyright": "City of Helsinki",
+    "accessibility": "Accessibility statement",
+    "accessibilityLink": "/en/accessibility-statement",
+    "feedback": "Give feedback",
+    "feedbackLink": "https://www.hel.fi/helsinki/en/administration/participate/feedback",
+    "goup": "Back to the top",
+    "cookie_settings": "Cookie settings"
+  },
+  "map": {
+    "location": "Location",
+    "new_window": "Open the map in a new window"
+  },
+  "unit": {
+    "contact_information": "Contact information",
+    "visit_address": "Visiting address",
+    "open_hours": "Opening hours",
+    "phone_service": "Phone service",
+    "postal_address": "Postal address",
+    "more_info": "See opening hours and contact details",
+    "accessibility_information": "Accessibility information"
+  },
+  "consent_info": {
+    "title": "Feedback buttons cannot be displayed",
+    "text": "To use this feature, you must accept cookies from the site. You can provide feedback on this page by enabling statistics-related cookies.",
+    "button": "Change cookie settings"
+  }
+}
