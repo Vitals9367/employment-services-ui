@@ -18,6 +18,7 @@ export default function Navigation({
   onSearch,
   onClick,
   langcode,
+  menuOtherLanguages,
 }: NavigationProps) {
   const { t } = useTranslation('common');
   return (
@@ -37,6 +38,7 @@ export default function Navigation({
             langLinks={langLinks}
             langcode={langcode}
             activePath={activePath}
+            menuOtherLanguages={menuOtherLanguages}
           />
           {primaryLanguages.includes(langcode as string) && (
             <NavigationHDS.Search

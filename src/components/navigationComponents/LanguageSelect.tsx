@@ -7,7 +7,12 @@ import { primaryLanguages, languageFrontPages } from '@/lib/helpers';
 import styles from './navigationComponents.module.scss';
 import { LanguageSelect } from '@/lib/types';
 
-function LanguageSelect({ langLinks, activePath, langcode }: LanguageSelect) {
+function LanguageSelect({
+  langLinks,
+  activePath,
+  langcode,
+  menuOtherLanguages,
+}: LanguageSelect) {
   const { t } = useTranslation('common');
   const [activeLang, setActiveLang] = useState<string | undefined>('');
   const [open, setOpen] = useState<boolean>(false);
@@ -98,21 +103,13 @@ function LanguageSelect({ langLinks, activePath, langcode }: LanguageSelect) {
               <div className={styles.headerLanguageLink}>
                 {t('global_menu_title')}
               </div>
-              <a href={languageFrontPages.ru}>
-                <div className={styles.globalLink}>
-                  <span>Russian</span>
-                </div>
-              </a>
-              <a href={languageFrontPages.so}>
-                <div className={styles.globalLink}>
-                  <span>Somali</span>
-                </div>
-              </a>
-              <a href={languageFrontPages.uk}>
-                <div className={styles.globalLink}>
-                  <span>Ukraine</span>
-                </div>
-              </a>
+              {menuOtherLanguages?.map((link: any) => (
+                <a href={link.url} key={link.id}>
+                  <div className={styles.globalLink}>
+                    <span>{link.title}</span>
+                  </div>
+                </a>
+              ))}
             </div>
           )}
         </div>

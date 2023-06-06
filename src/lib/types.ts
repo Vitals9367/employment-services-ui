@@ -45,7 +45,7 @@ export interface NavProps {
   breadcrumb?: any;
   hideNav?: boolean;
   langcode?: string;
-  globalMenu?: DrupalMenuLinkContent[];
+  menuOtherLanguages?: DrupalMenuLinkContent[];
 }
 
 export interface FooterProps {
@@ -159,12 +159,14 @@ export interface NavigationProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   langcode: string;
   onSignIn?: (() => void);
+  menuOtherLanguages?: DrupalMenuLinkContent[];
 }
 
 export interface LanguageSelect {
   langLinks: LangLinks;
   activePath: string;
   langcode: string | undefined;
+  menuOtherLanguages?: DrupalMenuLinkContent[];
 }
 interface LangLinks {
   en: string;

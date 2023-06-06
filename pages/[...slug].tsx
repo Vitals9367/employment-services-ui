@@ -143,7 +143,7 @@ export async function getStaticProps(
   );
   const { tree: footerNav } = await getMenu('footer', locale, defaultLocale);
 
-  const {  tree: globalMenu } = await drupal.getMenu("globalmenu");  
+  const {  tree: menuOtherLanguages } = await drupal.getMenu("menu-other-languages");  
 
   const breadcrumb = getBreadCrumb(
     menuItems,
@@ -161,7 +161,7 @@ export async function getStaticProps(
         themes,
         langLinks,
         breadcrumb,
-        globalMenu,
+        menuOtherLanguages,
       },
       footer: {
         locale,
