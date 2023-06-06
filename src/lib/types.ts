@@ -26,7 +26,7 @@ export interface Node extends DrupalNode {
   picture_url_override: any;
   drupal_internal__id: string;
   field_hide_navigation?: boolean;
-  field_article_category?: string;
+  field_article_category: string;
 }
 
 type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text'
