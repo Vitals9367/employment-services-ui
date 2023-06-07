@@ -184,6 +184,9 @@ export const baseArticlePageQueryParams = () =>
     .addInclude([
       'field_content.field_list_of_links_links.field_list_of_links_image.field_media_image',
       'field_content.field_image.field_media_image',
+      'field_content.field_liftup_with_image_image.field_media_image',
+      'field_content.field_background_color',
+      'field_content.field_accordion_items.field_accordion_item_content',
     ])
     .addFields(NODE_TYPES.ARTICLE, [
       'id',
@@ -214,6 +217,27 @@ export const baseArticlePageQueryParams = () =>
       'field_quote_author_first_name',
       'field_quote_author_last_name',
       'field_quote_author_title'
+    ])
+    .addFields(CONTENT_TYPES.MEDIA_IMAGE, [
+      'field_media_image',
+      'field_photographer',
+    ])
+    .addFields(CONTENT_TYPES.ACCORDION, [
+      'field_accordion_type',
+      'field_accordion_title_level',
+      'field_accordion_text',
+      'field_accordion_title',
+      'field_accordion_items'
+    ])
+    .addFields(CONTENT_TYPES.ACCORDION_ITEM, [
+      'field_accordion_item_content',
+      'field_accordion_item_heading'
+    ])
+    .addFields(CONTENT_TYPES.BANNER, [
+      'field_background_color',
+      'field_banner_desc',
+      'field_banner_title',
+      'field_icon'
     ])
     .addFields(CONTENT_TYPES.LIST_OF_LINKS, [
       'field_list_of_links_design',
