@@ -17,6 +17,7 @@ export default function MobileNavigation({
   langLinks,
   langcode,
   onSignIn,
+  menuOtherLanguages,
 }: NavigationProps) {
   const { t } = useTranslation('common');
   return (
@@ -55,6 +56,7 @@ export default function MobileNavigation({
         langLinks={langLinks}
         activePath={activePath}
         langcode={langcode}
+        menuOtherLanguages={menuOtherLanguages}
       />
     </div>
   );
