@@ -55,7 +55,7 @@ export default function Navigation({
             {t('navigation.button_text')}
           </Button>
         </NavigationHDS.Actions>
-        {!hideNav && (
+        {primaryLanguages.includes(langcode as string) && !hideNav && (
           <NavigationHDS.Row>{getNav(menu, activePath)}</NavigationHDS.Row>
         )}
       </NavigationHDS>

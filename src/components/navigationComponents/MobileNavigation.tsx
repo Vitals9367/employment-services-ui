@@ -48,7 +48,7 @@ export default function MobileNavigation({
             className={styles.blueButton}
           />
         </Navigation.Actions>
-        {!hideNav && (
+        {primaryLanguages.includes(langcode as string) && !hideNav && (
           <Navigation.Row>{getNav(menu, activePath)}</Navigation.Row>
         )}
       </Navigation>
