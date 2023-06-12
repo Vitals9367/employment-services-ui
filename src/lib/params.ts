@@ -274,6 +274,7 @@ export const baseTprUnitQueryParams = () =>
       'field_content',
       'field_lower_content',
       'phone',
+      'email',
       'address',
       'address_postal',
       'opening_hours',
@@ -282,7 +283,7 @@ export const baseTprUnitQueryParams = () =>
       'picture_url_override',
       'picture_url',
       'drupal_internal__id',
-      'accessibility_sentences'
+      'accessibility_sentences',
     ])
     .addFields(CONTENT_TYPES.ACCORDION, [
       'field_accordion_type',
