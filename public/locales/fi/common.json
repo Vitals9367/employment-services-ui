@@ -80,6 +80,7 @@
     "new_window": "Avaa kartta uuteen ikkunaan"
   },
   "unit": {
+    "email": "Sähköposti",
     "contact_information": "Yhteystiedot",
     "visit_address": "Käyntiosoite",
     "open_hours": "Aukioloajat",

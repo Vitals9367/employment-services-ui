@@ -76,6 +76,7 @@
     "new_window": "Open the map in a new window"
   },
   "unit": {
+    "email": "E-post",
     "contact_information": "Contact information",
     "visit_address": "Visiting address",
     "open_hours": "Opening hours",
