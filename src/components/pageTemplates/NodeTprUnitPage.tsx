@@ -119,7 +119,7 @@ function NodeTprUnitPage({
           <Block
             title={t('unit.email')}
             icon="envelope"
-            content={[`${email}`]}
+            content={[`<a href="mailto:${email}">${email}</a>`]}
           />
         )}
 
