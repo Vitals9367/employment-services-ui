@@ -74,6 +74,10 @@
   }
 }
 
+.linkBox > div > span > span {
+  aspect-ratio: 3/2;
+}
+
 .filter,
 .results {
   font-weight: 700;
