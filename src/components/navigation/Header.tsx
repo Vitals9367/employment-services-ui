@@ -2,7 +2,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { DrupalMenuLinkContent } from 'next-drupal';
-import { Navigation, IconArrowTopRight } from 'hds-react';
+import { Navigation, IconLinkExternal } from 'hds-react';
 
 import { NavProps } from '@/lib/types';
 import classNames from '@/lib/classNames';
@@ -98,7 +98,7 @@ function Header(header: NavProps): JSX.Element {
             id='navigation_blue_button'
             key='navigation_button'
             label={t('navigation.button_text')}
-            icon={<IconArrowTopRight size='l' />}
+            icon={<IconLinkExternal size='l' />}
             onSignIn={() => {
               window.open(t('navigation.button_link'), '_blank')?.focus()
             }}

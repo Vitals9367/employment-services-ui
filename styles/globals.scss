@@ -135,7 +135,7 @@ h5, .h5,
   .link-external::after,
   a[data-is-external="true"]::after {
     margin-right: var(--spacing-3-xs);
-    background: url('../src/assets/arrow-top-right.svg') no-repeat center top;
+    background: url('../src/assets/link-external.svg') no-repeat center top;
 
     @media print {
       margin: 0;
