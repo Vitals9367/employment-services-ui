@@ -49,7 +49,8 @@
     "events_page_url": "/en/current-matters/events",
     "no_events": "No upcoming events on this topic.",
     "event_title": "Event",
-    "event_link": "Event link to"
+    "event_link": "Event link to",
+    "result_zero": "No search results"
   },
   "event": {
     "remote_event": "Remote event",

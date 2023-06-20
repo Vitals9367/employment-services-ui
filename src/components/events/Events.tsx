@@ -1,66 +1,80 @@
-import { getEventsSearch, getEventsTags } from "@/lib/client-api"
-import { EventListProps } from "@/lib/types"
-import { Linkbox, Button as HDSButton, IconPlus, IconCrossCircle, Container } from "hds-react"
-import { useTranslation } from "next-i18next"
-import { useRouter } from "next/router"
-import useSWRInfinite from 'swr/infinite'
-import HtmlBlock from "../HtmlBlock"
-import Image from 'next/image'
+import { getEventsSearch, getEventsTags } from '@/lib/client-api';
+import { EventListProps } from '@/lib/types';
+import {
+  Linkbox,
+  Button as HDSButton,
+  IconPlus,
+  IconCrossCircle,
+  Container,
+} from 'hds-react';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import useSWRInfinite from 'swr/infinite';
+import HtmlBlock from '../HtmlBlock';
+import Image from 'next/image';
 
-import styles from './events.module.scss'
-import DateTime from "./DateTime"
-import TagList from "./TagList"
-import EventStatus from "./EventStatus"
-import { eventTags, getPath } from "@/lib/helpers"
-import { useEffect, useState } from "react"
+import styles from './events.module.scss';
+import DateTime from './DateTime';
+import TagList from './TagList';
+import EventStatus from './EventStatus';
+import { eventTags, getPath } from '@/lib/helpers';
+import { useEffect, useState } from 'react';
 
 const getKey = (eventsIndex: number) => {
-  return `${eventsIndex}`
-}
+  return `${eventsIndex}`;
+};
 
 const getEvents = (data: any) => {
-  return data.reduce((acc:any, curr:any) => acc.concat(curr.events), [])
-}
+  /** Filter events object from data */
+  return data.reduce((acc: any, curr: any) => acc.concat(curr.events), []);
+};
 
 const getTotal = (data: any) => {
+  /** Filter total from data */
   return {
-    'max': data[0].maxTotal ? data[0].maxTotal : data[0].total,
-    'current': data[0].total
-  }
-}
+    max: data[0].maxTotal ? data[0].maxTotal : data[0].total,
+    current: data[0].total,
+  };
+};
 
 export default function Events(props: EventListProps): JSX.Element {
-  const { field_title, field_events_list_desc } = props
-  const { t } = useTranslation()
-  const { locale } = useRouter()
-  const [ filter, setFilter ] = useState<string | null>(null)
+  const { field_title, field_events_list_desc } = props;
+  const { t } = useTranslation();
+  const { locale } = useRouter();
+  const [filter, setFilter] = useState<string[]>([]);
+  const fetcher = (eventsIndex: number) =>
+    getEventsSearch(eventsIndex, filter, locale != undefined ? locale : 'fi');
+  const { data } = useSWRInfinite(getKey, fetcher);
 
-  const fetcher = (eventsIndex: number) => getEventsSearch(eventsIndex, filter, locale != undefined ? locale : 'fi')
-  const { data, size, setSize } = useSWRInfinite(getKey, fetcher)
-  const events = data && getEvents(data)
-  const total = data && getTotal(data)
-  const [ eventsTags, setEventsTags ] = useState<any>([])
+  const events = data && getEvents(data);
+  const total = data && getTotal(data);
+  const [eventsTags, setEventsTags] = useState<any>([]);
 
-  const resultText = !total ? '' : total.current < total.max ? `${total.current} / ${total.max} ${t('list.results_text')}` : `${total.max} ${t('list.results_text')}`
+  const resultText = !total
+    ? ''
+    : total.current < total.max || total.current === 0
+    ? `${events.length} / ${total.max} ${t('list.results_text')}`
+    : `${total.max} ${t('list.results_text')}`;
 
   const updateTags = () => {
     getEventsTags(locale != undefined ? locale : 'fi').then((result) => {
       const tags: any = result
-        .filter((item: any) => { return item.key === undefined ? false : item })
-        .map((item: any) => { return item.key })
-        .sort((a: string, b: string) => eventTags.indexOf(a) - eventTags.indexOf(b))
-      setEventsTags(tags)
-    })
-  }
-
+        .filter((item: any) => {
+          return item.key === undefined ? false : item;
+        })
+        .map((item: any) => {
+          return item.key;
+        })
+        .sort(
+          (a: string, b: string) => eventTags.indexOf(a) - eventTags.indexOf(b)
+        );
+      setEventsTags(tags);
+    });
+  };
 
   useEffect(() => {
-    updateTags()
-  }, [])
-
-  useEffect(() => {
-    setSize(1)
-  }, [filter]) // eslint-disable-line
+    updateTags();
+  }, []);
 
   return (
     <div className="component">
@@ -89,11 +103,17 @@ export default function Events(props: EventListProps): JSX.Element {
                   aria-label={`${t('search.filter')} ${tag.replace('_', ' ')}`}
                   key={`tagFilter-${i}`}
                   className={
-                    filter === tag ? styles.selected : styles.filterTag
+                    filter.includes(tag) ? styles.selected : styles.filterTag
                   }
-                  onClick={() => {
-                    setFilter(tag);
-                  }}
+                  onClick={() =>
+                    setFilter((current) =>
+                      current?.includes(tag)
+                        ? [...current].filter(function (item) {
+                            return item !== tag;
+                          })
+                        : [...current, tag]
+                    )
+                  }
                 >
                   {tag.replace('_', ' ')}
                 </HDSButton>
@@ -103,7 +123,7 @@ export default function Events(props: EventListProps): JSX.Element {
               iconLeft={<IconCrossCircle />}
               className={styles.supplementary}
               onClick={() => {
-                setFilter(null);
+                setFilter([]);
               }}
             >
               {t('search.clear')}
@@ -114,7 +134,7 @@ export default function Events(props: EventListProps): JSX.Element {
           </div>
         </div>
         <div className={styles.eventList}>
-          {events &&
+          {events && events.length > 0 ? (
             events.map((event: any, key: any) => (
               <div className={styles.eventCard} key={key}>
                 <Linkbox
@@ -154,25 +174,12 @@ export default function Events(props: EventListProps): JSX.Element {
                   </div>
                 </Linkbox>
               </div>
-            ))}
+            ))
+          ) : (
+            <p>{t('list.result_zero')}</p>
+          )}
         </div>
-
-        {events && total && total.current > size * 9 && (
-          <div className={styles.loadMore}>
-            <HDSButton
-              variant="supplementary"
-              iconRight={<IconPlus />}
-              style={{ background: 'none' }}
-              onClick={() => {
-                setSize(size + 1);
-              }}
-            >
-              {t('list.load_more')}
-            </HDSButton>
-          </div>
-        )}
       </Container>
     </div>
   );
-
 }

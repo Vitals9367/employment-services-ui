@@ -49,7 +49,8 @@
     "events_page_url": "/ajankohtaista/tapahtumat",
     "no_events": "Ei tulevia tapahtumia tästä aiheesta.",
     "event_title": "Tapahtuma",
-    "event_link": "Tapahtuma linkki"
+    "event_link": "Tapahtuma linkki",
+    "result_zero": "Ei haku tuloksia"
   },
   "event": {
     "remote_event": "Etätapahtuma",
