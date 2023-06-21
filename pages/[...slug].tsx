@@ -131,16 +131,27 @@ export async function getStaticProps(
 
   const langLinks = await getLanguageLinks(node);
 
+  const getMainMenu = () => {
+    if (primaryLanguages.includes(locale)) {
+      return 'main'
+    } else {
+      return 'menu-other-languages'; 
+    }
+  }
+
   const { tree: menu, items: menuItems } = await getMenu(
-    'main',
+    getMainMenu(),
     locale,
     defaultLocale
   );
+
   const { tree: themes } = await getMenu(
     'additional-languages',
-    locale,
-    defaultLocale
+    'en',
+    defaultLocale,
   );
+
+  const { tree: menuOtherLanguages } = await drupal.getMenu('menu-other-languages');
 
   const getFooterMenu = () => {
     if (primaryLanguages.includes(locale)) {
@@ -149,9 +160,15 @@ export async function getStaticProps(
       return 'footer-other-languages'; 
     }
   }
-
-  const { tree: footerNav } = await getMenu(getFooterMenu(), locale, defaultLocale);
-  const {  tree: menuOtherLanguages } = await drupal.getMenu('menu-other-languages');  
+  const getFooterMenuLang = () => {
+    if (primaryLanguages.includes(locale)) {
+      return locale;
+    } else {
+      return 'en'; 
+    }
+  }
+ 
+  const { tree: footerNav } = await getMenu(getFooterMenu(), getFooterMenuLang(), defaultLocale);
 
   const breadcrumb = getBreadCrumb(
     menuItems,

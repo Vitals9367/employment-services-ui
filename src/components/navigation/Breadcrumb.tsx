@@ -7,11 +7,11 @@ import classNames from '@/lib/classNames';
 import { BreadcrumbContent } from '@/lib/types';
 
 import styles from './navigation.module.scss';
-import { languageFrontPages } from '@/lib/helpers';
+import { languageFrontPages, primaryLanguages } from '@/lib/helpers';
 
 interface BreadcrumbProps {
   breadcrumb: BreadcrumbContent[];
-  locale: string | undefined;
+  locale: string;
 }
 
 export const Breadcrumb = ({
@@ -66,6 +66,7 @@ const getFrontPageLink = (locale?: string) => {
       className={classNames(styles.breadcrumb)}
       aria-label={t('navigation.breadcrumb_label')}
     >
+      { (crumbs.length === 1 || primaryLanguages.includes(locale)) &&
       <div className={styles.breadcrumbElement} key="breadcrumb-frontpage">
         <Link href={`${getFrontPageLink(locale)}`}>
           <a>
@@ -74,6 +75,7 @@ const getFrontPageLink = (locale?: string) => {
         </Link>
         <IconAngleRight size="s" aria-hidden="true" />
       </div>
+      }
       {crumbs}
     </nav>
   );

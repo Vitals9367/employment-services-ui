@@ -15,7 +15,7 @@ import MobileNavigation from '../navigationComponents/MobileNavigation';
 
 
 function Header(header: NavProps): JSX.Element {
-  const { locale, menu, themes, langLinks, breadcrumb, hideNav, langcode, menuOtherLanguages } =
+  const { locale, menu, themes, langLinks, breadcrumb, hideNav, langcode } =
     header;
     
   const { t } = useTranslation('common');
@@ -57,7 +57,7 @@ function Header(header: NavProps): JSX.Element {
         activePath={activePath}
         langLinks={langLinks}
         langcode={langcode as string}
-        menuOtherLanguages={menuOtherLanguages}
+        menuOtherLanguages={themes}
       />
       <MobileNavigation
         locale={locale}
@@ -68,7 +68,7 @@ function Header(header: NavProps): JSX.Element {
         activePath={activePath}
         langLinks={langLinks}
         langcode={langcode as string}
-        menuOtherLanguages={menuOtherLanguages}
+        menuOtherLanguages={themes}
       />
       { !frontPagePaths.includes(activePath) && activePath !== '/' && (
         <div className={styles.subHeader}>
