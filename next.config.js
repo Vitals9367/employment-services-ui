@@ -568,19 +568,19 @@ const nextConfig = {
       },
       {
         source: '/uk',
-        destination: '/uk/ukrainian-landing-page',
+        destination: '/uk/frontpage',
         permanent: true,
         locale: false,
       },
       {
         source: '/so',
-        destination: 'so/somali-landing-page',
+        destination: 'so/frontpage',
         permanent: true,
         locale: false,
       },
       {
         source: '/ru',
-        destination: 'ru/russian-landing-page',
+        destination: 'ru/frontpage',
         permanent: true,
         locale: false,
       },

@@ -34,18 +34,18 @@ export const frontPagePaths = [
   '/',
   '/en',
   '/sv',
-  '/uk/ukrainian-landing-page',
-  '/so/somali-landing-page',
-  '/ru/russian-landing-page',
+  '/uk/frontpage',
+  '/so/frontpage',
+  '/ru/frontpage',
 ];
 
 export const languageFrontPages = {
   fi: '/',
   en: '/en',
   sv: '/sv',
-  uk: '/uk/ukrainian-landing-page',
-  so: '/so/somali-landing-page',
-  ru: '/ru/russian-landing-page',
+  uk: '/uk/frontpage',
+  so: '/so/frontpage',
+  ru: '/ru/frontpage',
 };
 
 export const isExternalLink = (href: string): boolean | undefined => {
