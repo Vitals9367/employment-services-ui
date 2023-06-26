@@ -2,11 +2,11 @@ import { ReactElement, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { DrupalMenuLinkContent } from 'next-drupal';
-import { Navigation as NavigationHDS, IconLinkExternal } from "hds-react";
+import { Navigation as NavigationHDS } from "hds-react";
 import { NavProps } from '@/lib/types';
 import classNames from '@/lib/classNames';
 import { frontPagePaths, printablePages } from '@/lib/helpers';
-import { previewNavigation, printablePages } from '@/lib/helpers';
+import { previewNavigation } from '@/lib/helpers';
 import { Breadcrumb } from './Breadcrumb';
 import styles from './navigation.module.scss';
 import PrintButton from '../printButton/PrintButton';
@@ -72,7 +72,7 @@ function Header(header: NavProps): JSX.Element {
       />
       { !frontPagePaths.includes(activePath) && activePath !== '/' && (
         <div className={styles.subHeader}>
-          <Breadcrumb breadcrumb={breadcrumb} locale={locale}/>
+          <Breadcrumb breadcrumb={breadcrumb} locale={locale as string} preview={preview}/>
           {isPrintable && (
             <PrintButton
               onClick={() => window?.print()}

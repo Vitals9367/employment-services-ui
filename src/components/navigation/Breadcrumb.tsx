@@ -1,6 +1,5 @@
 import { IconAngleRight, IconArrowRight } from 'hds-react';
 import Link from 'next/link';
-import { Link } from 'hds-react';
 import { ReactElement } from 'react';
 import { useTranslation } from 'next-i18next';
 
