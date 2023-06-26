@@ -92,7 +92,7 @@ function Accordion(props: AccordionProps): JSX.Element {
                 }}
                 language={locale}>
                 {field_accordion_item_content?.length > 0 && (
-                  <ContentMapper content={field_accordion_item_content} />
+                  <ContentMapper content={field_accordion_item_content} className={'accordion_component'} />
                 )}
               </HDSAccordion>
             ) : (
@@ -102,7 +102,7 @@ function Accordion(props: AccordionProps): JSX.Element {
                 index={i + 1}
                 field_accordion_item_heading={field_accordion_item_heading}>
                 {field_accordion_item_content?.length > 0 && (
-                  <ContentMapper content={field_accordion_item_content} />
+                  <ContentMapper content={field_accordion_item_content} className={'accordion_component'}/>
                 )}
               </NumberedAccordion>
             )

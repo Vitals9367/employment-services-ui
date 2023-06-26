@@ -61,6 +61,10 @@
     "cancelled_text": "Peruttu",
     "field_offers_info_url": "Ilmoittaudu"
   },
+  "news": {
+    "news": "Uutinen",
+    "newsletter": "Uutiskirje"
+  },
   "video": {
     "cookie_consent": "Et ole antanut lupaa asettaa evästeitä.",
     "link_text": "Hyväksythän evästeet nähdäksesi sisällön"
@@ -79,6 +83,7 @@
     "new_window": "Avaa kartta uuteen ikkunaan"
   },
   "unit": {
+    "email": "Sähköposti",
     "contact_information": "Yhteystiedot",
     "visit_address": "Käyntiosoite",
     "open_hours": "Aukioloajat",

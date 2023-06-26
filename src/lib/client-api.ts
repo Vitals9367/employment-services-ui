@@ -30,8 +30,8 @@ export const getEventsSearch = async (eventsIndex: number, filter: string | null
   return data
 }
 
-export const getNews = async (shortList: boolean, locale: Locale) => {
-  const { data } = await axios(`${NEWS_URL}`, { params: { limit: shortList, locale: locale } })
+export const getNews = async (shortList: boolean, newsFilter: string, locale: Locale) => {
+  const { data } = await axios(`${NEWS_URL}`, { params: { limit: shortList, filter: newsFilter, locale: locale } })
   return data
 }
 

@@ -28,6 +28,7 @@ export interface Node extends DrupalNode {
   drupal_internal__id: string;
   field_hide_navigation: boolean;
   langcode: string;
+  field_article_category: string;
 }
 
 type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text'
@@ -46,6 +47,7 @@ export interface NavProps {
   hideNav?: boolean;
   langcode?: string;
   menuOtherLanguages?: DrupalMenuLinkContent[];
+  preview?: boolean;
 }
 
 export interface FooterProps {

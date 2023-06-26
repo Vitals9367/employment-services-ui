@@ -61,6 +61,10 @@
     "cancelled_text": "Cancelled",
     "field_offers_info_url": "Sign up"
   },
+  "news": {
+    "news": "News",
+    "newsletter": "Newsletter"
+  },
   "video": {
     "cookie_consent": "You have not allowed the use of cookies on this site.",
     "link_text": "Please accept cookies to see the content."
@@ -79,6 +83,7 @@
     "new_window": "Open the map in a new window"
   },
   "unit": {
+    "email": "Email",
     "contact_information": "Contact information",
     "visit_address": "Visiting address",
     "open_hours": "Opening hours",
