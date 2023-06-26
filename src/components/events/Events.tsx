@@ -131,10 +131,11 @@ export default function Events(props: EventListProps): JSX.Element {
                       alt={event.field_image_alt[0]}
                       layout="responsive"
                       objectFit="cover"
-                      width={384}
-                      height={158}
+                      width={3}
+                      height={2}
                     />
                   )}
+
                   <div className={styles.eventCardContent}>
                     {event.field_tags && event.field_tags.length !== 0 && (
                       <TagList tags={event.field_event_tags} />
