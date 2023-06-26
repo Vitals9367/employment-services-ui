@@ -566,6 +566,24 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/uk',
+        destination: '/uk/frontpage',
+        permanent: true,
+        locale: false,
+      },
+      {
+        source: '/so',
+        destination: 'so/frontpage',
+        permanent: true,
+        locale: false,
+      },
+      {
+        source: '/ru',
+        destination: 'ru/frontpage',
+        permanent: true,
+        locale: false,
+      },
     ]
   },
 }

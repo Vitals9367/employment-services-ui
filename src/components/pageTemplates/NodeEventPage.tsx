@@ -34,12 +34,14 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
           <div className="col-12">
             <div className={styles.eventHero}>
               <div className={styles.imageContainer}>
+                {field_image_url &&
                 <Image
                   src={field_image_url}
                   alt={field_image_alt}
                   layout='fill'
                   objectFit='cover'
                 />
+              }
               </div>
               <div className={styles.headingContainer}>
                 {field_tags && field_tags.length !== 0 && <TagList tags={event_tags} /> }

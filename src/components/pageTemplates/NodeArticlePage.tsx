@@ -1,5 +1,6 @@
 import { Container } from 'hds-react'
 import { Node } from '@/lib/types'
+import { useTranslation } from 'next-i18next'
 import dateformat from 'dateformat'
 import ContentMapper from '@/components/ContentMapper'
 
@@ -10,14 +11,18 @@ interface NodeArticlePageProps {
 }
 
 export function NodeArticlePage({ node, ...props }: NodeArticlePageProps): JSX.Element {
-  const { title, field_lead, created, field_content, langcode, published_at } = node;
+  const { title, field_lead, field_article_category, created, field_content, langcode, published_at } = node;
   const articleDate = published_at !== null ? published_at : created;
+  const { t } = useTranslation();
 
   return (
     <article>
       <Container className="container content-region">
         <div className={styles.newsArticle}>
           <h1>{title}</h1>
+          {field_article_category === 'newsletter' && (
+            <p className={styles.articleType}>{ t('news.newsletter') }</p>
+          )}
           {field_lead && (
             <div className='lead-in'>{field_lead}</div>
           )}

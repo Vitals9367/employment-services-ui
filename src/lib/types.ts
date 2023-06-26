@@ -3,6 +3,7 @@ import {
   Locale,
   DrupalMenuLinkContent,
 } from 'next-drupal'
+import { MouseEventHandler } from 'react';
 
 export interface Node extends DrupalNode {
   title: string;
@@ -26,6 +27,8 @@ export interface Node extends DrupalNode {
   picture_url_override: any;
   drupal_internal__id: string;
   field_hide_navigation: boolean;
+  langcode: string;
+  field_article_category: string;
 }
 
 type TextFormats = 'basic_html' | 'restricted_html' | 'plain_text'
@@ -42,6 +45,9 @@ export interface NavProps {
   langLinks?: any;
   breadcrumb?: any;
   hideNav?: boolean;
+  langcode?: string;
+  menuOtherLanguages?: DrupalMenuLinkContent[];
+  preview?: boolean;
 }
 
 export interface FooterProps {
@@ -50,9 +56,9 @@ export interface FooterProps {
 }
 
 export interface BreadcrumbContent {
-  id: string
-  title: string
-  url: string
+  id: string;
+  title: string;
+  url: string;
 }
 
 export interface Tags {
@@ -143,4 +149,32 @@ declare global {
 export interface GroupingProps {
   group: string
   value: string
+}
+
+export interface NavigationProps {
+  locale: string | undefined;
+  onSearch: (searchValue: string) => void;
+  hideNav: boolean | undefined;
+  menu?: DrupalMenuLinkContent[];
+  activePath: string;
+  langLinks: LangLinks;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  langcode: string;
+  onSignIn?: (() => void);
+  menuOtherLanguages?: DrupalMenuLinkContent[];
+}
+
+export interface LanguageSelect {
+  langLinks: LangLinks;
+  activePath: string;
+  langcode: string | undefined;
+  menuOtherLanguages?: DrupalMenuLinkContent[];
+}
+interface LangLinks {
+  en: string;
+  fi: string;
+  sv: string;
+  uk: string;
+  ru: string;
+  so: string;
 }

@@ -27,9 +27,10 @@ interface ContentMapperProps {
   locationId?: string | null,
   langcode?: string,
   sidebar?: NavProps,
+  className?: string,
 }
 
-export function ContentMapper({ content, pageType, locationId, mapId, langcode,  sidebar, ...props }: ContentMapperProps): JSX.Element {
+export function ContentMapper({ content, pageType, locationId, mapId, langcode,  sidebar, className, ...props }: ContentMapperProps): JSX.Element {
 
   return content.map((item: any) => {
     const { type, id } = item
@@ -41,7 +42,7 @@ export function ContentMapper({ content, pageType, locationId, mapId, langcode, 
           return null
         }
         return (
-          <div className='component' key={key}>
+          <div className={`component ${className}`} key={key}>
             <Container className='container'>
               <HtmlBlock {...item} key={key} />
             </Container>

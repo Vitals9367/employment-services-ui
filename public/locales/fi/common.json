@@ -1,6 +1,9 @@
 {
   "locale": "fi",
   "lang-code": "Kielivalikko Suomeksi",
+  "choose_language": "Valitse sivuston kieli",
+  "global_menu_title": "Tietoa muilla kielillä",
+  "other_languages": "Avaa tietoa muilla kielillä valikko",
   "site_name": "Työllisyyspalvelut",
   "site_title": "Helsingin työllisyyspalvelut",
   "link_copied": "Linkki kopioitu",
@@ -58,6 +61,10 @@
     "cancelled_text": "Peruttu",
     "field_offers_info_url": "Ilmoittaudu"
   },
+  "news": {
+    "news": "Uutinen",
+    "newsletter": "Uutiskirje"
+  },
   "video": {
     "cookie_consent": "Et ole antanut lupaa asettaa evästeitä.",
     "link_text": "Hyväksythän evästeet nähdäksesi sisällön"
@@ -76,6 +83,7 @@
     "new_window": "Avaa kartta uuteen ikkunaan"
   },
   "unit": {
+    "email": "Sähköposti",
     "contact_information": "Yhteystiedot",
     "visit_address": "Käyntiosoite",
     "open_hours": "Aukioloajat",

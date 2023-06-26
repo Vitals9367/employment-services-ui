@@ -86,7 +86,7 @@ export default function HomePage({ node, nav, footer }: HomePageProps) {
   const metaImage = getDefaultImage(node)
 
   return (
-    <Layout header={nav} footer={footer}>
+    <Layout header={nav} footer={footer} langcode={node.langcode}>
       <Head>
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
@@ -105,5 +105,5 @@ export default function HomePage({ node, nav, footer }: HomePageProps) {
         </div>
       </Container>
     </Layout>
-  )
+  );
 }
