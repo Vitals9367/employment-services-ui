@@ -1,6 +1,9 @@
 {
   "locale": "en",
   "lang-code": "Language Selector In English",
+  "choose_language": "Select site language",
+  "other_languages": "Open Information in other languages menu",
+  "global_menu_title": "Information in other languages",
   "site_name": "Employment services",
   "site_title": "Helsinki Employment Services",
   "link_copied": "Link copied",

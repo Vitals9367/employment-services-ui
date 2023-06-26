@@ -1,32 +1,5 @@
 @import '/styles/variables.scss';
 
-.zover {
-  z-index: 100 !important;
-}
-.zover2 {
-  z-index: 110 !important;
-}
-.zover3 {
-  z-index: 120 !important;
-}
-
-.navigation {
-  --header-background-color: var(--color-white);
-  --header-color: var(--color-black-90);
-  --header-divider-color: var(--color-black-20);
-  --header-focus-outline-color: var(--color-black-90) !important;
-  --mobile-menu-background-color: var(--color-white);
-  --mobile-menu-color: var(--color-black-90);
-  --navigation-row-background-color: var(--color-white);
-  --navigation-row-focus-outline-color: var(--color-black-90) !important;
-  margin: 0 auto;
-  width: 100%;
-  max-width: var(--breakpoint-xl);
-
-  .blueButton {
-    --background-color: var(--color-bus) !important;
-  }
-}
 
 .navDropDown {
   --item-active-color: var(--color-metro) !important;

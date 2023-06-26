@@ -11,6 +11,7 @@ interface LayoutProps {
   header: NavProps;
   footer: FooterProps;
   hideNav?: boolean;
+  langcode?: string | undefined;
   preview?: boolean;
 }
 
@@ -19,13 +20,14 @@ export function Layout({
   header,
   footer,
   hideNav,
+  langcode,
   preview,
 }: LayoutProps): JSX.Element {
   return (
     <>
       <PreviewAlert />
       <div className={styles.wrapper}>
-        <Header {...header} hideNav={hideNav} preview={preview}/>
+        <Header {...header} hideNav={hideNav} langcode={langcode as string}  preview={preview}/>
         <main>{children}</main>
       </div>
       <Footer {...footer} />

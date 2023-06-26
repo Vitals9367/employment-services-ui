@@ -37,6 +37,25 @@ export const printablePages = [
   NODE_TYPES.TPR_UNIT,
 ];
 
+export const primaryLanguages = ['fi', 'en', 'sv'];
+export const frontPagePaths = [
+  '/',
+  '/en',
+  '/sv',
+  '/uk/frontpage',
+  '/so/frontpage',
+  '/ru/frontpage',
+];
+
+export const languageFrontPages = {
+  fi: '/',
+  en: '/en',
+  sv: '/sv',
+  uk: '/uk/frontpage',
+  so: '/so/frontpage',
+  ru: '/ru/frontpage',
+};
+
 /* Link and navigation helpers */
 export const previewNavigation = (path: string, preview: boolean | undefined): void => {
   if (preview) {
@@ -47,8 +66,6 @@ export const previewNavigation = (path: string, preview: boolean | undefined): v
     return;
   }
 };
-
-export const primaryLanguages = ['fi', 'en', 'sv'];
 
 export const isExternalLink = (href: string): boolean | undefined => {
   const isExternalLink =

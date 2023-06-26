@@ -1,6 +1,9 @@
 {
   "locale": "fi",
   "lang-code": "Kielivalikko Suomeksi",
+  "choose_language": "Valitse sivuston kieli",
+  "global_menu_title": "Tietoa muilla kielillä",
+  "other_languages": "Avaa tietoa muilla kielillä valikko",
   "site_name": "Työllisyyspalvelut",
   "site_title": "Helsingin työllisyyspalvelut",
   "link_copied": "Linkki kopioitu",

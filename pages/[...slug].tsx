@@ -20,7 +20,7 @@ import getMenu from '@/lib/get-menu'
 import { Node, NavProps, FooterProps } from '@/lib/types'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getNode } from '@/lib/ssr-api'
-import { getBreadCrumb, getDefaultImage, getDescription, getPathAlias, getTitle } from '@/lib/helpers'
+import { getBreadCrumb, getDefaultImage, getDescription, getPathAlias, getTitle, primaryLanguages } from '@/lib/helpers'
 import { useConsentStatus, useReactAndShare } from '@/hooks/useAnalytics'
 import ConsentInfo from '@/components/consentInfo/ConsentInfo'
 import { i18n } from '@/next-i18next.config'
@@ -122,7 +122,7 @@ export async function getStaticProps(
           locale,
           defaultLocale: i18n.defaultLocale,
         });
-        link = `${prefix}${response?.path.alias}`;
+            link = `${prefix}${response?.path.alias}`;
       }
       Object.assign(langLinks, { [locale]: link });
     }
@@ -131,18 +131,46 @@ export async function getStaticProps(
   }
 
   const langLinks = await getLanguageLinks(node);
-  
+
+  const getMainMenu = () => {
+    if (primaryLanguages.includes(locale)) {
+      return 'main'
+    } else {
+      return 'menu-other-languages'; 
+    }
+  }
+
   const { tree: menu, items: menuItems } = await getMenu(
-    'main',
+    getMainMenu(),
     locale,
     defaultLocale
   );
+
   const { tree: themes } = await getMenu(
     'additional-languages',
-    locale,
-    defaultLocale
+    'en',
+    defaultLocale,
   );
-  const { tree: footerNav } = await getMenu('footer', locale, defaultLocale);
+
+  const { tree: menuOtherLanguages } = await drupal.getMenu('menu-other-languages');
+
+  const getFooterMenu = () => {
+    if (primaryLanguages.includes(locale)) {
+      return 'footer'
+    } else {
+      return 'footer-other-languages'; 
+    }
+  }
+  const getFooterMenuLang = () => {
+    if (primaryLanguages.includes(locale)) {
+      return locale;
+    } else {
+      return 'en'; 
+    }
+  }
+ 
+  const { tree: footerNav } = await getMenu(getFooterMenu(), getFooterMenuLang(), defaultLocale);
+  
   const preview = context.preview ? context.preview : false;
 
   const breadcrumb = getBreadCrumb(
@@ -162,6 +190,7 @@ export async function getStaticProps(
         themes,
         langLinks,
         breadcrumb,
+        menuOtherLanguages,
       },
       footer: {
         locale,
@@ -193,9 +222,15 @@ export default function Page({ node, nav, footer, preview }: PageProps) {
   const metaDescription = getDescription(node);
   const metaUrl = process.env.NEXT_PUBLIC_SITE_URL + router.asPath;
   const metaImage = getDefaultImage(node);
-  
+
   return (
-    <Layout header={nav} footer={footer} hideNav={node.field_hide_navigation} preview={preview}>
+    <Layout
+      header={nav}
+      footer={footer}
+      hideNav={node.field_hide_navigation}
+      langcode={node.langcode}
+      preview={preview}
+    >
       <Head>
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
