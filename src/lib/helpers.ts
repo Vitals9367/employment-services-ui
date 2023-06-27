@@ -8,6 +8,14 @@ import { BreadcrumbContent } from './types';
 import { NODE_TYPES } from '@/lib/drupalApiTypes';
 import { NextApiResponse } from 'next';
 
+
+interface newPage {
+  id: string;
+  title: string; 
+  url: string;
+  parent: string;
+}
+
 export const eventTags = [
   'maahanmuuttajat',
   'nuoret',
@@ -28,6 +36,36 @@ export const printablePages = [
   NODE_TYPES.PAGE,
   NODE_TYPES.TPR_UNIT,
 ];
+
+export const primaryLanguages = ['fi', 'en', 'sv'];
+export const frontPagePaths = [
+  '/',
+  '/en',
+  '/sv',
+  '/uk/frontpage',
+  '/so/frontpage',
+  '/ru/frontpage',
+];
+
+export const languageFrontPages = {
+  fi: '/',
+  en: '/en',
+  sv: '/sv',
+  uk: '/uk/frontpage',
+  so: '/so/frontpage',
+  ru: '/ru/frontpage',
+};
+
+/* Link and navigation helpers */
+export const previewNavigation = (path: string, preview: boolean | undefined): void => {
+  if (preview) {
+    window
+      .open(`${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/${path}`, '_parent')
+      ?.focus();
+  } else {
+    return;
+  }
+};
 
 export const isExternalLink = (href: string): boolean | undefined => {
   const isExternalLink =
@@ -75,7 +113,7 @@ export const getBreadCrumb = (
   }
 
   // Breadcrumb object for pages without menu attachment
-  let newPage: any = {
+  let newPage: newPage = {
     id: 'current_page_crumb',
     title: title,
     url: path,
@@ -84,8 +122,7 @@ export const getBreadCrumb = (
 
   // Pages that are not in menus always get a breadcrumb.
   if (!page) {
-    // Custom breadcrumb for Event pages
-    if (type !== 'node--event') {
+    if (type !== 'node--event' && type !== 'node--article') {
       return [newPage];
     }
 
@@ -128,12 +165,14 @@ export const getBreadCrumb = (
   return breadcrumbs.reverse();
 };
 
+/* Cookie helpers */
 export const deleteCookie = (event: any, name: string, history: any) => {
   event.preventDefault();
   document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
   history.go(0);
 };
 
+/** Get data from node helpers */
 export const getTitle = (node: Node, suffix: String): string => {
   let pageTitle = node.title;
 
@@ -215,6 +254,8 @@ export const getDefaultImage = (node: Node): string => {
   return process.env.NEXT_PUBLIC_SITE_URL + '/tyollisyyspalvelut.png';
 };
 
+
+/** Filtering helpers */
 export const sortArrayByOtherArray = (array: any[], sortArray: string[]) => {
   return [...array].sort(
     (a, b) =>
@@ -237,4 +278,8 @@ export const groupData = (data: GroupingProps[]) => {
     groups.indexOf(item.group) === -1 ? groups.push(item.group) : null
   );
   return groups;
+};
+
+export const setInitialLocale = (locale: string ): string => {
+  return primaryLanguages.includes(locale) ? locale : 'en';
 };

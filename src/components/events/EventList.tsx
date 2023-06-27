@@ -39,14 +39,15 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
 
   return (
     <div
-      className='component hide-print'
-      style={{ backgroundColor: `var(--color-${bgColor})` }}>
-      <Container className='container'>
+      className="component hide-print"
+      style={{ backgroundColor: `var(--color-${bgColor})` }}
+    >
+      <Container className="container">
         <div className={styles.eventListTitleArea}>
           {field_title && <h2>{field_title}</h2>}
           {field_events_list_short && (
             <a href={t('list.events_page_url')}>
-              {t('list.show_all_events')} <IconArrowRight size='l' />
+              {t('list.show_all_events')} <IconArrowRight size="l" />
             </a>
           )}
         </div>
@@ -59,7 +60,8 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
         <div
           className={`${styles.eventList} ${
             field_events_list_short && styles.short
-          }`}>
+          }`}
+        >
           {events?.length
             ? events.map((event: any, key: any) => (
                 <div className={`${styles.eventCard} event-card`} key={key}>
@@ -69,23 +71,27 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
                     linkAriaLabel={`${t('list.event_link')} ${event.title}`}
                     key={key}
                     href={getPathAlias(event.path)}
-                    withBorder>
-                    <Image
-                      src={event.field_image_url}
-                      alt={event.field_image_alt}
-                      layout='responsive'
-                      objectFit='cover'
-                      width={384}
-                      height={158}
-                    />
+                    withBorder
+                  >
+                    {event.field_image_url && (
+                      <Image
+                        src={event.field_image_url}
+                        alt={event.field_image_alt}
+                        layout="responsive"
+                        objectFit="cover"
+                        width={384}
+                        height={158}
+                      />
+                    )}
                     <div className={styles.eventCardContent}>
-                      {event.field_event_tags && event.field_event_tags.length !== 0 && (
-                        <TagList
-                          tags={event.field_event_tags.map(
-                            (tag: any) => tag.name
-                          )}
-                        />
-                      )}
+                      {event.field_event_tags &&
+                        event.field_event_tags.length !== 0 && (
+                          <TagList
+                            tags={event.field_event_tags.map(
+                              (tag: any) => tag.name
+                            )}
+                          />
+                        )}
                       <DateTime
                         startTime={event.field_start_time}
                         endTime={event.field_end_time}
@@ -103,11 +109,10 @@ export function EventList({ pageType, locationId, ...props }: EventListProps): J
                     </div>
                   </Linkbox>
                 </div>
-            ))
-            : t('list.no_events')
-          }
+              ))
+            : t('list.no_events')}
         </div>
       </Container>
     </div>
-  )
+  );
 }

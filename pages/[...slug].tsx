@@ -20,16 +20,17 @@ import getMenu from '@/lib/get-menu'
 import { Node, NavProps, FooterProps } from '@/lib/types'
 import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getNode } from '@/lib/ssr-api'
-import { getBreadCrumb, getDefaultImage, getDescription, getPathAlias, getTitle } from '@/lib/helpers'
+import { getBreadCrumb, getDefaultImage, getDescription, getPathAlias, getTitle, primaryLanguages } from '@/lib/helpers'
 import { useConsentStatus, useReactAndShare } from '@/hooks/useAnalytics'
 import ConsentInfo from '@/components/consentInfo/ConsentInfo'
 import { i18n } from '@/next-i18next.config'
 import { DrupalJsonApiParams } from 'drupal-jsonapi-params'
 
 interface PageProps {
-  node: Node
-  nav: NavProps
-  footer: FooterProps
+  node: Node;
+  nav: NavProps;
+  footer: FooterProps;
+  preview: boolean | undefined;
 }
 
 export async function getStaticPaths(context: GetStaticPathsContext): Promise<GetStaticPathsResult> {
@@ -121,7 +122,7 @@ export async function getStaticProps(
           locale,
           defaultLocale: i18n.defaultLocale,
         });
-        link = `${prefix}${response?.path.alias}`;
+            link = `${prefix}${response?.path.alias}`;
       }
       Object.assign(langLinks, { [locale]: link });
     }
@@ -131,17 +132,46 @@ export async function getStaticProps(
 
   const langLinks = await getLanguageLinks(node);
 
+  const getMainMenu = () => {
+    if (primaryLanguages.includes(locale)) {
+      return 'main'
+    } else {
+      return 'menu-other-languages'; 
+    }
+  }
+
   const { tree: menu, items: menuItems } = await getMenu(
-    'main',
+    getMainMenu(),
     locale,
     defaultLocale
   );
+
   const { tree: themes } = await getMenu(
     'additional-languages',
-    locale,
-    defaultLocale
+    'en',
+    defaultLocale,
   );
-  const { tree: footerNav } = await getMenu('footer', locale, defaultLocale);
+
+  const { tree: menuOtherLanguages } = await drupal.getMenu('menu-other-languages');
+
+  const getFooterMenu = () => {
+    if (primaryLanguages.includes(locale)) {
+      return 'footer'
+    } else {
+      return 'footer-other-languages'; 
+    }
+  }
+  const getFooterMenuLang = () => {
+    if (primaryLanguages.includes(locale)) {
+      return locale;
+    } else {
+      return 'en'; 
+    }
+  }
+ 
+  const { tree: footerNav } = await getMenu(getFooterMenu(), getFooterMenuLang(), defaultLocale);
+  
+  const preview = context.preview ? context.preview : false;
 
   const breadcrumb = getBreadCrumb(
     menuItems,
@@ -153,12 +183,14 @@ export async function getStaticProps(
   return {
     props: {
       node,
+      preview,
       nav: {
         locale,
         menu,
         themes,
         langLinks,
         breadcrumb,
+        menuOtherLanguages,
       },
       footer: {
         locale,
@@ -170,7 +202,7 @@ export async function getStaticProps(
   };
 }
 
-export default function Page({ node, nav, footer }: PageProps) {
+export default function Page({ node, nav, footer, preview }: PageProps) {
   const router = useRouter();
   const { t } = useTranslation('common');
   const rnsStatus: boolean = useConsentStatus('rns');
@@ -190,9 +222,15 @@ export default function Page({ node, nav, footer }: PageProps) {
   const metaDescription = getDescription(node);
   const metaUrl = process.env.NEXT_PUBLIC_SITE_URL + router.asPath;
   const metaImage = getDefaultImage(node);
-  
+
   return (
-    <Layout header={nav} footer={footer} hideNav={node.field_hide_navigation}>
+    <Layout
+      header={nav}
+      footer={footer}
+      hideNav={node.field_hide_navigation}
+      langcode={node.langcode}
+      preview={preview}
+    >
       <Head>
         <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
@@ -204,7 +242,7 @@ export default function Page({ node, nav, footer }: PageProps) {
       </Head>
       <a id="content" tabIndex={-1}></a>
       { node.type === NODE_TYPES.PAGE && (
-        <NodeBasicPage node={node} sidebar={nav} />
+        <NodeBasicPage node={node} sidebar={nav} preview={preview}/>
       )}
       {node.type === NODE_TYPES.LANDING_PAGE && (
         <NodeLandingPage node={node} />
@@ -212,7 +250,7 @@ export default function Page({ node, nav, footer }: PageProps) {
       {node.type === NODE_TYPES.EVENT && <NodeEventPage node={node} />}
       {node.type === NODE_TYPES.ARTICLE && <NodeArticlePage node={node} />}
       {node.type === NODE_TYPES.TPR_UNIT && (
-        <NodeTprUnitPage node={node} sidebar={nav} />
+        <NodeTprUnitPage node={node} sidebar={nav} preview={preview}/>
       )}
       {/* React and share */}
       <Container className="container hide-print">

@@ -1,6 +1,9 @@
 {
   "locale": "sv",
   "lang-code": "Språkväljare På Svenska",
+  "choose_language": "Välj språk",
+  "other_languages": "Öppna Information på andra språk meny",
+  "global_menu_title": "Information på andra språk",
   "site_name": "Sysselsättningstjänster",
   "site_title": "Helsingfors sysselsättningstjänster",
   "link_copied": "Länken har kopierats",
@@ -59,6 +62,10 @@
     "cancelled_text": "Inställt",
     "field_offers_info_url": "Bli Medlem"
   },
+  "news": {
+    "news": "Nyhet",
+    "newsletter": "Nyhetsbrev"
+  },
   "video": {
     "cookie_consent": "Du har inte gett tillstånd att installera cookies.",
     "link_text": "Godkänn cookies för att se innehållet."
@@ -77,6 +84,7 @@
     "new_window": "Öppna kartan i nytt fönster"
   },
   "unit": {
+    "email": "E-post",
     "contact_information": "Kontaktuppgifter",
     "visit_address": "Besöksadress",
     "open_hours": "Öppettider",

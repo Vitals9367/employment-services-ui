@@ -40,9 +40,9 @@ export const getEventsSearch = async (
   return data;
 };
 
-export const getNews = async (shortList: boolean, locale: Locale) => {
+export const getNews = async (shortList: boolean, newsFilter: string, locale: Locale) => {
   const { data } = await axios(`${NEWS_URL}`, {
-    params: { limit: shortList, locale: locale },
+    params: { limit: shortList, filter: newsFilter, locale: locale }
   });
   return data;
 };
