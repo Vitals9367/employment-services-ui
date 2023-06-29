@@ -18,7 +18,7 @@ import DateTime from './DateTime';
 import TagList from './TagList';
 import EventStatus from './EventStatus';
 import { eventTags, getPath } from '@/lib/helpers';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const getKey = (eventsIndex: number) => {
   return `${eventsIndex}`;
@@ -44,8 +44,7 @@ export default function Events(props: EventListProps): JSX.Element {
   const [filter, setFilter] = useState<string[]>([]);
   const fetcher = (eventsIndex: number) =>
     getEventsSearch(eventsIndex, filter, locale != undefined ? locale : 'fi');
-  const { data } = useSWRInfinite(getKey, fetcher);
-
+  const { data, setSize } = useSWRInfinite(getKey, fetcher);
   const events = data && getEvents(data);
   const total = data && getTotal(data);
   const [eventsTags, setEventsTags] = useState<any>([]);
@@ -56,7 +55,7 @@ export default function Events(props: EventListProps): JSX.Element {
     ? `${events.length} / ${total.max} ${t('list.results_text')}`
     : `${total.max} ${t('list.results_text')}`;
 
-  const updateTags = () => {
+  const updateTags = useCallback(() => {
     getEventsTags(locale != undefined ? locale : 'fi').then((result) => {
       const tags: any = result
         .filter((item: any) => {
@@ -70,11 +69,12 @@ export default function Events(props: EventListProps): JSX.Element {
         );
       setEventsTags(tags);
     });
-  };
+  },[locale]);
 
   useEffect(() => {
     updateTags();
-  }, []);
+    setSize(1)
+  }, [filter, setSize, updateTags]);
 
   return (
     <div className="component">
@@ -99,7 +99,7 @@ export default function Events(props: EventListProps): JSX.Element {
               eventsTags.map((tag: any, i: number) => (
                 <HDSButton
                   role="checkbox"
-                  aria-checked={filter === tag ?? true}
+                  aria-checked={filter.includes(tag) ?? true}
                   aria-label={`${t('search.filter')} ${tag.replace('_', ' ')}`}
                   key={`tagFilter-${i}`}
                   className={
