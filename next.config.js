@@ -574,13 +574,13 @@ const nextConfig = {
       },
       {
         source: '/so',
-        destination: 'so/frontpage',
+        destination: '/so/frontpage',
         permanent: true,
         locale: false,
       },
       {
         source: '/ru',
-        destination: 'ru/frontpage',
+        destination: '/ru/frontpage',
         permanent: true,
         locale: false,
       },
