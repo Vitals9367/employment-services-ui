@@ -14,6 +14,7 @@ interface newPage {
   title: string; 
   url: string;
   parent: string;
+  locale: string;
 }
 
 export const eventTags = [
@@ -103,7 +104,8 @@ export const getBreadCrumb = (
   menuItems: DrupalMenuLinkContent[],
   path: string,
   title: string,
-  type: string
+  type: string,
+  locale: string,
 ): BreadcrumbContent[] => {
   const page = menuItems.find(({ url }) => url === path);
 
@@ -118,11 +120,14 @@ export const getBreadCrumb = (
     title: title,
     url: path,
     parent: '',
+    locale: locale,
   };
-
   // Pages that are not in menus always get a breadcrumb.
   if (!page) {
-    if (type !== 'node--event' && type !== 'node--article') {
+    if (
+      (type !== 'node--event' && type !== 'node--article') ||
+      (type === 'node--article' && !primaryLanguages.includes(locale))
+    ) {
       return [newPage];
     }
 

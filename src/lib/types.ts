@@ -59,6 +59,7 @@ export interface BreadcrumbContent {
   id: string;
   title: string;
   url: string;
+  locale?: string;
 }
 
 export interface Tags {
