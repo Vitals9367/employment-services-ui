@@ -51,7 +51,7 @@ export default function Events(props: EventListProps): JSX.Element {
 
   const resultText = !total
     ? ''
-    : total.current < total.max || total.current === 0
+    : total.current < total.max || total.current === 0 || events?.length === 0
     ? `${events.length} / ${total.max} ${t('list.results_text')}`
     : `${total.max} ${t('list.results_text')}`;
 

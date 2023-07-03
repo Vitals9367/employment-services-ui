@@ -36,7 +36,7 @@
     "entity_type_event": "Tapahtuma",
     "entity_type_article": "Uutinen",
     "loading_suggestions": "Ladataan ehdotuksia",
-    "group_description": "Voit valita seuraavista suodattimista yhden kerrallaan"
+    "group_description": "Voit valita seuraavista suodattimista useamman kerrallaan."
   },
   "list": {
     "load_more": "Näytä lisää",
@@ -53,7 +53,7 @@
     "no_events": "Ei tulevia tapahtumia tästä aiheesta.",
     "event_title": "Tapahtuma",
     "event_link": "Tapahtuma linkki",
-    "result_zero": "Ei haku tuloksia"
+    "result_zero": "Ei hakutuloksia"
   },
   "event": {
     "remote_event": "Etätapahtuma",
