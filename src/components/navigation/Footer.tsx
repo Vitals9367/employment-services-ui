@@ -6,6 +6,7 @@ import { DrupalMenuLinkContent } from 'next-drupal';
 import { FooterProps } from '@/lib/types';
 
 import styles from './navigation.module.scss';
+import { primaryLanguages } from '@/lib/helpers';
 
 function Footer(props: FooterProps): JSX.Element {
   const { t } = useTranslation();
@@ -45,7 +46,7 @@ function Footer(props: FooterProps): JSX.Element {
         {renderFooterNav(footerNav)}
         <HDSFooter.SoMe>
           <HDSFooter.Item
-            icon={<IconFacebook size="m" aria-label={facebook}/>}
+            icon={<IconFacebook size="m" aria-label={facebook} />}
             href="https://www.facebook.com/HelsinginTyollisyyspalvelut"
           />
           <HDSFooter.Item
@@ -53,7 +54,7 @@ function Footer(props: FooterProps): JSX.Element {
             href="https://www.instagram.com/helsingintyollisyyspalvelut"
           />
           <HDSFooter.Item
-            icon={<IconLinkedin size="m" aria-label={linkedIn}/>}
+            icon={<IconLinkedin size="m" aria-label={linkedIn} />}
             href="https://www.linkedin.com/showcase/helsingintyollisyyspalvelut"
           />
         </HDSFooter.SoMe>
@@ -65,7 +66,13 @@ function Footer(props: FooterProps): JSX.Element {
           label={t('footer.accessibility')}
         />
         <HDSFooter.Item
-          href={locale === 'fi' ? '/cookies' : `/${locale}/cookies`}
+          href={
+            locale === 'fi'
+              ? '/cookies'
+              : primaryLanguages.includes(locale)
+              ? `/${locale}/cookies`
+              : '/en/cookies'
+          }
           label={t('footer.cookie_settings')}
         />
         <HDSFooter.Item

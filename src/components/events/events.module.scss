@@ -81,18 +81,6 @@
   padding-bottom:  var(--spacing-2-xs);
 }
 
-.selected {
-  background-color: var(--color-fog-medium-light) !important;
-  border: none !important;
-  color: var(--color-black-90) !important;
-  margin-right: var(--spacing-xs);
-  margin-bottom: var(--spacing-s);
-  width: auto;
-
-  span:first-letter {
-    text-transform: capitalize;
-  }
-}
 
 .supplementary {
   --background-color-hover: var(--color-black-90) !important;  
@@ -143,6 +131,19 @@
     margin-bottom: var(--spacing-s);
     width: auto;
 
+    span:first-letter {
+      text-transform: capitalize;
+    }
+  }
+  
+  .selected {
+    background-color: var(--color-fog-medium-light) !important;
+    border: none !important;
+    color: var(--color-black-90) !important;
+    margin-right: var(--spacing-xs);
+    margin-bottom: var(--spacing-s);
+    width: auto;
+  
     span:first-letter {
       text-transform: capitalize;
     }
