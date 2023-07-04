@@ -7,6 +7,7 @@ import {
 } from '@elastic/elasticsearch/lib/api/types';
 
 type Data = EventState;
+type Index = Partial<{ [key: string]: string | string[] }>;
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,7 +19,9 @@ export default async function handler(
     return;
   }
 
-  const { index, filter, locale }: any = req?.query;
+  const { index, filter, locale }: Index = req?.query
+    ? req?.query
+    : { index: '1', filter: undefined, locale: 'fi' };
 
   if (isNaN(Number(index))) {
     res.status(400);
