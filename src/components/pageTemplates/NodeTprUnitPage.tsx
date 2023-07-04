@@ -1,41 +1,43 @@
-import {useTranslation} from 'next-i18next'
-import parse from 'html-react-parser'
+import { useTranslation } from 'next-i18next';
+import parse from 'html-react-parser';
 import {
   Container,
   IconClock,
   IconLocation,
   IconPhone,
   IconEnvelope,
-  IconPersonWheelchair
-} from 'hds-react'
+  IconPersonWheelchair,
+} from 'hds-react';
 
-import {NavProps, TprUnitData} from '@/lib/types'
-import { groupData } from '@/lib/helpers'
-import ContentMapper from '@/components/ContentMapper'
-import {Sidebar} from '@/components/navigation/Sidebar'
-import HtmlBlock from '@/components/HtmlBlock'
-import MediaImage from '@/components/mediaImage/MediaImage'
-import styles from './tprUnitPage.module.scss'
-import AccordionWithIcon from '../accordion/AccordionWithIcon'
+import { NavProps, TprUnitData } from '@/lib/types';
+import { groupData } from '@/lib/helpers';
+import ContentMapper from '@/components/ContentMapper';
+import { Sidebar } from '@/components/navigation/Sidebar';
+import HtmlBlock from '@/components/HtmlBlock';
+import MediaImage from '@/components/mediaImage/MediaImage';
+import styles from './tprUnitPage.module.scss';
+import AccordionWithIcon from '../accordion/AccordionWithIcon';
 
 interface NodeTprUnitProps {
-  node: TprUnitData
-  sidebar: NavProps
+  node: TprUnitData;
+  sidebar: NavProps;
+  preview: boolean | undefined;
 }
 
 interface BlockProps {
-  title: string
-  icon: string
-  content: any
+  title: string;
+  icon: string;
+  content: any;
 }
 
 interface ContactInfoProps {
-  aside?: boolean
+  aside?: boolean;
 }
 
 function NodeTprUnitPage({
   node,
   sidebar,
+  preview,
   ...props
 }: NodeTprUnitProps): JSX.Element {
   const {
@@ -45,6 +47,7 @@ function NodeTprUnitPage({
     field_content,
     field_lower_content,
     phone,
+    email,
     address,
     address_postal,
     opening_hours,
@@ -53,26 +56,26 @@ function NodeTprUnitPage({
     picture_url,
     picture_url_override,
     drupal_internal__id,
-  } = node
+  } = node;
 
-  const {t} = useTranslation('common')
-  const pageTitle = name_override ? name_override : name
-  const picture = picture_url_override ? picture_url_override : picture_url
+  const { t } = useTranslation('common');
+  const pageTitle = name_override ? name_override : name;
+  const picture = picture_url_override ? picture_url_override : picture_url;
 
   const Block = (block: BlockProps): JSX.Element => {
-    const {title, icon, content} = block
+    const { title, icon, content } = block;
     const iconsMap: any = {
       location: IconLocation,
       clock: IconClock,
       phone: IconPhone,
       envelope: IconEnvelope,
-    }
-    const IconTag = iconsMap[icon]
+    };
+    const IconTag = iconsMap[icon];
 
     return (
       <div className={`${styles.infoBlock} onSidebar`}>
         <div className={styles.icon}>
-          <IconTag aria-hidden='true' />
+          <IconTag aria-hidden="true" />
         </div>
         <div className={styles.blockContent}>
           <div className={styles.title}>{title}</div>
@@ -83,10 +86,10 @@ function NodeTprUnitPage({
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
-  const ContactInfo = ({aside}: ContactInfoProps): JSX.Element => {
+  const ContactInfo = ({ aside }: ContactInfoProps): JSX.Element => {
     return (
       <div className={`${styles.contactInfo} ${aside ? styles.aside : ''}`}>
         <div className={styles.contentTitle}>
@@ -95,7 +98,7 @@ function NodeTprUnitPage({
         {address.address_line1 && (
           <Block
             title={t('unit.visit_address')}
-            icon='location'
+            icon="location"
             content={[
               address.address_line1,
               address.postal_code,
@@ -107,15 +110,23 @@ function NodeTprUnitPage({
         {opening_hours && (
           <Block
             title={t('unit.open_hours')}
-            icon='clock'
+            icon="clock"
             content={[opening_hours[0].value]}
+          />
+        )}
+
+        {email && service_map_embed === '53341' && (
+          <Block
+            title={t('unit.email')}
+            icon="envelope"
+            content={[`<a href="mailto:${email}">${email}</a>`]}
           />
         )}
 
         {phone && (
           <Block
             title={t('unit.phone_service')}
-            icon='phone'
+            icon="phone"
             content={[`${phone} (${call_charge_info.value})`]}
           />
         )}
@@ -123,13 +134,13 @@ function NodeTprUnitPage({
         {address_postal && (
           <Block
             title={t('unit.postal_address')}
-            icon='envelope'
+            icon="location"
             content={[address_postal]}
           />
         )}
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <article>
@@ -142,7 +153,7 @@ function NodeTprUnitPage({
           <div className="content-region col col-8 flex-grow">
             <h1>{pageTitle}</h1>
             {description && (
-              <div className='lead-in'>
+              <div className="lead-in">
                 <HtmlBlock field_text={description} />
               </div>
             )}
@@ -155,23 +166,22 @@ function NodeTprUnitPage({
 
             <ContactInfo />
 
-
             {field_content?.length > 0 && (
               <ContentMapper
                 content={field_content}
-                pageType='tpr_unit'
+                pageType="tpr_unit"
                 locationId={drupal_internal__id}
                 mapId={service_map_embed}
               />
             )}
           </div>
         </div>
-        <div className='columns'>
-          <div className='lower-content-region col col-12'>
+        <div className="columns">
+          <div className="lower-content-region col col-12">
             {field_lower_content?.length > 0 && (
               <ContentMapper
                 content={field_lower_content}
-                pageType='tpr_unit'
+                pageType="tpr_unit"
               />
             )}
           </div>
@@ -185,16 +195,16 @@ function NodeTprUnitPage({
             backgroundColor={{ background: 'var(--color-silver-medium-light)' }}
             leftIcon={
               <IconPersonWheelchair
-                size='xl'
-                color='var(--color-black)'
-                aria-hidden='true'
+                size="xl"
+                color="var(--color-black)"
+                aria-hidden="true"
               />
             }
           />
         )}
       </Container>
     </article>
-  )
+  );
 }
 
-export default NodeTprUnitPage
+export default NodeTprUnitPage;

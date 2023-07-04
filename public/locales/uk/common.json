@@ -1,8 +1,6 @@
 {
-  "locale": "en",
-  "lang-code": "Language Selector In English",
-  "choose_language": "Select site language",
-  "other_languages": "Open Information in other languages menu",
+  "locale": "uk",
+  "lang-code": "Language Selector In Ukrainian",
   "global_menu_title": "Information in other languages",
   "site_name": "Employment services",
   "site_title": "Helsinki Employment Services",
@@ -60,10 +58,6 @@
     "info_url_text_teams": "Open Teams-event",
     "cancelled_text": "Cancelled",
     "field_offers_info_url": "Sign up"
-  },
-  "news": {
-    "news": "News",
-    "newsletter": "Newsletter"
   },
   "video": {
     "cookie_consent": "You have not allowed the use of cookies on this site.",
