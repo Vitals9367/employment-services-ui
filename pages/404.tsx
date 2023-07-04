@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import Link from '@/components/link/Link'
-import getMenu from '@/lib/get-menu'
 import { Layout } from '@/components/layout/Layout'
 import { NavProps, FooterProps } from '@/lib/types'
 import { getDrupalClient } from '@/lib/drupal-client'
