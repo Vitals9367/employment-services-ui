@@ -20,7 +20,7 @@ export default async function handler(
     return;
   }
 
-  const { index, filter, locale }: Index = req?.query;
+  const { index, filter, locale }: Index = req?.query ?? req?.query;
 
   if (isNaN(Number(index))) {
     res.status(400);
@@ -39,7 +39,7 @@ export default async function handler(
 
   try {
     const searchRes = await elastic.search({
-      index: `events_${locale}`,
+      index: `events_${locale ? locale : 'fi'}`,
       body: body,
       sort: 'field_end_time:asc',
     });
