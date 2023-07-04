@@ -19,10 +19,8 @@ export default async function handler(
     return;
   }
 
-  const { index, filter, locale }: Index = req?.query
-    ? req?.query
-    : { index: '1', filter: undefined, locale: 'fi' };
-
+  const { index, filter, locale }: Index = req?.query || {};
+    
   if (isNaN(Number(index))) {
     res.status(400);
     return;
