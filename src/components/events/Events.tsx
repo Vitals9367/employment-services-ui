@@ -99,7 +99,7 @@ export default function Events(props: EventListProps): JSX.Element {
               eventsTags.map((tag: any, i: number) => (
                 <HDSButton
                   role="checkbox"
-                  aria-checked={filter.includes(tag) ?? true}
+                  aria-checked={filter.includes(tag)}
                   aria-label={`${t('search.filter')} ${tag.replace('_', ' ')}`}
                   key={`tagFilter-${i}`}
                   className={

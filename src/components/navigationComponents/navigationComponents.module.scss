@@ -101,7 +101,6 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: var(--line-height);
-    color: #1a1a1a;
     margin-left: 0px;
     margin-right: 8px;
     &[aria-current=true] {
@@ -155,7 +154,6 @@ nav .buttonGlobe {
 .globalDropDown {
   background-color: var(--color-black-5);
   color: var(--color-black);
-  padding: 0;
   width: 100%;
   height: auto;
   position: absolute;

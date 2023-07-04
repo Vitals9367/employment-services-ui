@@ -70,7 +70,7 @@ export const previewNavigation = (path: string, preview: boolean | undefined): v
 
 export const isExternalLink = (href: string): boolean | undefined => {
   const isExternalLink =
-    href && (href.startsWith('https://') || href.startsWith('https://'));
+    href && (href.startsWith('https://') || href.startsWith('http://'));
 
   return isExternalLink || false;
 };
@@ -279,7 +279,7 @@ export const getLocale = (res: NextApiResponse<any>) => {
 
 export const groupData = (data: GroupingProps[]) => {
   const groups: string[] = [];
-  data.map((item: GroupingProps) =>
+  data.forEach((item: GroupingProps) =>
     groups.indexOf(item.group) === -1 ? groups.push(item.group) : null
   );
   return groups;
