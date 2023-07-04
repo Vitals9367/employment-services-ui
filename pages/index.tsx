@@ -29,7 +29,7 @@ interface HomePageProps {
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<HomePageProps>> {
   const { locale, defaultLocale } = context as { locale: Locale, defaultLocale: Locale }
   const { REVALIDATE_TIME, DRUPAL_FRONT_PAGE } = getConfig().serverRuntimeConfig
-  const drupal = getDrupalClient()
+  const drupal = getDrupalClient();
 
   const node = await drupal.getResourceByPath<Node>(DRUPAL_FRONT_PAGE, {
     locale,
@@ -45,9 +45,18 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   }
 
   const langLinks = { fi: '/', en: '/en', sv: '/sv'}
-  const { tree: menu } = await getMenu('main', locale, defaultLocale)
-  const { tree: themes } = await getMenu('additional-languages', locale, defaultLocale)
-  const { tree: footerNav } = await getMenu('footer', locale, defaultLocale)
+  const { tree: menu } = await drupal.getMenu('main', {
+    locale,
+    defaultLocale,
+  });
+  const { tree: themes } = await drupal.getMenu('additional-languages', {
+    locale,
+    defaultLocale,
+  });
+  const { tree: footerNav } = await drupal.getMenu('footer', {
+    locale,
+    defaultLocale,
+  });
 
   return {
     props: {

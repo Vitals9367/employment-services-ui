@@ -177,7 +177,8 @@ export async function getStaticProps(
     menuItems,
     getPathAlias(node?.path),
     node?.title,
-    node?.type
+    node?.type,
+    locale
   );
 
   return {
