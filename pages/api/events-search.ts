@@ -8,7 +8,7 @@ import {
 
 type Data = EventState;
 
-type Index = Partial<{ [key: string]: string | string[] }>;
+type Index = Partial<{ [key: string]: string | string[] | undefined }>;
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,7 +20,7 @@ export default async function handler(
     return;
   }
 
-  const { index, filter, locale }: Index = req?.query ?? req?.query;
+  const { index, filter, locale }: Index = req?.query;
 
   if (isNaN(Number(index))) {
     res.status(400);
