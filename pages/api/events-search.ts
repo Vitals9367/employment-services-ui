@@ -28,11 +28,18 @@ export default async function handler(
 
   const elastic = Elastic.getElasticClient();
 
+  const filterFirst: string | undefined =
+    filter === undefined
+      ? undefined
+      : Array.isArray(filter)
+      ? String(filter[0])
+      : String(filter);
+
   let response: any = {};
   const body = {
     size: 200,
     query: filter
-      ? { match: { field_event_tags: String(filter) } }
+      ? { match: { field_event_tags: filterFirst } }
       : { match_all: {} },
   };
 
