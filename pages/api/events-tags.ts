@@ -7,7 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { locale }: any = req?.query ? req?.query : 'fi';
+  const { locale }: any = req?.query || {};
 
   // No posts allowed, no missing params-errors revealed.
   if (req.method !== 'GET') {
