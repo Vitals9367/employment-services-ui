@@ -36,6 +36,18 @@ const getTotal = (data: EventData[]) => {
   };
 };
 
+const getAvailableTag = (events: any) => {
+  const availableTags: string[] = [];
+  events
+    ?.map((event: { field_event_tags: string[] }) => event?.field_event_tags)
+    .forEach((field_event_tag: string[]) =>
+      field_event_tag?.forEach((tag: string) =>
+        !availableTags.includes(tag) ? availableTags.push(tag) : null
+      )
+    );
+  return availableTags;
+};
+
 export default function Events(props: EventListProps): JSX.Element {
   const { field_title, field_events_list_desc } = props;
   const { t } = useTranslation();
@@ -76,15 +88,6 @@ export default function Events(props: EventListProps): JSX.Element {
     setSize(1);
   }, [filter, setSize, updateTags]);
 
-  const availableTags: string[] = [];
-  events
-    ?.map((event: { field_event_tags: string[] }) => event?.field_event_tags)
-    .forEach((field_event_tag: string[]) =>
-      field_event_tag?.forEach((tag: string) =>
-        !availableTags.includes(tag) ? availableTags.push(tag) : null
-      )
-    );
-
   return (
     <div className="component">
       <Container className="container">
@@ -107,7 +110,7 @@ export default function Events(props: EventListProps): JSX.Element {
             {eventsTags &&
               eventsTags?.map((tag: string, i: number) => (
                 <HDSButton
-                  disabled={!availableTags.includes(tag)}
+                  disabled={!getAvailableTag(events).includes(tag)}
                   role="checkbox"
                   aria-checked={filter.includes(tag)}
                   aria-label={`${t('search.filter')} ${tag.replace('_', ' ')}`}
