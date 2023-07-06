@@ -1,9 +1,8 @@
 import { getEventsSearch, getEventsTags } from '@/lib/client-api';
-import { EventListProps } from '@/lib/types';
+import { EventData, EventListProps } from '@/lib/types';
 import {
   Linkbox,
   Button as HDSButton,
-  IconPlus,
   IconCrossCircle,
   Container,
 } from 'hds-react';
@@ -17,19 +16,19 @@ import styles from './events.module.scss';
 import DateTime from './DateTime';
 import TagList from './TagList';
 import EventStatus from './EventStatus';
-import { eventTags, getPath } from '@/lib/helpers';
+import { eventTags } from '@/lib/helpers';
 import { useCallback, useEffect, useState } from 'react';
 
 const getKey = (eventsIndex: number) => {
   return `${eventsIndex}`;
 };
 
-const getEvents = (data: any) => {
+const getEvents = (data: EventData[]) => {
   /** Filter events object from data */
   return data.reduce((acc: any, curr: any) => acc.concat(curr.events), []);
 };
 
-const getTotal = (data: any) => {
+const getTotal = (data: EventData[]) => {
   /** Filter total from data */
   return {
     max: data[0].maxTotal ? data[0].maxTotal : data[0].total,
@@ -43,25 +42,26 @@ export default function Events(props: EventListProps): JSX.Element {
   const { locale } = useRouter();
   const [filter, setFilter] = useState<string[]>([]);
   const fetcher = (eventsIndex: number) =>
-    getEventsSearch(eventsIndex, filter, locale != undefined ? locale : 'fi');
+    getEventsSearch(eventsIndex, filter, locale ?? 'fi');
   const { data, setSize } = useSWRInfinite(getKey, fetcher);
   const events = data && getEvents(data);
   const total = data && getTotal(data);
   const [eventsTags, setEventsTags] = useState<any>([]);
+  
 
-  const resultText = !total
-    ? ''
-    : total.current < total.max || total.current === 0 || events?.length === 0
-    ? `${events.length} / ${total.max} ${t('list.results_text')}`
-    : `${total.max} ${t('list.results_text')}`;
+  const resultText =
+    total &&
+    (total.current < total.max || total.current === 0 || events?.length === 0)
+      ? `${events.length} / ${total.max} ${t('list.results_text')}`
+      : `${total?.max} ${t('list.results_text')}`;
 
   const updateTags = useCallback(() => {
-    getEventsTags(locale != undefined ? locale : 'fi').then((result) => {
-      const tags: any = result
-        .filter((item: any) => {
+    getEventsTags(locale ?? 'fi').then((result) => {
+      const tags: string[] = result
+        .filter((item: { key: string; doc_count: number }) => {
           return item.key === undefined ? false : item;
         })
-        .map((item: any) => {
+        .map((item: { key: string; doc_count: number }) => {
           return item.key;
         })
         .sort(
@@ -69,12 +69,21 @@ export default function Events(props: EventListProps): JSX.Element {
         );
       setEventsTags(tags);
     });
-  },[locale]);
+  }, [locale]);
 
   useEffect(() => {
     updateTags();
-    setSize(1)
+    setSize(1);
   }, [filter, setSize, updateTags]);
+
+  const availableTags: string[] = [];
+  events
+    ?.map((event: { field_event_tags: string[] }) => event?.field_event_tags)
+    .forEach((field_event_tag: string[]) =>
+      field_event_tag?.forEach((tag: string) =>
+        !availableTags.includes(tag) ? availableTags.push(tag) : null
+      )
+    );
 
   return (
     <div className="component">
@@ -96,8 +105,9 @@ export default function Events(props: EventListProps): JSX.Element {
             className={styles.filterTags}
           >
             {eventsTags &&
-              eventsTags.map((tag: any, i: number) => (
+              eventsTags?.map((tag: string, i: number) => (
                 <HDSButton
+                  disabled={!availableTags.includes(tag)}
                   role="checkbox"
                   aria-checked={filter.includes(tag)}
                   aria-label={`${t('search.filter')} ${tag.replace('_', ' ')}`}

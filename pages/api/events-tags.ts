@@ -1,11 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import * as Elastic from '@/lib/elasticsearch';
 
-type Data = any;
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<any>
 ) {
   const { locale }: any = req?.query || {};
 
@@ -24,7 +23,7 @@ export default async function handler(
     aggs: {
       events_tags: {
         terms: {
-          field: 'field_event_tags',
+          field: 'field_event_tags.keyword',
           size: 100,
         },
       },
