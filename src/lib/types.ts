@@ -163,6 +163,7 @@ export interface NavigationProps {
   langcode: string;
   onSignIn?: (() => void);
   menuOtherLanguages?: DrupalMenuLinkContent[];
+  preview?: boolean | undefined;
 }
 
 export interface LanguageSelect {
@@ -170,6 +171,7 @@ export interface LanguageSelect {
   activePath: string;
   langcode: string | undefined;
   menuOtherLanguages?: DrupalMenuLinkContent[];
+  preview: boolean | undefined;
 }
 interface LangLinks {
   en: string;

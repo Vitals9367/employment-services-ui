@@ -19,6 +19,7 @@ export default function Navigation({
   onClick,
   langcode,
   menuOtherLanguages,
+  preview,
 }: NavigationProps) {
   const { t } = useTranslation('common');
   return (
@@ -39,6 +40,7 @@ export default function Navigation({
             langcode={langcode}
             activePath={activePath}
             menuOtherLanguages={menuOtherLanguages}
+            preview={preview}
           />
           {primaryLanguages.includes(langcode as string) && (
             <NavigationHDS.Search
@@ -56,7 +58,7 @@ export default function Navigation({
           </Button>
         </NavigationHDS.Actions>
         {primaryLanguages.includes(langcode as string) && !hideNav && (
-          <NavigationHDS.Row>{getNav(menu, activePath)}</NavigationHDS.Row>
+          <NavigationHDS.Row>{getNav(menu, activePath, preview as boolean)}</NavigationHDS.Row>
         )}
       </NavigationHDS>
     </div>

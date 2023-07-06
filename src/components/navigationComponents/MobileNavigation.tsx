@@ -18,6 +18,7 @@ export default function MobileNavigation({
   langcode,
   onSignIn,
   menuOtherLanguages,
+  preview
 }: NavigationProps) {
   const { t } = useTranslation('common');
   return (
@@ -49,7 +50,7 @@ export default function MobileNavigation({
           />
         </Navigation.Actions>
         {primaryLanguages.includes(langcode as string) && !hideNav && (
-          <Navigation.Row>{getNav(menu, activePath)}</Navigation.Row>
+          <Navigation.Row>{getNav(menu, activePath, preview as boolean)}</Navigation.Row>
         )}
       </Navigation>
       <LanguageSelect
@@ -57,6 +58,7 @@ export default function MobileNavigation({
         activePath={activePath}
         langcode={langcode}
         menuOtherLanguages={menuOtherLanguages}
+        preview={preview}
       />
     </div>
   );

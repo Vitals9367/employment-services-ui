@@ -3,7 +3,7 @@ import { Button, IconAngleDown, IconAngleUp, IconGlobe, Link } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 
 import { useBlur } from '@/hooks/useBlur';
-import { primaryLanguages, languageFrontPages } from '@/lib/helpers';
+import { primaryLanguages, languageFrontPages, previewNavigation } from '@/lib/helpers';
 import styles from './navigationComponents.module.scss';
 import { LanguageSelect } from '@/lib/types';
 
@@ -12,6 +12,7 @@ function LanguageSelect({
   activePath,
   langcode,
   menuOtherLanguages,
+  preview
 }: LanguageSelect) {
   const { t } = useTranslation('common');
   const [activeLang, setActiveLang] = useState<string | undefined>('');
@@ -38,6 +39,9 @@ function LanguageSelect({
                 ? langLinks.fi
                 : languageFrontPages.fi
             }
+            onClick={() => previewNavigation(primaryLanguages.includes(langcode as string)
+              ? langLinks.fi
+              : languageFrontPages.fi, preview)}
           >
             Suomi
           </Link>
@@ -48,6 +52,9 @@ function LanguageSelect({
                 ? langLinks.sv
                 : languageFrontPages.sv
             }
+            onClick={() => previewNavigation(primaryLanguages.includes(langcode as string)
+              ? langLinks.sv
+              : languageFrontPages.sv, preview)}
           >
             Svenska
           </Link>
@@ -58,6 +65,9 @@ function LanguageSelect({
                 ? langLinks.en
                 : languageFrontPages.en
             }
+            onClick={() => previewNavigation(primaryLanguages.includes(langcode as string)
+              ? langLinks.en
+              : languageFrontPages.en, preview)}
           >
             English
           </Link>
@@ -65,6 +75,7 @@ function LanguageSelect({
             <Link
               aria-current={langLinks.ru === activePath}
               href={langLinks.ru}
+              onClick={() => previewNavigation(langLinks.ru, preview)}
             >
               Russian
             </Link>
@@ -73,6 +84,7 @@ function LanguageSelect({
             <Link
               aria-current={langLinks.so === activePath}
               href={langLinks.so}
+              onClick={() => previewNavigation(langLinks.so, preview)}
             >
               Somali
             </Link>
@@ -82,6 +94,7 @@ function LanguageSelect({
             <Link
               aria-current={langLinks.uk === activePath}
               href={langLinks.uk}
+              onClick={() => previewNavigation(langLinks.uk, preview)}
             >
               Ukraine
             </Link>
