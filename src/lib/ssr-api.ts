@@ -193,7 +193,7 @@ export const getNode = async (props: GetNodeProps) => {
       path.entity.path,
       attempts
     );
-    throw `Unable to get page ${path.entity.path} after ${retry} attempts`;
+    throw new Error(`Unable to get page ${path.entity.path} after ${retry} attempts`);
   }
 
   return node;
