@@ -15,14 +15,8 @@ function Footer(props: FooterProps): JSX.Element {
   const facebook = `${t('site_name')} Facebook`;
   const linkedIn = `${t('site_name')} LinkedIn`;
 
-  const scrollToTop = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    event.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
 
   const renderFooterNav = (nav: DrupalMenuLinkContent[] | undefined) => {
@@ -77,7 +71,7 @@ function Footer(props: FooterProps): JSX.Element {
         />
         <HDSFooter.Item
           className={styles.backToTopButton}
-          onClick={(e: any) => scrollToTop(e)}
+          onClick={scrollToTop}
           label={
             <>
               {t('footer.goup')}

@@ -73,33 +73,39 @@ export interface EventsQueryParams {
 }
 
 export interface EventData {
-  title: string
-  url: string
-  field_image_url: string
-  field_image_alt: string
-  field_start_time: number
-  field_end_time: number
-  field_event_status: string
-  field_location: string
-  field_location_id?: string
-  field_tags: string[]
-  field_event_tags: string[]
-  field_street_address?: string
+  id: string;
+  title: string;
+  url: string;
+  field_image_url: string;
+  field_image_alt: string;
+  field_start_time: number;
+  field_end_time: number;
+  field_event_status: string;
+  field_location: string;
+  field_location_id?: string;
+  field_tags: string[];
+  field_event_tags: string[];
+  field_street_address?: string;
+  path: {
+    alias: string;
+    langcode: string;
+    pid: number;
+  }
 }
 
 export interface TprUnitData extends DrupalNode {
-  name: string
-  name_override: string
-  description: DrupalFormattedText
-  field_content: any
-  field_lower_content: any
-  phone: any
-  address: any
-  address_postal: string
-  opening_hours: any
-  picture_url: string
-  picture_url_override: any
-  drupal_internal__id: string
+  name: string;
+  name_override: string;
+  description: DrupalFormattedText;
+  field_content: any;
+  field_lower_content: any;
+  phone: any;
+  address: any;
+  address_postal: string;
+  opening_hours: any;
+  picture_url: string;
+  picture_url_override: any;
+  drupal_internal__id: string;
 }
 
 export interface EventState {

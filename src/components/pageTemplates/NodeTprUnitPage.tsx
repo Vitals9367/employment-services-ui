@@ -62,33 +62,6 @@ function NodeTprUnitPage({
   const pageTitle = name_override ? name_override : name;
   const picture = picture_url_override ? picture_url_override : picture_url;
 
-  const Block = (block: BlockProps): JSX.Element => {
-    const { title, icon, content } = block;
-    const iconsMap: any = {
-      location: IconLocation,
-      clock: IconClock,
-      phone: IconPhone,
-      envelope: IconEnvelope,
-    };
-    const IconTag = iconsMap[icon];
-
-    return (
-      <div className={`${styles.infoBlock} onSidebar`}>
-        <div className={styles.icon}>
-          <IconTag aria-hidden="true" />
-        </div>
-        <div className={styles.blockContent}>
-          <div className={styles.title}>{title}</div>
-          <div className={styles.content}>
-            <p>
-              {parse(content.join('<br/>').replace(/(?:\r\n|\r|\n)/g, '<br/>'))}
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   const ContactInfo = ({ aside }: ContactInfoProps): JSX.Element => {
     return (
       <div className={`${styles.contactInfo} ${aside ? styles.aside : ''}`}>
@@ -208,3 +181,30 @@ function NodeTprUnitPage({
 }
 
 export default NodeTprUnitPage;
+
+const Block = (block: BlockProps): JSX.Element => {
+  const { title, icon, content } = block;
+  const iconsMap: any = {
+    location: IconLocation,
+    clock: IconClock,
+    phone: IconPhone,
+    envelope: IconEnvelope,
+  };
+  const IconTag = iconsMap[icon];
+
+  return (
+    <div className={`${styles.infoBlock} onSidebar`}>
+      <div className={styles.icon}>
+        <IconTag aria-hidden="true" />
+      </div>
+      <div className={styles.blockContent}>
+        <div className={styles.title}>{title}</div>
+        <div className={styles.content}>
+          <p>
+            {parse(content.join('<br/>').replace(/(?:\r\n|\r|\n)/g, '<br/>'))}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
