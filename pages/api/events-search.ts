@@ -28,24 +28,17 @@ export default async function handler(
 
   const elastic = Elastic.getElasticClient();
 
-  const filterFirst: string | undefined =
-    filter === undefined
-      ? undefined
-      : Array.isArray(filter)
-      ? String(filter[0])
-      : String(filter);
-
   let response: any = {};
   const body = {
     size: 200,
     query: filter
-      ? { match: { field_event_tags: filterFirst } }
+      ? { match: { field_event_tags: getQueryFilterTags(filter) } }
       : { match_all: {} },
   };
 
   try {
     const searchRes = await elastic.search({
-      index: `events_${locale ? locale : 'fi'}`,
+      index: `events_${locale ?? 'fi'}`,
       body: body,
       sort: 'field_end_time:asc',
     });
@@ -56,62 +49,10 @@ export default async function handler(
       hits: { total: SearchTotalHits; hits: SearchHit<unknown>[] };
     };
 
-    const filterTags: string[] | undefined =
-      filter === undefined
-        ? undefined
-        : Array.isArray(filter)
-        ? filter
-        : [String(filter)];
-
-    const getFilteredEvens = () => {
-      return hits
-        .map((hit: any) => {
-          const {
-            title,
-            url,
-            field_image_url,
-            field_image_alt,
-            field_start_time,
-            field_end_time,
-            field_location,
-            field_tags,
-            field_event_tags,
-            field_street_address,
-            field_event_status,
-          } = hit._source as EventData;
-          if (
-            filterTags === undefined ||
-            filterTags?.length <= 1 ||
-            (filterTags !== undefined &&
-              filterTags?.length > 1 &&
-              filterTags?.every((tag) =>
-                hit._source.field_event_tags.includes(tag)
-              ))
-          ) {
-            return {
-              title,
-              url,
-              field_image_url,
-              field_image_alt,
-              field_start_time,
-              field_end_time,
-              field_location,
-              field_tags,
-              field_event_tags,
-              field_street_address,
-              field_event_status,
-            };
-          } else {
-            return;
-          }
-        })
-        .filter((event: any) => event !== null && event !== undefined);
-    };
-
     response = {
       ...response,
       total: total?.value,
-      events: getFilteredEvens(),
+      events: getFilteredEvents(getFilterTags(filter), hits),
     };
   } catch (err) {
     console.log('err', err);
@@ -150,3 +91,68 @@ export default async function handler(
 
   res.json(response);
 }
+
+const getFilterTags = (filter: string | string[] | undefined) => {
+  if (filter === undefined) {
+    return undefined;
+  } else if (Array.isArray(filter)) {
+    return filter;
+  } else {
+    return [String(filter)];
+  }
+};
+
+const getQueryFilterTags = (filter: string | string[] | undefined) => {
+  if (filter === undefined) {
+    return undefined;
+  } else if (Array.isArray(filter)) {
+    return String(filter[0]);
+  } else {
+    return String(filter);
+  }
+};
+
+const getFilteredEvents = (filterTags: string[] | undefined, hits: any) => {
+  return hits
+    .map((hit: any) => {
+      const {
+        title,
+        url,
+        field_image_url,
+        field_image_alt,
+        field_start_time,
+        field_end_time,
+        field_location,
+        field_tags,
+        field_event_tags,
+        field_street_address,
+        field_event_status,
+      } = hit._source as EventData;
+      if (
+        filterTags === undefined ||
+        filterTags?.length <= 1 ||
+        (filterTags !== undefined &&
+          filterTags?.length > 1 &&
+          filterTags?.every((tag) =>
+            hit._source.field_event_tags.includes(tag)
+          ))
+      ) {
+        return {
+          title,
+          url,
+          field_image_url,
+          field_image_alt,
+          field_start_time,
+          field_end_time,
+          field_location,
+          field_tags,
+          field_event_tags,
+          field_street_address,
+          field_event_status,
+        };
+      } else {
+        return;
+      }
+    })
+    .filter((event: any) => event !== null && event !== undefined);
+};
