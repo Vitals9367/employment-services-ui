@@ -16,8 +16,16 @@ import MobileNavigation from '../navigationComponents/MobileNavigation';
 
 function Header(header: NavProps): JSX.Element {
 
-  const { locale, menu, themes, langLinks, breadcrumb, hideNav, langcode, preview } =
-    header;
+  const {
+    locale,
+    menu,
+    themes,
+    langLinks,
+    breadcrumb,
+    hideNav,
+    langcode,
+    preview,
+  } = header;
   const { t } = useTranslation('common');
   const router: any = useRouter(); // @TODO Fix type for proper
   const activePath = langLinks[locale ? locale : 'fi'];
@@ -58,6 +66,7 @@ function Header(header: NavProps): JSX.Element {
         langLinks={langLinks}
         langcode={langcode as string}
         menuOtherLanguages={themes}
+        preview={preview}
       />
       <MobileNavigation
         locale={locale}
@@ -69,6 +78,7 @@ function Header(header: NavProps): JSX.Element {
         langLinks={langLinks}
         langcode={langcode as string}
         menuOtherLanguages={themes}
+        preview={preview}
       />
       { !frontPagePaths.includes(activePath) && activePath !== '/' && (
         <div className={styles.subHeader}>
@@ -87,7 +97,7 @@ function Header(header: NavProps): JSX.Element {
 
 export default Header;
 
-export const getNav = (menuArray: DrupalMenuLinkContent[] | undefined, activePath: any) => {
+export const getNav = (menuArray: DrupalMenuLinkContent[] | undefined, activePath: any, preview: boolean) => {
   const nav: ReactElement[] = [];
   if (!menuArray) {
     return <></>;
@@ -104,6 +114,7 @@ export const getNav = (menuArray: DrupalMenuLinkContent[] | undefined, activePat
           href={sub.url}
           label={sub.title}
           active={sub.url === activePath}
+          onClick={() => previewNavigation(sub.url, preview)}
         />
       );
       return subs;
@@ -117,6 +128,7 @@ export const getNav = (menuArray: DrupalMenuLinkContent[] | undefined, activePat
         active={isActive}
         className={classNames(styles.navDropDown, isActive && styles.active)}
         href={item.url}
+        onClick={() => previewNavigation(item.url, preview)}
       >
         {subs}
       </NavigationHDS.DropdownLink>
