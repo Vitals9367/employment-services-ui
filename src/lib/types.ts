@@ -107,6 +107,13 @@ export interface EventState {
   events: EventData[]
 }
 
+export interface EventData  {
+  events: EventData[];
+  tags: string[];
+  total: number;
+  maxTotal?: number;
+}
+
 export interface EventListProps {
   pageType?: string
   field_title: string

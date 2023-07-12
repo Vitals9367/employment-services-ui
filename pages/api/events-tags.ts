@@ -1,11 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import * as Elastic from '@/lib/elasticsearch';
 
-type Data = any;
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<any>
 ) {
   const { locale }: any = req?.query || {};
 

@@ -2,14 +2,12 @@ import { DrupalMenuLinkContent } from 'next-drupal';
 import { GroupingProps, Node } from '@/lib/types';
 import getConfig from 'next/config';
 
-import { i18n } from 'next-i18next.config';
-
 import { BreadcrumbContent } from './types';
 import { NODE_TYPES } from '@/lib/drupalApiTypes';
 import { NextApiResponse } from 'next';
 
 
-interface newPage {
+interface NewPage {
   id: string;
   title: string; 
   url: string;
@@ -115,7 +113,7 @@ export const getBreadCrumb = (
   }
 
   // Breadcrumb object for pages without menu attachment
-  let newPage: newPage = {
+  let newPage: NewPage = {
     id: 'current_page_crumb',
     title: title,
     url: path,
