@@ -6,9 +6,10 @@ import { BreadcrumbContent } from './types';
 import { NODE_TYPES } from '@/lib/drupalApiTypes';
 import { NextApiResponse } from 'next';
 
+
 interface NewPage {
   id: string;
-  title: string;
+  title: string; 
   url: string;
   parent: string;
   locale: string;
@@ -116,12 +117,11 @@ export const getBreadCrumb = (
     parent: '',
     locale: locale,
   };
-
-  // Read parent from the page path
-  const parentPath = path.substring(0, path.lastIndexOf('/'));
-  // Load parent menu object
-  const parentPage = menuItems.find(({ url }) => url.includes(parentPath));
-
+    // Read parent from the page path
+    const parentPath = path.substring(0, path.lastIndexOf('/'));
+    // Load parent menu object
+    const parentPage = menuItems.find(({ url }) => url.includes(parentPath));
+  
   // Pages that are not in menus always get a breadcrumb.
   if (!mainMenuPage) {
     // TPR Unit may not have menu attachment
