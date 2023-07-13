@@ -15,14 +15,10 @@ function LanguageSelect({
   preview
 }: LanguageSelect) {
   const { t } = useTranslation('common');
-  const [activeLang, setActiveLang] = useState<string | undefined>('');
   const [open, setOpen] = useState<boolean>(false);
   const wrapperRef = useRef(null);
 
   useBlur(wrapperRef, setOpen);
-  useEffect(() => {
-    setActiveLang(langcode);
-  }, [langcode]);
 
   return (
     <div>

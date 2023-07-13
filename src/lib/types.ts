@@ -176,7 +176,7 @@ export interface NavigationProps {
   langcode: string;
   onSignIn?: (() => void);
   menuOtherLanguages?: DrupalMenuLinkContent[];
-  preview?: boolean | undefined;
+  preview?: boolean;
 }
 
 export interface LanguageSelect {
