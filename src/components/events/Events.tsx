@@ -107,30 +107,29 @@ export default function Events(props: EventListProps): JSX.Element {
             aria-label={t('search.group_description')}
             className={styles.filterTags}
           >
-            {eventsTags &&
-              eventsTags?.map((tag: string, i: number) => (
-                <HDSButton
-                  disabled={!getAvailableTag(events).includes(tag)}
-                  role="checkbox"
-                  aria-checked={filter.includes(tag)}
-                  aria-label={`${t('search.filter')} ${tag.replace('_', ' ')}`}
-                  key={`tagFilter-${i}`}
-                  className={
-                    filter.includes(tag) ? styles.selected : styles.filterTag
-                  }
-                  onClick={() =>
-                    setFilter((current) =>
-                      current?.includes(tag)
-                        ? [...current].filter(function (item) {
-                            return item !== tag;
-                          })
-                        : [...current, tag]
-                    )
-                  }
-                >
-                  {tag.replace('_', ' ')}
-                </HDSButton>
-              ))}
+            {eventsTags?.map((tag: string, i: number) => (
+              <HDSButton
+                disabled={!getAvailableTag(events).includes(tag)}
+                role="checkbox"
+                aria-checked={filter.includes(tag)}
+                aria-label={`${t('search.filter')} ${tag.replace('_', ' ')}`}
+                key={`tagFilter-${i}`}
+                className={
+                  filter.includes(tag) ? styles.selected : styles.filterTag
+                }
+                onClick={() =>
+                  setFilter((current) =>
+                    current?.includes(tag)
+                      ? [...current].filter(function (item) {
+                          return item !== tag;
+                        })
+                      : [...current, tag]
+                  )
+                }
+              >
+                {tag.replace('_', ' ')}
+              </HDSButton>
+            ))}
             <HDSButton
               variant="supplementary"
               iconLeft={<IconCrossCircle />}
