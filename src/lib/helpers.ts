@@ -56,7 +56,10 @@ export const languageFrontPages = {
 };
 
 /* Link and navigation helpers */
-export const previewNavigation = (path: string, preview: boolean | undefined): void => {
+export const previewNavigation = (
+  path: string,
+  preview: boolean | undefined
+): void => {
   if (preview) {
     window
       .open(`${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/${path}`, '_parent')
@@ -103,56 +106,51 @@ export const getBreadCrumb = (
   path: string,
   title: string,
   type: string,
-  locale: string,
+  locale: string
 ): BreadcrumbContent[] => {
-  const page = menuItems.find(({ url }) => url === path);
-
-  // TPR Unit may not have menu attachment
-  if (!page && type === 'tpr_unit--tpr_unit') {
-    return [];
-  }
-
+  const mainMenuPage = menuItems.find(({ url }) => url === path);
   // Breadcrumb object for pages without menu attachment
-  let newPage: NewPage = {
+  const newPage: NewPage = {
     id: 'current_page_crumb',
     title: title,
     url: path,
     parent: '',
     locale: locale,
   };
+    // Read parent from the page path
+    const parentPath = path.substring(0, path.lastIndexOf('/'));
+    // Load parent menu object
+    const parentPage = menuItems.find(({ url }) => url.includes(parentPath));
+  
   // Pages that are not in menus always get a breadcrumb.
-  if (!page) {
+  if (!mainMenuPage) {
+    // TPR Unit may not have menu attachment
+    if (type === 'tpr_unit--tpr_unit') {
+      return [];
+    }
+
     if (
-      (type !== 'node--event' && type !== 'node--article') ||
+      type === 'node--page' ||
+      !parentPage?.id ||
       (type === 'node--article' && !primaryLanguages.includes(locale))
     ) {
       return [newPage];
     }
 
-    // Read parent from the page path
-    const parentPath = path.substring(0, path.lastIndexOf('/'));
-    // Load parent menu object
-    const parentPage = menuItems.find(({ url }) => url.includes(parentPath));
-
-    // Event page doesn't have parent
-    if (!parentPage?.id) {
-      return [newPage];
-    }
-
-    // Create parent id for the page
+    // Create parent id for the event
     newPage.parent = parentPage.id;
   }
 
   // Landing pages don't need breadcrumb.
-  if (page?.parent === '') {
+  if (mainMenuPage?.parent === '') {
     return [];
   }
-
   // Create handle for the page object based on above
-  const pageHandle: any = newPage.parent !== '' ? newPage : page;
+  const pageHandle: DrupalMenuLinkContent | NewPage | undefined =
+    newPage.parent !== '' ? newPage : mainMenuPage;
 
-  const breadcrumbs: BreadcrumbContent[] = [pageHandle];
-  let parentItem = menuItems.find(({ id }) => id === pageHandle.parent);
+  const breadcrumbs: BreadcrumbContent[] = [pageHandle as BreadcrumbContent];
+  let parentItem = menuItems.find(({ id }) => id === pageHandle?.parent);
 
   if (parentItem) {
     breadcrumbs.push(parentItem);
@@ -165,6 +163,7 @@ export const getBreadCrumb = (
       if (!parentItem?.parent) break;
     }
   }
+
   return breadcrumbs.reverse();
 };
 
@@ -257,7 +256,6 @@ export const getDefaultImage = (node: Node): string => {
   return process.env.NEXT_PUBLIC_SITE_URL + '/tyollisyyspalvelut.png';
 };
 
-
 /** Filtering helpers */
 export const sortArrayByOtherArray = (array: any[], sortArray: string[]) => {
   return [...array].sort(
@@ -283,6 +281,6 @@ export const groupData = (data: GroupingProps[]) => {
   return groups;
 };
 
-export const setInitialLocale = (locale: string ): string => {
+export const setInitialLocale = (locale: string): string => {
   return primaryLanguages.includes(locale) ? locale : 'en';
 };

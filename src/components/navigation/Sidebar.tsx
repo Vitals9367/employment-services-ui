@@ -24,7 +24,7 @@ export function Sidebar(sidebar: NavProps): JSX.Element {
     if (!menuArray) {
       return { nav, defaultOpenMainLevels };
     }
-    menuArray.map((second: DrupalMenuLinkContent, index: number) => {
+    menuArray.map((second: DrupalMenuLinkContent) => {
       const subs: ReactElement[] = [];
       let parent: boolean = false;
 
@@ -35,7 +35,7 @@ export function Sidebar(sidebar: NavProps): JSX.Element {
         }
         if (sub.items) {
           let thirds: ReactElement[] = [];
-          sub.items?.map((third: DrupalMenuLinkContent, idx: number) => {
+          sub.items?.map((third: DrupalMenuLinkContent) => {
             if (third.url === activePath) {
               parent = true;
             }
