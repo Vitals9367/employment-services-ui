@@ -80,7 +80,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 export const PageNotFound = ({ nav, footer }: PageNotFoundProps) => {
   const { locale } = useRouter()
 
-  let texts = notFoundTexts.fi
+  let texts;
   switch (locale) {
     case 'sv':
       texts = notFoundTexts.sv

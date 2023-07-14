@@ -98,8 +98,6 @@
 @media (min-width: $breakpoint-xl) {
   .newsCard {
     flex-grow: 0;
-  }
-  .newsCard {
     width: calc(50% - var(--spacing-l));
   }
 }

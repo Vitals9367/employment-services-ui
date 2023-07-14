@@ -21,17 +21,18 @@ interface NewsListProps {
   }
 };
 interface News {
-  published_at?: string,
-  path: Path,
-  title: string,
-  status: boolean,
-  field_article_category: string,
+  id: string;
+  published_at?: string;
+  path: Path;
+  title: string;
+  status: boolean;
+  field_article_category: string;
 }
 
 interface Path {
-  alias: string,
-  langcode: string,
-  pid: number,
+  alias: string;
+  langcode: string;
+  pid: number;
 }
 
 function NewsList({
@@ -80,8 +81,8 @@ function NewsList({
         <div
           className={`${styles.newsList} ${field_short_list && styles.short}`}>
           {paginatedNews &&
-            paginatedNews.map((news: News, key: number) => (
-              <div className={styles.newsCard} key={key}>
+            paginatedNews.map((news: News) => (
+              <div className={styles.newsCard} key={news.id}>
                 <a href={getPathAlias(news.path)}>
                   <h3 className={styles.newsTitle}>{news.title}</h3>
                 </a>
