@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button, IconAngleDown, IconAngleUp, IconGlobe, Link } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 

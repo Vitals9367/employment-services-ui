@@ -1,12 +1,16 @@
 import React from 'react';
-import { Footer as HDSFooter, IconArrowUp, IconFacebook, IconInstagram, IconLinkedin } from 'hds-react';
+import {
+  Footer as HDSFooter,
+  IconArrowUp,
+  IconFacebook,
+  IconInstagram,
+  IconLinkedin,
+} from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { DrupalMenuLinkContent } from 'next-drupal';
 
 import { FooterProps } from '@/lib/types';
-
 import styles from './navigation.module.scss';
-import { primaryLanguages } from '@/lib/helpers';
 
 function Footer(props: FooterProps): JSX.Element {
   const { t } = useTranslation();
@@ -28,6 +32,19 @@ function Footer(props: FooterProps): JSX.Element {
     });
     return items;
   };
+
+  let cookieUrl;
+  switch (locale) {
+    case 'fi':
+      cookieUrl = '/cookies';
+      break;
+    case 'en':
+    case 'sv':
+      cookieUrl = `/${locale}/cookies`;
+      break;
+    default:
+      cookieUrl = '/en/cookies';
+  }
 
   return (
     <HDSFooter
@@ -59,16 +76,7 @@ function Footer(props: FooterProps): JSX.Element {
           href={t('footer.accessibilityLink')}
           label={t('footer.accessibility')}
         />
-        <HDSFooter.Item
-          href={
-            locale === 'fi'
-              ? '/cookies'
-              : primaryLanguages.includes(locale)
-              ? `/${locale}/cookies`
-              : '/en/cookies'
-          }
-          label={t('footer.cookie_settings')}
-        />
+        <HDSFooter.Item href={cookieUrl} label={t('footer.cookie_settings')} />
         <HDSFooter.Item
           className={styles.backToTopButton}
           onClick={scrollToTop}

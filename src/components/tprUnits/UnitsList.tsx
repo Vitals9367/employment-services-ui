@@ -41,7 +41,7 @@ function UnitsList(sidebar: NavProps): JSX.Element {
   });
   const { t } = useTranslation();
   const { locale } = useRouter();
-  const fetcher = () => getUnits(locale != undefined ? locale : 'fi');
+  const fetcher = () => getUnits(locale ?? 'fi');
   const { data: units } = useSWR(`/units`, fetcher);
 
   const getFilterValues = useCallback(() => {

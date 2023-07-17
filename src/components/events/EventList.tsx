@@ -14,14 +14,6 @@ import DateTime from './DateTime';
 
 import styles from './events.module.scss';
 import EventStatus from './EventStatus';
-import { Interface } from 'readline';
-
-interface TagInterface {
-  label: string,
-  value: string,
-  key: number | string,
-  color: string,
-}
 
 export function EventList({
   pageType,
@@ -35,7 +27,7 @@ export function EventList({
     field_background_color,
     field_events_list_desc,
   } = props;
-  const bgColor = field_background_color?.field_css_name || 'white';
+  const bgColor = field_background_color?.field_css_name ?? 'white';
   const { t } = useTranslation();
   const { locale, asPath } = useRouter();
   const queryParams: EventsQueryParams = {
@@ -102,6 +94,7 @@ export function EventList({
                       />
                     )}
                     <div className={styles.eventCardContent}>
+                      {console.log('event.field_event_tags', event.field_event_tags)}
                       {event.field_event_tags &&
                         event.field_event_tags.length !== 0 && (
                           <TagList
