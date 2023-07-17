@@ -55,7 +55,7 @@ function NewsList({
   const fetcher = () => getNews(field_short_list, field_news_filter, langcode);
   const { data: news } = useSWR(`/news`, fetcher);
 
-  const total: number = news.length ?? 0;
+  const total: number = news?.length ?? 0;
   useEffect(() => {
     const filterNews = () => {
       const paginatedArticle = news?.slice(0, 4 * newsIndex);
