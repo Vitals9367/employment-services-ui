@@ -58,7 +58,7 @@ function LiftupWithImage(props: LiftupWithImageProps): JSX.Element {
           <div className={styles.liftupWithImageContentWrapper}>
             <div className={`${styles.liftupWithImageContent}  ${contentBgSecondary}`}>
               <h2>{field_liftup_with_image_title}</h2>
-              { field_liftup_with_image_desc.processed &&
+              { field_liftup_with_image_desc &&
                 <HtmlBlock field_text={field_liftup_with_image_desc} />
               }
             </div>
