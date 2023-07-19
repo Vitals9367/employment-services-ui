@@ -1,8 +1,9 @@
-import { Button, IconAlertCircleFill, Link } from 'hds-react';
+import { useEffect, useState } from 'react';
+import { Button, IconAlertCircleFill } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import router, { useRouter } from 'next/router';
+
 import styles from './consentInfo.module.scss';
-import { useEffect, useState } from 'react';
 
 export default function ConsentInfo(): JSX.Element {
   const { t } = useTranslation('common');
