@@ -35,6 +35,9 @@ export function NodeArticlePage({
           {field_article_category === 'newsletter' && (
             <p className={styles.articleType}>{t('news.newsletter')}</p>
           )}
+          {field_article_category === 'partner_jobs' && (
+            <p className={styles.articleType}>{t('news.partner_jobs')}</p>
+          )}
           {field_lead && <div className="lead-in">{field_lead}</div>}
           <div className={styles.pageDivider}></div>
           {articleDate && (
