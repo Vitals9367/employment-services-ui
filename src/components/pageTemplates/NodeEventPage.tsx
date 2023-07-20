@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Container } from 'hds-react';
 import {
+  Container,
   IconLocation,
   IconLinkExternal,
   IconAlertCircle,
@@ -48,10 +48,9 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
   
   const { t } = useTranslation('common');
   const { locale } = useRouter();
-  const infoUrlText =
-    field_info_url && field_info_url.startsWith('https://teams.microsoft')
-      ? t('event.info_url_text_teams')
-      : t('event.info_url_text');
+  const infoUrlText = field_info_url?.startsWith('https://teams.microsoft')
+    ? t('event.info_url_text_teams')
+    : t('event.info_url_text');
   const event_tags: string[] = [];
   field_event_tags.map((tag: { name: string }) => event_tags.push(tag.name));
 

@@ -34,7 +34,7 @@ export default function MobileNavigation({
         className={classNames(styles.navigation, styles.zover)}
       >
         <Navigation.Actions>
-          {primaryLanguages.includes(langcode as string) && (
+          {primaryLanguages.includes(langcode) && (
             <Navigation.Search
               onSearch={onSearch}
               searchLabel={t('navigation.search_label')}
@@ -49,7 +49,7 @@ export default function MobileNavigation({
             className={styles.blueButton}
           />
         </Navigation.Actions>
-        {primaryLanguages.includes(langcode as string) && !hideNav && (
+        {primaryLanguages.includes(langcode) && !hideNav && (
           <Navigation.Row>{getNav(menu, activePath, preview as boolean)}</Navigation.Row>
         )}
       </Navigation>

@@ -3,19 +3,34 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { DrupalMenuLinkContent } from 'next-drupal';
 import { Navigation as NavigationHDS } from "hds-react";
-import { NavProps } from '@/lib/types';
+
+import { FooterProps, NavProps, NavigationProps, Node } from '@/lib/types';
 import classNames from '@/lib/classNames';
-import { frontPagePaths, printablePages } from '@/lib/helpers';
-import { previewNavigation } from '@/lib/helpers';
+import {
+  frontPagePaths,
+  printablePages,
+  previewNavigation,
+} from '@/lib/helpers';
 import { Breadcrumb } from './Breadcrumb';
 import styles from './navigation.module.scss';
 import PrintButton from '../printButton/PrintButton';
 import Navigation from '../navigationComponents/Navigation';
 import MobileNavigation from '../navigationComponents/MobileNavigation';
 
+interface RouterProps {
+  components?: any;
+  route: string;
+  push: (searchValue: string, undefined: undefined, { shallow }: any) => void;
+}
+
+interface PageProps {
+ footer: FooterProps;
+ nav: NavigationProps;
+ _nextI18Next: any;
+ node: Node;
+}
 
 function Header(header: NavProps): JSX.Element {
-
   const {
     locale,
     menu,
@@ -27,10 +42,10 @@ function Header(header: NavProps): JSX.Element {
     preview,
   } = header;
   const { t } = useTranslation('common');
-  const router: any = useRouter(); // @TODO Fix type for proper
+  const router: RouterProps = useRouter();
   const activePath = langLinks[locale ? locale : 'fi'];
-  const [pageProps, setPageProps]: any | null = useState(null);
-  const [isPrintable, setIsPrintable] = useState(false);
+  const [pageProps, setPageProps] = useState<PageProps | null>(null);
+  const [isPrintable, setIsPrintable] = useState<boolean>(false);
 
   useEffect(() => {
     setPageProps(router.components[router.route].props.pageProps);

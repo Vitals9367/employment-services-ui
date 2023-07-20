@@ -6,7 +6,7 @@ import styles from '../pageTemplates/tprUnitPage.module.scss';
 interface ContactInfoProps {
   aside?: boolean;
   phone: string;
-  email: String;
+  email: string;
   address: {
     address_line1: string;
     postal_code: number;

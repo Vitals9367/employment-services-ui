@@ -24,7 +24,7 @@ export function Sidebar(sidebar: NavProps): JSX.Element {
     if (!menuArray) {
       return { nav, defaultOpenMainLevels };
     }
-    menuArray.map((second: DrupalMenuLinkContent) => {
+    menuArray.forEach((second: DrupalMenuLinkContent) => {
       const subs: ReactElement[] = [];
       let parent: boolean = false;
 
@@ -59,7 +59,6 @@ export function Sidebar(sidebar: NavProps): JSX.Element {
             <SideNavigation.MainLevel
               key={sub.title}
               id={sub.title}
-              // href={sub.url}
               onClick={() => (window.location.href = sub.url)}
               label={sub.title}
               className={classNames(

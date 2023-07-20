@@ -1,6 +1,4 @@
 import {
-  getResourceCollection,
-  getResourceByPath,
   Locale,
   translatePath,
   DrupalClient,
@@ -22,10 +20,8 @@ const drupal = getDrupalClient();
 export const getEvents = async (queryParams: EventsQueryParams) => {
   const { tags, locationId } = queryParams;
   const defaultLocale: Locale = 'fi';
-  const locale: Locale =
-    queryParams.locale != undefined ? queryParams.locale : defaultLocale;
-
-  let eventParams = () =>
+  const locale: Locale = queryParams.locale ?? defaultLocale;
+  const eventParams = () =>
     baseEventQueryParams().addSort('field_end_time', 'ASC').addPageLimit(3);
 
   if (tags && locationId) {
@@ -136,9 +132,6 @@ export const getUnits = async (locale: Locale) => {
   });
 };
 
-/**
- * @TODO These may be better solution to fetch translated path for Events.
- */
 export const getByPath = async (path: string) => {
   return await drupal.getResourceByPath(path);
 };

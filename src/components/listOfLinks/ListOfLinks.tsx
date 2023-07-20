@@ -41,7 +41,7 @@ function ListOfLinks(props: ListOfLinksProps): JSX.Element {
     field_background_color,
     field_list_of_links_links,
   } = props;
-  const bgColor = field_background_color?.field_css_name || 'white';
+  const bgColor = field_background_color?.field_css_name ?? 'white';
   return (
     <div
       className="component hide-print"
