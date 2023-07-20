@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { Linkbox, IconArrowRight, Container } from 'hds-react';
 
 import { EventsQueryParams, EventListProps, EventData } from '@/lib/types';
@@ -97,8 +97,8 @@ export function EventList({
                         alt={event.field_image_alt}
                         layout="responsive"
                         objectFit="cover"
-                        width={384}
-                        height={158}
+                        width={3}
+                        height={2}
                       />
                     )}
                     <div className={styles.eventCardContent}>
