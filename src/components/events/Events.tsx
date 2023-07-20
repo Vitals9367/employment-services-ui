@@ -10,7 +10,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useSWRInfinite from 'swr/infinite';
 import HtmlBlock from '../HtmlBlock';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import styles from './events.module.scss';
 import DateTime from './DateTime';

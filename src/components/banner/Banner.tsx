@@ -34,7 +34,7 @@ function Banner(props: BannerProps): JSX.Element {
             {field_banner_title && 
               <h2>{field_banner_title}</h2>
             }
-            {field_banner_desc?.processed && 
+            {field_banner_desc && 
               <HtmlBlock field_text={field_banner_desc} />
             }
           </div>

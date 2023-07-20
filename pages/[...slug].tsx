@@ -7,6 +7,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { DrupalNode, Locale } from 'next-drupal'
 import { useTranslation } from 'next-i18next'
 import { Container } from 'hds-react'
+import dynamic from 'next/dynamic'
 
 import NodeBasicPage from '@/components/pageTemplates/NodeBasicPage'
 import NodeLandingPage from '@/components/pageTemplates/NodeLandingPage'
@@ -22,9 +23,9 @@ import { NODE_TYPES } from '@/lib/drupalApiTypes'
 import { getNode } from '@/lib/ssr-api'
 import { getBreadCrumb, getDefaultImage, getDescription, getPathAlias, getTitle, primaryLanguages } from '@/lib/helpers'
 import { useConsentStatus, useReactAndShare } from '@/hooks/useAnalytics'
-import ConsentInfo from '@/components/consentInfo/ConsentInfo'
 import { i18n } from '@/next-i18next.config'
 import { DrupalJsonApiParams } from 'drupal-jsonapi-params'
+
 
 interface PageProps {
   node: Node;
@@ -204,6 +205,7 @@ export async function getStaticProps(
 }
 
 export default function Page({ node, nav, footer, preview }: PageProps) {
+  const ConsentInfo = dynamic(() => import('../src/components/consentInfo/ConsentInfo'));
   const router = useRouter();
   const { t } = useTranslation('common');
   const rnsStatus: boolean = useConsentStatus('rns');
