@@ -94,7 +94,6 @@ export function EventList({
                       />
                     )}
                     <div className={styles.eventCardContent}>
-                      {console.log('event.field_event_tags', event.field_event_tags)}
                       {event.field_event_tags &&
                         event.field_event_tags.length !== 0 && (
                           <TagList
