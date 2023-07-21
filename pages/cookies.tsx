@@ -6,7 +6,6 @@ import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 import { CookiePage, Container } from 'hds-react'
 
-import getMenu from '@/lib/get-menu'
 import { Layout } from '@/components/layout/Layout'
 import { NavProps, FooterProps } from '@/lib/types'
 

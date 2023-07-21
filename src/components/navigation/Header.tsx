@@ -43,7 +43,7 @@ function Header(header: NavProps): JSX.Element {
   } = header;
   const { t } = useTranslation('common');
   const router: RouterProps = useRouter();
-  const activePath = langLinks[locale ? locale : 'fi'];
+  const activePath = langLinks[locale ?? 'fi'];
   const [pageProps, setPageProps] = useState<PageProps | null>(null);
   const [isPrintable, setIsPrintable] = useState<boolean>(false);
 

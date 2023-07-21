@@ -13,7 +13,7 @@ import styles from './navigation.module.scss'
 export function Sidebar(sidebar: NavProps): JSX.Element {
   const { locale, menu, langLinks, preview } = sidebar;
   const { t } = useTranslation('common');
-  const activePath = langLinks[locale ? locale : 'fi'];
+  const activePath = langLinks[locale ?? 'fi'];
 
   const getSideNav = (
     menuArray: DrupalMenuLinkContent[] | undefined

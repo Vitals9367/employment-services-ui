@@ -42,8 +42,8 @@ function NodeTprUnitPage({
   } = node;
 
   const { t } = useTranslation('common');
-  const pageTitle = name_override ? name_override : name;
-  const picture = picture_url_override ? picture_url_override : picture_url;
+  const pageTitle = name_override ?? name;
+  const picture = picture_url_override ?? picture_url;
 
   return (
     <article>
