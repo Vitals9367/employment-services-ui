@@ -76,7 +76,7 @@ export const getNews = async (shortList: string, newsFilter: string, locale: Loc
       .addFilter('status', '1')
       .addFilter('langcode', locale)
 
-  if (shortList === 'true' && (newsFilter === 'news' || newsFilter === 'newsletter')) {
+  if (shortList === 'true' && (newsFilter === 'news' || newsFilter === 'newsletter' || newsFilter === 'partner_jobs')) {
     const newsParamsLimitedFiltered = () =>
       newsParams()
         .addFilter('field_article_category', newsFilter)
@@ -99,7 +99,7 @@ export const getNews = async (shortList: string, newsFilter: string, locale: Loc
     });
   }
 
-  if (newsFilter === 'news' || newsFilter === 'newsletter') {
+  if (newsFilter === 'news' || newsFilter === 'newsletter' || newsFilter === 'partner_jobs') {
     const newsParamsFiltered = () => newsParams()
       .addFilter('field_article_category', newsFilter);
 
