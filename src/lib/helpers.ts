@@ -174,6 +174,22 @@ export const deleteCookie = (event: any, name: string, history: any) => {
   history.go(0);
 };
 
+export const getCookiesUrl = (locale: string) => {
+  let cookieUrl;
+  switch (locale) {
+    case 'fi':
+      cookieUrl = '/cookies';
+      break;
+    case 'en':
+    case 'sv':
+      cookieUrl = `/${locale}/cookies`;
+      break;
+    default:
+      cookieUrl = '/en/cookies';
+  }
+  return cookieUrl;
+}; 
+
 /** Get data from node helpers */
 export const getTitle = (node: Node, suffix: String): string => {
   let pageTitle = node.title;

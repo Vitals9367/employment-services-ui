@@ -18,7 +18,7 @@ interface BannerProps {
 
 function Banner(props: BannerProps): JSX.Element {
   const { field_background_color, field_banner_desc, field_banner_title, field_icon } = props
-  const bgColor = field_background_color?.field_css_name || 'white'
+  const bgColor = field_background_color?.field_css_name ?? 'white'
 
   return (
     <div className='component'>

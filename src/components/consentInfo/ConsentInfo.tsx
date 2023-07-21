@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import router, { useRouter } from 'next/router';
 
 import styles from './consentInfo.module.scss';
+import { getCookiesUrl } from '@/lib/helpers';
 
 export default function ConsentInfo(): JSX.Element {
   const { t } = useTranslation('common');
@@ -11,7 +12,7 @@ export default function ConsentInfo(): JSX.Element {
   const [cookiesUrl, setCookiesUrl] = useState('/cookies');
 
   useEffect(() => {
-    setCookiesUrl(locale === 'fi' ? '/cookies' : `/${locale}/cookies)`);
+    setCookiesUrl(getCookiesUrl(locale as string));
   }, [locale]);
 
   return (
