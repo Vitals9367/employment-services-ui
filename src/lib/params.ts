@@ -176,6 +176,9 @@ export const baseEventQueryParams = () =>
       'field_event_tags',
       'field_provider',
       'field_super_event',
+      'field_publisher',
+      'field_provider',
+      'field_in_language'
     ])
 
 const getEventPageQueryParams = () =>
