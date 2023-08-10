@@ -151,6 +151,8 @@ export const baseEventQueryParams = () =>
   .addInclude([
     'field_event_tags.content_translation_uid',
     'field_event_tags.parent',
+    'field_in_language.content_translation_uid',
+    'field_in_language.parent',
   ])
     .addFields(NODE_TYPES.EVENT, [
       'id',

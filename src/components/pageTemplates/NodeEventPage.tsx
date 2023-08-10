@@ -62,12 +62,14 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
     : t('event.info_url_text');
   const event_tags: string[] = [];
   field_event_tags.map((tag: { name: string }) => event_tags.push(tag.name));
+  const event_languages = field_in_language.map(
+    (language: { name: string }) =>
+      `${language.name.charAt(0).toUpperCase()}${language.name.slice(1)}`
+  );
 
   const onClick = () => {
     location.href = field_offers_info_url;
   };
-
-  console.log('node--->', node);
 
   return (
     <article>
@@ -129,59 +131,54 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                     <div>{field_location_extra_info}</div>
                   </div>
                 )}
-            </div>
-            <div className={styles.eventDetailContainer}>
-              <div className={styles.contentRegionEventLeft}>
-                <div className={`${styles.contentContainer} content-region`}>
-                  {field_text?.processed && (
-                    <HtmlBlock field_text={field_text} />
-                  )}
-
-                  {field_info_url && (
-                    <Link href={field_info_url} text={infoUrlText} />
-                  )}
-                  {field_external_links.length > 0 &&
-                    field_external_links.map(
-                      (externalLink: ExternalLinks, key: number) => (
-                        <Link
-                          key={`${externalLink.title}-${key}`}
-                          href={externalLink.uri}
-                          text={externalLink.title}
-                        />
-                      )
-                    )}
-                </div>
-                {field_offers_info_url && (
-                  <Button
-                    onClick={onClick}
-                    theme="black"
-                    iconRight={<IconLinkExternal size="m" aria-hidden="true" />}
-                  >
-                    {t('event.field_offers_info_url')}
-                  </Button>
-                )}
               </div>
-              <div className={styles.contentRegionEventRight}>
-              {field_in_language && (
+              <div className={styles.eventDetailContainer}>
+                <div className={styles.contentRegionEventLeft}>
+                  <div className={`${styles.contentContainer} content-region`}>
+                    {field_text?.processed && (
+                      <HtmlBlock field_text={field_text} />
+                    )}
+                  </div>
+                  {field_offers_info_url && (
+                    <Button
+                      onClick={onClick}
+                      theme="black"
+                      iconRight={
+                        <IconLinkExternal size="m" aria-hidden="true" />
+                      }
+                    >
+                      {t('event.field_offers_info_url')}
+                    </Button>
+                  )}
+                </div>
+                <div className={styles.contentRegionEventRight}>
+                  {field_in_language && (
+                    <div className={styles.location}>
+                      <IconGlobe />
+                      <div>{field_in_language}</div>
+                    </div>
+                  )}
+                </div>
+                {field_in_language && (
                   <div className={styles.location}>
                     <IconGlobe />
                     <div>{field_in_language}</div>
                   </div>
                 )}
               </div>
-                {field_provider && (
-                  <div>
-                    <h2 className={styles.location}>
-                      <IconFaceSmile />
-                      <div className={styles.contentRegionSubHeader}>
-                        {t('event.provider')}
-                      </div>
-                    </h2>
-                    <div className={styles.contentRegionText}>
-                      {field_provider}
+              {field_provider && (
+                <div>
+                  <h2 className={styles.location}>
+                    <IconFaceSmile />
+                    <div className={styles.contentRegionSubHeader}>
+                      {t('event.provider')}
                     </div>
+                  </h2>
+                  <div className={styles.contentRegionText}>
+                    {field_provider}
                   </div>
-                )}
+                </div>
+              )}
                 {field_super_event && (
                   <div>
                     <h2 className={styles.location}>
@@ -196,21 +193,20 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                     />
                   </div>
                 )}
-              </div>
-              {field_info_url && (
-                <Link href={field_info_url} text={infoUrlText} />
-              )}
-              {field_external_links.length > 0 &&
-                field_external_links.map(
-                  (externalLink: ExternalLinks, key: number) => (
-                    <Link
-                      key={`${externalLink.title}-${key}`}
-                      href={externalLink.uri}
-                      text={externalLink.title}
-                    />
-                  )
-                )}
             </div>
+            {field_info_url && (
+              <Link href={field_info_url} text={infoUrlText} />
+            )}
+            {field_external_links.length > 0 &&
+              field_external_links.map(
+                (externalLink: ExternalLinks, key: number) => (
+                  <Link
+                    key={`${externalLink.title}-${key}`}
+                    href={externalLink.uri}
+                    text={externalLink.title}
+                  />
+                )
+              )}
           </div>
         </div>
       </Container>
