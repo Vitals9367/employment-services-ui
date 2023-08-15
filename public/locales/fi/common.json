@@ -100,6 +100,12 @@
     "title": "Sivun palautenappeja ei voida näyttää",
     "text": "Toiminnon käyttämiseksi vaaditaan, että hyväksyt sivuston evästeet. Pääset antamaan palautetta tästä sivusta sallimalla evästeasetuksista tilastointiin liittyvät evästeet.",
     "button": "Muokkaa evästeasetuksia"
-  }
-
+  },
+  "Sun": "Su",
+  "Mon": "Ma",
+  "Tue": "Ti",
+  "Wed": "Ke",
+  "Thu": "To",
+  "Fri": "Pe",
+  "Sat": "La"
 }

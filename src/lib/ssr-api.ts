@@ -6,7 +6,7 @@ import {
 } from 'next-drupal';
 import { GetStaticPropsContext } from 'next';
 import { NODE_TYPES } from '@/lib/drupalApiTypes';
-import { EventsQueryParams, Node } from '@/lib/types';
+import { EventsQueryParams, EventsRelatedQueryParams, Node } from '@/lib/types';
 import {
   baseEventQueryParams,
   baseArticlePageQueryParams,
@@ -67,16 +67,45 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
   });
 };
 
-export const getNews = async (shortList: string, newsFilter: string, locale: Locale) => {
+export const getRelatedEvents = async (
+  queryParams: EventsRelatedQueryParams
+) => {
+  const { superEvent } = queryParams;
+  const defaultLocale: Locale = 'fi';
+  const locale: Locale = queryParams.locale ?? defaultLocale;
+  const eventParams = () =>
+    baseEventQueryParams()
+      .addFilter('field_super_event', superEvent)
+      .addSort('field_end_time', 'ASC')
+      .addFilter('status', '1')
+      .addFilter('langcode', locale);
+
+  return await drupal.getResourceCollection(NODE_TYPES.EVENT, {
+    locale,
+    defaultLocale,
+    params: eventParams().getQueryObject(),
+  });
+};
+
+export const getNews = async (
+  shortList: string,
+  newsFilter: string,
+  locale: Locale
+) => {
   const defaultLocale: Locale = 'fi';
 
   let newsParams = () =>
     baseArticlePageQueryParams()
       .addSort('created', 'DESC')
       .addFilter('status', '1')
-      .addFilter('langcode', locale)
+      .addFilter('langcode', locale);
 
-  if (shortList === 'true' && (newsFilter === 'news' || newsFilter === 'newsletter' || newsFilter === 'partner_jobs')) {
+  if (
+    shortList === 'true' &&
+    (newsFilter === 'news' ||
+      newsFilter === 'newsletter' ||
+      newsFilter === 'partner_jobs')
+  ) {
     const newsParamsLimitedFiltered = () =>
       newsParams()
         .addFilter('field_article_category', newsFilter)
@@ -99,9 +128,13 @@ export const getNews = async (shortList: string, newsFilter: string, locale: Loc
     });
   }
 
-  if (newsFilter === 'news' || newsFilter === 'newsletter' || newsFilter === 'partner_jobs') {
-    const newsParamsFiltered = () => newsParams()
-      .addFilter('field_article_category', newsFilter);
+  if (
+    newsFilter === 'news' ||
+    newsFilter === 'newsletter' ||
+    newsFilter === 'partner_jobs'
+  ) {
+    const newsParamsFiltered = () =>
+      newsParams().addFilter('field_article_category', newsFilter);
 
     return await drupal.getResourceCollection(NODE_TYPES.ARTICLE, {
       params: newsParamsFiltered().getQueryObject(),
@@ -125,7 +158,7 @@ export const getUnits = async (locale: Locale) => {
       .addFilter('menu_link', null, 'IS NOT NULL')
       .addSort('name_override', 'ASC');
 
-  return  await drupal.getResourceCollection(NODE_TYPES.TPR_UNIT, {
+  return await drupal.getResourceCollection(NODE_TYPES.TPR_UNIT, {
     locale,
     defaultLocale,
     params: unitsParams().getQueryObject(),
@@ -186,7 +219,9 @@ export const getNode = async (props: GetNodeProps) => {
       path.entity.path,
       attempts
     );
-    throw new Error(`Unable to get page ${path.entity.path} after ${retry} attempts`);
+    throw new Error(
+      `Unable to get page ${path.entity.path} after ${retry} attempts`
+    );
   }
 
   return node;

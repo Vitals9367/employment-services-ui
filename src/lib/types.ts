@@ -72,6 +72,11 @@ export interface EventsQueryParams {
   locale?: Locale
 }
 
+export interface EventsRelatedQueryParams {
+  locale?: Locale;
+  superEvent: string;
+}
+
 export interface EventData {
   id: string;
   title: string;

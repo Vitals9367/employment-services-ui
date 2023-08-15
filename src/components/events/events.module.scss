@@ -168,21 +168,6 @@ ul.tags {
   }
 }
 
-.dateTime {
-  padding: 0;
-
-  div {
-    display: flex;
-    font-size: var(--fontsize-body-m);
-    margin-top: var(--spacing-3-xs);
-    align-items: flex-end;
-  }
-
-  svg {
-    margin-right: var(--spacing-xs);
-  }
-}
-
 .loadMore {
   display: flex;
   justify-content: center;
@@ -191,6 +176,24 @@ ul.tags {
   > button {
     --border-color-focus: var(--color-black-90);
     --border-color-hover-focus: var(--color-black-90);
+  }
+}
+
+.relatedEvent  {
+  max-width: 50rem;
+  padding: var(--spacing-s);
+  border-top: 1px solid var(--color-black-10);
+  &:last-child {
+    border-bottom: 1px solid var(--color-black-10);
+  }
+  a {
+    display: flex;
+    flex-flow: row wrap;
+    text-decoration: none;
+    border: none;
+  }
+  svg {
+    margin-left: 3rem;
   }
 }
 

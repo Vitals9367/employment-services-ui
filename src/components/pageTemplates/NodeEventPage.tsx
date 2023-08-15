@@ -13,13 +13,17 @@ import {
 import { Node } from '@/lib/types';
 import HtmlBlock from '@/components/HtmlBlock';
 import TagList from '@/components/events/TagList';
-import DateTime from '@/components/events/DateTime';
+
 import Link from '@/components/link/Link';
 import styles from './eventPage.module.scss';
 import EventStatus from '../events/EventStatus';
+import { RelatedEvents } from '../events/RelatedEvents';
+import DateTime from '../dateTime/DateTime';
+
 
 interface NodeEventPageProps {
   node: Node;
+  superEvent: string;
 }
 
 interface ExternalLinks {
@@ -46,6 +50,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
     field_offers_info_url,
     field_event_tags,
     field_provider,
+    field_super_event,
   } = node;
 
   const { t } = useTranslation('common');
@@ -170,6 +175,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
             </div>
           </div>
         </div>
+        {field_super_event && <RelatedEvents superEvent={field_super_event} />}
       </Container>
     </article>
   );

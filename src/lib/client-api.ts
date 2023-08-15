@@ -1,13 +1,14 @@
 import axios from 'axios';
 import qs from 'qs';
 
-import { EventsQueryParams } from '@/lib/types';
+import { EventsQueryParams, EventsRelatedQueryParams } from '@/lib/types';
 import { Locale } from 'next-drupal';
 
 /** The Client API urls  */
 const EVENTS_URL = '/api/events';
 const EVENTS_SEARCH_URL = '/api/events-search';
 const EVENTS_TAGS_URL = '/api/events-tags';
+const RELATED_EVENTS = '/api/related-events'
 const NEWS_URL = '/api/news';
 const UNITS_URL = '/api/units';
 const SEARCH_URL = '/api/search';
@@ -37,6 +38,17 @@ export const getEventsSearch = async (
       return qs.stringify(params, { arrayFormat: 'repeat' });
     }, 
   });
+  return data;
+};
+
+export const getRelatedEvents = async (queryParams: EventsRelatedQueryParams) => {
+  const { data } = await axios(`${RELATED_EVENTS}`, {
+    params:
+      queryParams,
+      paramsSerializer: params => {
+        return qs.stringify(params, { arrayFormat: 'repeat' })
+      }
+  })
   return data;
 };
 
