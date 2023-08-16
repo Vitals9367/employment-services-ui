@@ -62,7 +62,9 @@
     "cancelled_text": "Peruttu",
     "field_offers_info_url": "Ilmoittaudu",
     "provider": "Järjestäjän tiedot",
-    "publisher": "Julkaisijan tiedot"
+    "publisher": "Julkaisijan tiedot",
+    "showAll": "Näytä kaikki",
+    "showLess": "Piilota",
   },
   "news": {
     "news": "Uutinen",

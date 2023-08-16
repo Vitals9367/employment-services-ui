@@ -57,12 +57,9 @@ function NewsList({
 
   const total: number = news?.length ?? 0;
   useEffect(() => {
-    const filterNews = () => {
       const paginatedArticle = news?.slice(0, 4 * newsIndex);
       setPaginatedNews(paginatedArticle);
-    };
-    filterNews();
-  }, [news, newsIndex]); // eslint-disable-line
+  }, [news, newsIndex]);
 
   const loadMoreText = t('list.load_more');
   return (

@@ -182,9 +182,9 @@ ul.tags {
 .relatedEvent  {
   max-width: 50rem;
   padding: var(--spacing-s);
-  border-top: 1px solid var(--color-black-10);
-  &:last-child {
-    border-bottom: 1px solid var(--color-black-10);
+  border-bottom: 1px solid var(--color-black-10);
+  &:first-child {
+    border-top: 1px solid var(--color-black-10);
   }
   a {
     display: flex;

@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import useSWR from 'swr';
-import { Button, Container, IconAngleDown, IconArrowRight } from 'hds-react';
+import { Button, Container, IconAngleDown, IconAngleUp, IconArrowRight } from 'hds-react';
 
 import { EventData, EventsRelatedQueryParams } from '@/lib/types';
 import { getRelatedEvents } from '@/lib/client-api';
@@ -25,7 +25,6 @@ export function RelatedEvents(props: DateTimeProps): JSX.Element {
     superEvent: props.superEvent,
     locale: locale,
   };
-  console.log(events);
 
   useEffect(() => {
     showAll ? setEventData(events) : setEventData(events?.slice(0, 3));
@@ -47,13 +46,13 @@ export function RelatedEvents(props: DateTimeProps): JSX.Element {
         ))}
         <Button
           variant="supplementary"
-          iconRight={<IconAngleDown />}
-          style={{ background: 'none', color: 'black' }}
+          iconRight={showAll ? <IconAngleUp /> : <IconAngleDown />}
+          style={{ background: 'none', color: 'black', margin: 0, padding: 0 }}
           onClick={() => {
-            setShowAll(true);
+            setShowAll(!showAll);
           }}
         >
-          loadMoreText
+         {showAll ? t('event.showLess') : t('event.showAll')} 
         </Button>
       </Container>
     </div>

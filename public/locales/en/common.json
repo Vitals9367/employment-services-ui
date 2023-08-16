@@ -62,7 +62,9 @@
     "cancelled_text": "Cancelled",
     "field_offers_info_url": "Sign up",
     "provider": "Organizer information",
-    "publisher": "Publisher information"
+    "publisher": "Publisher information",
+    "showAll": "Show All",
+    "showLess": "Hide"
   },
   "news": {
     "news": "News",
@@ -100,5 +102,12 @@
     "title": "Feedback buttons cannot be displayed",
     "text": "To use this feature, you must accept cookies from the site. You can provide feedback on this page by enabling statistics-related cookies.",
     "button": "Change cookie settings"
-  }
+  },
+  "Sun": "Sun",
+  "Mon": "Mon",
+  "Tue": "Tue",
+  "Wed": "Wed",
+  "Thu": "Thu",
+  "Fri": "Fri",
+  "Sat": "Sat"
 }

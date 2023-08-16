@@ -22,9 +22,9 @@ function DateTimeSimple(props: DateTimeProps): JSX.Element {
   return (
     <>
       <div>
-        {`${t(getStartDateOfWeek)} ${dateformat(startDate, `dd.mm.yyyy`)}`}
+        {`${t(getStartDateOfWeek.toString())} ${dateformat(startDate, `dd.mm.yyyy`)}`}
         {!isSameDay &&
-          ` - ${t(getEndDateOfWeek)} ${dateformat(endDate, 'ddd dd.mm.yyyy')},`}
+          ` - ${t(getEndDateOfWeek.toString())} ${dateformat(endDate, 'ddd dd.mm.yyyy')},`}
         {` klo ${dateformat(startDate, 'HH:MM')} - ${dateformat(
           endDate,
           'HH:MM'
