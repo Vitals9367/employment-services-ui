@@ -8,7 +8,7 @@
   "site_title": "Служба занятости Хельсинки",
   "link_copied": "Ссылка скопирована",
   "text_print": "Распечатать",
-  "text_print_section": "Распечатать этот разделn",
+  "text_print_section": "Распечатать этот раздел",
   "skip-to-main-content": "Прямо к содержанию",
   "navigation": {
     "button_text": "Самообслуживание",
@@ -52,11 +52,11 @@
     "events_page_url": "/en/current-matters/events",
     "no_events": "Нет предстоящих событий по этой теме.",
     "event_title": "Событие",
-    "event_link": "Нет результатов поиска"
+    "event_link": "Ссылка на событие"
   },
   "event": {
     "remote_event": "Мероприятия по удаленной связи",
-    "info_url_text": "Домашние страницы событий,",
+    "info_url_text": "Домашние страницы событий",
     "info_url_text_teams": "Открыть событие через Teams",
     "cancelled_text": "Отменено",
     "field_offers_info_url": "Зарегистрировано"

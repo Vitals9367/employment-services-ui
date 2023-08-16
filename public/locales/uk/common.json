@@ -36,7 +36,7 @@
     "entity_type_event": "Захід",
     "entity_type_article": "Новина",
     "loading_suggestions": "Loading suggestions",
-    "group_description": "Ви можете вибрати кілька з наведених нижче фільтрів одночасно"
+    "group_description": "Ви можете вибрати кілька з наведених нижче фільтрів одночасно."
   },
   "list": {
     "load_more": "Показати більше",
