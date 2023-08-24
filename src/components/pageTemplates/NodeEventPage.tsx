@@ -7,6 +7,8 @@ import {
   IconLinkExternal,
   IconAlertCircle,
   Button,
+  IconFaceSmile,
+  IconLayers,
 } from 'hds-react';
 
 import { Node } from '@/lib/types';
@@ -44,8 +46,10 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
     field_location_extra_info,
     field_offers_info_url,
     field_event_tags,
+    field_publisher,
+    field_provider,
   } = node;
-  
+
   const { t } = useTranslation('common');
   const { locale } = useRouter();
   const infoUrlText = field_info_url?.startsWith('https://teams.microsoft')
@@ -117,6 +121,19 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                     <div>{field_location_extra_info}</div>
                   </div>
                 )}
+                {field_publisher && (
+                  <div className={styles.location}>
+                    <IconFaceSmile />
+                    <div>{field_publisher}</div>
+                  </div>
+                )}
+
+                {field_provider && (
+                  <div className={styles.location}>
+                    <IconLayers />
+                    <div>{field_provider}</div>
+                  </div>
+                )}
               </div>
             </div>
             <div className={`${styles.contentContainer} content-region`}>
@@ -126,13 +143,15 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                 <Link href={field_info_url} text={infoUrlText} />
               )}
               {field_external_links.length > 0 &&
-                field_external_links.map((externalLink: ExternalLinks, key: number) => (
-                  <Link
-                    key={`${externalLink.title}-${key}`}
-                    href={externalLink.uri}
-                    text={externalLink.title}
-                  />
-                ))}
+                field_external_links.map(
+                  (externalLink: ExternalLinks, key: number) => (
+                    <Link
+                      key={`${externalLink.title}-${key}`}
+                      href={externalLink.uri}
+                      text={externalLink.title}
+                    />
+                  )
+                )}
             </div>
             {field_offers_info_url && (
               <Button
