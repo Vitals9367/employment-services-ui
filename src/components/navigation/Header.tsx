@@ -3,26 +3,49 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { DrupalMenuLinkContent } from 'next-drupal';
 import { Navigation as NavigationHDS } from "hds-react";
-import { NavProps } from '@/lib/types';
+
+import { FooterProps, NavProps, NavigationProps, Node } from '@/lib/types';
 import classNames from '@/lib/classNames';
-import { frontPagePaths, printablePages } from '@/lib/helpers';
-import { previewNavigation } from '@/lib/helpers';
+import {
+  frontPagePaths,
+  printablePages,
+  previewNavigation,
+} from '@/lib/helpers';
 import { Breadcrumb } from './Breadcrumb';
 import styles from './navigation.module.scss';
 import PrintButton from '../printButton/PrintButton';
 import Navigation from '../navigationComponents/Navigation';
 import MobileNavigation from '../navigationComponents/MobileNavigation';
 
+interface RouterProps {
+  components?: any;
+  route: string;
+  push: (searchValue: string, undefined: undefined, { shallow }: any) => void;
+}
+
+interface PageProps {
+ footer: FooterProps;
+ nav: NavigationProps;
+ _nextI18Next: any;
+ node: Node;
+}
 
 function Header(header: NavProps): JSX.Element {
-
-  const { locale, menu, themes, langLinks, breadcrumb, hideNav, langcode, preview } =
-    header;
+  const {
+    locale,
+    menu,
+    themes,
+    langLinks,
+    breadcrumb,
+    hideNav,
+    langcode,
+    preview,
+  } = header;
   const { t } = useTranslation('common');
-  const router: any = useRouter(); // @TODO Fix type for proper
-  const activePath = langLinks[locale ? locale : 'fi'];
-  const [pageProps, setPageProps]: any | null = useState(null);
-  const [isPrintable, setIsPrintable] = useState(false);
+  const router: RouterProps = useRouter();
+  const activePath = langLinks[locale ?? 'fi'];
+  const [pageProps, setPageProps] = useState<PageProps | null>(null);
+  const [isPrintable, setIsPrintable] = useState<boolean>(false);
 
   useEffect(() => {
     setPageProps(router.components[router.route].props.pageProps);
@@ -58,6 +81,7 @@ function Header(header: NavProps): JSX.Element {
         langLinks={langLinks}
         langcode={langcode as string}
         menuOtherLanguages={themes}
+        preview={preview}
       />
       <MobileNavigation
         locale={locale}
@@ -69,6 +93,7 @@ function Header(header: NavProps): JSX.Element {
         langLinks={langLinks}
         langcode={langcode as string}
         menuOtherLanguages={themes}
+        preview={preview}
       />
       { !frontPagePaths.includes(activePath) && activePath !== '/' && (
         <div className={styles.subHeader}>
@@ -87,7 +112,7 @@ function Header(header: NavProps): JSX.Element {
 
 export default Header;
 
-export const getNav = (menuArray: DrupalMenuLinkContent[] | undefined, activePath: any) => {
+export const getNav = (menuArray: DrupalMenuLinkContent[] | undefined, activePath: any, preview: boolean) => {
   const nav: ReactElement[] = [];
   if (!menuArray) {
     return <></>;
@@ -104,6 +129,7 @@ export const getNav = (menuArray: DrupalMenuLinkContent[] | undefined, activePat
           href={sub.url}
           label={sub.title}
           active={sub.url === activePath}
+          onClick={() => previewNavigation(sub.url, preview)}
         />
       );
       return subs;
@@ -117,6 +143,7 @@ export const getNav = (menuArray: DrupalMenuLinkContent[] | undefined, activePat
         active={isActive}
         className={classNames(styles.navDropDown, isActive && styles.active)}
         href={item.url}
+        onClick={() => previewNavigation(item.url, preview)}
       >
         {subs}
       </NavigationHDS.DropdownLink>

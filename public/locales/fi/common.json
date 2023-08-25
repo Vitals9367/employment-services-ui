@@ -36,7 +36,7 @@
     "entity_type_event": "Tapahtuma",
     "entity_type_article": "Uutinen",
     "loading_suggestions": "Ladataan ehdotuksia",
-    "group_description": "Voit valita seuraavista suodattimista yhden kerrallaan"
+    "group_description": "Voit valita seuraavista suodattimista useamman kerrallaan."
   },
   "list": {
     "load_more": "Näytä lisää",
@@ -52,7 +52,8 @@
     "events_page_url": "/ajankohtaista/tapahtumat",
     "no_events": "Ei tulevia tapahtumia tästä aiheesta.",
     "event_title": "Tapahtuma",
-    "event_link": "Tapahtuma linkki"
+    "event_link": "Tapahtuma linkki",
+    "result_zero": "Ei hakutuloksia"
   },
   "event": {
     "remote_event": "Etätapahtuma",
@@ -63,7 +64,8 @@
   },
   "news": {
     "news": "Uutinen",
-    "newsletter": "Uutiskirje"
+    "newsletter": "Uutiskirje",
+    "partner_jobs": "Kumppanien tarjoamat työpaikat"
   },
   "video": {
     "cookie_consent": "Et ole antanut lupaa asettaa evästeitä.",

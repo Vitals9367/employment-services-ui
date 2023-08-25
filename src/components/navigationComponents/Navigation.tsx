@@ -1,13 +1,12 @@
-import { Button, IconLinkExternal } from 'hds-react';
-import { Navigation as NavigationHDS } from 'hds-react';
+import { Button, IconLinkExternal, Navigation as NavigationHDS } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 
 import { NavigationProps } from '@/lib/types';
+import { primaryLanguages } from '@/lib/helpers';
 import classNames from '@/lib/classNames';
 import { getNav } from '../navigation/Header';
 import styles from './navigationComponents.module.scss';
 import LanguageSelect from './LanguageSelect';
-import { primaryLanguages } from '@/lib/helpers';
 
 export default function Navigation({
   locale,
@@ -19,6 +18,7 @@ export default function Navigation({
   onClick,
   langcode,
   menuOtherLanguages,
+  preview,
 }: NavigationProps) {
   const { t } = useTranslation('common');
   return (
@@ -39,8 +39,9 @@ export default function Navigation({
             langcode={langcode}
             activePath={activePath}
             menuOtherLanguages={menuOtherLanguages}
+            preview={preview}
           />
-          {primaryLanguages.includes(langcode as string) && (
+          {primaryLanguages.includes(langcode) && (
             <NavigationHDS.Search
               onSearch={onSearch}
               searchLabel={t('navigation.search_label')}
@@ -55,8 +56,8 @@ export default function Navigation({
             {t('navigation.button_text')}
           </Button>
         </NavigationHDS.Actions>
-        {primaryLanguages.includes(langcode as string) && !hideNav && (
-          <NavigationHDS.Row>{getNav(menu, activePath)}</NavigationHDS.Row>
+        {primaryLanguages.includes(langcode) && !hideNav && (
+          <NavigationHDS.Row>{getNav(menu, activePath, preview as boolean)}</NavigationHDS.Row>
         )}
       </NavigationHDS>
     </div>

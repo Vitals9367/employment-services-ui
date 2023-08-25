@@ -1,13 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import parse from 'html-react-parser';
-import {
-  Container,
-  IconClock,
-  IconLocation,
-  IconPhone,
-  IconEnvelope,
-  IconPersonWheelchair,
-} from 'hds-react';
+import { Container, IconPersonWheelchair } from 'hds-react';
 
 import { NavProps, TprUnitData } from '@/lib/types';
 import { groupData } from '@/lib/helpers';
@@ -17,21 +9,12 @@ import HtmlBlock from '@/components/HtmlBlock';
 import MediaImage from '@/components/mediaImage/MediaImage';
 import styles from './tprUnitPage.module.scss';
 import AccordionWithIcon from '../accordion/AccordionWithIcon';
+import ContactInfo from '../contactInfo/ContactInfo';
 
 interface NodeTprUnitProps {
   node: TprUnitData;
   sidebar: NavProps;
   preview: boolean | undefined;
-}
-
-interface BlockProps {
-  title: string;
-  icon: string;
-  content: any;
-}
-
-interface ContactInfoProps {
-  aside?: boolean;
 }
 
 function NodeTprUnitPage({
@@ -59,96 +42,25 @@ function NodeTprUnitPage({
   } = node;
 
   const { t } = useTranslation('common');
-  const pageTitle = name_override ? name_override : name;
-  const picture = picture_url_override ? picture_url_override : picture_url;
-
-  const Block = (block: BlockProps): JSX.Element => {
-    const { title, icon, content } = block;
-    const iconsMap: any = {
-      location: IconLocation,
-      clock: IconClock,
-      phone: IconPhone,
-      envelope: IconEnvelope,
-    };
-    const IconTag = iconsMap[icon];
-
-    return (
-      <div className={`${styles.infoBlock} onSidebar`}>
-        <div className={styles.icon}>
-          <IconTag aria-hidden="true" />
-        </div>
-        <div className={styles.blockContent}>
-          <div className={styles.title}>{title}</div>
-          <div className={styles.content}>
-            <p>
-              {parse(content.join('<br/>').replace(/(?:\r\n|\r|\n)/g, '<br/>'))}
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const ContactInfo = ({ aside }: ContactInfoProps): JSX.Element => {
-    return (
-      <div className={`${styles.contactInfo} ${aside ? styles.aside : ''}`}>
-        <div className={styles.contentTitle}>
-          <span>{t('unit.contact_information')}</span>
-        </div>
-        {address.address_line1 && (
-          <Block
-            title={t('unit.visit_address')}
-            icon="location"
-            content={[
-              address.address_line1,
-              address.postal_code,
-              address.locality,
-            ]}
-          />
-        )}
-
-        {opening_hours && (
-          <Block
-            title={t('unit.open_hours')}
-            icon="clock"
-            content={[opening_hours[0].value]}
-          />
-        )}
-
-        {email && service_map_embed === '53341' && (
-          <Block
-            title={t('unit.email')}
-            icon="envelope"
-            content={[`<a href="mailto:${email}">${email}</a>`]}
-          />
-        )}
-
-        {phone && (
-          <Block
-            title={t('unit.phone_service')}
-            icon="phone"
-            content={[`${phone} (${call_charge_info.value})`]}
-          />
-        )}
-
-        {address_postal && (
-          <Block
-            title={t('unit.postal_address')}
-            icon="location"
-            content={[address_postal]}
-          />
-        )}
-      </div>
-    );
-  };
+  const pageTitle = name_override ?? name;
+  const picture = picture_url_override ?? picture_url;
 
   return (
     <article>
       <Container className="container">
         <div className="columns">
           <div className="sidebar col col-4 flex-order-first">
-            <Sidebar {...sidebar}/>
-            <ContactInfo aside={true} />
+            <Sidebar {...sidebar} />
+            <ContactInfo
+              aside={true}
+              phone={phone}
+              email={email}
+              address={address}
+              address_postal={address_postal}
+              opening_hours={opening_hours}
+              call_charge_info={call_charge_info}
+              service_map_embed={service_map_embed}
+            />
           </div>
           <div className="content-region col col-8 flex-grow">
             <h1>{pageTitle}</h1>
@@ -164,7 +76,15 @@ function NodeTprUnitPage({
               </div>
             )}
 
-            <ContactInfo />
+            <ContactInfo
+              phone={phone}
+              email={email}
+              address={address}
+              address_postal={address_postal}
+              opening_hours={opening_hours}
+              call_charge_info={call_charge_info}
+              service_map_embed={service_map_embed}
+            />
 
             {field_content?.length > 0 && (
               <ContentMapper

@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import Link from '@/components/link/Link'
-import getMenu from '@/lib/get-menu'
 import { Layout } from '@/components/layout/Layout'
 import { NavProps, FooterProps } from '@/lib/types'
 import { getDrupalClient } from '@/lib/drupal-client'
@@ -81,7 +80,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 export const PageNotFound = ({ nav, footer }: PageNotFoundProps) => {
   const { locale } = useRouter()
 
-  let texts = notFoundTexts.fi
+  let texts;
   switch (locale) {
     case 'sv':
       texts = notFoundTexts.sv

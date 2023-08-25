@@ -2,14 +2,12 @@ import { DrupalMenuLinkContent } from 'next-drupal';
 import { GroupingProps, Node } from '@/lib/types';
 import getConfig from 'next/config';
 
-import { i18n } from 'next-i18next.config';
-
 import { BreadcrumbContent } from './types';
 import { NODE_TYPES } from '@/lib/drupalApiTypes';
 import { NextApiResponse } from 'next';
 
 
-interface newPage {
+interface NewPage {
   id: string;
   title: string; 
   url: string;
@@ -58,7 +56,10 @@ export const languageFrontPages = {
 };
 
 /* Link and navigation helpers */
-export const previewNavigation = (path: string, preview: boolean | undefined): void => {
+export const previewNavigation = (
+  path: string,
+  preview: boolean | undefined
+): void => {
   if (preview) {
     window
       .open(`${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/${path}`, '_parent')
@@ -70,7 +71,7 @@ export const previewNavigation = (path: string, preview: boolean | undefined): v
 
 export const isExternalLink = (href: string): boolean | undefined => {
   const isExternalLink =
-    href && (href.startsWith('https://') || href.startsWith('https://'));
+    href && (href.startsWith('https://') || href.startsWith('http://'));
 
   return isExternalLink || false;
 };
@@ -105,56 +106,51 @@ export const getBreadCrumb = (
   path: string,
   title: string,
   type: string,
-  locale: string,
+  locale: string
 ): BreadcrumbContent[] => {
-  const page = menuItems.find(({ url }) => url === path);
-
-  // TPR Unit may not have menu attachment
-  if (!page && type === 'tpr_unit--tpr_unit') {
-    return [];
-  }
-
+  const mainMenuPage = menuItems.find(({ url }) => url === path);
   // Breadcrumb object for pages without menu attachment
-  let newPage: newPage = {
+  const newPage: NewPage = {
     id: 'current_page_crumb',
     title: title,
     url: path,
     parent: '',
     locale: locale,
   };
+    // Read parent from the page path
+    const parentPath = path.substring(0, path.lastIndexOf('/'));
+    // Load parent menu object
+    const parentPage = menuItems.find(({ url }) => url.includes(parentPath));
+  
   // Pages that are not in menus always get a breadcrumb.
-  if (!page) {
+  if (!mainMenuPage) {
+    // TPR Unit may not have menu attachment
+    if (type === 'tpr_unit--tpr_unit') {
+      return [];
+    }
+
     if (
-      (type !== 'node--event' && type !== 'node--article') ||
+      type === 'node--page' ||
+      !parentPage?.id ||
       (type === 'node--article' && !primaryLanguages.includes(locale))
     ) {
       return [newPage];
     }
 
-    // Read parent from the page path
-    const parentPath = path.substring(0, path.lastIndexOf('/'));
-    // Load parent menu object
-    const parentPage = menuItems.find(({ url }) => url.includes(parentPath));
-
-    // Event page doesn't have parent
-    if (!parentPage?.id) {
-      return [newPage];
-    }
-
-    // Create parent id for the page
+    // Create parent id for the event
     newPage.parent = parentPage.id;
   }
 
   // Landing pages don't need breadcrumb.
-  if (page?.parent === '') {
+  if (mainMenuPage?.parent === '') {
     return [];
   }
-
   // Create handle for the page object based on above
-  const pageHandle: any = newPage.parent !== '' ? newPage : page;
+  const pageHandle: DrupalMenuLinkContent | NewPage | undefined =
+    newPage.parent !== '' ? newPage : mainMenuPage;
 
-  const breadcrumbs: BreadcrumbContent[] = [pageHandle];
-  let parentItem = menuItems.find(({ id }) => id === pageHandle.parent);
+  const breadcrumbs: BreadcrumbContent[] = [pageHandle as BreadcrumbContent];
+  let parentItem = menuItems.find(({ id }) => id === pageHandle?.parent);
 
   if (parentItem) {
     breadcrumbs.push(parentItem);
@@ -167,6 +163,7 @@ export const getBreadCrumb = (
       if (!parentItem?.parent) break;
     }
   }
+
   return breadcrumbs.reverse();
 };
 
@@ -176,6 +173,22 @@ export const deleteCookie = (event: any, name: string, history: any) => {
   document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
   history.go(0);
 };
+
+export const getCookiesUrl = (locale: string) => {
+  let cookieUrl;
+  switch (locale) {
+    case 'fi':
+      cookieUrl = '/cookies';
+      break;
+    case 'en':
+    case 'sv':
+      cookieUrl = `/${locale}/cookies`;
+      break;
+    default:
+      cookieUrl = '/en/cookies';
+  }
+  return cookieUrl;
+}; 
 
 /** Get data from node helpers */
 export const getTitle = (node: Node, suffix: String): string => {
@@ -259,7 +272,6 @@ export const getDefaultImage = (node: Node): string => {
   return process.env.NEXT_PUBLIC_SITE_URL + '/tyollisyyspalvelut.png';
 };
 
-
 /** Filtering helpers */
 export const sortArrayByOtherArray = (array: any[], sortArray: string[]) => {
   return [...array].sort(
@@ -279,12 +291,12 @@ export const getLocale = (res: NextApiResponse<any>) => {
 
 export const groupData = (data: GroupingProps[]) => {
   const groups: string[] = [];
-  data.map((item: GroupingProps) =>
+  data.forEach((item: GroupingProps) =>
     groups.indexOf(item.group) === -1 ? groups.push(item.group) : null
   );
   return groups;
 };
 
-export const setInitialLocale = (locale: string ): string => {
+export const setInitialLocale = (locale: string): string => {
   return primaryLanguages.includes(locale) ? locale : 'en';
 };

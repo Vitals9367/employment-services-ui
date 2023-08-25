@@ -13,7 +13,7 @@ import styles from './navigation.module.scss'
 export function Sidebar(sidebar: NavProps): JSX.Element {
   const { locale, menu, langLinks, preview } = sidebar;
   const { t } = useTranslation('common');
-  const activePath = langLinks[locale ? locale : 'fi'];
+  const activePath = langLinks[locale ?? 'fi'];
 
   const getSideNav = (
     menuArray: DrupalMenuLinkContent[] | undefined
@@ -24,7 +24,7 @@ export function Sidebar(sidebar: NavProps): JSX.Element {
     if (!menuArray) {
       return { nav, defaultOpenMainLevels };
     }
-    menuArray.map((second: DrupalMenuLinkContent, index: number) => {
+    menuArray.forEach((second: DrupalMenuLinkContent) => {
       const subs: ReactElement[] = [];
       let parent: boolean = false;
 
@@ -35,7 +35,7 @@ export function Sidebar(sidebar: NavProps): JSX.Element {
         }
         if (sub.items) {
           let thirds: ReactElement[] = [];
-          sub.items?.map((third: DrupalMenuLinkContent, idx: number) => {
+          sub.items?.map((third: DrupalMenuLinkContent) => {
             if (third.url === activePath) {
               parent = true;
             }
@@ -59,7 +59,6 @@ export function Sidebar(sidebar: NavProps): JSX.Element {
             <SideNavigation.MainLevel
               key={sub.title}
               id={sub.title}
-              // href={sub.url}
               onClick={() => (window.location.href = sub.url)}
               label={sub.title}
               className={classNames(

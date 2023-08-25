@@ -36,7 +36,7 @@
     "entity_type_event": "Event",
     "entity_type_article": "News",
     "loading_suggestions": "Loading suggestions",
-    "group_description": "You can select one of the following filters at a time"
+    "group_description": "You can select multiple tags from the following filters at a time."
   },
   "list": {
     "load_more": "Show more",
@@ -52,7 +52,8 @@
     "events_page_url": "/en/current-matters/events",
     "no_events": "No upcoming events on this topic.",
     "event_title": "Event",
-    "event_link": "Event link to"
+    "event_link": "Event link to",
+    "result_zero": "No search results"
   },
   "event": {
     "remote_event": "Remote event",
@@ -63,7 +64,8 @@
   },
   "news": {
     "news": "News",
-    "newsletter": "Newsletter"
+    "newsletter": "Newsletter",
+    "partner_jobs": "Jobs offered by partners"
   },
   "video": {
     "cookie_consent": "You have not allowed the use of cookies on this site.",
