@@ -60,7 +60,9 @@
     "info_url_text": "Tapahtuman kotisivut",
     "info_url_text_teams": "Avaa Teams-tapahtuma",
     "cancelled_text": "Peruttu",
-    "field_offers_info_url": "Ilmoittaudu"
+    "field_offers_info_url": "Ilmoittaudu",
+    "provider": "Järjestäjän tiedot",
+    "publisher": "Julkaisijan tiedot"
   },
   "news": {
     "news": "Uutinen",

@@ -60,7 +60,9 @@
     "info_url_text": "Evenemangets hemsida",
     "info_url_text_teams": "Öppna Teams-evenemanget",
     "cancelled_text": "Inställt",
-    "field_offers_info_url": "Bli Medlem"
+    "field_offers_info_url": "Bli Medlem",
+    "provider": "Arrangör",
+    "publisher": "Utgivare"
   },
   "news": {
     "news": "Nyhet",

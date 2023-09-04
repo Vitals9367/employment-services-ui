@@ -60,7 +60,9 @@
     "info_url_text": "Event homepage",
     "info_url_text_teams": "Open Teams-event",
     "cancelled_text": "Cancelled",
-    "field_offers_info_url": "Sign up"
+    "field_offers_info_url": "Sign up",
+    "provider": "Organizer information",
+    "publisher": "Publisher information"
   },
   "news": {
     "news": "News",

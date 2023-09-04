@@ -121,47 +121,68 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                     <div>{field_location_extra_info}</div>
                   </div>
                 )}
-                {field_publisher && (
-                  <div className={styles.location}>
-                    <IconFaceSmile />
-                    <div>{field_publisher}</div>
+              </div>
+            </div>
+            <div className={styles.eventDetailContainer}>
+              <div className={styles.contentRegionEventLeft}>
+                <div className={`${styles.contentContainer} content-region`}>
+                  {field_text?.processed && (
+                    <HtmlBlock field_text={field_text} />
+                  )}
+
+                  {field_info_url && (
+                    <Link href={field_info_url} text={infoUrlText} />
+                  )}
+                  {field_external_links.length > 0 &&
+                    field_external_links.map(
+                      (externalLink: ExternalLinks, key: number) => (
+                        <Link
+                          key={`${externalLink.title}-${key}`}
+                          href={externalLink.uri}
+                          text={externalLink.title}
+                        />
+                      )
+                    )}
+                </div>
+                {field_offers_info_url && (
+                  <Button
+                    onClick={onClick}
+                    theme="black"
+                    iconRight={<IconLinkExternal size="m" aria-hidden="true" />}
+                  >
+                    {t('event.field_offers_info_url')}
+                  </Button>
+                )}
+              </div>
+              <div className={styles.contentRegionEventRight}>
+                {field_provider && (
+                  <div>
+                    <h2 className={styles.location}>
+                      <IconLayers />
+                      <div className={styles.contentRegionSubHeader}>
+                        {t('event.provider')}
+                      </div>
+                    </h2>
+                    <div className={styles.contentRegionText}>
+                      {field_provider}
+                    </div>
                   </div>
                 )}
-
-                {field_provider && (
-                  <div className={styles.location}>
-                    <IconLayers />
-                    <div>{field_provider}</div>
+                {field_publisher && (
+                  <div>
+                    <div className={styles.location}>
+                      <IconFaceSmile />
+                      <h2 className={styles.contentRegionSubHeader}>
+                        {t('event.publisher')}
+                      </h2>
+                    </div>
+                    <div className={styles.contentRegionText}>
+                      {field_publisher}
+                    </div>
                   </div>
                 )}
               </div>
             </div>
-            <div className={`${styles.contentContainer} content-region`}>
-              {field_text?.processed && <HtmlBlock field_text={field_text} />}
-
-              {field_info_url && (
-                <Link href={field_info_url} text={infoUrlText} />
-              )}
-              {field_external_links.length > 0 &&
-                field_external_links.map(
-                  (externalLink: ExternalLinks, key: number) => (
-                    <Link
-                      key={`${externalLink.title}-${key}`}
-                      href={externalLink.uri}
-                      text={externalLink.title}
-                    />
-                  )
-                )}
-            </div>
-            {field_offers_info_url && (
-              <Button
-                onClick={onClick}
-                theme="black"
-                iconRight={<IconLinkExternal size="m" aria-hidden="true" />}
-              >
-                {t('event.field_offers_info_url')}
-              </Button>
-            )}
           </div>
         </div>
       </Container>
