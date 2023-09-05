@@ -70,12 +70,13 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
 export const getRelatedEvents = async (
   queryParams: EventsRelatedQueryParams
 ) => {
-  const { superEvent } = queryParams;
+  const { superEvent, nodeId } = queryParams;
   const defaultLocale: Locale = 'fi';
   const locale: Locale = queryParams.locale ?? defaultLocale;
   const eventParams = () =>
     baseEventQueryParams()
       .addFilter('field_super_event', superEvent)
+      .addFilter('id', nodeId, 'NOT IN')
       .addSort('field_end_time', 'ASC')
       .addFilter('status', '1')
       .addFilter('langcode', locale);

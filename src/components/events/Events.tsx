@@ -161,7 +161,7 @@ export default function Events(props: EventListProps): JSX.Element {
                   {event.field_image_url && (
                     <Image
                       src={event.field_image_url[0]}
-                      alt={event.field_image_alt[0]}
+                      alt={event.field_image_alt ? event.field_image_alt[0] : ''}
                       layout="responsive"
                       objectFit="cover"
                       width={3}

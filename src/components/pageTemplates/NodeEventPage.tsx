@@ -8,6 +8,7 @@ import {
   IconAlertCircle,
   Button,
   IconFaceSmile,
+  IconCalendarPlus,
 } from 'hds-react';
 
 import { Node } from '@/lib/types';
@@ -19,7 +20,6 @@ import styles from './eventPage.module.scss';
 import EventStatus from '../events/EventStatus';
 import { RelatedEvents } from '../events/RelatedEvents';
 import DateTime from '../dateTime/DateTime';
-
 
 interface NodeEventPageProps {
   node: Node;
@@ -64,6 +64,9 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
   const onClick = () => {
     location.href = field_offers_info_url;
   };
+
+  console.log('node--->', node);
+
   return (
     <article>
       <Container className="container">
@@ -171,11 +174,24 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                     </div>
                   </div>
                 )}
+                {field_super_event && (
+                  <div>
+                    <h2 className={styles.location}>
+                      <IconCalendarPlus />
+                      <div className={styles.contentRegionSubHeader}>
+                        {t('event.Other_times')}
+                      </div>
+                    </h2>
+                    <RelatedEvents
+                      superEvent={field_super_event}
+                      nodeId={node.id}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-        {field_super_event && <RelatedEvents superEvent={field_super_event} />}
       </Container>
     </article>
   );

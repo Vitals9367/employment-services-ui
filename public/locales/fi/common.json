@@ -65,6 +65,7 @@
     "publisher": "Julkaisijan tiedot",
     "showAll": "Näytä kaikki",
     "showLess": "Piilota",
+    "Other_times": "Tapahtuman muut ajat"
   },
   "news": {
     "news": "Uutinen",
@@ -102,6 +103,9 @@
     "title": "Sivun palautenappeja ei voida näyttää",
     "text": "Toiminnon käyttämiseksi vaaditaan, että hyväksyt sivuston evästeet. Pääset antamaan palautetta tästä sivusta sallimalla evästeasetuksista tilastointiin liittyvät evästeet.",
     "button": "Muokkaa evästeasetuksia"
+  },
+  "datetime": {
+    "time": "kl."
   },
   "Sun": "Su",
   "Mon": "Ma",

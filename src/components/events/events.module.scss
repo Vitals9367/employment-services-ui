@@ -183,6 +183,7 @@ ul.tags {
   max-width: 50rem;
   padding: var(--spacing-s);
   border-bottom: 1px solid var(--color-black-10);
+  position: relative;
   &:first-child {
     border-top: 1px solid var(--color-black-10);
   }
@@ -193,7 +194,9 @@ ul.tags {
     border: none;
   }
   svg {
-    margin-left: 3rem;
+    position: absolute;
+    margin-left: 20px;
+    right: 0;
   }
 }
 

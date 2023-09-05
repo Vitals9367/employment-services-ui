@@ -21,11 +21,11 @@ function DateTimeSimple(props: DateTimeProps): JSX.Element {
 
   return (
     <>
-      <div>
+      <div style={{ marginRight: '1.5rem' }}>
         {`${t(getStartDateOfWeek.toString())} ${dateformat(startDate, `dd.mm.yyyy`)}`}
         {!isSameDay &&
           ` - ${t(getEndDateOfWeek.toString())} ${dateformat(endDate, 'ddd dd.mm.yyyy')},`}
-        {` klo ${dateformat(startDate, 'HH:MM')} - ${dateformat(
+        {` ${t('datetime.time')} ${dateformat(startDate, 'HH:MM')} - ${dateformat(
           endDate,
           'HH:MM'
         )}`}
