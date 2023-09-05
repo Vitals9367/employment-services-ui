@@ -86,7 +86,7 @@ export function EventList({
                     {event.field_image_url && (
                       <Image
                         src={event.field_image_url}
-                        alt={event.field_image_alt}
+                        alt={event.field_image_alt ?? ''}
                         layout="responsive"
                         objectFit="cover"
                         width={3}
