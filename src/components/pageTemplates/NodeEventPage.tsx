@@ -8,7 +8,6 @@ import {
   IconAlertCircle,
   Button,
   IconFaceSmile,
-  IconLayers,
 } from 'hds-react';
 
 import { Node } from '@/lib/types';
@@ -46,7 +45,6 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
     field_location_extra_info,
     field_offers_info_url,
     field_event_tags,
-    field_publisher,
     field_provider,
   } = node;
 
@@ -158,26 +156,13 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                 {field_provider && (
                   <div>
                     <h2 className={styles.location}>
-                      <IconLayers />
+                      <IconFaceSmile />
                       <div className={styles.contentRegionSubHeader}>
                         {t('event.provider')}
                       </div>
                     </h2>
                     <div className={styles.contentRegionText}>
                       {field_provider}
-                    </div>
-                  </div>
-                )}
-                {field_publisher && (
-                  <div>
-                    <div className={styles.location}>
-                      <IconFaceSmile />
-                      <h2 className={styles.contentRegionSubHeader}>
-                        {t('event.publisher')}
-                      </h2>
-                    </div>
-                    <div className={styles.contentRegionText}>
-                      {field_publisher}
                     </div>
                   </div>
                 )}
