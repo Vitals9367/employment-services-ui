@@ -69,7 +69,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                 {field_image_url && (
                   <Image
                     src={field_image_url}
-                    alt={field_image_alt}
+                    alt={field_image_alt ?? ''}
                     layout="fill"
                     objectFit="cover"
                   />
