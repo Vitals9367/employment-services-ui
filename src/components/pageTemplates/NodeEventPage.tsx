@@ -19,8 +19,12 @@ import TagList from '@/components/events/TagList';
 import Link from '@/components/link/Link';
 import styles from './eventPage.module.scss';
 import EventStatus from '../events/EventStatus';
+<<<<<<< HEAD
 import { RelatedEvents } from '../events/RelatedEvents';
 import DateTime from '../dateTime/DateTime';
+=======
+import SideContent from '../sideContent/SideContent';
+>>>>>>> e8a0bcd8c (THF-533: sideContent module)
 
 interface NodeEventPageProps {
   node: Node;
@@ -66,11 +70,15 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
     (language: { name: string }) =>
       `${language.name.charAt(0).toUpperCase()}${language.name.slice(1)}`
   );
-
+  
   const onClick = () => {
     location.href = field_offers_info_url;
+<<<<<<< HEAD
   };
 
+=======
+  };    
+>>>>>>> e8a0bcd8c (THF-533: sideContent module)
   return (
     <article>
       <Container className="container">
@@ -132,6 +140,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                   </div>
                 )}
               </div>
+<<<<<<< HEAD
               <div className={styles.eventDetailContainer}>
                 <div className={styles.contentRegionEventLeft}>
                   <div className={`${styles.contentContainer} content-region`}>
@@ -150,22 +159,41 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                       {t('event.field_offers_info_url')}
                     </Button>
                   )}
-                </div>
-                <div className={styles.contentRegionEventRight}>
-                  {field_in_language && (
-                    <div className={styles.location}>
-                      <IconGlobe />
-                      <div>{field_in_language}</div>
-                    </div>
+=======
+            </div>
+            <div className={styles.eventDetailContainer}>
+              <div className={styles.contentRegionEventLeft}>
+                <div className={`${styles.contentContainer} content-region`}>
+                  {field_text?.processed && (
+                    <HtmlBlock field_text={field_text} />
                   )}
+
+                  {field_info_url && (
+                    <Link href={field_info_url} text={infoUrlText} />
+                  )}
+                  {field_external_links.length > 0 &&
+                    field_external_links.map(
+                      (externalLink: ExternalLinks, key: number) => (
+                        <Link
+                          key={`${externalLink.title}-${key}`}
+                          href={externalLink.uri}
+                          text={externalLink.title}
+                        />
+                      )
+                    )}
+>>>>>>> e8a0bcd8c (THF-533: sideContent module)
                 </div>
-                {field_in_language && (
-                  <div className={styles.location}>
-                    <IconGlobe />
-                    <div>{field_in_language}</div>
-                  </div>
+                {field_offers_info_url && (
+                  <Button
+                    onClick={onClick}
+                    theme="black"
+                    iconRight={<IconLinkExternal size="m" aria-hidden="true" />}
+                  >
+                    {t('event.field_offers_info_url')}
+                  </Button>
                 )}
               </div>
+<<<<<<< HEAD
               {field_provider && (
                 <div>
                   <h2 className={styles.location}>
@@ -204,9 +232,25 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                     key={`${externalLink.title}-${key}`}
                     href={externalLink.uri}
                     text={externalLink.title}
+=======
+              <div className={styles.contentRegionEventRight}>
+                {field_in_language.length > 0 && (
+                  <SideContent
+                    header={t('event.languages')}
+                    field={event_languages.toString().replace(',', ', ')}
+                    icon={<IconGlobe />}
+>>>>>>> e8a0bcd8c (THF-533: sideContent module)
                   />
-                )
-              )}
+                )}
+                {field_provider && (
+                  <SideContent
+                    header={t('event.provider')}
+                    field={field_provider}
+                    icon={<IconFaceSmile />}
+                  />
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </Container>

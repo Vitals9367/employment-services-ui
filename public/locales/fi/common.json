@@ -65,7 +65,8 @@
     "publisher": "Julkaisijan tiedot",
     "showAll": "Näytä kaikki",
     "showLess": "Piilota",
-    "Other_times": "Tapahtuman muut ajat"
+    "Other_times": "Tapahtuman muut ajat",
+    "languages": "Kielet"
   },
   "news": {
     "news": "Uutinen",
