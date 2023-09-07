@@ -1,3 +1,6 @@
+.contentRegionWarper {
+  margin-bottom: var(--spacing-l);
+}
 .headerContent {
     display: flex;
     font-size: var(--fontsize-body-m);
@@ -17,7 +20,7 @@
   .contentRegionSubHeader {
     font-size: var(--fontsize-body-l);
     font-weight: 600;
-    margin: 0 0 var(--spacing-xs);
+    margin: 0 0 var(--spacing-2-xs);
   }
   
   .contentRegionText {
