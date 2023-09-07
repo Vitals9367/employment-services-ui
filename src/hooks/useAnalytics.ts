@@ -144,16 +144,16 @@ export const useReactAndShare = (
   lang: string | undefined,
   pageTitle: string | undefined
 ) => {
+    const [reactAndShareApiKey, setReactAndShareApiKey] = useState(getConfig().publicRuntimeConfig.REACT_AND_SHARE_EN)
   useEffect(() => {
     if (cookieConsent !== true) {
       return
     }
 
-    let reactAndShareApiKey = getConfig().publicRuntimeConfig.REACT_AND_SHARE_FI
-    if (lang === 'en') {
-      reactAndShareApiKey = getConfig().publicRuntimeConfig.REACT_AND_SHARE_EN
+    if (lang === 'fi') {
+      setReactAndShareApiKey(getConfig().publicRuntimeConfig.REACT_AND_SHARE_FI)
     } else if (lang === 'sv') {
-      reactAndShareApiKey = getConfig().publicRuntimeConfig.REACT_AND_SHARE_SV
+      setReactAndShareApiKey(getConfig().publicRuntimeConfig.REACT_AND_SHARE_SV)
     }
 
     const script = document.createElement("script")
