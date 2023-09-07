@@ -10,10 +10,10 @@ import { getPathAlias } from '@/lib/helpers';
 
 import HtmlBlock from '@/components/HtmlBlock';
 import TagList from './TagList';
-import DateTime from './DateTime';
-
 import styles from './events.module.scss';
 import EventStatus from './EventStatus';
+import DateTime from '../dateTime/DateTime';
+
 
 export function EventList({
   pageType,
