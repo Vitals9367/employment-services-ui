@@ -4,18 +4,18 @@ import styles from './sideContent.module.scss';
 
 interface SideContent {
     header: string;
-    field: any;
+    content: any;
     icon: ReactElement;
 }
 
-function SideContent({ header, field, icon }: SideContent) {
+function SideContent({ header, content, icon }: SideContent) {
   return (
     <div className={styles.contentRegionWrapper}>
       <div className={styles.headerContent}>
         {icon}
         <h2 className={styles.contentRegionSubHeader}>{header}</h2>
       </div>
-      <div className={styles.contentRegionText}>{field}</div>
+      <div className={styles.contentRegionText}>{content}</div>
     </div>
   );
 }
