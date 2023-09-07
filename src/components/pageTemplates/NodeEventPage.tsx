@@ -8,22 +8,22 @@ import {
   IconAlertCircle,
   Button,
   IconFaceSmile,
+  IconGlobe,
   IconCalendarPlus,
 } from 'hds-react';
 
 import { Node } from '@/lib/types';
 import HtmlBlock from '@/components/HtmlBlock';
 import TagList from '@/components/events/TagList';
-
+import DateTime from '../dateTime/DateTime';
 import Link from '@/components/link/Link';
 import styles from './eventPage.module.scss';
 import EventStatus from '../events/EventStatus';
-import { RelatedEvents } from '../events/RelatedEvents';
-import DateTime from '../dateTime/DateTime';
+import SideContent from '../sideContent/SideContent';
+import RelatedEvents from '../events/RelatedEvents';
 
 interface NodeEventPageProps {
   node: Node;
-  superEvent: string;
 }
 
 interface ExternalLinks {
@@ -50,6 +50,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
     field_offers_info_url,
     field_event_tags,
     field_provider,
+    field_in_language,
     field_super_event,
   } = node;
 
@@ -60,13 +61,14 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
     : t('event.info_url_text');
   const event_tags: string[] = [];
   field_event_tags.map((tag: { name: string }) => event_tags.push(tag.name));
+  const event_languages = field_in_language.map(
+    (language: { name: string }) =>
+      `${language.name.charAt(0).toUpperCase()}${language.name.slice(1)}`
+  );
 
   const onClick = () => {
     location.href = field_offers_info_url;
   };
-
-  console.log('node--->', node);
-
   return (
     <article>
       <Container className="container">
@@ -137,7 +139,9 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                   )}
 
                   {field_info_url && (
-                    <Link href={field_info_url} text={infoUrlText} />
+                    <div className={styles.eventLinkWrapper}>
+                      <Link href={field_info_url} text={infoUrlText} />
+                    </div>
                   )}
                   {field_external_links.length > 0 &&
                     field_external_links.map(
@@ -151,42 +155,45 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                     )}
                 </div>
                 {field_offers_info_url && (
-                  <Button
-                    onClick={onClick}
-                    theme="black"
-                    iconRight={<IconLinkExternal size="m" aria-hidden="true" />}
-                  >
-                    {t('event.field_offers_info_url')}
-                  </Button>
+                  <div className={styles.eventLinkWrapper}>
+                    <Button
+                      onClick={onClick}
+                      theme="black"
+                      iconRight={
+                        <IconLinkExternal size="m" aria-hidden="true" />
+                      }
+                    >
+                      {t('event.field_offers_info_url')}
+                    </Button>
+                  </div>
                 )}
               </div>
               <div className={styles.contentRegionEventRight}>
+                {field_in_language.length > 0 && (
+                  <SideContent
+                    header={t('event.languages')}
+                    content={event_languages.toString().replace(',', ', ')}
+                    icon={<IconGlobe />}
+                  />
+                )}
                 {field_provider && (
-                  <div>
-                    <h2 className={styles.location}>
-                      <IconFaceSmile />
-                      <div className={styles.contentRegionSubHeader}>
-                        {t('event.provider')}
-                      </div>
-                    </h2>
-                    <div className={styles.contentRegionText}>
-                      {field_provider}
-                    </div>
-                  </div>
+                  <SideContent
+                    header={t('event.provider')}
+                    content={field_provider}
+                    icon={<IconFaceSmile />}
+                  />
                 )}
                 {field_super_event && (
-                  <div>
-                    <h2 className={styles.location}>
-                      <IconCalendarPlus />
-                      <div className={styles.contentRegionSubHeader}>
-                        {t('event.Other_times')}
-                      </div>
-                    </h2>
-                    <RelatedEvents
-                      superEvent={field_super_event}
-                      nodeId={node.id}
-                    />
-                  </div>
+                  <SideContent
+                    header={t('event.Other_times')}
+                    content={
+                      <RelatedEvents
+                        superEvent={field_super_event}
+                        nodeId={node.id}
+                      />
+                    }
+                    icon={<IconCalendarPlus />}
+                  />
                 )}
               </div>
             </div>

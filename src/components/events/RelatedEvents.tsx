@@ -21,7 +21,7 @@ interface DateTimeProps {
   nodeId: string;
 }
 
-export function RelatedEvents(props: DateTimeProps): JSX.Element {
+export default function RelatedEvents(props: DateTimeProps): JSX.Element {
   const fetcher = () => getRelatedEvents(queryParams);
   const { data: events } = useSWR(`api/related-events`, fetcher);
   const { t } = useTranslation();
