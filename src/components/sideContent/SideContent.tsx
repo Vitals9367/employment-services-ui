@@ -10,7 +10,7 @@ interface SideContent {
 
 function SideContent({ header, field, icon }: SideContent) {
   return (
-    <div className={styles.contentRegionWarper}>
+    <div className={styles.contentRegionWrapper}>
       <div className={styles.headerContent}>
         {icon}
         <h2 className={styles.contentRegionSubHeader}>{header}</h2>
