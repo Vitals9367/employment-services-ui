@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React, { PropsWithChildren, ReactChildren, ReactElement } from 'react';
 
 import styles from './sideContent.module.scss';
 
 interface SideContent {
     header: string;
-    content: any;
+    content: ReactChildren | PropsWithChildren<any>;
     icon: ReactElement;
 }
 

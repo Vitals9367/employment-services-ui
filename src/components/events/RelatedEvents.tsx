@@ -22,17 +22,18 @@ interface DateTimeProps {
 }
 
 export default function RelatedEvents(props: DateTimeProps): JSX.Element {
-  const fetcher = () => getRelatedEvents(queryParams);
-  const { data: events } = useSWR(`api/related-events`, fetcher);
-  const { t } = useTranslation();
-  const { locale } = useRouter();
-  const [showAll, setShowAll] = useState<boolean>(false);
-  const [eventData, setEventData] = useState<EventData[]>(events);
+  const { locale, asPath } = useRouter();
   const queryParams: EventsRelatedQueryParams = {
     superEvent: props.superEvent,
     nodeId: props.nodeId,
     locale: locale,
   };
+  const fetcher = () => getRelatedEvents(queryParams);
+  const { data: events } = useSWR(`/${locale}/${asPath}`, fetcher);
+  const { t } = useTranslation();
+
+  const [showAll, setShowAll] = useState<boolean>(false);
+  const [eventData, setEventData] = useState<EventData[]>(events);
 
   useEffect(() => {
     showAll ? setEventData(events) : setEventData(events?.slice(0, 3));
