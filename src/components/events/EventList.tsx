@@ -10,10 +10,10 @@ import { getPathAlias } from '@/lib/helpers';
 
 import HtmlBlock from '@/components/HtmlBlock';
 import TagList from './TagList';
-import DateTime from './DateTime';
-
 import styles from './events.module.scss';
 import EventStatus from './EventStatus';
+import DateTime from '../dateTime/DateTime';
+
 
 export function EventList({
   pageType,
@@ -86,7 +86,7 @@ export function EventList({
                     {event.field_image_url && (
                       <Image
                         src={event.field_image_url}
-                        alt={event.field_image_alt}
+                        alt={event.field_image_alt ?? ''}
                         layout="responsive"
                         objectFit="cover"
                         width={3}

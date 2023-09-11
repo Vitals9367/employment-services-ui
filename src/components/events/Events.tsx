@@ -13,11 +13,12 @@ import HtmlBlock from '../HtmlBlock';
 import Image from 'next/legacy/image';
 
 import styles from './events.module.scss';
-import DateTime from './DateTime';
+
 import TagList from './TagList';
 import EventStatus from './EventStatus';
 import { eventTags } from '@/lib/helpers';
 import { useCallback, useEffect, useState } from 'react';
+import DateTime from '../dateTime/DateTime';
 
 const getKey = (eventsIndex: number) => {
   return `${eventsIndex}`;
@@ -160,7 +161,7 @@ export default function Events(props: EventListProps): JSX.Element {
                   {event.field_image_url && (
                     <Image
                       src={event.field_image_url[0]}
-                      alt={event.field_image_alt[0]}
+                      alt={event.field_image_alt ? event.field_image_alt[0] : ''}
                       layout="responsive"
                       objectFit="cover"
                       width={3}

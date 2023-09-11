@@ -8,16 +8,19 @@ import {
   IconAlertCircle,
   Button,
   IconFaceSmile,
-  IconLayers,
+  IconGlobe,
+  IconCalendarPlus,
 } from 'hds-react';
 
 import { Node } from '@/lib/types';
 import HtmlBlock from '@/components/HtmlBlock';
 import TagList from '@/components/events/TagList';
-import DateTime from '@/components/events/DateTime';
+import DateTime from '../dateTime/DateTime';
 import Link from '@/components/link/Link';
 import styles from './eventPage.module.scss';
 import EventStatus from '../events/EventStatus';
+import SideContent from '../sideContent/SideContent';
+import RelatedEvents from '../events/RelatedEvents';
 
 interface NodeEventPageProps {
   node: Node;
@@ -46,8 +49,9 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
     field_location_extra_info,
     field_offers_info_url,
     field_event_tags,
-    field_publisher,
     field_provider,
+    field_in_language,
+    field_super_event,
   } = node;
 
   const { t } = useTranslation('common');
@@ -57,6 +61,10 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
     : t('event.info_url_text');
   const event_tags: string[] = [];
   field_event_tags.map((tag: { name: string }) => event_tags.push(tag.name));
+  const event_languages = field_in_language.map(
+    (language: { name: string }) =>
+      `${language.name.charAt(0).toUpperCase()}${language.name.slice(1)}`
+  );
 
   const onClick = () => {
     location.href = field_offers_info_url;
@@ -71,7 +79,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                 {field_image_url && (
                   <Image
                     src={field_image_url}
-                    alt={field_image_alt}
+                    alt={field_image_alt ?? ''}
                     layout="fill"
                     objectFit="cover"
                   />
@@ -121,47 +129,74 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                     <div>{field_location_extra_info}</div>
                   </div>
                 )}
-                {field_publisher && (
-                  <div className={styles.location}>
-                    <IconFaceSmile />
-                    <div>{field_publisher}</div>
-                  </div>
-                )}
+              </div>
+            </div>
+            <div className={styles.eventDetailContainer}>
+              <div className={styles.contentRegionEventLeft}>
+                <div className={`${styles.contentContainer} content-region`}>
+                  {field_text?.processed && (
+                    <HtmlBlock field_text={field_text} />
+                  )}
 
-                {field_provider && (
-                  <div className={styles.location}>
-                    <IconLayers />
-                    <div>{field_provider}</div>
+                  {field_info_url && (
+                    <div className={styles.eventLinkWrapper}>
+                      <Link href={field_info_url} text={infoUrlText} />
+                    </div>
+                  )}
+                  {field_external_links.length > 0 &&
+                    field_external_links.map(
+                      (externalLink: ExternalLinks, key: number) => (
+                        <Link
+                          key={`${externalLink.title}-${key}`}
+                          href={externalLink.uri}
+                          text={externalLink.title}
+                        />
+                      )
+                    )}
+                </div>
+                {field_offers_info_url && (
+                  <div className={styles.eventLinkWrapper}>
+                    <Button
+                      onClick={onClick}
+                      theme="black"
+                      iconRight={
+                        <IconLinkExternal size="m" aria-hidden="true" />
+                      }
+                    >
+                      {t('event.field_offers_info_url')}
+                    </Button>
                   </div>
                 )}
               </div>
-            </div>
-            <div className={`${styles.contentContainer} content-region`}>
-              {field_text?.processed && <HtmlBlock field_text={field_text} />}
-
-              {field_info_url && (
-                <Link href={field_info_url} text={infoUrlText} />
-              )}
-              {field_external_links.length > 0 &&
-                field_external_links.map(
-                  (externalLink: ExternalLinks, key: number) => (
-                    <Link
-                      key={`${externalLink.title}-${key}`}
-                      href={externalLink.uri}
-                      text={externalLink.title}
-                    />
-                  )
+              <div className={styles.contentRegionEventRight}>
+                {field_in_language.length > 0 && (
+                  <SideContent
+                    header={t('event.languages')}
+                    content={event_languages.toString().replace(',', ', ')}
+                    icon={<IconGlobe />}
+                  />
                 )}
+                {field_provider && (
+                  <SideContent
+                    header={t('event.provider')}
+                    content={field_provider}
+                    icon={<IconFaceSmile />}
+                  />
+                )}
+                {field_super_event && (
+                  <SideContent
+                    header={t('event.Other_times')}
+                    content={
+                      <RelatedEvents
+                        superEvent={field_super_event}
+                        nodeId={node.id}
+                      />
+                    }
+                    icon={<IconCalendarPlus />}
+                  />
+                )}
+              </div>
             </div>
-            {field_offers_info_url && (
-              <Button
-                onClick={onClick}
-                theme="black"
-                iconRight={<IconLinkExternal size="m" aria-hidden="true" />}
-              >
-                {t('event.field_offers_info_url')}
-              </Button>
-            )}
           </div>
         </div>
       </Container>

@@ -151,6 +151,8 @@ export const baseEventQueryParams = () =>
   .addInclude([
     'field_event_tags.content_translation_uid',
     'field_event_tags.parent',
+    'field_in_language.content_translation_uid',
+    'field_in_language.parent',
   ])
     .addFields(NODE_TYPES.EVENT, [
       'id',
@@ -174,8 +176,11 @@ export const baseEventQueryParams = () =>
       'field_location_extra_info',
       'field_offers_info_url',
       'field_event_tags',
+      'field_provider',
+      'field_super_event',
       'field_publisher',
-      'field_provider'
+      'field_provider',
+      'field_in_language'
     ])
 
 const getEventPageQueryParams = () =>

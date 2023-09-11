@@ -60,7 +60,13 @@
     "info_url_text": "Evenemangets hemsida",
     "info_url_text_teams": "Öppna Teams-evenemanget",
     "cancelled_text": "Inställt",
-    "field_offers_info_url": "Bli Medlem"
+    "field_offers_info_url": "Bli Medlem",
+    "provider": "Arrangör",
+    "publisher": "Utgivare",
+    "showAll": "Visa Alt",
+    "showLess": "Dölj",
+    "Other_times": "Andra evenemangstider",
+    "languages": "Språk"
   },
   "news": {
     "news": "Nyhet",
@@ -98,5 +104,12 @@
     "title": "Feedbackknappar kan inte visas",
     "text": "För att använda denna funktion måste du acceptera cookies från webbplatsen. Du kan ge feedback på den här sidan genom att aktivera statistikrelaterade cookies.",
     "button": "Ändra inställningarna för cookies"
-  }
+  },
+  "Sun": "Sön",
+  "Mon": "Mån",
+  "Tue": "Tis",
+  "Wed": "Ons",
+  "Thu": "Tor",
+  "Fri": "Fre",
+  "Sat": "Lör"
 }
