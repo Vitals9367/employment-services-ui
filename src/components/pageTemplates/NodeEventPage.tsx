@@ -173,7 +173,7 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                     header={t('event.languages')}
                     icon={<IconGlobe />}
                   >
-                    {event_languages.toString().replace(',', ', ')}
+                    {event_languages.toString().replaceAll(',', ', ')}
                   </SideContent>
                 )}
                 {field_provider && (
