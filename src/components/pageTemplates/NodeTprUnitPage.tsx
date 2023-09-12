@@ -45,6 +45,13 @@ function NodeTprUnitPage({
   const pageTitle = name_override ?? name;
   const picture = picture_url_override ?? picture_url;
 
+  const textContent: string[] = [];
+  const otherContent: string[] = [];
+
+ field_content?.map((x: any) =>
+   x.type === 'paragraph--text' ? textContent.push(x) : otherContent.push(x)
+ );
+
   return (
     <article>
       <Container className="container">
@@ -85,10 +92,36 @@ function NodeTprUnitPage({
               call_charge_info={call_charge_info}
               service_map_embed={service_map_embed}
             />
+            {field_content?.length > 0 && (
+              <ContentMapper
+                content={textContent}
+                pageType="tpr_unit"
+                locationId={drupal_internal__id}
+                mapId={service_map_embed}
+              />
+            )}
+            {node.accessibility_sentences.length !== 0 && (
+              <AccordionWithIcon
+                ariaLabel={t('unit.accessibility_information')}
+                accordionTitle={t('unit.accessibility_information')}
+                data={node.accessibility_sentences}
+                group={groupData(node.accessibility_sentences)}
+                backgroundColor={{
+                  background: 'var(--color-silver-medium-light)',
+                }}
+                leftIcon={
+                  <IconPersonWheelchair
+                    size="xl"
+                    color="var(--color-black)"
+                    aria-hidden="true"
+                  />
+                }
+              />
+            )}
 
             {field_content?.length > 0 && (
               <ContentMapper
-                content={field_content}
+                content={otherContent}
                 pageType="tpr_unit"
                 locationId={drupal_internal__id}
                 mapId={service_map_embed}
@@ -106,22 +139,6 @@ function NodeTprUnitPage({
             )}
           </div>
         </div>
-        {node.accessibility_sentences.length !== 0 && (
-          <AccordionWithIcon
-            ariaLabel={t('unit.accessibility_information')}
-            accordionTitle={t('unit.accessibility_information')}
-            data={node.accessibility_sentences}
-            group={groupData(node.accessibility_sentences)}
-            backgroundColor={{ background: 'var(--color-silver-medium-light)' }}
-            leftIcon={
-              <IconPersonWheelchair
-                size="xl"
-                color="var(--color-black)"
-                aria-hidden="true"
-              />
-            }
-          />
-        )}
       </Container>
     </article>
   );
