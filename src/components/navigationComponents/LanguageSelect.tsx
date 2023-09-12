@@ -73,7 +73,7 @@ function LanguageSelect({
               href={langLinks.ru}
               onClick={() => previewNavigation(langLinks.ru, preview)}
             >
-              Русский
+              Россия
             </Link>
           )}
           {langLinks.so === activePath && activePath !== undefined && (
@@ -82,7 +82,7 @@ function LanguageSelect({
               href={langLinks.so}
               onClick={() => previewNavigation(langLinks.so, preview)}
             >
-              Af-soomaaliga
+              Soomaali
             </Link>
           )}
 
@@ -92,7 +92,7 @@ function LanguageSelect({
               href={langLinks.uk}
               onClick={() => previewNavigation(langLinks.uk, preview)}
             >
-              Українська мова
+              Україна
             </Link>
           )}
         </div>

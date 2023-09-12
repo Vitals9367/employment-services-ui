@@ -9,7 +9,6 @@ import {
   Button,
   IconFaceSmile,
   IconGlobe,
-  IconCalendarPlus,
 } from 'hds-react';
 
 import { Node } from '@/lib/types';
@@ -172,27 +171,21 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                 {field_in_language.length > 0 && (
                   <SideContent
                     header={t('event.languages')}
-                    content={event_languages.toString().replace(',', ', ')}
                     icon={<IconGlobe />}
-                  />
+                  >
+                    {event_languages.toString().replaceAll(',', ', ')}
+                  </SideContent>
                 )}
                 {field_provider && (
                   <SideContent
                     header={t('event.provider')}
-                    content={field_provider}
                     icon={<IconFaceSmile />}
-                  />
+                  >{field_provider}</SideContent>
                 )}
                 {field_super_event && (
-                  <SideContent
-                    header={t('event.Other_times')}
-                    content={
-                      <RelatedEvents
-                        superEvent={field_super_event}
-                        nodeId={node.id}
-                      />
-                    }
-                    icon={<IconCalendarPlus />}
+                  <RelatedEvents
+                    superEvent={field_super_event}
+                    nodeId={node.id}
                   />
                 )}
               </div>
