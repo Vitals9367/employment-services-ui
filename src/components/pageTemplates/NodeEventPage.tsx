@@ -171,22 +171,22 @@ function NodeEventPage({ node, ...props }: NodeEventPageProps): JSX.Element {
                 {field_in_language.length > 0 && (
                   <SideContent
                     header={t('event.languages')}
-                    content={event_languages.toString().replace(',', ', ')}
                     icon={<IconGlobe />}
-                  />
+                  >
+                    {event_languages.toString().replace(',', ', ')}
+                  </SideContent>
                 )}
                 {field_provider && (
                   <SideContent
                     header={t('event.provider')}
-                    content={field_provider}
                     icon={<IconFaceSmile />}
-                  />
+                  >{field_provider}</SideContent>
                 )}
                 {field_super_event && (
-                   <RelatedEvents
-                   superEvent={field_super_event}
-                   nodeId={node.id}
-                 />
+                  <RelatedEvents
+                    superEvent={field_super_event}
+                    nodeId={node.id}
+                  />
                 )}
               </div>
             </div>
