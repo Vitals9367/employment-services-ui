@@ -1,3 +1,4 @@
+import { Key } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Container, IconPersonWheelchair } from 'hds-react';
 
@@ -10,14 +11,6 @@ import MediaImage from '@/components/mediaImage/MediaImage';
 import styles from './tprUnitPage.module.scss';
 import AccordionWithIcon from '../accordion/AccordionWithIcon';
 import ContactInfo from '../contactInfo/ContactInfo';
-import {
-  Key,
-  ReactChild,
-  ReactFragment,
-  ReactPortal,
-  useEffect,
-  useState,
-} from 'react';
 
 interface NodeTprUnitProps {
   node: TprUnitData;
