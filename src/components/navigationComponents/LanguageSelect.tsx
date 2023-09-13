@@ -73,7 +73,7 @@ function LanguageSelect({
               href={langLinks.ru}
               onClick={() => previewNavigation(langLinks.ru, preview)}
             >
-              Русский
+              Россия
             </Link>
           )}
           {langLinks.so === activePath && activePath !== undefined && (
@@ -82,7 +82,7 @@ function LanguageSelect({
               href={langLinks.so}
               onClick={() => previewNavigation(langLinks.so, preview)}
             >
-              Af-soomaaliga
+              Soomaali
             </Link>
           )}
 
@@ -92,7 +92,7 @@ function LanguageSelect({
               href={langLinks.uk}
               onClick={() => previewNavigation(langLinks.uk, preview)}
             >
-              Українська мова
+              Україна
             </Link>
           )}
         </div>
@@ -114,7 +114,7 @@ function LanguageSelect({
                   {t('global_menu_title')}
                 </div>
                 {menuOtherLanguages?.map((link: any) => (
-                  <a href={link.url} key={link.id}>
+                  <a href={link.url} key={link.id} onClick={() => previewNavigation(link.url, preview)}>
                     <div className={styles.globalLink}>
                       <span>{link.title}</span>
                     </div>
