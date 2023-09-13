@@ -10,6 +10,14 @@ import MediaImage from '@/components/mediaImage/MediaImage';
 import styles from './tprUnitPage.module.scss';
 import AccordionWithIcon from '../accordion/AccordionWithIcon';
 import ContactInfo from '../contactInfo/ContactInfo';
+import {
+  Key,
+  ReactChild,
+  ReactFragment,
+  ReactPortal,
+  useEffect,
+  useState,
+} from 'react';
 
 interface NodeTprUnitProps {
   node: TprUnitData;
@@ -44,13 +52,14 @@ function NodeTprUnitPage({
   const { t } = useTranslation('common');
   const pageTitle = name_override ?? name;
   const picture = picture_url_override ?? picture_url;
+  const arrivalContent: string[] = [];
+  const otherContent: any = [];
 
-  const textContent: string[] = [];
-  const otherContent: string[] = [];
-
- field_content?.map((x: any) =>
-   x.type === 'paragraph--text' ? textContent.push(x) : otherContent.push(x)
- );
+  field_content?.map((content: any) =>
+    content.type === 'paragraph--text' && field_content[0].id == content.id
+      ? arrivalContent.push(content)
+      : otherContent.push(content)
+  );
 
   return (
     <article>
@@ -76,13 +85,11 @@ function NodeTprUnitPage({
                 <HtmlBlock field_text={description} />
               </div>
             )}
-
             {picture && (
               <div className={styles.unitImage}>
                 <MediaImage media={picture} />
               </div>
             )}
-
             <ContactInfo
               phone={phone}
               email={email}
@@ -94,7 +101,7 @@ function NodeTprUnitPage({
             />
             {field_content?.length > 0 && (
               <ContentMapper
-                content={textContent}
+                content={arrivalContent}
                 pageType="tpr_unit"
                 locationId={drupal_internal__id}
                 mapId={service_map_embed}
@@ -104,8 +111,6 @@ function NodeTprUnitPage({
               <AccordionWithIcon
                 ariaLabel={t('unit.accessibility_information')}
                 accordionTitle={t('unit.accessibility_information')}
-                data={node.accessibility_sentences}
-                group={groupData(node.accessibility_sentences)}
                 backgroundColor={{
                   background: 'var(--color-silver-medium-light)',
                 }}
@@ -116,9 +121,30 @@ function NodeTprUnitPage({
                     aria-hidden="true"
                   />
                 }
-              />
+              >
+                {groupData(node.accessibility_sentences).map(
+                  (groupName: string, i: Key) => (
+                    <div key={i}>
+                      <h3>{groupName}</h3>
+                      <ul>
+                        {node.accessibility_sentences
+                          ?.filter(
+                            (group: { group: {} }) => groupName === group.group
+                          )
+                          .map(
+                            (
+                              value: { group: string; value: string },
+                              i: number
+                            ) => (
+                              <li key={`${value.group}-${i}`}>{value.value}</li>
+                            )
+                          )}
+                      </ul>
+                    </div>
+                  )
+                )}
+              </AccordionWithIcon>
             )}
-
             {field_content?.length > 0 && (
               <ContentMapper
                 content={otherContent}
