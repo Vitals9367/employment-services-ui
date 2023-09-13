@@ -114,7 +114,7 @@ function LanguageSelect({
                   {t('global_menu_title')}
                 </div>
                 {menuOtherLanguages?.map((link: any) => (
-                  <a href={link.url} key={link.id}>
+                  <a href={link.url} key={link.id} onClick={() => previewNavigation(link.url, preview)}>
                     <div className={styles.globalLink}>
                       <span>{link.title}</span>
                     </div>
