@@ -84,10 +84,37 @@ export default function Events(props: EventListProps): JSX.Element {
     });
   }, [locale]);
 
-  useEffect(() => {
-    updateTags();
-    setSize(1);
-  }, [filter, setSize, updateTags]);
+  useEffect(() => {  
+   
+     const x =  sessionStorage.getItem('screenX');
+      const sessionFilters = sessionStorage.getItem('sessionFilter');
+      const screenX = sessionStorage.getItem('screenX');
+      if (sessionFilters !== null) {
+        
+        setFilter(JSON.parse(sessionFilters))
+      }
+      if (screenX !== null) {
+        window.scrollTo(0, parseInt(screenX));
+      }
+  },[])
+
+ 
+    useEffect(() => {
+      updateTags();
+      setSize(1);
+      const handleBeforeUnload = (): void => {
+        if (filter !== null && filter !== undefined) {
+          sessionStorage.setItem('sessionFilter', JSON.stringify(filter));
+        }
+        sessionStorage.setItem('screenX', document.documentElement.scrollTop.toString())
+      };
+      window.addEventListener('beforeunload', handleBeforeUnload);
+
+      return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+      };
+    }, [filter, setSize, updateTags]);
+
 
   return (
     <div className="component">
