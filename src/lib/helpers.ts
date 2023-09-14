@@ -62,7 +62,7 @@ export const previewNavigation = (
 ): void => {
   if (preview) {
     window
-      .open(`${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/${path}`, '_parent')
+      .open(`${process.env.NEXT_DRUPAL_EDIT_URL}/${path}`, '_parent')
       ?.focus();
   } else {
     return;
