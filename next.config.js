@@ -2,6 +2,7 @@ const { i18n } = require('./next-i18next.config')
 
 const publicRuntimeConfig = {
   NEXT_PUBLIC_DRUPAL_BASE_URL: process.env.NEXT_PUBLIC_DRUPAL_BASE_URL,
+  NEXT_PUBLIC_DRUPAL_EDIT_URL: process.env.NEXT_PUBLIC_DRUPAL_EDIT_URL,
   NEXT_IMAGE_DOMAIN: process.env.NEXT_IMAGE_DOMAIN,
   MATOMO_SITE_ID: process.env.MATOMO_SITE_ID,
   MATOMO_URL: process.env.MATOMO_URL,
@@ -18,6 +19,7 @@ const serverRuntimeConfig = {
   elasticsearch_password: process.env.elasticsearch_password,
   elasticsearch_certificate: process.env.elasticsearch_certificate,
   NEXT_PUBLIC_DRUPAL_BASE_URL: process.env.NEXT_PUBLIC_DRUPAL_BASE_URL,
+  NEXT_PUBLIC_DRUPAL_EDIT_URL: process.env.NEXT_PUBLIC_DRUPAL_EDIT_URL,
   DRUPAL_FRONT_PAGE: process.env.DRUPAL_FRONT_PAGE,
   DRUPAL_CLIENT_ID: process.env.DRUPAL_CLIENT_ID,
   DRUPAL_CLIENT_SECRET: process.env.DRUPAL_CLIENT_SECRET,

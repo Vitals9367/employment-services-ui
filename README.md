@@ -27,7 +27,8 @@ Copy `.env.example` to .env.local. This is a `.gitignore`d local checkout's env 
 Required environment variables are
 
 ```env
-NEXT_PUBLIC_DRUPAL_BASE_URL='https://url-to-site.com
+NEXT_PUBLIC_DRUPAL_BASE_URL='https://url-to-site.com'
+NEXT_PUBLIC_DRUPAL_EDIT_URL='https://url-to-site.com'
 NEXT_IMAGE_DOMAIN=image.domain.com
 DRUPAL_SITE_ID=THE SITE ID HASH FROM DRUPAL INSTANCE
 DRUPAL_FRONT_PAGE=/
