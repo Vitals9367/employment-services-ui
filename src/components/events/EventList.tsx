@@ -70,7 +70,7 @@ export function EventList({
           }`}
         >
           {events?.length
-            ? events.map((event: EventData) => (
+            ? events?.map((event: EventData) => (
                 <div
                   className={`${styles.eventCard} event-card`}
                   key={event.id}

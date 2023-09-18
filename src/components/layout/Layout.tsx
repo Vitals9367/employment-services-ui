@@ -5,9 +5,10 @@ import Footer from '@/components/navigation/Footer';
 import { NavProps, FooterProps } from '@/lib/types';
 
 import styles from './layout.module.scss';
+import { ReactChildren, PropsWithChildren } from 'react';
 
 interface LayoutProps {
-  children: any;
+  children: ReactChildren | PropsWithChildren<any>;
   header: NavProps;
   footer: FooterProps;
   hideNav?: boolean;
