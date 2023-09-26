@@ -54,6 +54,10 @@ function NodeTprUnitPage({
       : otherContent.push(content)
   );
 
+  const openingHours = opening_hours.filter(
+    (open: { type: string }) => open.type === 'OPENING_HOURS'
+  );
+
   return (
     <article>
       <Container className="container">
@@ -66,7 +70,7 @@ function NodeTprUnitPage({
               email={email}
               address={address}
               address_postal={address_postal}
-              opening_hours={opening_hours}
+              opening_hours={openingHours}
               call_charge_info={call_charge_info}
               service_map_embed={service_map_embed}
             />
@@ -88,7 +92,7 @@ function NodeTprUnitPage({
               email={email}
               address={address}
               address_postal={address_postal}
-              opening_hours={opening_hours}
+              opening_hours={openingHours}
               call_charge_info={call_charge_info}
               service_map_embed={service_map_embed}
             />
