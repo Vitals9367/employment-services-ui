@@ -30,9 +30,9 @@ export const useCookieConsents = (): any => {
       sv: 'Statistiksystemets kaka samlar information om hur webbplatsen används.',
     },
     rns_description: {
-      fi: 'React & Share -reaktionappien toimintaan liittyvä tietue.',
-      en: 'A record related to the operation of the React & Share react buttons.',
-      sv: 'En post relaterad till driften av reaktionsknappen React & Share.',
+      fi: 'Askem-reaktionappien toimintaan liittyvä tietue.',
+      en: 'A record related to the operation of the Askem react buttons.',
+      sv: 'En post relaterad till driften av reaktionsknappen Askem.',
     },
     period_minutes: {
       fi: 'minuuttia',
