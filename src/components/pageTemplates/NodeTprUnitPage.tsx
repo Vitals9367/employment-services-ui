@@ -1,3 +1,4 @@
+import { Key } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Container, IconPersonWheelchair } from 'hds-react';
 
@@ -44,6 +45,18 @@ function NodeTprUnitPage({
   const { t } = useTranslation('common');
   const pageTitle = name_override ?? name;
   const picture = picture_url_override ?? picture_url;
+  const arrivalContent: string[] = [];
+  const otherContent: any = [];
+
+  field_content?.map((content: any) =>
+    content.type === 'paragraph--text' && field_content[0].id == content.id
+      ? arrivalContent.push(content)
+      : otherContent.push(content)
+  );
+
+  const openingHours = opening_hours.filter(
+    (open: { type: string }) => open.type === 'OPENING_HOURS'
+  );
 
   return (
     <article>
@@ -57,7 +70,7 @@ function NodeTprUnitPage({
               email={email}
               address={address}
               address_postal={address_postal}
-              opening_hours={opening_hours}
+              opening_hours={openingHours}
               call_charge_info={call_charge_info}
               service_map_embed={service_map_embed}
             />
@@ -69,26 +82,69 @@ function NodeTprUnitPage({
                 <HtmlBlock field_text={description} />
               </div>
             )}
-
             {picture && (
               <div className={styles.unitImage}>
                 <MediaImage media={picture} />
               </div>
             )}
-
             <ContactInfo
               phone={phone}
               email={email}
               address={address}
               address_postal={address_postal}
-              opening_hours={opening_hours}
+              opening_hours={openingHours}
               call_charge_info={call_charge_info}
               service_map_embed={service_map_embed}
             />
-
             {field_content?.length > 0 && (
               <ContentMapper
-                content={field_content}
+                content={arrivalContent}
+                pageType="tpr_unit"
+                locationId={drupal_internal__id}
+                mapId={service_map_embed}
+              />
+            )}
+            {node.accessibility_sentences.length !== 0 && (
+              <AccordionWithIcon
+                ariaLabel={t('unit.accessibility_information')}
+                accordionTitle={t('unit.accessibility_information')}
+                backgroundColor={{
+                  background: 'var(--color-silver-medium-light)',
+                }}
+                leftIcon={
+                  <IconPersonWheelchair
+                    size="xl"
+                    color="var(--color-black)"
+                    aria-hidden="true"
+                  />
+                }
+              >
+                {groupData(node.accessibility_sentences).map(
+                  (groupName: string, i: Key) => (
+                    <div key={i}>
+                      <h3>{groupName}</h3>
+                      <ul>
+                        {node.accessibility_sentences
+                          ?.filter(
+                            (group: { group: {} }) => groupName === group.group
+                          )
+                          .map(
+                            (
+                              value: { group: string; value: string },
+                              i: number
+                            ) => (
+                              <li key={`${value.group}-${i}`}>{value.value}</li>
+                            )
+                          )}
+                      </ul>
+                    </div>
+                  )
+                )}
+              </AccordionWithIcon>
+            )}
+            {field_content?.length > 0 && (
+              <ContentMapper
+                content={otherContent}
                 pageType="tpr_unit"
                 locationId={drupal_internal__id}
                 mapId={service_map_embed}
@@ -106,22 +162,6 @@ function NodeTprUnitPage({
             )}
           </div>
         </div>
-        {node.accessibility_sentences.length !== 0 && (
-          <AccordionWithIcon
-            ariaLabel={t('unit.accessibility_information')}
-            accordionTitle={t('unit.accessibility_information')}
-            data={node.accessibility_sentences}
-            group={groupData(node.accessibility_sentences)}
-            backgroundColor={{ background: 'var(--color-silver-medium-light)' }}
-            leftIcon={
-              <IconPersonWheelchair
-                size="xl"
-                color="var(--color-black)"
-                aria-hidden="true"
-              />
-            }
-          />
-        )}
       </Container>
     </article>
   );

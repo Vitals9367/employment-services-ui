@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren, ReactChildren } from 'react'
 import { useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useReactToPrint } from 'react-to-print'
@@ -117,7 +117,7 @@ interface NumberedAccordionProps {
   id: string
   index: number
   field_accordion_item_heading: string
-  children: any
+  children: ReactChildren | PropsWithChildren<any>;
 }
 
 function NumberedAccordion(props: NumberedAccordionProps): JSX.Element {
