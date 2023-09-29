@@ -73,7 +73,7 @@ function LanguageSelect({
               href={langLinks.ru}
               onClick={() => previewNavigation(langLinks.ru, preview)}
             >
-              Россия
+              Русский
             </Link>
           )}
           {langLinks.so === activePath && activePath !== undefined && (
