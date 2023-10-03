@@ -2,7 +2,7 @@ const languages = [
   { code: 'fi', text: 'Suomi' },
   { code: 'sv', text: 'Svenska' },
   { code: 'en', text: 'English' },
-  { code: 'uk', text: 'Ukrainian' },
+  { code: 'ua', text: 'Ukrainian' },
   { code: 'so', text: 'Somali' },
   { code: 'ru', text: 'Russian' }
 ]

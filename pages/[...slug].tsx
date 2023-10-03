@@ -65,7 +65,7 @@ export async function getStaticProps(
   if (context.preview) {
     withAuth = true;
   }
-  
+
   const drupal = getDrupalClient(withAuth);
 
   const path = await drupal.translatePathFromContext(context);
@@ -79,6 +79,7 @@ export async function getStaticProps(
   }
 
   const entityLangcode = path?.entity?.langcode;
+  
   // If page(path) doesn't exist on current language.
   if (locale !== entityLangcode) {
     return {

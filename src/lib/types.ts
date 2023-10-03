@@ -196,7 +196,7 @@ interface LangLinks {
   en: string;
   fi: string;
   sv: string;
-  uk: string;
+  ua: string;
   ru: string;
   so: string;
 }
