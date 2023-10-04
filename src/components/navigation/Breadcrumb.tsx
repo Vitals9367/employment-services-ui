@@ -47,8 +47,8 @@ export const Breadcrumb = ({
 const getFrontPageLink = (locale?: string) => {
   let frontPageLink;
   switch (locale) {
-    case 'uk':
-      frontPageLink = languageFrontPages.uk;
+    case 'ua':
+      frontPageLink = languageFrontPages.ua;
       break;
     case 'so':
       frontPageLink = languageFrontPages.so;

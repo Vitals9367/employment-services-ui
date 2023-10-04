@@ -567,8 +567,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/uk',
-        destination: '/uk/frontpage',
+        source: '/ua',
+        destination: '/ua/frontpage',
         permanent: true,
         locale: false,
       },

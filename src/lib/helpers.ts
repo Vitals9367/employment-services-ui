@@ -41,7 +41,7 @@ export const frontPagePaths = [
   '/',
   '/en',
   '/sv',
-  '/uk/frontpage',
+  '/ua/frontpage',
   '/so/frontpage',
   '/ru/frontpage',
 ];
@@ -50,7 +50,7 @@ export const languageFrontPages = {
   fi: '/',
   en: '/en',
   sv: '/sv',
-  uk: '/uk/frontpage',
+  ua: '/ua/frontpage',
   so: '/so/frontpage',
   ru: '/ru/frontpage',
 };

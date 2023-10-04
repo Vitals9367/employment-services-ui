@@ -86,11 +86,11 @@ function LanguageSelect({
             </Link>
           )}
 
-          {langLinks.uk === activePath && activePath !== undefined && (
+          {langLinks.ua === activePath && activePath !== undefined && (
             <Link
-              aria-current={langLinks.uk === activePath}
-              href={langLinks.uk}
-              onClick={() => previewNavigation(langLinks.uk, preview)}
+              aria-current={langLinks.ua === activePath}
+              href={langLinks.ua}
+              onClick={() => previewNavigation(langLinks.ua, preview)}
             >
               Україна
             </Link>
