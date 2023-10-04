@@ -70,7 +70,7 @@ function NewsList({
       <Container className="container">
         <div className={styles.newsListTitleArea}>
           {field_title && <h2>{field_title}</h2>}
-          {field_short_list && (
+          {field_short_list && t('list.news_url') && (
             <a href={t('list.news_url')}>
               {t('list.show_all_news')} <IconArrowRight size="l" />
             </a>
