@@ -52,7 +52,7 @@ export function EventList({
       <Container className="container">
         <div className={styles.eventListTitleArea}>
           {field_title && <h2>{field_title}</h2>}
-          {field_events_list_short && (
+          {field_events_list_short && t('list.events_page_url') && (
             <a href={t('list.events_page_url')}>
               {t('list.show_all_events')} <IconArrowRight size="l" />
             </a>
