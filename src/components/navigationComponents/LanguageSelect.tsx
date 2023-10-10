@@ -92,7 +92,7 @@ function LanguageSelect({
               href={langLinks.ua}
               onClick={() => previewNavigation(langLinks.ua, preview)}
             >
-              Україна
+              Українська
             </Link>
           )}
         </div>
