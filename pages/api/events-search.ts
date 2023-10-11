@@ -12,7 +12,6 @@ type Index = Partial<{ [key: string]: string | string[] }>;
 interface Terms {
   terms: {
     field_event_tags?: string[],
-    field_in_language?: string[]
   } 
 }
 
@@ -26,7 +25,7 @@ export default async function handler(
     return;
   }
 
-  const { index, filter, languageFilter, locale }: Index = req?.query || {};
+  const { index, filter, locale }: Index = req?.query || {};
 
   if (isNaN(Number(index))) {
     res.status(400);
@@ -56,16 +55,6 @@ export default async function handler(
     queryBody.push(objectFilter);
   }
 
-  if (languageFilter) {
-    const objectLanguageFilter = {
-      terms: {
-        field_in_language: getQueryFilterTags(languageFilter),
-      },
-    };
-
-    queryBody.push(objectLanguageFilter);
-  }
-
   try {
     const searchRes = await elastic.search({
       index: `events_${locale ?? 'fi'}`,
@@ -89,7 +78,7 @@ export default async function handler(
     res.status(500);
   }
   
-  if (filter || languageFilter) {
+  if (filter) {
     try {
       const searchRes = await elastic.search({
         index: `events_${locale}`,

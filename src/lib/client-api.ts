@@ -8,7 +8,6 @@ import { Locale } from 'next-drupal';
 const EVENTS_URL = '/api/events';
 const EVENTS_SEARCH_URL = '/api/events-search';
 const EVENTS_TAGS_URL = '/api/events-tags';
-const EVENTS_LANGUAGE_TAGS_URL = '/api/events-language-tags';
 const RELATED_EVENTS = '/api/related-events'
 const NEWS_URL = '/api/news';
 const UNITS_URL = '/api/units';
@@ -30,10 +29,9 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
 export const getEventsSearch = async (
   eventsIndex: number,
   field_event_tags: string[] | null,
-  field_in_language: string[] | null,
   locale: Locale
 ) => {  
-  const queryParams = {index: eventsIndex, filter: field_event_tags, languageFilter: field_in_language, locale: locale };
+  const queryParams = {index: eventsIndex, filter: field_event_tags, locale: locale };
   
   const { data } = await axios(`${EVENTS_SEARCH_URL}`, {
     params: queryParams,

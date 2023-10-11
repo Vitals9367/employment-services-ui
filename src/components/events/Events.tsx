@@ -13,14 +13,12 @@ import {
   getTotal,
   keepScrollPosition,
   getInitialFilters,
-  getAvailableTags,
   handlePageURL,
 } from '@/lib/helpers';
 import styles from './events.module.scss';
 import ButtonFilter from '../eventsComponents/ButtonFilter';
 import EventListComponent from '../eventsComponents/EventListComponent';
 import HtmlBlock from '../HtmlBlock';
-import ResponsiveFilterMapper from '../eventsComponents/ResponsiveFilterMapper';
 
 export default function Events(props: EventListProps): JSX.Element {
   const { field_title, field_events_list_desc } = props;
@@ -36,11 +34,9 @@ export default function Events(props: EventListProps): JSX.Element {
   const [filter, setFilter] = useState<string[]>(
     getInitialFilters('tag', locale ?? 'fi')
   );
-  const [languageFilter, setLanguageFilter] = useState<string[]>(
-    getInitialFilters('lang', locale ?? 'fi')
-  );
+
   const fetcher = (eventsIndex: number) =>
-    getEventsSearch(eventsIndex, filter, languageFilter, locale ?? 'fi');
+    getEventsSearch(eventsIndex, filter, locale ?? 'fi');
   const { data, setSize } = useSWRInfinite(getKey, fetcher);
   const events = data && getEvents(data);
   const total = data && getTotal(data);
@@ -62,15 +58,8 @@ export default function Events(props: EventListProps): JSX.Element {
       setEventsTags(tags);
     });
 
-    getEventsTags('field_in_language', locale ?? 'fi').then((result) => {
-      const languageTags = result.map(
-        (tag: { key: string; doc_count: number }) => tag.key
-      );
-      setEventsLanguageTags(languageTags);
-    });
-
-    handlePageURL(filter, languageFilter, router, basePath);
-  }, [locale, filter, languageFilter]);
+    handlePageURL(filter, router, basePath);
+  }, [locale, filter]);
 
   useEffect(() => {
     updateTags();
@@ -78,7 +67,6 @@ export default function Events(props: EventListProps): JSX.Element {
     const handleBeforeUnload = (): void => {
       if (filter !== null && filter !== undefined) {
         sessionStorage.setItem('tag', JSON.stringify(filter));
-        sessionStorage.setItem('lang', JSON.stringify(languageFilter));
       }
       sessionStorage.setItem(
         'screenX',
@@ -91,10 +79,9 @@ export default function Events(props: EventListProps): JSX.Element {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [filter, languageFilter, locale, setSize, updateTags]);
+  }, [filter, locale, setSize, updateTags]);
 
   const clearFilters = () => {
-    setLanguageFilter([]);
     setFilter([]);
     router.replace(`/${basePath}`, undefined, { shallow: true });
   };
@@ -104,26 +91,6 @@ export default function Events(props: EventListProps): JSX.Element {
       (total.current < total.max || total.current === 0 || events?.length === 0)
       ? `${events.length} / ${total.max} ${t('list.results_text')}`
       : `${total?.max} ${t('list.results_text')}`;
-  };
-
-  const getInitialOptions = () => {
-    const dropdownOptions: { label: string }[] = [];
-    eventsLanguageTags.map((option: string) =>
-      dropdownOptions.push({ label: option })
-    );
-    return dropdownOptions;
-  };
-
-  const getSelectedOptions = () : { label: string }[] => {
-    const currentOptionSelected: { label: string }[] = [];
-    const available = getAvailableTags(events, 'field_in_language');
-
-    languageFilter.map((option: string) => {
-      available.includes(option)
-        ? currentOptionSelected.push({ label: option })
-        : null;
-    });
-    return currentOptionSelected;
   };
 
   return (
@@ -145,19 +112,6 @@ export default function Events(props: EventListProps): JSX.Element {
             filter={filter}
             filterField={'field_event_tags'}
             filterLabel={'search.filter'}
-          />
-
-          <ResponsiveFilterMapper
-            setAvailableTags={filter.length > 0}
-            events={events}
-            setFilter={setLanguageFilter}
-            selectedOptions={getSelectedOptions()}
-            initialOptions={getInitialOptions()}
-            tags={eventsLanguageTags}
-            filter={languageFilter}
-            filterField={'field_in_language'}
-            filterLabel={'search.filter_lang'}
-            dropdownLabel={'search.dropdown_label'}
           />
 
           <HDSButton

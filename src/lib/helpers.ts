@@ -343,24 +343,16 @@ export const getInitialFilters = (filterName: string, locale: string) => {
 
 export const handlePageURL = (
   filter: string[],
-  languageFilter: string[],
   router: any,
   basePath: string
 ) => {
-  if (filter.length || languageFilter.length) {
+  if (filter.length) {
     const tags = filter.map((tag) =>
       tag === filter[0] ? `tag=${tag}` : `&tag=${tag}`
     );
-    const langTags = languageFilter.map((tag) =>
-      tag === languageFilter[0] && tags.length === 0
-        ? `lang=${tag}`
-        : `&lang=${tag}`
-    );
 
     router.replace(
-      `/${basePath}?${tags.toString().replaceAll(',', '')}${langTags
-        .toString()
-        .replaceAll(',', '')}`,
+      `/${basePath}?${tags.toString().replaceAll(',', '')}`,
       undefined,
       { shallow: true }
     );
