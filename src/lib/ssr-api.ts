@@ -25,7 +25,7 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
     baseEventQueryParams().addSort('field_end_time', 'ASC')
     .addFilter('status', '1')
     .addFilter('langcode', locale)
-    .addPageLimit(3);
+    .addPageLimit(4);
 
   if (tags && locationId) {
     const filteredEventParams = () =>
