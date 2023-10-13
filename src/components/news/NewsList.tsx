@@ -32,6 +32,7 @@ interface News {
   title: string;
   status: boolean;
   field_article_category: string;
+  created: string;
 }
 
 interface Path {
@@ -62,6 +63,11 @@ function NewsList({
   }, [news, newsIndex]);
 
   const loadMoreText = t('list.load_more');
+
+  const getArticleDate = (published_at: string | null, created: string) => {
+   return published_at !== null && published_at > created ? published_at : created;
+  }
+  
   return (
     <div
       className="component"
@@ -94,8 +100,8 @@ function NewsList({
               )}
               {news.published_at && (
                 <p className={styles.articleDate}>
-                  <time dateTime={news.published_at}>{`${dateformat(
-                    news.published_at,
+                  <time dateTime={getArticleDate(news.published_at, news.created)}>{`${dateformat(
+                    getArticleDate(news.published_at, news.created),
                     'dd.mm.yyyy'
                   )}`}</time>
                 </p>
