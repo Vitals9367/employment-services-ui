@@ -22,7 +22,10 @@ export const getEvents = async (queryParams: EventsQueryParams) => {
   const defaultLocale: Locale = 'fi';
   const locale: Locale = queryParams.locale ?? defaultLocale;
   const eventParams = () =>
-    baseEventQueryParams().addSort('field_end_time', 'ASC').addPageLimit(3);
+    baseEventQueryParams().addSort('field_end_time', 'ASC')
+    .addFilter('status', '1')
+    .addFilter('langcode', locale)
+    .addPageLimit(3);
 
   if (tags && locationId) {
     const filteredEventParams = () =>
