@@ -120,7 +120,7 @@ function LanguageSelect({
               aria-current={langLinks.ua === activePath}
               href={langLinks.ua}
               onClick={() => {
-                previewNavigation(langLinks.uk, preview);
+                previewNavigation(langLinks.ua, preview);
                 clearSessionStorage();
               }}
             >
