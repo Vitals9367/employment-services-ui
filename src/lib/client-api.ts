@@ -32,6 +32,7 @@ export const getEventsSearch = async (
   locale: Locale
 ) => {  
   const queryParams = {index: eventsIndex, filter: field_event_tags, locale: locale };
+  
   const { data } = await axios(`${EVENTS_SEARCH_URL}`, {
     params: queryParams,
     paramsSerializer: (params) => {
@@ -75,9 +76,9 @@ export const getSearch = async (
   return data;
 };
 
-export const getEventsTags = async (locale: Locale) => {
+export const getEventsTags = async (tagField: string, locale: Locale, ) => {
   const { data } = await axios(`${EVENTS_TAGS_URL}`, {
-    params: { locale: locale },
+    params: { tagField: tagField, locale: locale},
   });
   return data;
 };

@@ -22,8 +22,10 @@
     "search_placeholder": "Hae sisältöä"
   },
   "search": {
-    "filter": "Suodata tapahtumia",
-    "clear": "Poista valinta",
+    "filter": "Valitse aiheet",
+    "filter_lang": "Valitse kielet",
+    "dropdown_label": "Ohjauskielet",
+    "clear": "Poista kaikki valinnat",
     "title": "Hae työllisyyspalveluiden sivuilta",
     "page_title": "Haku",
     "input_label": "Mitä haet?",
@@ -36,7 +38,8 @@
     "entity_type_event": "Tapahtuma",
     "entity_type_article": "Uutinen",
     "loading_suggestions": "Ladataan ehdotuksia",
-    "group_description": "Voit valita seuraavista suodattimista useamman kerrallaan."
+    "group_description": "Voit valita seuraavista suodattimista useamman kerrallaan.",
+    "header": "Tulevat tapahtumat"
   },
   "list": {
     "load_more": "Näytä lisää",

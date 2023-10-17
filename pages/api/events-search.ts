@@ -9,6 +9,12 @@ import {
 type Data = EventState;
 type Index = Partial<{ [key: string]: string | string[] }>;
 
+interface Terms {
+  terms: {
+    field_event_tags?: string[],
+  } 
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
@@ -20,7 +26,7 @@ export default async function handler(
   }
 
   const { index, filter, locale }: Index = req?.query || {};
-    
+
   if (isNaN(Number(index))) {
     res.status(400);
     return;
@@ -31,10 +37,23 @@ export default async function handler(
   let response: any = {};
   const body = {
     size: 200,
-    query: filter
-      ? { match: { field_event_tags: getQueryFilterTags(filter) } }
-      : { match_all: {} },
+    query: {
+      bool: {
+        filter: [] as Terms[],
+      },
+    },
   };
+
+  const queryBody: Terms[] = body.query.bool.filter;
+
+  if (filter) {
+    const objectFilter = {
+      terms: {
+        field_event_tags: getQueryFilterTags(filter),
+      },
+    };
+    queryBody.push(objectFilter);
+  }
 
   try {
     const searchRes = await elastic.search({
@@ -58,41 +77,34 @@ export default async function handler(
     console.log('err', err);
     res.status(500);
   }
-
-  /**
-   * @TODO Is there better way to get static info about the tags and total amount of all events for filters?
-   */
+  
   if (filter) {
     try {
       const searchRes = await elastic.search({
         index: `events_${locale}`,
         body: { query: { match_all: {} } },
-        sort: 'field_end_time:asc',
       });
       const {
-        hits: { total, hits },
+        hits: { total },
       } = searchRes as {
-        hits: { total: SearchTotalHits; hits: SearchHit<unknown>[] };
+        hits: { total: SearchTotalHits };
       };
 
       response = {
         ...response,
         maxTotal: total?.value,
-        tags: hits.map((hit: any) => {
-          const { field_event_tags } = hit._source as EventData;
-          return { field_event_tags };
-        }),
       };
     } catch (err) {
       console.log('err', err);
       res.status(500);
     }
   }
-
   res.json(response);
 }
 
-const getFilterTags = (filter: string | string[] | undefined) => {
+const getFilterTags = (
+  filter: string | string[] | undefined
+): string[] | undefined => {
   if (filter === undefined) {
     return undefined;
   } else if (Array.isArray(filter)) {
@@ -102,13 +114,15 @@ const getFilterTags = (filter: string | string[] | undefined) => {
   }
 };
 
-const getQueryFilterTags = (filter: string | string[] | undefined) => {
+const getQueryFilterTags = (
+  filter: string | string[] | undefined
+): string[] => {
   if (filter === undefined) {
-    return undefined;
+    return [];
   } else if (Array.isArray(filter)) {
-    return String(filter[0]);
+    return filter;
   } else {
-    return String(filter);
+    return [String(filter)];
   }
 };
 
@@ -127,6 +141,7 @@ const getFilteredEvents = (filterTags: string[] | undefined, hits: any) => {
         field_event_tags,
         field_street_address,
         field_event_status,
+        field_in_language,
       } = hit._source as EventData;
       if (
         filterTags === undefined ||
@@ -149,10 +164,11 @@ const getFilteredEvents = (filterTags: string[] | undefined, hits: any) => {
           field_event_tags,
           field_street_address,
           field_event_status,
+          field_in_language,
         };
       } else {
         return;
       }
     })
-    .filter((event: any) => event !== null && event !== undefined);
+    .filter((event: EventData) => event !== null && event !== undefined);
 };
