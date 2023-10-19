@@ -1,5 +1,5 @@
 import { DrupalMenuLinkContent } from 'next-drupal';
-import { GroupingProps, Node } from '@/lib/types';
+import { EventData, GroupingProps, Node } from '@/lib/types';
 import getConfig from 'next/config';
 
 import { BreadcrumbContent } from './types';
@@ -9,7 +9,7 @@ import { NextApiResponse } from 'next';
 
 interface NewPage {
   id: string;
-  title: string; 
+  title: string;
   url: string;
   parent: string;
   locale: string;
@@ -59,10 +59,10 @@ export const languageFrontPages = {
 export const previewNavigation = (
   path: string,
   preview: boolean | undefined
-): void => {
+): void => {  
   if (preview) {
     window
-      .open(`${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/${path}`, '_parent')
+      .open(`${process.env.NEXT_PUBLIC_DRUPAL_EDIT_URL}/${path}`, '_parent')
       ?.focus();
   } else {
     return;
@@ -117,11 +117,11 @@ export const getBreadCrumb = (
     parent: '',
     locale: locale,
   };
-    // Read parent from the page path
-    const parentPath = path.substring(0, path.lastIndexOf('/'));
-    // Load parent menu object
-    const parentPage = menuItems.find(({ url }) => url.includes(parentPath));
-  
+  // Read parent from the page path
+  const parentPath = path.substring(0, path.lastIndexOf('/'));
+  // Load parent menu object
+  const parentPage = menuItems.find(({ url }) => url.includes(parentPath));
+
   // Pages that are not in menus always get a breadcrumb.
   if (!mainMenuPage) {
     // TPR Unit may not have menu attachment
@@ -188,7 +188,7 @@ export const getCookiesUrl = (locale: string) => {
       cookieUrl = '/en/cookies';
   }
   return cookieUrl;
-}; 
+};
 
 /** Get data from node helpers */
 export const getTitle = (node: Node, suffix: String): string => {
@@ -299,4 +299,93 @@ export const groupData = (data: GroupingProps[]) => {
 
 export const setInitialLocale = (locale: string): string => {
   return primaryLanguages.includes(locale) ? locale : 'en';
+};
+
+/* Event helpers */
+const urlParams =
+  typeof window !== 'undefined'
+    ? new URLSearchParams(window.location.search)
+    : null;
+
+export const getKey = (eventsIndex: number) => {
+  return `${eventsIndex}`;
+};
+
+export const getEvents = (data: EventData[]) => {
+  /** Filter events object from data */
+  return data.reduce((acc: any, curr: any) => acc.concat(curr.events), []);
+};
+
+export const getTotal = (data: EventData[]) => {
+  /** Filter total from data */
+  return {
+    max: data[0].maxTotal ? data[0].maxTotal : data[0].total,
+    current: data[0].total,
+  };
+};
+
+export const getInitialFilters = (filterName: string, locale: string) => {
+  if (typeof window !== 'undefined') {
+    if (urlParams !== null && urlParams.getAll(filterName).length !== 0) {
+      return urlParams.getAll(filterName);
+    }
+    const sessionLocale = sessionStorage.getItem('locale');
+    const sessionFilters = sessionStorage.getItem(filterName);
+    if (sessionFilters !== null && sessionLocale === locale) {
+      return JSON.parse(sessionFilters);
+    } else {
+      return [];
+    }
+  } else {
+    return [];
+  }
+};
+
+export const handlePageURL = (
+  filter: string[],
+  router: any,
+  basePath: string
+) => {
+  if (filter.length) {
+    const tags = filter.map((tag) =>
+      tag === filter[0] ? `tag=${tag}` : `&tag=${tag}`
+    );
+
+    router.replace(
+      `/${basePath}?${tags.toString().replaceAll(',', '')}`,
+      undefined,
+      { shallow: true }
+    );
+  }
+};
+
+export const getAvailableTags = (events: EventData[], fieldName: string) => {
+  const availableTags: string[] = [];
+  events
+    ?.map((event: { [field: string]: any }) => event?.[fieldName])
+    .forEach((field: string[]) =>
+      field?.forEach((tag: string) =>
+        !availableTags.includes(tag) ? availableTags.push(tag) : null
+      )
+    );
+  return availableTags;
+};
+
+export const keepScrollPosition = () => {
+  if (typeof window !== 'undefined' && urlParams !== null) {
+    const screenX = sessionStorage.getItem('screenX');
+    if (screenX !== null) {
+      const position = parseInt(screenX);
+      window.scrollTo(0, position);
+      sessionStorage.removeItem('screenX');
+    } else {
+      return;
+    }
+  }
+};
+
+export const clearSessionStorage = () => {
+  if (typeof window !== 'undefined' && sessionStorage.length !== 0) {
+    sessionStorage.clear();
+  }
 };

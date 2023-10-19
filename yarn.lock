@@ -1723,20 +1723,20 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-hds-core@2.15.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/hds-core/-/hds-core-2.15.0.tgz#af6521a0eb845fd96703beadab8d0663fc6197f3"
-  integrity sha512-sznZTftR456tjBIL0rNTtkr2+AT7Szau3rm/Ee0L6vt3g0PkwfkxJkCb1edN703HxjNpna6FHQ4p0w5z1fUAAA==
+hds-core@2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/hds-core/-/hds-core-2.17.0.tgz#05bb9febbaea6314df86e6930dfd485950daf37f"
+  integrity sha512-OKYAU3bGsogDXAuJ40WMaGDxNfSXPp4zvgIrHM/O/f2lenQTqVjdL2zJTMcIFufXevwxdiY1bmJ1qXyksMmtBw==
 
-hds-design-tokens@2.15.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/hds-design-tokens/-/hds-design-tokens-2.15.0.tgz#77df3abd5d8be93d013ab94996d4481f0cb3ff89"
-  integrity sha512-x6RIWwqVErF9ZyRF7JClaMGjo01ccoFUQdOyt6VEbpmi/gToKYbgUd4NZQMVpzdv0ILYJUEwCBl5OHXUEdabrg==
+hds-design-tokens@2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/hds-design-tokens/-/hds-design-tokens-2.17.0.tgz#13e755728424b6cb91fee30e72202b7911630866"
+  integrity sha512-Ad3PJ6ta4ALStt8rDjZxb4SMu/IBkr6vl1ZWY7hp2TfyIFpXrzB/Q0TWcaH99MUgO0S1OuFwhAp70ZzCwpkI/Q==
 
-hds-react@2.15.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/hds-react/-/hds-react-2.15.0.tgz#180b46e86f719a0f675f490d1c431914f33d38f2"
-  integrity sha512-yacrBf84OXbMohhUTDVz/vt3fxt6rZEI8QKt5MBa3nbEQKFH6ti6JRd15AmMJ9cFBSHPyOBe3eIhrnXyBDozsQ==
+hds-react@2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/hds-react/-/hds-react-2.17.0.tgz#7dfffc7dc6673bb59bd222699c2893cbaa0b0557"
+  integrity sha512-nfN6sCCGGkZpv9++9qf0X3Dn+grTI5hPNXFGbFWCrV0dlTYBrDEzV2P3rsJiT6uYs5Yl0kqGBbr+uxQWw3s3wg==
   dependencies:
     "@babel/runtime" "7.17.9"
     "@emotion/styled-base" "^11.0.0"
@@ -1750,7 +1750,7 @@ hds-react@2.15.0:
     crc-32 "1.2.0"
     date-fns "2.16.1"
     downshift "6.0.6"
-    hds-core "2.15.0"
+    hds-core "2.17.0"
     kashe "1.0.4"
     lodash.get "^4.4.2"
     lodash.isequal "4.5.0"
