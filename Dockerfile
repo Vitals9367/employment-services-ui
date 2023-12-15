@@ -1,14 +1,4 @@
 # =======================================
-FROM node:16-alpine AS deps
-# =======================================
-
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
-
-# =======================================
 FROM node:16-alpine AS builder
 # =======================================
 
@@ -62,17 +52,16 @@ ENV REACT_AND_SHARE_FI=$REACT_AND_SHARE_FI
 ENV REACT_AND_SHARE_SV=$REACT_AND_SHARE_SV
 ENV REACT_AND_SHARE_EN=$REACT_AND_SHARE_EN
 
+RUN apk add --no-cache libc6-compat
+
 WORKDIR /app
+
 COPY . .
-COPY --from=deps /app/node_modules ./node_modules
 
-
-RUN yarn build
-# Prune dev & build deps until we can use Yarn 2 which does it on the next line a
-RUN rm -rf node_modules
-# Install only production runtime deps
-RUN yarn install --production --ignore-scripts --prefer-offline
-# Use Azure env variables
+RUN yarn install --frozen-lockfile && \
+    yarn build && \
+    rm -rf node_modules && \
+    yarn install --production --ignore-scripts --prefer-offline
 
 # =======================================
 FROM node:16-alpine AS runner
@@ -81,8 +70,6 @@ FROM node:16-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-
-
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/next.config.js ./next.config.js
@@ -95,16 +82,15 @@ COPY --from=builder /app/next-i18next.config.js ./next-i18next.config.js
 # copy .env.production to runner so that runtime can have new env vars from repo if needed
 COPY --from=builder /app/.env.production .env.production
 
-
 # node process user should be able to write to .next/*
 RUN chmod -R a+rwx ./.next
 
-
-EXPOSE 8080
-ENV PORT=8080
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # We don't use it.
 ENV NEXT_TELEMETRY_DISABLED 1
+
+EXPOSE 8080
+ENV PORT=8080
 
 CMD ["yarn", "start"]
